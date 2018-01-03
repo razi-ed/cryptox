@@ -103,5 +103,7 @@ vignettes/*.pdf
 # Temporary files created by R markdown
 *.utf8.md
 *.knit.md
-package-lock.json
+
 # End of https://www.gitignore.io/api/r,node,code
+/dist
+package-lock.json

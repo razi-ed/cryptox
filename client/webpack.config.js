@@ -20,6 +20,7 @@ module.exports = {
     path: paths.DIST,
     filename: 'app.bundle.js',
   },
+  devtool: "source-map",
   // Tell webpack to use html plugin
   plugins: [
     new HtmlWebpackPlugin({
@@ -33,9 +34,12 @@ module.exports = {
     rules: [{
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: [
-          'babel-loader',
-        ],
+        use: [{
+          loader: 'babel-loader',
+          options: {
+            sourceMap: true
+          }
+        }],
       },
       // CSS loader for CSS files
       // Files will get handled by css loader and then passed to the extract text plugin

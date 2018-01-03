@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { render } from 'react-dom';
 
 
 
-export default class Hello extends Component {
+export default class Hello extends React.Component {
   render() {
     return (
       <h1>

@@ -86,7 +86,7 @@ export default class SignUp extends React.Component{
 
           />
       </div>
-      <div style={{padding:25}}>
+      <div style={{paddingTop:25,textAlign:"center"}}>
         <Button raised color="primary">Create New Account</Button>
       </div>
       </form>

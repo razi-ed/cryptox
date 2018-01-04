@@ -1,6 +1,14 @@
+*{
+  margin: 0px;
+  padding: 0px;
+}
 a {
     text-decoration-line: none;
-    width: 50%
+    width: 50%;
+    color: #fcfcfa;
+}
+.login{
+  width:101%;
 }
 #frame{
     text-align: center;

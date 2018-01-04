@@ -30,8 +30,8 @@ const styles = theme => ({
 });
 
 export default class BasicTabs extends React.Component {
-  state = {
-    value: 0,
+  state  ={
+    value: 0
   };
 
   handleChange = (event, value) => {

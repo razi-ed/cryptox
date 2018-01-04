@@ -1,18 +1,23 @@
 import React, { Component } from 'react';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Link, BrowserRouter} from 'react-router-dom';
 import { render } from 'react-dom';
 import LogIn from './tabForSignUp';
 import Header from './header';
+import Home from '../components/home'
 import '../css/style.css'
+//import { Login } from './login';
 
 export default class App extends React.Component {
   render() {
     return (
-      <div>
-        <Header/>
-        <LogIn/>
-        {/* <Footer/> */}
+      <BrowserRouter>
+        <div>
+      <Header/>
+      <Route exact path={"/"} component={Home}/>
+      <Route exact path={"/login"} component={LogIn}/>
       </div>
+    </BrowserRouter>
+        
     );
   }
 }

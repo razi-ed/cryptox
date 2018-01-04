@@ -30,7 +30,17 @@ const styles = theme => ({
 
 })
 
-
+function loginUser(){
+  fetch("http://localhost:5000/auth/login",{
+    method:"POST",
+    body:JSON.stringify({
+      email:document.getElementById('email').value,
+      password: document.getElementById('password').value
+    })
+  }).then((res)=>{
+    console.log(res);
+  })
+}
 
 
 export  class Login extends Component {
@@ -55,15 +65,13 @@ export  class Login extends Component {
         <Grid item sm={4}></Grid>
         <Grid id='frame' item sm={4}>
         
-          <form noValidate autoComplete="off">
-            <h2>Log Into Your Account</h2>
+          <form method="POST" autoComplete="off">
+            <h1>Log Into Your Account</h1>
               <TextField fullWidth
                 required
                 id="email"
                 label="Email" 
                 type="Email"
-               // value={this.state.email}
-               // onChange={this.handleChange('email')}
                 margin="normal"
               />
               <TextField fullWidth
@@ -74,17 +82,22 @@ export  class Login extends Component {
                 autoComplete="current-password"
                 margin="normal"
               />
-
+            <div id='button_line'>
+              <Button type="submit" raised color="primary"  className={classes.button} onClick={this.loginUser}>
+                Log In
+              </Button>
+            </div>
+            <div>
+              <a href="#">Forgot Password?</a>
+            </div>
           </form>
-          <div id='button_line'>
-            <Button type="submit" raised color="primary" label="Log In" className={classes.button}>
-              Log In
-        </Button>
-          </div>
-          <div>
-            <a href="#">Forgot Password?</a>
-          </div>
+          
           <hr className="hr-text" data-content="Or"></hr>
+          <div id="signG">
+            <Button type="submit" raised color="accent" className={classes.button} onClick={this.loginUser}>
+              Continue with Google+
+              </Button>
+          </div>
         </Grid>
 
         <Grid item sm={4}></Grid>

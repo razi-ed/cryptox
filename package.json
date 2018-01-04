@@ -15,12 +15,15 @@
   "author": "team cryptX",
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
     "bootstrap": "^3.3.7",
     "cors": "^2.8.4",
     "express": "^4.16.2",
+    "express-validator": "^4.3.0",
     "mongo": "^0.1.0",
     "mongoose": "^4.13.7",
+    "passport": "^0.4.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },

@@ -1,17 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import { render } from 'react-dom';
 import SignUp from './signup';
 import Header from './header';
-import '../css/style.css'
-
-
-import React, { Component } from 'react';
-
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
-
-import { render } from 'react-dom';
 import Login from './login';
-
+import '../css/style.css'
 
 export default class App extends React.Component {
   render() {
@@ -28,4 +21,4 @@ export default class App extends React.Component {
 
 
 
-render( < Hello /> , document.getElementById('app1'));
+render( <App /> , document.getElementById('app1'));

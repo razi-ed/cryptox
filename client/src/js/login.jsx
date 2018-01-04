@@ -9,7 +9,7 @@ import Button from 'material-ui/Button';
 import { FormControl, FormHelperText } from 'material-ui/Form';
 import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
 import Grid from 'material-ui/Grid';
-import OverridesClassNames from "./icon.js";
+import OverridesClassNames from "./icon";
 
 const styles = theme => ({
   container: {
@@ -37,10 +37,10 @@ function loginUser(){
   fetch("http://localhost:5000/auth/login",{
   // method:"POST",
     body:JSON.stringify({
-      email:document.getElementById('email').value,
-      password: document.getElementById('password').value
+      email:document.getElementById('log-email').value,
+      password: document.getElementById('log-password').value
     })
-  }).then((res)=>{
+  }).then(res=>res.text()).then((res)=>{
     console.log(res);
   })
 }
@@ -68,18 +68,18 @@ export  class Login extends Component {
         <Grid item sm={4}></Grid>
         <Grid id='frame' item sm={4}>
         
-          <form method="POST" autoComplete="off">
+         <div>
             <h1>Log Into Your Account</h1>
               <TextField fullWidth
                 required
-                id="email"
+                id="log-email"
                 label="Email" 
                 type="Email"
                 margin="normal"
               />
               <TextField fullWidth
                 required
-                id="password"
+                id="log-password"
                 label="Password"
                 type="password"
                 autoComplete="current-password"
@@ -93,7 +93,7 @@ export  class Login extends Component {
             <div>
               <a href="#">Forgot Password?</a>
             </div>
-          </form>
+          </div>
           
           <hr className="hr-text" data-content="Or"></hr>
           <div id="signG">

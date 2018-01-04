@@ -14,4 +14,6 @@ router.post('/login',login)
 router.post('/register',register)
 router.get('/validate',validate)
 router.put('/resetPassword',resetPassword)
+
+
 module.exports=router

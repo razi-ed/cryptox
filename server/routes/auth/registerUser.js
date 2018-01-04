@@ -19,7 +19,7 @@ let registerUser =(req,res)=>{
 		user.createUser(newUser, function(err, user){
 			if(err) throw err;
       console.log(user);
-      res.json(user)
+      res.send("user successfully saved")
 		});
   }
   //res.json({name,email,password,errors})

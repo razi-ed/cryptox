@@ -18,14 +18,13 @@ const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 400,
   },
   button: {
     margin: theme.spacing.unit,
 
   },
   input: {
-    display: 'none',
+    display: 'block',
   },
 
 
@@ -42,9 +41,11 @@ export  class Login extends Component {
   };
 
   handleChange = prop => event => {
+
     this.setState({
       [prop]: event.target.value,
     });
+    console.log(this.state.email);
   };
 
   render() {
@@ -53,29 +54,26 @@ export  class Login extends Component {
       <div className={classes.container}>
         <Grid item sm={4}></Grid>
         <Grid id='frame' item sm={4}>
+        
           <form noValidate autoComplete="off">
-            <div>
-              <TextField
+            <h2>Log Into Your Account</h2>
+              <TextField fullWidth
+                required
                 id="email"
-                label="Email"
-                className={classes.textField}
+                label="Email" 
                 type="Email"
-                value={this.state.email}
-                onChange={this.handleChange('email')}
+               // value={this.state.email}
+               // onChange={this.handleChange('email')}
                 margin="normal"
               />
-            </div>
-            <div>
-              <TextField
-                fullWidth
+              <TextField fullWidth
+                required
                 id="password"
                 label="Password"
-                className={classes.textField}
                 type="password"
                 autoComplete="current-password"
                 margin="normal"
               />
-            </div>
 
           </form>
           <div id='button_line'>
@@ -86,6 +84,7 @@ export  class Login extends Component {
           <div>
             <a href="#">Forgot Password?</a>
           </div>
+          <hr className="hr-text" data-content="Or"></hr>
         </Grid>
 
         <Grid item sm={4}></Grid>

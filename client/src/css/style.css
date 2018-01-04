@@ -1,5 +1,6 @@
 a {
     text-decoration-line: none;
+    width: 50%
 }
 #frame{
     text-align: center;
@@ -11,3 +12,40 @@ a {
      text-align: center;
 
   }
+  Button{
+      width: 50%
+  }
+
+  h2{
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+  }
+  .hr-text {
+  line-height: 1em;
+  position: relative;
+  outline: 0;
+  border: 0;
+  color: black;
+  text-align: center;
+  height: 1.5em;
+  opacity: .5;
+}
+.hr-text:before {
+  content: '';
+  background: -webkit-gradient(linear, left top, right top, from(transparent), color-stop(#0e0e0e), to(transparent));
+  background: linear-gradient(to right, transparent, #0e0e0e, transparent);
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 1px;
+}
+.hr-text:after {
+  content: attr(data-content);
+  position: relative;
+  display: inline-block;
+  color: black;
+  padding: 0 .5em;
+  line-height: 1.5em;
+  color: #0e0e0e;
+  background-color: #fcfcfa;
+}

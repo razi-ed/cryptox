@@ -1,17 +1,20 @@
 import React from 'react';
 import { render } from 'react-dom';
+import SignUp from './signup'
 
 
-
-export default class Hello extends React.Component {
+export default class App extends React.Component {
   render() {
     return (
-      <h1>
-      Hello world</h1>
+      <div>
+        <Header/>
+        <SignUp/>
+        <Footer/>
+      </div>
     );
   }
 }
 
 
 
-render( < Hello / > , document.getElementById('app'));
+render( <App /> , document.getElementById('app'));

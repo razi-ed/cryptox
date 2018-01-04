@@ -87,7 +87,6 @@ export default class SignUp extends React.Component{
           />
       </div>
       <div style={{padding:25}}>
-        <Button raised color="accent">Cancel</Button>
         <Button raised color="primary">Create New Account</Button>
       </div>
       </form>

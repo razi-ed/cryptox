@@ -24,6 +24,7 @@
     "material-ui": "^1.0.0-beta.26",
     "material-ui-icons": "^1.0.0-beta.17",
     "express-validator": "^4.3.0",
+    "jsonwebtoken": "^8.1.0",
     "mongo": "^0.1.0",
     "mongoose": "^4.13.7",
     "passport": "^0.4.0",

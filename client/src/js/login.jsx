@@ -97,10 +97,10 @@ export  class Login extends Component {
           
           <hr className="hr-text" data-content="Or"></hr>
           <div id="signG">
-            <Button type="submit" raised color="accent" className={classes.button} onClick={this.loginUser}>
+            {/* <Button type="submit" raised color="accent" className={classes.button} onClick={this.loginUser}> */}
               <OverridesClassNames/>
-              Continue with Google+
-              </Button>
+              {/* Continue with Google+
+              </Button> */}
           </div>
         </Grid>
 

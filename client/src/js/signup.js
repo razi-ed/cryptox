@@ -41,7 +41,7 @@ export default class SignUp extends React.Component{
       <div>
       <Grid container spacing={24}>
       <Grid item sm={4} xs={4}/>
-      <Grid item sm={4} xs={4} className={this.props.spacing}>
+      <Grid item sm={4} xs={4} >
       <form method="POST">
         <div>
           <TextField

@@ -20,6 +20,7 @@
     "cors": "^2.8.4",
     "express": "^4.16.2",
     "material-ui": "^1.0.0-beta.26",
+    "material-ui-icons": "^1.0.0-beta.17",
     "mongo": "^0.1.0",
     "mongoose": "^4.13.7",
     "react": "^16.2.0",

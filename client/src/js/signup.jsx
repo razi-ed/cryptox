@@ -4,7 +4,7 @@ import {BrowserRouter as Router,Route,Link} from "react-router-dom";
 import Button from 'material-ui/Button';
 import Grid from 'material-ui/Grid';
 import TextField from 'material-ui/TextField'
-
+import OverridesClassNames from './icon'
 export default class SignUp extends React.Component{
   constructor(props){
     super(props)
@@ -82,6 +82,7 @@ export default class SignUp extends React.Component{
       <Grid item sm={4} xs={2}/>
       <Grid item sm={4} xs={8} style={{alignItems:"center"}}  >
       <div>
+        <h1>Create New Account</h1>
         <div>
           <TextField
             required
@@ -137,6 +138,10 @@ export default class SignUp extends React.Component{
         <Button raised color="primary" type="submit" onClick={this.createUser}>Create New Account</Button>
       </div>
       </div>
+      <hr className="hr-text" data-content="Or"></hr>
+          <div id="signG">
+           <OverridesClassNames/>
+          </div>
      
       </Grid>
       

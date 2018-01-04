@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema
+const bcrypt= require('bcrypt')
 const SecretQuestion=new Schema({
   question:{
     type:String,
@@ -25,6 +26,15 @@ const userSchema = new Schema({
     type:String,
     required:true
   },
-  SecretQuestion
+  // SecretQuestion
 })
-module.exports = mongoose.model("user", userSchema)
+let user=module.exports = mongoose.model("user", userSchema)
+
+module.exports.createUser = function(newUser, callback){
+	bcrypt.genSalt(10, function(err, salt) {
+	    bcrypt.hash(newUser.password, salt, function(err, hash) {
+	        newUser.password = hash;
+	        newUser.save(callback);
+	    });
+	});
+}

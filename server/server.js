@@ -1,12 +1,17 @@
 const express = require('express')
 const Mongoose=  require('mongoose')
-const app = express()
+const bodyParser = require('body-parser');
 const path= require('path')
+const passport= require('passport')
+
+const app = express()
 Mongoose.Promise=global.Promise
 //const routes= require('./routes/api')
 const auth= require('./routes/auth')
-
-
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+//pasport init
+app.use(passport.initialize());
 //app.use(routes)
 app.use(express.static(path.join(__dirname, '../dist/')));
 app.use("/auth",auth)

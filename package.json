@@ -12,17 +12,12 @@
     "type": "git",
     "url": "git@gitlab.com:mountblue/november/cryptox.git"
   },
-  "devServer": {
-    "historyApiFallback": true
-  },
   "author": "team cryptX",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.17.1",
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
     "bootstrap": "^3.3.7",
-    "cors": "^2.8.4",
     "express": "^4.16.2",
     "express-validator": "^4.3.0",
     "material-ui": "^1.0.0-beta.26",

@@ -18,6 +18,7 @@ module.exports = {
   entry: path.join(paths.JS, 'app.js'),
   output: {
     path: paths.DIST,
+    // public:"/",
     filename: 'app.bundle.js',
   },
   devtool: "source-map",

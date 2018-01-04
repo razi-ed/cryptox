@@ -19,10 +19,17 @@
     "bootstrap": "^3.3.7",
     "cors": "^2.8.4",
     "express": "^4.16.2",
+    "material-ui": "^1.0.0-beta.26",
     "mongo": "^0.1.0",
     "mongoose": "^4.13.7",
+<<<<<<< Updated upstream
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
+=======
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-router-dom": "^4.2.2"
+>>>>>>> Stashed changes
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -35,6 +42,7 @@
     "extract-text-webpack-plugin": "^3.0.1",
     "file-loader": "^1.1.5",
     "html-webpack-plugin": "^2.30.1",
+    "material-ui": "^1.0.0-beta.26",
     "nodemon": "^1.14.3",
     "webpack": "^3.6.0",
     "webpack-dev-server": "^2.9.1"

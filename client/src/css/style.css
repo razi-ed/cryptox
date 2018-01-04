@@ -1,0 +1,13 @@
+a {
+    text-decoration-line: none;
+}
+#frame{
+    text-align: center;
+    justify-content: center;
+    direction: 'row';
+  }
+  #button_line{
+      
+     text-align: center;
+
+  }

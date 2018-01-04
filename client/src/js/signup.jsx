@@ -78,9 +78,7 @@ export default class SignUp extends React.Component{
   render(){
     return(
       <div>
-      <Grid container>
-      <Grid item sm={4} xs={2}/>
-      <Grid item sm={4} xs={8} style={{alignItems:"center"}}  >
+     
       <div>
         <h1>Create New Account</h1>
         <div>
@@ -143,11 +141,6 @@ export default class SignUp extends React.Component{
            <OverridesClassNames/>
           </div>
      
-      </Grid>
-      
-      <Grid item sm={4} xs={6}/>
-      </Grid>
-      
       </div>
     )
   }

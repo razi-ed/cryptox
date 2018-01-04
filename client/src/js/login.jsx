@@ -64,10 +64,7 @@ export  class Login extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <div className={classes.container}>
-        <Grid item sm={4}></Grid>
-        <Grid id='frame' item sm={4}>
-        
+      <div>       
          <div>
             <h1>Log Into Your Account</h1>
               <TextField fullWidth
@@ -99,9 +96,6 @@ export  class Login extends Component {
           <div id="signG">
           <OverridesClassNames/>
           </div>
-        </Grid>
-
-        <Grid item sm={4}></Grid>
       </div>
     );
   }

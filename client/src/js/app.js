@@ -1,22 +1,18 @@
 
-import React from 'react';
+import React, { Component } from 'react';
 
-import {
-  BrowserRouter as Router,
-  Route,
-  Link
-} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
 import { render } from 'react-dom';
-//import Login from 'login';
+import Login from './login';
 
-import RadioButtonsGroup from './test'
+//import RadioButtonsGroup from './test'
 
-export default class Hello extends React.Component {
+export default class Hello extends Component {
   render() {
     return (
       <div>
-        <RadioButtonsGroup/>
+      <Login/>
       </div>
     );
   }

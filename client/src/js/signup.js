@@ -29,20 +29,30 @@ export default class SignUp extends React.Component{
   }
   
   validatePassword(event){
-    console.log(event.target.value)
+    let passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;  
+    if(event.target.value.match(passw))   
+    {   
+      // alert('Correct, try another...')  
+      return true;  
+    }  
+    else  
+    {   
+      // alert('Wrong...!')  
+      return false;  
+    }  
   }
 
-  handleClickShowPasssword(){
-    this.setState({showPassword:!this.state.showPassword})
-  }
+  // handleClickShowPasssword(){
+  //   this.setState({showPassword:!this.state.showPassword})
+  // }
 
   render(){
     return(
       <div>
-      <Grid container spacing={24}>
-      <Grid item sm={4} xs={4}/>
-      <Grid item sm={4} xs={4} >
-      <form method="POST">
+      <Grid container>
+      <Grid item sm={4} xs={2}/>
+      <Grid item sm={4} xs={8} style={{alignItems:"center"}}  >
+      <form action="/auth/registerUser" method="POST">
         <div>
           <TextField
             required
@@ -72,7 +82,8 @@ export default class SignUp extends React.Component{
             label="Password"
             type="password"
             onChange={this.validatePassword}
-      
+            onFocus={()=>document.getElementById('message').style.display='block'}
+            onBlur={()=>document.getElementById('message').style.display='none'}
           />
       </div>
       <div>
@@ -83,17 +94,20 @@ export default class SignUp extends React.Component{
             id="password"
             label="Re-Enter Password"
             type="password"
-
+            onFocus={()=>document.getElementById('message').style.display='block'}
+            onBlur={()=>document.getElementById('message').style.display='block'}
           />
+          
       </div>
+      <div id="message" style={{display:"none"}}><h1>Hello</h1></div>
       <div style={{paddingTop:25,textAlign:"center"}}>
-        <Button raised color="primary">Create New Account</Button>
+        <Button raised color="primary" type="submit">Create New Account</Button>
       </div>
       </form>
      
       </Grid>
       
-      <Grid item sm={2} xs={4}/>
+      <Grid item sm={4} xs={6}/>
       </Grid>
       
       </div>

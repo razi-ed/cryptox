@@ -25,16 +25,19 @@ export default class Header extends React.Component{
     return(
       <div style={{display:"flex"}}>
         <AppBar position="static">
-        <Toolbar>
+        
+        <Toolbar style={{display:"flex",justifyContent:"space-between"}}>
+        <div style={{display:"flex",flexDirection:"row",alignItems:"center"}}>
           <IconButton color="contrast" aria-label="Menu">
             <MenuIcon />
           </IconButton>
-          <Typography type="title" color="inherit" className={this.props.flex}>
+          <Typography type="title" color="inherit" style={{textAlign:"center"}}>
             CrytpX
           </Typography>
-          <div>
-            <Button color="contrast">Login</Button>
-          </div>
+         </div>
+         <div>
+            <Button color="contrast">Login/SignUp</Button>
+            </div>
         </Toolbar>
       </AppBar>
       </div>

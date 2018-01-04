@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const path= require('path')
 const passport= require('passport')
 
-
 const app = express()
 Mongoose.Promise=global.Promise
 //const routes= require('./routes/api')

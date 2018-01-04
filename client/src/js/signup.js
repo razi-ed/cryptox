@@ -15,14 +15,18 @@ export default class SignUp extends React.Component{
   }
   
   createUser(){
-    fetch("http://localhost:5000/auth/register",{
+    console.log(document.getElementById('name').value)
+    fetch("/auth/register",{
       method:"POST",
+      headers:{
+      'Content-Type':'application/json',
+      },
       body:JSON.stringify({
         name:document.getElementById('name').value,
-        email:document.getElementById('email').value,
-        password:document.getElementById('password').value
+      email:document.getElementById('email').value,
+      password:document.getElementById('password').value,
       })
-    }).then((res)=>{
+    }).then(res=>res.json()).then((res)=>{
       console.log(res);
     })
   }
@@ -77,7 +81,7 @@ export default class SignUp extends React.Component{
       <Grid container>
       <Grid item sm={4} xs={2}/>
       <Grid item sm={4} xs={8} style={{alignItems:"center"}}  >
-      <form  method="POST">
+      <div>
         <div>
           <TextField
             required
@@ -132,7 +136,7 @@ export default class SignUp extends React.Component{
       <div style={{paddingTop:25,textAlign:"center"}}>
         <Button raised color="primary" type="submit" onClick={this.createUser}>Create New Account</Button>
       </div>
-      </form>
+      </div>
      
       </Grid>
       

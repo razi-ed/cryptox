@@ -1,3 +1,4 @@
+const jwt=require('jsonwebtoken')
 const user= require('../../models/users')
 
 let registerUser =(req,res)=>{
@@ -19,7 +20,11 @@ let registerUser =(req,res)=>{
 		user.createUser(newUser, function(err, user){
 			if(err) throw err;
       console.log(user);
-      res.send("user successfully saved")
+      var payload = {email: user.email}
+      let token =jwt.sign(payload,process.env.JWT_KEY,{
+        expiresIn:4000
+      })
+      res.json({success:true,token})
 		});
   }
   //res.json({name,email,password,errors})

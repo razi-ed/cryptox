@@ -16,4 +16,6 @@ router.get('/validate',validate)
 router.put('/resetPassword',resetPassword)
 
 
+process.env.JWT_KEY="mountblue"
+
 module.exports=router

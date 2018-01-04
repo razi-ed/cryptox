@@ -28,7 +28,19 @@ const userSchema = new Schema({
   },
   // SecretQuestion
 })
-let user=module.exports = mongoose.model("user", userSchema)
+
+userSchema.methods.comparePassword = function(pw, cb) {
+  bcrypt.compare(pw, this.password, function(err, isMatch) {
+    console.log(pw, this.password)
+    if (err) {
+      return err;
+    }
+    cb(null, isMatch);
+  });
+}
+
+let user = mongoose.model("user", userSchema)
+module.exports = user
 
 module.exports.createUser = function(newUser, callback){
 	bcrypt.genSalt(10, function(err, salt) {
@@ -38,3 +50,13 @@ module.exports.createUser = function(newUser, callback){
 	    });
 	});
 }
+
+/* module.exports.comparePassword = function(pw, cb) {
+  bcrypt.compare(pw, this.password, function(err, isMatch) {
+    console.log(pw, this.password)
+    if (err) {
+      return err;
+    }
+    cb(null, isMatch);
+  });
+}; */

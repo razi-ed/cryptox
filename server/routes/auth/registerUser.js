@@ -24,7 +24,7 @@ let registerUser =(req,res)=>{
       let token =jwt.sign(payload,process.env.JWT_KEY,{
         expiresIn:4000
       })
-      res.json({success:true,token})
+      res.json({success:true,token: 'JWT ' + token})
 		});
   }
   //res.json({name,email,password,errors})

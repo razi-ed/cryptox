@@ -106,3 +106,4 @@ vignettes/*.pdf
 package-lock.json
 # End of https://www.gitignore.io/api/r,node,code
 /dist
+'./server/config/*'

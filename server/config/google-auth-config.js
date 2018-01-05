@@ -1,7 +1,7 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20');
-const keys = require('./keys')
-const User = require('../models/userModels');
+const keys = require('./keys/keys')
+const User = require('../models/users');
 
 // console.log("from config pasport");
 
@@ -32,15 +32,24 @@ passport.use(new GoogleStrategy({
         done(null, currentUser);
       } else {
         //if not , create account
-        new User({
-          userName: profile.displayName,
+        let user={name: profile.displayName,
           googleID: profile.id,
-          uEmail: profile.emails[0].value,
-          avatar: profile._json.image.url
-        }).save().then((newUser) => {
-          console.log("Account created.");
-          done(null, newUser)
-        })
+          email: profile.emails[0].value,
+          avatar: profile._json.image.url}
+        console.log(user);
+        // res.json(user)
+        // .then(()=>done())
+        done(null,user)
+        // new User({
+        //   name: profile.displayName,
+        //   googleID: profile.id,
+        //   email: profile.emails[0].value,
+        //   avatar: profile._json.image.url
+        // }).save().then((newUser) => {
+        //   console.log("Account created.");
+        //   done(null, newUser)
+        // })
+        // .catch(e=>console.log(e))
       }
     })
     // console.log(profile);

@@ -4,9 +4,9 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const googleAuthRoutes = require('./routes/auth/google-auth-routes');
 const postGoogleRoutes = require('./routes/auth/post-google-auth');
-const passportSetup = require('./config/passport-config');
+const passportSetup = require('./config/google-auth-config');
 const mongoose = require('mongoose');
-const keys = require('./config/keys');
+const keys = require('./config/keys/keys');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 
@@ -29,11 +29,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 //app.use(routes)
 app.use(express.static(path.join(__dirname, '../dist/')));
-app.use("/auth", auth)
+//app.use("/auth", auth)
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../dist/index.html'))
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../dist/index.html'))
+// });
 
 
 app.use('/auth', googleAuthRoutes);
@@ -41,7 +41,7 @@ app.use('/auth', googleAuthRoutes);
 Mongoose.connect(process.env.DB_HOST || keys.DB.URI, {
     useMongoClient: true
   }).then(() => {
-    app.listen(process.env.port || 5000, function() {
+    app.listen(process.env.port || 3000, function() {
       console.log('now listening for requests in port 5000  and please start `npm run watch` for frontend live reload')
     })
   })

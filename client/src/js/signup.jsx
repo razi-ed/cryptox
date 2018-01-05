@@ -91,12 +91,14 @@ export default class SignUp extends React.Component {
             <Input autoFocus="true" id="new-name" type="name"/>
           </FormControl>
           </div>
+          
           <div>
           <FormControl className="formElements" >
             <InputLabel >Email</InputLabel>
             <Input id="email" type="email"/>
           </FormControl>
           </div>
+          
           <div>
           <FormControl className="formElements" >
             <InputLabel>Password</InputLabel>
@@ -115,6 +117,7 @@ export default class SignUp extends React.Component {
               <FormHelperText>Password must have atleat 8 characters</FormHelperText>
           </FormControl>
           </div>
+          
           <div>
           <FormControl className="formElements" >
             <InputLabel>Re-Enter Password</InputLabel>

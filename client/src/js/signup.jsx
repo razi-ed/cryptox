@@ -84,9 +84,7 @@ export default class SignUp extends React.Component {
   render() {
     return (
       <div>
-        <Grid container>
-          <Grid item sm={4} xs={2} />
-          <Grid item sm={4} xs={8} style={{ alignItems: "center" }}>
+       
           <div>
           <FormControl className="formElements" >
             <InputLabel>Name</InputLabel>
@@ -151,10 +149,6 @@ export default class SignUp extends React.Component {
                   Create New Account
                 </Button>
               </div>
-          </Grid>
-
-          <Grid item sm={4} xs={6} />
-        </Grid>
       </div>
     );
   }

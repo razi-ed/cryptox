@@ -4,7 +4,12 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Button from "material-ui/Button";
 import Grid from "material-ui/Grid";
 import TextField from "material-ui/TextField";
-
+import Input,{InputLabel} from 'material-ui/Input'
+import {FormHelperText,FormControl} from 'material-ui/Form'
+import Visibility from 'material-ui-icons/Visibility'
+import VisibilityOff from 'material-ui-icons/VisibilityOff'
+import {InputAdornment} from "material-ui/Input";
+import IconButton from "material-ui/IconButton";
 export default class SignUp extends React.Component {
   constructor(props) {
     super(props);
@@ -12,6 +17,7 @@ export default class SignUp extends React.Component {
       showPassword: false,
       isUserCreated: false
     };
+    this.handleClickShowPasssword=this.handleClickShowPasssword.bind(this)
   }
   createUser() {
     fetch("http://localhost:5000/auth/register", {
@@ -32,8 +38,8 @@ export default class SignUp extends React.Component {
       document.getElementById("letter").classList.remove("invalid");
       document.getElementById("letter").classList.add("valid");
     } else {
-      letter.classList.remove("valid");
-      letter.classList.add("invalid");
+      document.getElementById('letter').classList.remove("valid");
+      document.getElementById('letter').classList.add("invalid");
     }
 
     // Validate capital letters
@@ -66,9 +72,9 @@ export default class SignUp extends React.Component {
     }
   }
 
-  // handleClickShowPasssword(){
-  //   this.setState({showPassword:!this.state.showPassword})
-  // }
+  handleClickShowPasssword(){
+    this.setState({showPassword:!this.state.showPassword})
+  }
 
   render() {
     return (
@@ -76,51 +82,44 @@ export default class SignUp extends React.Component {
         <Grid container>
           <Grid item sm={4} xs={2} />
           <Grid item sm={4} xs={8} style={{ alignItems: "center" }}>
-            <form method="POST">
-              <div>
-                <TextField required fullWidth id="name" label="Name" />
-              </div>
+          <div>
+          <FormControl className="formElements" >
+            <InputLabel>Name</InputLabel>
+            <Input autoFocus="true" id="new-name" type="name"/>
+          </FormControl>
+          </div>
+          <div>
+          <FormControl className="formElements" >
+            <InputLabel >Email</InputLabel>
+            <Input id="email" type="email"/>
+          </FormControl>
+          </div>
+          <div>
+          <FormControl className="formElements" >
+            <InputLabel>Password</InputLabel>
+            <Input
+              id="password" 
+              type={this.state.showPassword?'text':'password'}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton onClick={this.handleClickShowPasssword} >
+                    {this.state.showPassword?<VisibilityOff/>:<Visibility/>}
+                  </IconButton>
+                </InputAdornment>
 
-              <div>
-                <TextField
-                  required
-                  fullWidth
-                  id="email"
-                  type="email"
-                  label="Email"
-                />
-              </div>
-
-              <div>
-                <TextField
-                  required
-                  fullWidth
-                  id="password"
-                  label="Password"
-                  type="password"
-                  onChange={this.validatePassword}
-                  onFocus={() =>
-                    (document.getElementById("message").style.display = "block")
-                  }
-                  onBlur={() =>
-                    (document.getElementById("message").style.display = "none")
-                  }
-                />
-              </div>
-              <div>
-                <TextField
-                  required
-                  fullWidth
-                  label="Re-Enter Password"
-                  type="password"
-                  onFocus={() =>
-                    (document.getElementById("message").style.display = "block")
-                  }
-                  onBlur={() =>
-                    (document.getElementById("message").style.display = "block")
-                  }
-                />
-              </div>
+              }  
+              />
+              <FormHelperText>Password must have atleat 8 characters</FormHelperText>
+          </FormControl>
+          </div>
+          <div>
+          <FormControl className="formElements" >
+            <InputLabel>Re-Enter Password</InputLabel>
+            <Input id="confirm" type="password"
+             />
+          </FormControl>
+          </div>
+            
               <div id="message" style={{ display: "none" }}>
                 <h3>Password must contain the following:</h3>
                 <p id="letter" className="invalid">
@@ -147,7 +146,6 @@ export default class SignUp extends React.Component {
                   Create New Account
                 </Button>
               </div>
-            </form>
           </Grid>
 
           <Grid item sm={4} xs={6} />

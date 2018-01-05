@@ -1,5 +1,14 @@
+
+*{
+  margin: 0px;
+  padding:0px;
+}
 .valid {
   color: green;
+}
+
+.formElements{
+  width: 100%;
 }
 
 .valid:before {

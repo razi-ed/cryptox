@@ -18,7 +18,7 @@ const userSchema = new Schema({
     required: true
   },
   email: {
-    type: String,
+    type: String,//add a validator
     unique: true,
     required: true
   },
@@ -39,10 +39,9 @@ userSchema.methods.comparePassword = function(pw, cb) {
   });
 }
 
-let user = mongoose.model("user", userSchema)
-module.exports = user
+let User = mongoose.model("User", userSchema)
 
-module.exports.createUser = function(newUser, callback){
+User.createUser = function(newUser, callback){
 	bcrypt.genSalt(10, function(err, salt) {
 	    bcrypt.hash(newUser.password, salt, function(err, hash) {
 	        newUser.password = hash;
@@ -50,13 +49,6 @@ module.exports.createUser = function(newUser, callback){
 	    });
 	});
 }
+module.exports = User
 
-/* module.exports.comparePassword = function(pw, cb) {
-  bcrypt.compare(pw, this.password, function(err, isMatch) {
-    console.log(pw, this.password)
-    if (err) {
-      return err;
-    }
-    cb(null, isMatch);
-  });
-}; */
+

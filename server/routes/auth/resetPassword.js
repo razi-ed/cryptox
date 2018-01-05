@@ -1,4 +1,4 @@
-let resetPassword =(req,res)=>{
+const resetPassword =(req,res)=>{
   res.send('resetPassword')
 }
 module.exports=resetPassword

@@ -19,7 +19,7 @@ const styles = {
 function OverridesClassNames(props) {
     return (
         <Button className={props.classes.button}><img src="../images/google.svg" width="10px" height="10px"/>
-            {props.children ? props.children : 'Continue with GOOGLE+'}
+            {props.children ? props.children : 'Continue with Google'}
         </Button>
     );
 }

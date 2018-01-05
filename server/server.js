@@ -4,6 +4,9 @@ const bodyParser = require('body-parser');
 const path= require('path')
 const passport= require('passport')
 
+
+//key
+process.env.JWT_KEY="mountblue"
 const app = express()
 Mongoose.Promise=global.Promise
 //const routes= require('./routes/api')
@@ -19,6 +22,10 @@ app.use("/auth",auth)
 app.get('*',(req,res)=>{
   res.sendFile(path.join(__dirname, '../dist/index.html'))
 })
+
+
+
+
 
 Mongoose.connect(process.env.DB_HOST ||'mongodb://localhost/cryptox',{
   useMongoClient:true

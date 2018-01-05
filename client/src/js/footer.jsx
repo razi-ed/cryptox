@@ -8,8 +8,8 @@ import '../css/style.css';
 export default class Footer extends Component{
     render(){
         return (
-            <footer id="footer" >
-            <p id="content">Created by Team CryptX</p>
+            <footer id="footer"  >
+            <p id="content">&copy; Team CryptX</p>
             </footer>
         )
     }

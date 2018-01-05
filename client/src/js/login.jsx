@@ -61,37 +61,36 @@ export  class Login extends Component {
     const { classes } = this.props;
     return (
       <div>       
-         <div>
-            <h1>Log Into Your Account</h1>
-              <TextField fullWidth
-                required
-                id="log-email"
-                label="Email" 
-                type="Email"
-                margin="normal"
-              />
-              <TextField fullWidth
-                required
-                id="log-password"
-                label="Password"
-                type="password"
-                autoComplete="current-password"
-                margin="normal"
-              />
-            <div id='button_line'>
-              <Button type="submit" raised color="primary"  className={classes.button} onClick={this.loginUser}>
-                Log In
-              </Button>
-            </div>
-            <div>
-              <a href="#">Forgot Password?</a>
-            </div>
+        <div>
+          <h1>Log Into Your Account</h1>
+            <TextField fullWidth
+              required
+              id="log-email"
+              label="Email" 
+              type="Email"
+              margin="normal"
+            />
+            <TextField fullWidth
+              required
+              id="log-password"
+              label="Password"
+              type="password"
+              autoComplete="current-password"
+              margin="normal"
+            />
+          <div id='button_line'>
+            <Button type="submit" raised color="primary"  className={classes.button} onClick={this.loginUser}>
+              Log In
+            </Button>
           </div>
-          
-          <hr className="hr-text" data-content="Or"></hr>
-          <div id="signG">
+          <div>
+            <a href="#">Forgot Password?</a>
+          </div>
+        </div>
+        <hr className="hr-text" data-content="Or"></hr>
+        <div id="signG">
           <OverridesClassNames/>
-          </div>
+        </div>
       </div>
     );
   }

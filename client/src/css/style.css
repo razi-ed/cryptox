@@ -84,7 +84,13 @@ a {
   left: -35px;
   content: "✖";
 }
-/* #content{
-  margin: 5%;
-  background-color: #126dd4;
-} */
+#footer{
+  padding: 6%;
+  margin-top: 5%;
+  background-color: black;
+  text-align: center;
+}
+#content{
+    color: white;
+    font-family: monospace;
+}

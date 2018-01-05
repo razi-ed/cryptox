@@ -14,7 +14,6 @@ a {
     text-align: center;
     justify-content: center;
     direction: 'row';
-     /* margin-top: 10%; */
   }
   #button_line{
       
@@ -65,7 +64,6 @@ a {
 }
 #signG Button{
     width:100%;
-    background-color: #c8ba44;
 }
 #footer{
   position: absolute;

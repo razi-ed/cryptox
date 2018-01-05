@@ -13,9 +13,10 @@ const paths = {
   JS: path.resolve(__dirname, 'src/js'),
 };
 
+//path.join(paths.JS, 'app.js')
 // Webpack configuration
 module.exports = {
-  entry: path.join(paths.JS, 'app.js'),
+  entry: ["webpack-hot-middleware/client",paths.SRC+'/app'],
   output: {
     path: paths.DIST,
     // public:"/",

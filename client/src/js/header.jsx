@@ -33,12 +33,12 @@ export default class Header extends React.Component{
             <MenuIcon />
           </IconButton>
           <Typography type="title" color="inherit" style={{textAlign:"center"}}>
-          <Link to="/">CrytpX</Link>
+          <Link to={"/"}>CrytpX</Link>
             
           </Typography>
          </div>
          <div>
-            <Button color="contrast" className="login"><Link to="/login">Login/SignUp</Link></Button>
+            <Button color="contrast" className="login"><Link to={"/login"}>Login/SignUp</Link></Button>
             </div>
         </Toolbar>
       </AppBar>

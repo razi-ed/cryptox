@@ -33,17 +33,6 @@ const icons = {
 };
 
 
-function loginUser(){
-  fetch("http://localhost:5000/auth/login",{
-  // method:"POST",
-    body:JSON.stringify({
-      email:document.getElementById('log-email').value,
-      password: document.getElementById('log-password').value
-    })
-  }).then(res=>res.text()).then((res)=>{
-    console.log(res);
-  })
-}
 
 
 export  class Login extends Component {
@@ -52,6 +41,23 @@ export  class Login extends Component {
     password: '',
     showPassword: false,
   };
+
+  loginUser(){
+    console.log(document.getElementById('log-email').value)
+    fetch("/auth/login",{
+      method:"POST",
+      headers:{
+        'Content-Type':'application/json',
+        },
+      body:JSON.stringify({
+        email:document.getElementById('log-email').value,
+        password: document.getElementById('log-password').value
+      })
+    }).then(res=>res.text()).then((res)=>{
+      console.log(res);
+    })
+  }
+  
 
   handleChange = prop => event => {
 

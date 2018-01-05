@@ -9,7 +9,7 @@ export default class Footer extends Component{
     render(){
         return (
             <footer id="footer" >
-                <div id='content'>Created by Team CryptX</div>
+            <p>Created by Team CryptX</p>
             </footer>
         )
     }

@@ -39,23 +39,15 @@ userSchema.methods.comparePassword = function(pw, cb) {
   });
 }
 
-const User = mongoose.model("User", userSchema)
-
-User.updateUser = function(user, callback) {
-  hashPassword(user, callback);
-}
+let User = mongoose.model("User", userSchema)
 
 User.createUser = function(newUser, callback){
-	hashPassword(newUser, callback)
-}
-
-function hashPassword(user, callback) {
-  bcrypt.genSalt(10, function(err, salt) {
-    bcrypt.hash(user.password, salt, function(err, hash) {
-        user.password = hash;
-        user.save(callback);
-    });
-})
+	bcrypt.genSalt(10, function(err, salt) {
+	    bcrypt.hash(newUser.password, salt, function(err, hash) {
+	        newUser.password = hash;
+	        newUser.save(callback);
+	    });
+	});
 }
 module.exports = User
 

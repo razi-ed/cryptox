@@ -30,7 +30,7 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-form-validator-core": "^0.3.0",
-    "react-material-ui-form-validator": "^1.0.1",
+    "react-material-ui-form-validator": "^1.0.5",
     "react-router-dom": "^4.2.2"
   },
   "devDependencies": {
@@ -39,7 +39,7 @@
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
-    "css-loader": "^0.28.7",
+    "css-loader": "^0.28.8",
     "eslint": "^4.14.0",
     "eslint-config-google": "^0.9.1",
     "eslint-plugin-react": "^7.5.1",
@@ -49,6 +49,6 @@
     "nodemon": "^1.14.3",
     "svg-inline-loader": "^0.8.0",
     "webpack": "^3.6.0",
-    "webpack-dev-server": "^2.9.1"
+    "webpack-dev-server": "^2.10.0"
   }
 }

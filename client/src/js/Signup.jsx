@@ -81,7 +81,7 @@ export default class SignUp extends React.Component {
   render() {
     return (
       <div>
-          <h1>Create New Account</h1>
+          <h1 style={{textAlign:"center"}} >Create New Account</h1>
           <div>
           <FormControl className="formElements" >
             <InputLabel>Name</InputLabel>
@@ -119,7 +119,7 @@ export default class SignUp extends React.Component {
 
               }  
               />
-              <FormHelperText style={{color:this.state.passwordColor,display:this.state.passwordHelperText}} >Password length must be between 8 to 15 characters characters</FormHelperText>
+              <FormHelperText style={{color:this.state.passwordColor,display:this.state.passwordHelperText}} >Password length must be atleast 8 characters</FormHelperText>
           </FormControl>
           </div>
           

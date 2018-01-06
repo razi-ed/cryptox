@@ -64,7 +64,7 @@ export  class Login extends Component {
     return (
       <div>       
          <div>
-            <h1>Log Into Your Account</h1>
+            <h1 style={{textAlign:"center"}}>Log Into Your Account</h1>
               <TextField fullWidth
                 required
                 id="log-email"

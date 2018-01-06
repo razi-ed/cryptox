@@ -1,4 +1,4 @@
-const user= require('../../models/users')
+const User= require('../../models/users')
 
 const registerUser =(req,res)=>{
   const name=req.body.name
@@ -11,11 +11,11 @@ const registerUser =(req,res)=>{
   if(errors){
     res.json(errors[0].msg)
   }else{
-    const newUser = new user({
+    const newUser = new User({
       name,email,password
 		});
 
-		user.createUser(newUser, function(err, user){
+		User.createUser(newUser, function(err, user){
 			if(err) throw err;
       console.log(user);
       res.json({success:true})

@@ -1,4 +1,4 @@
-const User= require('../../models/users')
+const User= require('../../models/Users')
 const validatePassword= require('../../../utils/ValidateUser')
 const registerUser =(req,res)=>{
   const name=req.body.name

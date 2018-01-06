@@ -9,7 +9,6 @@ import Button from 'material-ui/Button';
 import { FormControl, FormHelperText } from 'material-ui/Form';
 import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
 import Grid from 'material-ui/Grid';
-import OverridesClassNames from "./icon";
 
 const styles = theme => ({
   container: {
@@ -92,9 +91,6 @@ export  class Login extends Component {
           </div>
           
           <hr className="hr-text" data-content="Or"></hr>
-          <div id="signG">
-          <OverridesClassNames/>
-          </div>
       </div>
     );
   }

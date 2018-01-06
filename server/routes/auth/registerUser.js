@@ -1,27 +1,26 @@
 const user= require('../../models/users')
 
-let registerUser =(req,res)=>{
-  let name=req.body.name
-  let email=req.body.email
-  let password=req.body.password
+const registerUser =(req,res)=>{
+  const name=req.body.name
+  const email=req.body.email
+  const password=req.body.password
   req.checkBody('name','Username is required').notEmpty()
   req.checkBody('email','email is required').notEmpty()
   req.checkBody('password','password is required').notEmpty()
-  let errors= req.validationErrors()
+  const errors= req.validationErrors()
   if(errors){
     res.json(errors[0].msg)
   }else{
-    var newUser = new user({
+    const newUser = new user({
       name,email,password
-      //Secret question is commented 
 		});
 
 		user.createUser(newUser, function(err, user){
 			if(err) throw err;
       console.log(user);
-      res.send("user successfully saved")
+      res.json({success:true})
 		});
   }
-  //res.json({name,email,password,errors})
+  
 }
 module.exports=registerUser

@@ -30,6 +30,8 @@
     "passport-google-oauth20": "^1.0.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-form-validator-core": "^0.3.0",
+    "react-material-ui-form-validator": "^1.0.1",
     "react-router-dom": "^4.2.2"
   },
   "devDependencies": {
@@ -39,7 +41,9 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "css-loader": "^0.28.7",
+    "eslint": "^4.14.0",
     "eslint-config-google": "^0.9.1",
+    "eslint-plugin-react": "^7.5.1",
     "extract-text-webpack-plugin": "^3.0.1",
     "file-loader": "^1.1.5",
     "html-webpack-plugin": "^2.30.1",

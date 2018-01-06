@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {Link} from 'react-router-dom'
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import IconButton from 'material-ui/IconButton';
@@ -32,11 +33,12 @@ export default class Header extends React.Component{
             <MenuIcon />
           </IconButton>
           <Typography type="title" color="inherit" style={{textAlign:"center"}}>
-            CrytpX
+          <Link to="/">CrytpX</Link>
+            
           </Typography>
          </div>
          <div>
-            <Button color="contrast">Login/SignUp</Button>
+            <Button color="contrast" className="login"><Link to="/login">Login/SignUp</Link></Button>
             </div>
         </Toolbar>
       </AppBar>

@@ -1,5 +1,17 @@
+
+*{
+  margin: 0px;
+  padding:0px;
+}
 .valid {
   color: green;
+}
+a{
+  text-decoration: none;
+  color: whitesmoke;
+}
+.formElements{
+  width: 100%;
 }
 
 .valid:before {

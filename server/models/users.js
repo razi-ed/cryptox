@@ -18,7 +18,7 @@ const userSchema = new Schema({
     required: true
   },
   email: {
-    type: String,
+    type: String,//add a validator
     unique: true,
     required: true
   },
@@ -27,9 +27,20 @@ const userSchema = new Schema({
   },
   // SecretQuestion
 })
-let user=module.exports = mongoose.model("user", userSchema)
 
-module.exports.createUser = function(newUser, callback){
+userSchema.methods.comparePassword = function(pw, cb) {
+  bcrypt.compare(pw, this.password, function(err, isMatch) {
+    console.log(pw, this.password)
+    if (err) {
+      return err;
+    }
+    cb(null, isMatch);
+  });
+}
+
+let User = mongoose.model("User", userSchema)
+
+User.createUser = function(newUser, callback){
 	bcrypt.genSalt(10, function(err, salt) {
 	    bcrypt.hash(newUser.password, salt, function(err, hash) {
 	        newUser.password = hash;
@@ -37,3 +48,6 @@ module.exports.createUser = function(newUser, callback){
 	    });
 	});
 }
+module.exports = User
+
+

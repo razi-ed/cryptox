@@ -1,15 +1,15 @@
 const jwt = require('jsonwebtoken');
 const User = require('../../models/users');
 
-let login = (req, res) => {
+const login = (req, res) => {
   /* res.send('login') */
-  let email = req.body.email;
-  let passwd = req.body.password;
+  const email = req.body.email;
+  const passwd = req.body.password;
   console.log(email, passwd, process.env.JWT_KEY)
   req.checkBody('email', 'email is required').notEmpty();
   //req.checkBody('passwd', 'Password is required').notEmpty();
 
-  let errors = req.validationErrors();
+  const errors = req.validationErrors();
 
   if (errors) {
     res.json(errors[0].msg)

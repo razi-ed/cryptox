@@ -1,15 +1,13 @@
-const express = require('express');
-const expressValidator = require('express-validator');
-const passport = require('passport')
+const express = require('express')
+const expressValidator = require('express-validator')
 
-const router = express.Router();
-let login, register ,validate,resetPassword;
-login= require('./auth/login')
-validate= require('./auth/validate')
-resetPassword= require('./auth/resetPassword')
-register= require('./auth/registerUser')
+const router = express.Router()
+const login= require('./auth/login')
+const validate= require('./auth/validate')
+const resetPassword= require('./auth/resetPassword')
+const register= require('./auth/registerUser')
 
-require('../config/passport')(passport)
+
 
 router.use(expressValidator())
 router.post('/login',login)

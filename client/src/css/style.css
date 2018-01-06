@@ -1,0 +1,32 @@
+
+*{
+  margin: 0px;
+  padding:0px;
+}
+.valid {
+  color: green;
+}
+a{
+  text-decoration: none;
+  color: whitesmoke;
+}
+.formElements{
+  width: 100%;
+}
+
+.valid:before {
+  position: relative;
+  left: -35px;
+  content: "✔";
+}
+
+/* Add a red text color and an "x" when the requirements are wrong */
+.invalid {
+  color: red;
+}
+
+.invalid:before {
+  position: relative;
+  left: -35px;
+  content: "✖";
+}

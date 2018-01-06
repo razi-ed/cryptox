@@ -1,17 +1,27 @@
-import React from 'react';
+import React, { Component } from 'react';
+import {BrowserRouter as Router, Route, Link, BrowserRouter} from 'react-router-dom';
 import { render } from 'react-dom';
+import LogIn from './tabForSignUp';
+import Header from './header';
+import Home from '../components/home'
+import '../css/style.css'
+//import { Login } from './login';
 
-
-
-export default class Hello extends React.Component {
+export default class App extends React.Component {
   render() {
     return (
-      <h1>
-      Hello world</h1>
+      <BrowserRouter>
+        <div>
+      <Header/>
+      <Route exact path={"/"} component={Home}/>
+      <Route exact path={"/login"} component={LogIn}/>
+      </div>
+    </BrowserRouter>
+        
     );
   }
 }
 
 
 
-render( < Hello / > , document.getElementById('app'));
+render( <App /> , document.getElementById('app1'));

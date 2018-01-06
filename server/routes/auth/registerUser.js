@@ -5,7 +5,7 @@ const registerUser =(req,res)=>{
   const email=req.body.email
   const password=req.body.password
   req.checkBody('name','Username is required').notEmpty()
-  req.checkBody('email','email is required').notEmpty().isemail()
+  req.checkBody('email','email is required').notEmpty().isEmail()
   req.checkBody('password','password is required').notEmpty()
   const errors= req.validationErrors()
   if(errors){

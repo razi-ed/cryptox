@@ -81,7 +81,7 @@ export default class SignUp extends React.Component {
   render() {
     return (
       <div>
-       
+          <h1>Create New Account</h1>
           <div>
           <FormControl className="formElements" >
             <InputLabel>Name</InputLabel>

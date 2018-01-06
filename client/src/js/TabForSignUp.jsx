@@ -48,9 +48,9 @@ export default class BasicTabs extends React.Component {
       <Grid item sm={3} xs={2}/>
       <Grid item sm={6} xs={2} style={{alignItems:"center"}}>
       <div>
-        <AppBar position="static">
+        <AppBar className="tabs" position="static"  style={{display:"flex"}}>
        
-          <Tabs value={value} onChange={this.handleChange} style={{display:"flex",justifyContent:"space-between"}}>
+          <Tabs value={value} onChange={this.handleChange} >
             <Tab label="LogIn" />
             <Tab label="SignUp" />
           </Tabs>

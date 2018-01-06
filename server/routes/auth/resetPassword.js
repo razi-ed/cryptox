@@ -7,7 +7,7 @@ const resetPassword =(req,res)=>{
   User.findOne({email})
   .then((user) => {
     user.password = password;
-    User.createUser(user, function(err, user){
+    User.updateUser(user, function(err, user){
 			if(err) throw err;
       console.log(user);
       res.json({success:true, message: "Successfully updated password for "+user.email})

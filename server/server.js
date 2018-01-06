@@ -4,10 +4,12 @@ const bodyParser = require('body-parser');
 const path= require('path')
 const passport= require('passport')
 
+const auth= require('./routes/auth')
+const frontend= require('./routes/frontend')
+
 const app = express()
 Mongoose.Promise=global.Promise
 //const routes= require('./routes/api')
-const auth= require('./routes/auth')
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 //pasport init
@@ -15,10 +17,7 @@ app.use(passport.initialize());
 //app.use(routes)
 app.use(express.static(path.join(__dirname, '../dist/')));
 app.use("/auth",auth)
-
-app.get('*',(req,res)=>{
-  res.sendFile(path.join(__dirname, '../dist/index.html'))
-})
+app.use(frontend)
 
 Mongoose
   .connect(process.env.DB_HOST ||'mongodb://localhost/cryptox',{

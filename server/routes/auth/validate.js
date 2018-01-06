@@ -1,4 +1,4 @@
-const users=require('../../models/users') 
+const users=require('../../models/Users') 
 
 const validate =(req,res)=>{
   const email= req.query.email

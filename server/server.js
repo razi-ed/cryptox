@@ -21,11 +21,16 @@ app.get('*',(req,res)=>{
   res.sendFile(path.join(__dirname, '../dist/index.html'))
 })
 
-Mongoose.connect(process.env.DB_HOST ||'mongodb://localhost/cryptox',{
-  useMongoClient:true
-}).then(()=>{
-  app.listen(process.env.port || 5000, function() {
-    console.log('now listening for requests in port 5000  and please start `npm run watch` for frontend live reload')
+Mongoose
+  .connect(process.env.DB_HOST ||'mongodb://localhost/cryptox',{
+    useMongoClient:true
   })
+
+Mongoose
+  .connection('once',()=>console.log('copnnected to db'))
+  .on('error',(e)=>console.log('error connectin to db',e))
+
+
+app.listen(process.env.port || 5000, function() {
+  console.log('now listening for requests in port 5000  and please start `npm run watch` for frontend live reload')
 })
-.catch(e=>console.log(e))

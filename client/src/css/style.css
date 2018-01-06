@@ -6,7 +6,10 @@
 .valid {
   color: green;
 }
-
+a{
+  text-decoration: none;
+  color: whitesmoke;
+}
 .formElements{
   width: 100%;
 }

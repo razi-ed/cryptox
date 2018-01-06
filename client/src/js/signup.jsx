@@ -9,7 +9,6 @@ import Visibility from 'material-ui-icons/Visibility'
 import VisibilityOff from 'material-ui-icons/VisibilityOff'
 import {InputAdornment} from "material-ui/Input";
 import IconButton from "material-ui/IconButton";
-import Dialog,{DialogActions, DialogContent, DialogContentText, DialogTitle,} from 'material-ui/Dialog'
 
 export default class SignUp extends React.Component {
   constructor(props) {
@@ -19,8 +18,6 @@ export default class SignUp extends React.Component {
       email:"",
       password:"",
       showPassword: false,
-      isUserCreated: false,
-      isDialogOpen:false,
       passwordColor:"red",
       passwordHelperText:"none",
       confirmPasswordColor:"red",
@@ -74,10 +71,10 @@ export default class SignUp extends React.Component {
   confirmPassword(event){
     this.setState({confirmHelperText:"block"})
     if(this.state.password==event.target.value){
-      this.setState({isPasswordMatch:true,confirmPasswordColor:"green",isPasswordSet:true,confirmHelperText:"block"})
+      this.setState({isPasswordMatch:true,confirmPasswordColor:"green",confirmHelperText:"block"})
     }
     else{
-      this.setState({isPasswordMatch:false,confirmPasswordColor:"red",isPasswordSet:false,confirmHelperText:"block"})
+      this.setState({isPasswordMatch:false,confirmPasswordColor:"red",confirmHelperText:"block"})
     }
   }
 

@@ -1,21 +1,15 @@
-const users=require('../../models/users') 
+const users=require('../../models/Users') 
 
-let validate =(req,res)=>{
-  let email= req.query.email
-  let question = req.query.question
+const validate =(req,res)=>{
+  const email= req.query.email
   users
   .find({email})
   .then(user=>{
-    //res.json({email,user,question})
-    if(!user.length==0){
-      if(question){
-        res.json({isRegisered:true,email,question:user[0].SecretQuestion.question})
-      }
-      res.json({isRegisered:true,email})
-    }else{
-      res.json({isRegisered:false,email})
-    }
+   
+    const isRegisered=user.length>0
+    res.json({isRegisered,email})
+    
   })
-  .catch(e=>res.send(e))
+  .catch(()=>res.status(500).json({error:"internal system error"}))
 }
 module.exports=validate

@@ -59,6 +59,10 @@ module.exports = {
           'file-loader',
         ],
       },
+      {
+        test: /\.svg$/,
+        loader: 'svg-inline-loader'
+      }
     ],
   },
   // Enable importing JS files without specifying their's extenstion

@@ -59,22 +59,22 @@ export default class SignUp extends React.Component {
 
   validatePassword(event){
     const pattern=new RegExp(/\w{8,}/)
-    this.setState({helperTextVisible:"block"})
+    this.setState({passwordHelperText:"block"})
     if(event.target.value.match(pattern)){
-      this.setState({password:event.target.value,passwordColor:"green",passwordHelperText:"block"})
+      this.setState({password:event.target.value,passwordColor:"green"})
     }
     else{
-      this.setState({password:event.target.value,passwordColor:"red",passwordHelperText:"block"})
+      this.setState({password:event.target.value,passwordColor:"red"})
     }
   }
 
   confirmPassword(event){
     this.setState({confirmHelperText:"block"})
     if(this.state.password==event.target.value){
-      this.setState({isPasswordMatch:true,confirmPasswordColor:"green",confirmHelperText:"block"})
+      this.setState({isPasswordMatch:true,confirmPasswordColor:"green"})
     }
     else{
-      this.setState({isPasswordMatch:false,confirmPasswordColor:"red",confirmHelperText:"block"})
+      this.setState({isPasswordMatch:false,confirmPasswordColor:"red"})
     }
   }
 

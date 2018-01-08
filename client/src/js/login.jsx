@@ -5,6 +5,7 @@ import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import GoogleButton from 'react-google-button'
 import '../css/style.css';
+import ForgotPassword from './forgotPassword';
 
 const styles = theme => ({
   textField: {
@@ -91,7 +92,7 @@ export  class Login extends Component {
               </Button>
             </div>
             <div>
-              <a id='forgPass' href="#">Forgot Password?</a>
+              <a id='forgPass' href="./forgotPassword">Forgot Password?</a>
             </div>
           </div>
           
@@ -102,6 +103,7 @@ export  class Login extends Component {
               onClick={() => { console.log('this will not run on click since it is disabled') }}
             />
           </div>
+          
       </div>
     );
   }

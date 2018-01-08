@@ -9,7 +9,7 @@ import '../css/style.css';
 import Footer from './footer';
 import Home from '../components/home';
 import '../css/style.css';
-import ForgetPassword from './forgetPassword';
+import ForgotPassword from './forgotPassword';
 
 
 
@@ -21,7 +21,7 @@ export default class App extends Component {
       <Header/>
       <Route exact path={"/"} component={Home}/>
       <Route exact path={"/login"} component={LogIn}/>
-      <Route exact path={"/reset-password"} component={ForgetPassword}/>
+      <Route exact path={"/reset-password"} component={ForgotPassword}/>
       <Footer />
       </div>
     </BrowserRouter>

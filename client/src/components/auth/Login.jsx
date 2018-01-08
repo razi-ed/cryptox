@@ -4,8 +4,8 @@ import { withStyles } from 'material-ui/styles';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import GoogleButton from 'react-google-button'
-import '../css/style.css';
-import ForgotPassword from './forgotPassword';
+import '../../css/style.css';
+import ForgotPassword from './ForgotPassword';
 
 export default class Login extends Component {
   constructor(){

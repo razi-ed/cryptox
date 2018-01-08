@@ -6,8 +6,8 @@ import Grid from 'material-ui/Grid';
 import Visibility from 'material-ui-icons/Visibility';
 import VisibilityOff from 'material-ui-icons/VisibilityOff';
 import IconButton from 'material-ui/IconButton';
-import ResetPassword from './resetPassword';
-import '../css/style.css';
+import ResetPassword from './ResetPassword';
+import '../../css/style.css';
 
 export default class ForgotPassword extends Component {
     constructor(){

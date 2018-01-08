@@ -18,7 +18,6 @@ const resetPassword =(req, res)=>{
         if (err) {
           throw err;
         }
-        console.log(user);
         res.json({
           success: true,
           message: 'Successfully updated password for '+user.email,

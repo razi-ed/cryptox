@@ -1,63 +1,17 @@
-a {
-    text-decoration-line: none;
-    width: 50%
-}
-#frame{
-    text-align: center;
-    justify-content: center;
-    direction: 'row';
-     margin-top: 10%;
-  }
-  #button_line{
-      
-     text-align: center;
 
-  }
-  Button{
-      width: 50%;
-  }
-
-  h1{
-    font-family: Arial, Helvetica, sans-serif;
-    color: #646c6c;
-  }
-  .hr-text {
-  line-height: 1em;
-  position: relative;
-  outline: 0;
-  border: 0;
-  color: black;
-  text-align: center;
-  height: 1.5em;
-  opacity: .5;
+*{
+  margin: 0px;
+  padding:0px;
 }
-.hr-text:before {
-  content: '';
-  background: -webkit-gradient(linear, left top, right top, from(transparent), color-stop(#0e0e0e), to(transparent));
-  background: linear-gradient(to right, transparent, #0e0e0e, transparent);
-  position: absolute;
-  left: 0;
-  top: 50%;
-  width: 100%;
-  height: 1px;
-}
-.hr-text:after {
-  content: attr(data-content);
-  position: relative;
-  display: inline-block;
-  color: black;
-  padding: 0 .5em;
-  line-height: 1.5em;
-  color: #0e0e0e;
-  background-color: #fcfcfa;
-}
-#signG Button{
-    width:100%;
-    background-color: #c8ba44;
-}
-
 .valid {
   color: green;
+}
+a{
+  text-decoration: none;
+  color: whitesmoke;
+}
+.formElements{
+  width: 100%;
 }
 
 .valid:before {

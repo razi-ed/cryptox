@@ -29,19 +29,6 @@ const styles = theme => ({
   }
 })
 
-function loginUser(){
-  fetch("http://localhost:5000/auth/login",{
-  // method:"POST",
-    body:JSON.stringify({
-      email:document.getElementById('log-email').value,
-      password: document.getElementById('log-password').value
-    })
-  }).then(res=>res.text()).then((res)=>{
-    console.log(res);
-  })
-}
-
-
 export  class Login extends Component {
   state = {
     email: "",
@@ -49,6 +36,22 @@ export  class Login extends Component {
     showPassword: false,
   };
 
+  loginUser(){
+    console.log(document.getElementById('log-email').value)
+    fetch("/auth/login",{
+      method:"POST",
+      headers:{
+        'Content-Type':'application/json',
+      },
+      body:JSON.stringify({
+        email:document.getElementById('log-email').value,
+        password: document.getElementById('log-password').value
+      })
+    }).then(res=>res.text()).then((res)=>{
+      console.log(res);
+    })
+  }
+  
   handleChange = prop => event => {
 
     this.setState({
@@ -60,10 +63,7 @@ export  class Login extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <div className={classes.container}>
-        <Grid item sm={4}></Grid>
-        <Grid id='frame' item sm={4}>
-        
+      <div>       
          <div>
             <h1>Log Into Your Account</h1>
               <TextField fullWidth
@@ -93,19 +93,12 @@ export  class Login extends Component {
           
           <hr className="hr-text" data-content="Or"></hr>
           <div id="signG">
-            {/* <Button type="submit" raised color="accent" className={classes.button} onClick={this.loginUser}> */}
-              <OverridesClassNames/>
-              {/* Continue with Google+
-              </Button> */}
+          <OverridesClassNames/>
           </div>
-        </Grid>
-
-        <Grid item sm={4}></Grid>
       </div>
     );
   }
 }
-
 
 Login.propTypes = {
   classes: PropTypes.object.isRequired,

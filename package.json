@@ -20,14 +20,16 @@
     "bootstrap": "^3.3.7",
     "express": "^4.16.2",
     "express-validator": "^4.3.0",
+    "jsonwebtoken": "^8.1.0",
     "material-ui": "^1.0.0-beta.26",
     "material-ui-icons": "^1.0.0-beta.17",
-    "jsonwebtoken": "^8.1.0",
     "mongo": "^0.1.0",
     "mongoose": "^4.13.7",
     "passport": "^0.4.0",
+    "passport-jwt": "^2.1.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-form-validator-core": "^0.3.0",
     "react-router-dom": "^4.2.2"
   },
   "devDependencies": {
@@ -36,14 +38,16 @@
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
-    "css-loader": "^0.28.7",
+    "css-loader": "^0.28.8",
+    "eslint": "^4.14.0",
     "eslint-config-google": "^0.9.1",
+    "eslint-plugin-react": "^7.5.1",
     "extract-text-webpack-plugin": "^3.0.1",
     "file-loader": "^1.1.5",
     "html-webpack-plugin": "^2.30.1",
-    "material-ui": "^1.0.0-beta.26",
     "nodemon": "^1.14.3",
+    "svg-inline-loader": "^0.8.0",
     "webpack": "^3.6.0",
-    "webpack-dev-server": "^2.9.1"
+    "webpack-dev-server": "^2.10.0"
   }
 }

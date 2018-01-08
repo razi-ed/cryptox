@@ -1,4 +1,5 @@
 {
+    "extends": "google",
     "env": {
         "browser": true,
         "commonjs": true,
@@ -12,7 +13,8 @@
         "sourceType": "module"
     },
     "plugins": [
-        "material-ui"
+        "material-ui",
+        "react"
     ],
         
     
@@ -23,6 +25,7 @@
         "no-unreachable": "warn",
         "no-unused-vars": "warn",
         "constructor-super": "warn",
-        "valid-typeof": "warn"
+        "valid-typeof": "warn",
+        "react/jsx-uses-vars": [2]
     }
 }

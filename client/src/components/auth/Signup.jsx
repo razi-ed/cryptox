@@ -96,7 +96,7 @@ export default class SignUp extends React.Component {
   }
   /**
    * this function is called when react compnent is called to render
-   * @return {component} component to be mounted
+   * @return {component}
    */
   render() {
     return (

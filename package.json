@@ -48,16 +48,11 @@
     "history": "^4.7.2",
     "html-webpack-plugin": "^2.30.1",
     "nodemon": "^1.14.3",
-<<<<<<< HEAD
     "react-hot-loader": "^3.1.3",
-    "webpack": "^3.6.0",
     "webpack-dev-middleware": "^2.0.3",
-    "webpack-dev-server": "^2.9.1",
-    "webpack-hot-middleware": "^2.21.0"
-=======
+    "webpack-hot-middleware": "^2.21.0",
     "svg-inline-loader": "^0.8.0",
     "webpack": "^3.6.0",
     "webpack-dev-server": "^2.10.0"
->>>>>>> authentication
   }
 }

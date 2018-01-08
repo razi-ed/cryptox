@@ -15,7 +15,7 @@ module.exports = {
   entry: [
     "webpack-hot-middleware/client",
     "react-hot-loader/patch",
-    path.join(paths.JS, "app.js")
+    path.join(paths.JS, "main.jsx")
   ],
   output: {
     path: paths.DIST,

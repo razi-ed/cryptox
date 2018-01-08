@@ -1,17 +1,26 @@
 const User = require('../../models/Users')
-
+const validatePassword = require('../../../utils/ValidateUser');
 const resetPassword =(req,res)=>{
   const email = req.body.email;
   const password = req.body.password;
-
-  User.findOne({email})
-  .then((user) => {
-    user.password = password;
-    User.updateUser(user, function(err, user){
-			if(err) throw err;
-      console.log(user);
-      res.json({success:true, message: "Successfully updated password for "+user.email})
-		});
-  })
+  req.checkBody('email','email is required').notEmpty().isEmail();
+  req.checkBody('password','password is required').notEmpty();
+  const errors= req.validationErrors()
+  if(errors){
+    res.json(errors[0].msg)
+  }else if(validatePassword(password)!=="valid password"){
+    res.send("password "+validatePassword(password))
+  }else {
+    User.findOne({email})
+    .then((user) => {
+      user.password = password;
+      User.updateUser(user, function(err, user){
+        if(err) throw err;
+        console.log(user);
+        res.json({success:true, message: "Successfully updated password for "+user.email})
+      });
+    })  
+  }
+  
 }
 module.exports=resetPassword

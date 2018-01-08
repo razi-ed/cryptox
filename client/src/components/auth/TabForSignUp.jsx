@@ -4,8 +4,8 @@ import { withStyles } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
 import Tabs, { Tab } from 'material-ui/Tabs';
 import Typography from 'material-ui/Typography';
-import LogIn from './login';
-import SignUp from './signup'
+import LogIn from './Login';
+import SignUp from './Signup'
 import Grid from 'material-ui/Grid';
 
 
@@ -48,9 +48,8 @@ export default class BasicTabs extends React.Component {
       <Grid item sm={3} xs={2}/>
       <Grid item sm={6} xs={2} style={{alignItems:"center"}}>
       <div>
-        <AppBar position="static">
-       
-          <Tabs value={value} onChange={this.handleChange} style={{display:"flex",justifyContent:"space-between"}}>
+        <AppBar className="tabs" position="static" style={{justifyContent:"space-around"}}>
+          <Tabs value={value} onChange={this.handleChange} >
             <Tab label="LogIn" />
             <Tab label="SignUp" />
           </Tabs>
@@ -66,9 +65,3 @@ export default class BasicTabs extends React.Component {
     );
   }
 }
-
-// BasicTabs.propTypes = {
-//   classes: PropTypes.object.isRequired,
-// };
-
-// export default withStyles(styles)(BasicTabs);

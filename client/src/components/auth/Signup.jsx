@@ -1,13 +1,9 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Button from "material-ui/Button";
-import Grid from "material-ui/Grid";
-import TextField from "material-ui/TextField";
-import Input,{InputLabel} from 'material-ui/Input'
+import Input,{InputLabel,InputAdornment} from 'material-ui/Input'
 import {FormHelperText,FormControl} from 'material-ui/Form'
 import Visibility from 'material-ui-icons/Visibility'
 import VisibilityOff from 'material-ui-icons/VisibilityOff'
-import {InputAdornment} from "material-ui/Input";
 import IconButton from "material-ui/IconButton";
 export default class SignUp extends React.Component {
   constructor(props) {
@@ -36,14 +32,16 @@ export default class SignUp extends React.Component {
     });
   }
 
-  validatePassword(event) {
-    var lowerCaseLetters = /[a-z]/g;
-    if (event.target.value.match(lowerCaseLetters)) {
-      document.getElementById("letter").classList.remove("invalid");
-      document.getElementById("letter").classList.add("valid");
-    } else {
-      document.getElementById('letter').classList.remove("valid");
-      document.getElementById('letter').classList.add("invalid");
+  handleMouseDownIcon(event){
+    event.preventDefault();
+  }
+
+
+  validatePassword(event){
+    const pattern=new RegExp(/\w{8,}/)
+    this.setState({passwordHelperText:"block"})
+    if(event.target.value.match(pattern)){
+      this.setState({password:event.target.value,passwordColor:"green"})
     }
 
     // Validate capital letters
@@ -83,7 +81,7 @@ export default class SignUp extends React.Component {
   render() {
     return (
       <div>
-       
+          <h1 style={{textAlign:"center"}} >Create New Account</h1>
           <div>
           <FormControl className="formElements" >
             <InputLabel>Name</InputLabel>
@@ -106,14 +104,17 @@ export default class SignUp extends React.Component {
               type={this.state.showPassword?'text':'password'}
               endAdornment={
                 <InputAdornment position="end">
-                  <IconButton onClick={this.handleClickShowPasssword} >
+                  <IconButton 
+                    onClick={this.handleClickIcon}
+                    onMouseDown={this.handleMouseDownIcon}
+                  >
                     {this.state.showPassword?<VisibilityOff/>:<Visibility/>}
                   </IconButton>
                 </InputAdornment>
 
               }  
               />
-              <FormHelperText>Password must have atleat 8 characters</FormHelperText>
+              <FormHelperText style={{color:this.state.passwordColor,display:this.state.passwordHelperText}} >Password length must be atleast 8 characters</FormHelperText>
           </FormControl>
           </div>
           

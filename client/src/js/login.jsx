@@ -99,7 +99,6 @@ export  class Login extends Component {
               onClick={() => { console.log('this will not run on click since it is disabled') }}
             />
           </div>
-        </Grid>
       </div>
     );
   }

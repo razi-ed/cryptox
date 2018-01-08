@@ -7,21 +7,7 @@ import GoogleButton from 'react-google-button'
 import '../css/style.css';
 import ForgotPassword from './forgotPassword';
 
-const styles = theme => ({
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-  },
-  button: {
-    margin: theme.spacing.unit,
-
-  },
-  input: {
-    display: 'block',
-  }
-})
-
-export  class Login extends Component {
+export default class Login extends Component {
   constructor(){
     super();
     this.state = {
@@ -29,13 +15,13 @@ export  class Login extends Component {
     password: '',
     showPassword: false,
   };
-  this.changeEmail = this.changeEmail.bind(this);
+  this.changeEmail = this.changeEmail.bind(this)
   this.changePassword = this.changePassword.bind(this)
   this.loginUser = this.loginUser.bind(this)
 }
 
   loginUser(){
-    console.log(document.getElementById('log-email').value)
+    
     fetch("/auth/login",{
       method:"POST",
       headers:{
@@ -65,7 +51,6 @@ export  class Login extends Component {
   }
 
   render() {
-    const { classes } = this.props;
     return (
       <div id="form">       
          <div>
@@ -87,12 +72,12 @@ export  class Login extends Component {
                 margin="normal"
               />
             <div id='button_line'>
-              <Button type="submit" raised color="primary"  className={classes.button} onClick={this.loginUser}>
+              <Button type="submit" raised color="primary"  className="button" onClick={this.loginUser}>
                 Log In
               </Button>
             </div>
             <div>
-              <a id='forgPass' href="./forgotPassword">Forgot Password?</a>
+              <a id='forgPass' href="/reset-password">Forgot Password?</a>
             </div>
           </div>
           
@@ -108,9 +93,3 @@ export  class Login extends Component {
     );
   }
 }
-
-Login.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(Login);

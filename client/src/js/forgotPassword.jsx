@@ -1,81 +1,76 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
 import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
 import Button from 'material-ui/Button';
 import { FormHelperText, FormControl } from 'material-ui/Form';
-import '../css/style.css';
 import Grid from 'material-ui/Grid';
+import Visibility from 'material-ui-icons/Visibility';
+import VisibilityOff from 'material-ui-icons/VisibilityOff';
+import IconButton from 'material-ui/IconButton';
+import ResetPassword from './resetPassword';
+import '../css/style.css';
 
-
-const styles = theme => ({
-    textField: {
-        marginLeft: theme.spacing.unit,
-        marginRight: theme.spacing.unit,
-    },
-    button: {
-        margin: theme.spacing.unit,
-
-    },
-
-});
 export default class ForgotPassword extends Component {
     constructor(){
         super();
         this.state={
-            email: "",
-            password: ''
+            email: ' ',
+            password: ' ',
+            isRegistered:false,    
         }
         this.checkEmail=this.checkEmail.bind(this)
         this.changeEmail = this.changeEmail.bind(this)
     }
     changeEmail(event) {
         this.setState({
-            email: event.target.value
-        },()=>{
-            this.checkEmail();
+            email: event.target.value,
         });
     }
-
+    
     checkEmail() {
         console.log(this.state.email)
         fetch(`/auth/validate?email=${this.state.email}`)
-            .then(res=>res.json())
-            .then((res) => {
-                console.log(res)
-                if(res.isRegistered){
-                    fetch()
-                }
-            })
+        .then(res=>res.json())
+        .then((res) => {
+            console.log(res)
+            if (res.isRegisered){
+                this.setState({
+                    isRegistered: res.isRegisered,
+                })
+                
+            }
+            
+        })
     }
-
-
+    
+    
     render(){
         return(
             <div id="forgFrame">
                 <Grid item sm={6} md={6} lg={4}>
+                <h1>Reset Your Password</h1>
                     <FormControl className="formElements" >
                         <InputLabel >Email</InputLabel>
                         <Input
-                            type="email"
-                            onChange={(event) => this.setState({ email: event.target.value })}
+                        type="email"
+                        onChange={this.changeEmail}
                         />
                     </FormControl>
-                    <div style={{ paddingTop: 25, textAlign: "center" }}>
+            
+                    {this.state.isRegistered == false ? (<div style={{ paddingTop: 25, textAlign: "center" }}>
                         <Button
-                            raised
-                            color="primary"
-                            type="submit"
-                            onClick={(event)=> {
-                            this.changeEmail(event);
-                                
-                            }}
+                        raised
+                        color="primary"
+                        type="submit"
+                        onClick={()=> {
+                            this.checkEmail();    
+                        }}
                         > Submit
                         </Button>
-                    </div>
+                    </div>):<ResetPassword email={this.state.email}/>}
+        
                 </Grid>
-             </div>
+            </div>
         )
     }
-
+    
 }

@@ -1,10 +1,10 @@
-import React from "react";
-import Button from "material-ui/Button";
-import Input,{InputLabel,InputAdornment} from 'material-ui/Input'
-import {FormHelperText,FormControl} from 'material-ui/Form'
-import Visibility from 'material-ui-icons/Visibility'
-import VisibilityOff from 'material-ui-icons/VisibilityOff'
-import IconButton from "material-ui/IconButton";
+import React from 'react';
+import Button from 'material-ui/Button';
+import Input, {InputLabel, InputAdornment} from 'material-ui/Input';
+import {FormHelperText, FormControl} from 'material-ui/Form';
+import Visibility from 'material-ui-icons/Visibility';
+import VisibilityOff from 'material-ui-icons/VisibilityOff';
+import IconButton from 'material-ui/IconButton';
 export default class SignUp extends React.Component {
   constructor(props) {
     super(props);

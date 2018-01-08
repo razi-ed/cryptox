@@ -4,7 +4,7 @@ const bcrypt= require('bcrypt');
 const SecretQuestion=new Schema({
   question: {
     type: String,
-    required: true
+    required: true,
   },
   answer: {
     type: String,

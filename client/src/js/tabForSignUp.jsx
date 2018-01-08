@@ -50,7 +50,7 @@ export default class BasicTabs extends React.Component {
       <div>
         <AppBar position="static">
        
-          <Tabs value={value} onChange={this.handleChange} style={{display:"flex",justifyContent:"space-between"}}>
+          <Tabs value={value} onChange={this.handleChange} style={{justifyContent:"space-between"}}>
             <Tab label="LogIn" />
             <Tab label="SignUp" />
           </Tabs>

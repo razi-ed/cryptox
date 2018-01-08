@@ -84,7 +84,7 @@ export  class Login extends React.Component {
           </div>
           
           <hr className="hr-text" data-content="Or"></hr>
-          <a href='http://loaclhost:3000/auth/google'>
+          <a href='http://localhost:3000/auth/google'>
             <GoogleButton />
           </a>
         

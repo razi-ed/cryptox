@@ -3,7 +3,7 @@ const GoogleStrategy = require('passport-google-oauth20');
 const keys = require('../../../config/googleAuth')
 const User = require('../../../models/Users');
 
-// console.log("from config pasport");
+console.log("from config pasport");
 
 // serializing user and passing to cookie then to server
 passport.serializeUser((user, done) => {

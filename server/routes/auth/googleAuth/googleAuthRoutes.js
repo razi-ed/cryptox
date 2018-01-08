@@ -5,14 +5,16 @@ const passport = require('passport')
   //   res.render('login', { user: req.user });
   // });
 
-router.get('/google', passport.authenticate('google', {
+router.get('/', passport.authenticate('google', {
   scope: ['profile', 'email'], //what an all to retrieve from users google account
 }));
 
 // callback route for google to redirect to
 router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
   // res.send(req.user);
-  res.redirect('/dashboard')
+  //res.redirect('/dashboard')
+  console.log("crazy as fuck");
+  
 });
 
 

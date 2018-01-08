@@ -3,7 +3,7 @@ const Mongoose= require('mongoose');
 const bodyParser = require('body-parser');
 const path= require('path');
 const passport= require('passport');
-
+const keys = require('./config/googleAuth');
 const auth= require('./routes/auth');
 const frontend= require('./routes/frontend');
 
@@ -27,7 +27,7 @@ app.use('/auth', auth);
 app.use(frontend);
 
 Mongoose
-  .connect(process.env.DB_HOST ||'mongodb://localhost/cryptox', {
+  .connect( keys.DB.URI, {
     useMongoClient: true,
   });
 

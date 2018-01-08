@@ -1,20 +1,17 @@
 import React, { Component } from 'react';
-import {  BrowserRouter as Router , Route , Link } from 'react-router-dom';
-import { render } from 'react-dom';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import '../css/style.css';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import { FormControl, FormHelperText } from 'material-ui/Form';
 import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
-import Grid from 'material-ui/Grid';
-import OverridesClassNames from "./icon";
-
+import GoogleButton from 'react-google-button'
+import '../css/style.css';
 const styles = theme => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',
+    justifyContent:"center",
   },
   textField: {
     marginLeft: theme.spacing.unit,
@@ -30,11 +27,15 @@ const styles = theme => ({
 })
 
 export  class Login extends Component {
-  state = {
+  constructor(){
+    super();
+    state = {
     email: "",
     password: '',
     showPassword: false,
   };
+}
+//  handleChange = prop => event => {
 
   loginUser(){
     console.log(document.getElementById('log-email').value)
@@ -93,8 +94,12 @@ export  class Login extends Component {
           
           <hr className="hr-text" data-content="Or"></hr>
           <div id="signG">
-          <OverridesClassNames/>
+            <GoogleButton
+              type="dark"
+              onClick={() => { console.log('this will not run on click since it is disabled') }}
+            />
           </div>
+        </Grid>
       </div>
     );
   }

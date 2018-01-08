@@ -15,7 +15,9 @@ export default class ForgotPassword extends Component {
         this.state={
             email: ' ',
             password: ' ',
-            isRegistered:false,    
+            isRegistered:false,
+            emailHelperTextVisible: 'none', 
+            emailColor: 'red',  
         }
         this.checkEmail=this.checkEmail.bind(this)
         this.changeEmail = this.changeEmail.bind(this)
@@ -38,6 +40,10 @@ export default class ForgotPassword extends Component {
                 })
                 
             }
+            else{
+                this.setState({ emailHelperTextVisible: ' block' });
+            }
+            
             
         })
     }
@@ -54,6 +60,18 @@ export default class ForgotPassword extends Component {
                         type="email"
                         onChange={this.changeEmail}
                         />
+                        <FormHelperText
+                            style={
+                                {
+                                    color: this.state.emailColor,
+                                    display: this.state.emailHelperTextVisible,
+                                }
+                            }
+                        >
+                           Email not registered
+                        </FormHelperText>
+
+
                     </FormControl>
             
                     {this.state.isRegistered == false ? (<div style={{ paddingTop: 25, textAlign: "center" }}>

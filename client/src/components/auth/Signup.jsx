@@ -172,8 +172,8 @@ export default class SignUp extends React.Component {
               <div style={{paddingTop: 25, textAlign: ' center'}}>
                 <Button
                   raised
-                  color=' primary'
-                  type=' submit'
+                  color='primary'
+                  type='submit'
                   onClick={this.createUser}
                 >
                   Create New Account

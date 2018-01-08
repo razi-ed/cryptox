@@ -1,11 +1,8 @@
-import React, { Component } from 'react';
-import {BrowserRouter as Router, Route, Link, BrowserRouter} from 'react-router-dom';
-import { render } from 'react-dom';
-import LogIn from './TabForSignUp';
+import React from 'react';
+import {BrowserRouter,Route} from 'react-router-dom';
+import LogIn from './auth/TabForSignUp';
 import Header from './Header';
 import Home from '../components/home'
-import '../css/style.css'
-import Login  from './Login';
 
 export default class App extends React.Component {
   render() {
@@ -21,7 +18,3 @@ export default class App extends React.Component {
     );
   }
 }
-
-
-
-render( <App /> , document.getElementById('app1'));

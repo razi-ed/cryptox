@@ -1,14 +1,10 @@
-import React, { Component } from 'react';
-import {  BrowserRouter as Router , Route , Link } from 'react-router-dom';
-import { render } from 'react-dom';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import '../css/style.css';
+import '../../css/style.css'
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import { FormControl, FormHelperText } from 'material-ui/Form';
-import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
-import Grid from 'material-ui/Grid';
 
 const styles = theme => ({
   container: {
@@ -28,12 +24,15 @@ const styles = theme => ({
   }
 })
 
-export  class Login extends Component {
-  state = {
-    email: "",
-    password: '',
-    showPassword: false,
-  };
+export  class Login extends React.Component {
+  constructor(){
+    super()
+    this.state={
+      email: "",
+      password: '',
+      showPassword: false,
+    }
+  }
 
   loginUser(){
     console.log(document.getElementById('log-email').value)
@@ -50,14 +49,6 @@ export  class Login extends Component {
       console.log(res);
     })
   }
-  
-  handleChange = prop => event => {
-
-    this.setState({
-      [prop]: event.target.value,
-    });
-    console.log(this.state.email);
-  };
 
   render() {
     const { classes } = this.props;

@@ -1,13 +1,9 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Button from "material-ui/Button";
-import Grid from "material-ui/Grid";
-import TextField from "material-ui/TextField";
-import Input,{InputLabel} from 'material-ui/Input'
+import Input,{InputLabel,InputAdornment} from 'material-ui/Input'
 import {FormHelperText,FormControl} from 'material-ui/Form'
 import Visibility from 'material-ui-icons/Visibility'
 import VisibilityOff from 'material-ui-icons/VisibilityOff'
-import {InputAdornment} from "material-ui/Input";
 import IconButton from "material-ui/IconButton";
 
 export default class SignUp extends React.Component {
@@ -56,6 +52,11 @@ export default class SignUp extends React.Component {
   handleClickIcon(){
     this.setState({showPassword:!this.state.showPassword})
   }
+
+  handleMouseDownIcon(event){
+    event.preventDefault();
+  }
+
 
   validatePassword(event){
     const pattern=new RegExp(/\w{8,}/)
@@ -112,7 +113,10 @@ export default class SignUp extends React.Component {
               onFocus={this.validatePassword}
               endAdornment={
                 <InputAdornment position="end">
-                  <IconButton onClick={this.handleClickIcon} >
+                  <IconButton 
+                    onClick={this.handleClickIcon}
+                    onMouseDown={this.handleMouseDownIcon}
+                  >
                     {this.state.showPassword?<VisibilityOff/>:<Visibility/>}
                   </IconButton>
                 </InputAdornment>

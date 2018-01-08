@@ -15,7 +15,7 @@ const paths = {
 
 // Webpack configuration
 module.exports = {
-  entry: path.join(paths.JS, 'App.jsx'),
+  entry: path.join(paths.JS, 'Main.jsx'),
   output: {
     path: paths.DIST,
     // public:"/",

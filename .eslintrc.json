@@ -11,6 +11,11 @@
         },
         "sourceType": "module"
     },
+    "plugins": [
+        "material-ui"
+    ],
+        
+    
     "rules": {
         "no-const-assign": "warn",
         "no-this-before-super": "warn",

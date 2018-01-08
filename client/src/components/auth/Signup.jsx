@@ -39,7 +39,7 @@ export default class SignUp extends React.Component {
     console.log(this.state.name, this.state.email, this.state.password);
     if (this.state.name && this.state.email && this.state.password) {
       fetch(' /auth/register', {
-        method: ' POST',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -172,8 +172,8 @@ export default class SignUp extends React.Component {
               <div style={{paddingTop: 25, textAlign: ' center'}}>
                 <Button
                   raised
-                  color=' primary'
-                  type=' submit'
+                  color='primary'
+                  type='submit'
                   onClick={this.createUser}
                 >
                   Create New Account

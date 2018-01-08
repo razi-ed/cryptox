@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import AppBar from 'material-ui/AppBar';
 import Tabs, {Tab} from 'material-ui/Tabs';
 import Typography from 'material-ui/Typography';
@@ -14,23 +13,11 @@ import Grid from 'material-ui/Grid';
  */
 function TabContainer(props) {
   return (
-    <Typography component='div' style={{ padding: 8 * 3 }}>
+    <Typography component='div' style={{padding: 8 * 3}}>
       {props.children}
     </Typography>
   );
 }
-
-TabContainer.propTypes = {
-  children: PropTypes.node.isRequired,
-};
-
-const styles = theme => ({
-  root: {
-    flexGrow: 1,
-    marginTop: theme.spacing.unit * 3,
-    backgroundColor: theme.palette.background.paper,
-  },
-});
 
 /**
  * class to create tab structure for signup and login
@@ -38,12 +25,14 @@ const styles = theme => ({
 export default class BasicTabs extends React.Component {
   /**
    * constructor to initialize object
+   * @param {props} props
    */
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state={
       value: 0,
     };
+    this.handleChange=this.handleChange.bind(this);
   }
   /**
    * @param {event} event
@@ -58,11 +47,10 @@ export default class BasicTabs extends React.Component {
    * @return {component} tab component
    */
   render() {
-    const {classes}=this.props;
     const {value} = this.state;
 
     return (
-      <div className={this.props.root}>
+      <div>
       <Grid container>
       <Grid item sm={3} xs={2}/>
       <Grid item sm={6} xs={2} style={{alignItems: 'center'}}>

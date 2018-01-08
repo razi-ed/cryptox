@@ -3,7 +3,7 @@ const validatePassword=(password)=>{
   const upperCase=/[A-Z]/g;
   const numbers = /[0-9]/g;
   const len= password.length;
-  console.log('password from validator',password);
+  console.log('password from validator', password);
   const validator=(reg)=>password.match(reg);
   return !validator(lowerCase)?'must contain lowercase letters':
           !validator(upperCase)?'must contain lowercase letters':

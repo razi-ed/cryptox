@@ -1,5 +1,5 @@
 const express = require('express');
-const Mongoose=  require('mongoose');
+const Mongoose= require('mongoose');
 const bodyParser = require('body-parser');
 const path= require('path');
 const passport= require('passport');
@@ -27,7 +27,7 @@ app.use('/auth', auth);
 app.use(frontend);
 
 Mongoose
-  .connect(process.env.DB_HOST ||'mongodb://localhost/cryptox',{
+  .connect(process.env.DB_HOST ||'mongodb://localhost/cryptox', {
     useMongoClient: true,
   });
 

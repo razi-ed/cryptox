@@ -1,7 +1,7 @@
 const express = require('express');
 const expressValidator = require('express-validator');
 
-const router = express.Router();
+const router = new express.Router();
 const login= require('./auth/login');
 const validate= require('./auth/validate');
 const resetPassword= require('./auth/resetPassword');

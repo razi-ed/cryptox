@@ -1,18 +1,14 @@
-var JwtStrategy = require('passport-jwt').Strategy;  
-var ExtractJwt = require('passport-jwt').ExtractJwt;  
-var User = require('../models/users'); 
+let JwtStrategy = require('passport-jwt').Strategy;
+let ExtractJwt = require('passport-jwt').ExtractJwt;
+let User = require('../models/Users');
 
 // Setup work and export for the JWT passport strategy
-module.exports = function(passport) {  
-  var opts = {};
+module.exports = function(passport) {
+  let opts = {};
   opts.jwtFromRequest = ExtractJwt.fromAuthHeader();
   opts.secretOrKey = process.env.JWT_KEY;
-  console.log(opts)
-  passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
-    console.log(jwt_payload);
-    
-
-    User.findOne({email: jwt_payload.id}, function(err, user) {
+  passport.use(new JwtStrategy(opts, function(jwtPayload, done) {
+    User.findOne({email: jwtPayload.id}, function(err, user) {
       if (err) {
         return done(err, false);
       }

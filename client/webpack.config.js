@@ -50,9 +50,15 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|gif)$/,
-        use: ["file-loader"]
+        use: [
+          'file-loader',
+        ],
+      },
+      {
+        test: /\.svg$/,
+        loader: 'svg-inline-loader'
       }
-    ]
+    ],
   },
   resolve: {
     extensions: [" ", ".js", ".jsx"]

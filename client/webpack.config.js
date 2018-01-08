@@ -29,7 +29,6 @@ module.exports = {
     }),
     new ExtractTextPlugin("style.bundle.css"),
     new webpack.NoEmitOnErrorsPlugin(),
-
     new webpack.HotModuleReplacementPlugin()
   ],
   module: {

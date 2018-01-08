@@ -7,6 +7,9 @@ a{
   text-decoration: none;
   color:white;
 }
+#forgPass{
+  color: blue;
+}
 
 .login{
   width:101%;
@@ -20,25 +23,28 @@ a{
   justify-content: center;
   text-align: center;
 }
-  #button_line{
-      
-     text-align: center;
+#forgFrame{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+.formElements{
+  width: 100%;
+}
 
-  }
-  Button{
-      width: 50%;
-  }
+ #button_line {
+    text-align: center;
+ }
+  
+Button {
+  width:50%;
+}
 
-  h1{
-    font-family: Arial, Helvetica, sans-serif;
-    color: #646c6c;
-  }
-
-  h1{
-    font-family: Arial, Helvetica, sans-serif;
-    color: #646c6c;
-  }
-  .hr-text {
+h1 {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #646c6c;
+}
+.hr-text {
   line-height: 1em;
   position: relative;
   outline: 0;

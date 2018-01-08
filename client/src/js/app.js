@@ -7,11 +7,13 @@ import '../css/style.css';
 import Login from './login';
 import '../css/style.css';
 import Footer from './footer';
-import Home from '../components/home'
-import '../css/style.css'
-//import { Login } from './login';
+import Home from '../components/home';
+import '../css/style.css';
+import ForgetPassword from './forgetPassword';
 
-export default class App extends React.Component {
+
+
+export default class App extends Component {
   render() {
     return (
       <BrowserRouter>
@@ -19,6 +21,7 @@ export default class App extends React.Component {
       <Header/>
       <Route exact path={"/"} component={Home}/>
       <Route exact path={"/login"} component={LogIn}/>
+      <Route exact path={"/reset-password"} component={ForgetPassword}/>
       <Footer />
       </div>
     </BrowserRouter>

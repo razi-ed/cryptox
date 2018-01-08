@@ -3,16 +3,10 @@ import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
-import { FormControl, FormHelperText } from 'material-ui/Form';
-import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
 import GoogleButton from 'react-google-button'
 import '../css/style.css';
+
 const styles = theme => ({
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent:"center",
-  },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
@@ -29,13 +23,15 @@ const styles = theme => ({
 export  class Login extends Component {
   constructor(){
     super();
-    state = {
+    this.state = {
     email: "",
     password: '',
     showPassword: false,
   };
+  this.changeEmail = this.changeEmail.bind(this);
+  this.changePassword = this.changePassword.bind(this)
+  this.loginUser = this.loginUser.bind(this)
 }
-//  handleChange = prop => event => {
 
   loginUser(){
     console.log(document.getElementById('log-email').value)
@@ -45,32 +41,39 @@ export  class Login extends Component {
         'Content-Type':'application/json',
       },
       body:JSON.stringify({
-        email:document.getElementById('log-email').value,
-        password: document.getElementById('log-password').value
+        email:this.state.email,
+        password: this.state.password
       })
     }).then(res=>res.text()).then((res)=>{
       console.log(res);
     })
   }
   
-  handleChange = prop => event => {
-
+  changeEmail(event) {
     this.setState({
-      [prop]: event.target.value,
+      email: event.target.value
     });
     console.log(this.state.email);
-  };
+  }
+
+  changePassword(event) {
+    this.setState({
+      password: event.target.value
+    });
+    console.log(this.state.password)
+  }
 
   render() {
     const { classes } = this.props;
     return (
-      <div>       
+      <div id="form">       
          <div>
             <h1>Log Into Your Account</h1>
               <TextField fullWidth
                 required
                 id="log-email"
                 label="Email" 
+                onChange = {this.changeEmail}
                 type="Email"
                 margin="normal"
               />
@@ -79,7 +82,7 @@ export  class Login extends Component {
                 id="log-password"
                 label="Password"
                 type="password"
-                autoComplete="current-password"
+                onChange = {this.changePassword}
                 margin="normal"
               />
             <div id='button_line'>
@@ -88,7 +91,7 @@ export  class Login extends Component {
               </Button>
             </div>
             <div>
-              <a href="#">Forgot Password?</a>
+              <a id='forgPass' href="#">Forgot Password?</a>
             </div>
           </div>
           

@@ -1,4 +1,4 @@
-{
+{   "extends": "google",
     "env": {
         "browser": true,
         "commonjs": true,
@@ -11,6 +11,11 @@
         },
         "sourceType": "module"
     },
+    "plugins": [
+        "material-ui",
+        "react"
+    ],
+    
     "rules": {
         "no-const-assign": "warn",
         "no-this-before-super": "warn",

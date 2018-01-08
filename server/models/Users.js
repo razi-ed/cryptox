@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const bcrypt= require('bcrypt');
-const SecretQuestion=new Schema({
+const bcrypt = require('bcrypt');
+const SecretQuestion = new Schema({
   question: {
     type: String,
     required: true,
@@ -23,8 +23,7 @@ const userSchema = new Schema({
     required: true,
   },
   password: {
-    type: String,
-    required: true,
+    type: String
   },
   // SecretQuestion
 });
@@ -39,7 +38,7 @@ userSchema.methods.comparePassword = function(pw, cb) {
 };
 
 userSchema.statics.createUser =
-(newUser, callback)=> hashPassword(newUser, callback);
+  (newUser, callback) => hashPassword(newUser, callback);
 
 let User = mongoose.model('User', userSchema);
 
@@ -48,12 +47,12 @@ User.updateUser = function(user, callback) {
 };
 
 
-const hashPassword=(user, callback) => {
-bcrypt.genSalt(10, function(err, salt) {
-  bcrypt.hash(user.password, salt, function(err, hash) {
-    user.password = hash;
-    user.save(callback);
+const hashPassword = (user, callback) => {
+  bcrypt.genSalt(10, function(err, salt) {
+    bcrypt.hash(user.password, salt, function(err, hash) {
+      user.password = hash;
+      user.save(callback);
+    });
   });
-});
 };
 module.exports = User;

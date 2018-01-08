@@ -2,7 +2,7 @@ import React from 'react';
 import {BrowserRouter,Route} from 'react-router-dom';
 import LogIn from './auth/TabForSignUp';
 import Header from './Header';
-import Home from '../components/home'
+import Home from '../components/Home'
 
 export default class App extends React.Component {
   render() {

@@ -5,52 +5,31 @@ import {FormHelperText,FormControl} from 'material-ui/Form'
 import Visibility from 'material-ui-icons/Visibility'
 import VisibilityOff from 'material-ui-icons/VisibilityOff'
 import IconButton from "material-ui/IconButton";
-
 export default class SignUp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name:"",
-      email:"",
-      password:"",
       showPassword: false,
-      passwordColor:"red",
-      passwordHelperText:"none",
-      confirmPasswordColor:"red",
-      confirmHelperText:"none",
-      isPasswordMatch:false,
-      isPasswordSet:false,
+      isUserCreated: false
     };
-    this.validatePassword=this.validatePassword.bind(this);
-    this.confirmPassword=this.confirmPassword.bind(this);
-    this.createUser=this.createUser.bind(this);
-    this.handleClickIcon=this.handleClickIcon.bind(this);
+    this.handleClickShowPasssword=this.handleClickShowPasssword.bind(this)
   }
-  createUser() {
-    console.log(this.state.name,this.state.email,this.state.password)
-    if(this.state.name && this.state.email && this.state.password){
-      fetch("/auth/register", {
-        method: "POST",
-        headers:{
-          'Content-Type':'application/json'
-        },
-        body: JSON.stringify({
-          name:this.state.name,
-          email: this.state.email,
-          password:this.state.password
-        })
-      }).then(res=>res.json()).then(res => {
-        console.log(res);
-      });
-    }
-    else{
-      this.setState({isDialogOpen:true})
-     
-    }
-  }
-
-  handleClickIcon(){
-    this.setState({showPassword:!this.state.showPassword})
+  
+  createUser(){
+    console.log(document.getElementById('name').value)
+    fetch("/auth/register",{
+      method:"POST",
+      headers:{
+      'Content-Type':'application/json',
+      },
+      body:JSON.stringify({
+        name:document.getElementById('name').value,
+      email:document.getElementById('email').value,
+      password:document.getElementById('password').value,
+      })
+    }).then(res=>res.json()).then((res)=>{
+      console.log(res);
+    });
   }
 
   handleMouseDownIcon(event){
@@ -64,19 +43,39 @@ export default class SignUp extends React.Component {
     if(event.target.value.match(pattern)){
       this.setState({password:event.target.value,passwordColor:"green"})
     }
-    else{
-      this.setState({password:event.target.value,passwordColor:"red"})
+
+    // Validate capital letters
+    var upperCaseLetters = /[A-Z]/g;
+    if (event.target.value.match(upperCaseLetters)) {
+      document.getElementById("capital").classList.remove("invalid");
+      document.getElementById("capital").classList.add("valid");
+    } else {
+      document.getElementById("capital").classList.remove("valid");
+      document.getElementById("capital").classList.add("invalid");
+    }
+
+    // Validate numbers
+    var numbers = /[0-9]/g;
+    if (event.target.value.match(numbers)) {
+      document.getElementById("number").classList.remove("invalid");
+      document.getElementById("number").classList.add("valid");
+    } else {
+      document.getElementById("number").classList.remove("valid");
+      document.getElementById("number").classList.add("invalid");
+    }
+
+    // Validate length
+    if (event.target.value.length >= 8) {
+      document.getElementById("length").classList.remove("invalid");
+      document.getElementById("length").classList.add("valid");
+    } else {
+      document.getElementById("length").classList.remove("valid");
+      document.getElementById("length").classList.add("invalid");
     }
   }
 
-  confirmPassword(event){
-    this.setState({confirmHelperText:"block"})
-    if(this.state.password==event.target.value){
-      this.setState({isPasswordMatch:true,confirmPasswordColor:"green"})
-    }
-    else{
-      this.setState({isPasswordMatch:false,confirmPasswordColor:"red"})
-    }
+  handleClickShowPasssword(){
+    this.setState({showPassword:!this.state.showPassword})
   }
 
   render() {
@@ -86,20 +85,14 @@ export default class SignUp extends React.Component {
           <div>
           <FormControl className="formElements" >
             <InputLabel>Name</InputLabel>
-            <Input 
-              autoFocus={true} 
-              onChange={(event)=>this.setState({name:event.target.value})}
-              />
+            <Input autoFocus="true" id="new-name" type="name"/>
           </FormControl>
           </div>
           
           <div>
           <FormControl className="formElements" >
             <InputLabel >Email</InputLabel>
-            <Input 
-              type="email"
-              onChange={(event)=>this.setState({email:event.target.value})}
-            />
+            <Input id="email" type="email"/>
           </FormControl>
           </div>
           
@@ -109,8 +102,6 @@ export default class SignUp extends React.Component {
             <Input
               id="password" 
               type={this.state.showPassword?'text':'password'}
-              onChange={this.validatePassword}
-              onFocus={this.validatePassword}
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton 
@@ -130,14 +121,27 @@ export default class SignUp extends React.Component {
           <div>
           <FormControl className="formElements" >
             <InputLabel>Re-Enter Password</InputLabel>
-            <Input 
-              id="confirm" 
-              type="password"
-              onChange={this.confirmPassword}
+            <Input id="confirm" type="password"
              />
-            <FormHelperText style={{color:this.state.confirmPasswordColor,display:this.state.confirmHelperText}} >{this.state.isPasswordMatch?'Password Match':'Password Mismatch'}</FormHelperText>
           </FormControl>
           </div>
+            
+              <div id="message" style={{ display: "none" }}>
+                <h3>Password must contain the following:</h3>
+                <p id="letter" className="invalid">
+                  A <b>lowercase</b> letter
+                </p>
+                <p id="capital" className="invalid">
+                  A <b>capital (uppercase)</b> letter
+                </p>
+                <p id="number" className="invalid">
+                  A <b>number</b>
+                </p>
+                <p id="length" className="invalid">
+                  Minimum <b>8 characters</b>
+                </p>
+              </div>
+
               <div style={{ paddingTop: 25, textAlign: "center" }}>
                 <Button
                   raised

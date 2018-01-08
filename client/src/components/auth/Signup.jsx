@@ -9,8 +9,16 @@ export default class SignUp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      name:"",
+      email:"",
+      password:"",
       showPassword: false,
-      isUserCreated: false
+      passwordColor:"red",
+      passwordHelperText:"none",
+      confirmPasswordColor:"red",
+      confirmHelperText:"none",
+      isPasswordMatch:false,
+      isPasswordSet:false,
     };
     this.handleClickShowPasssword=this.handleClickShowPasssword.bind(this)
   }

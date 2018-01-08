@@ -4,7 +4,9 @@ import { withStyles } from 'material-ui/styles';
 import '../../css/style.css'
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
+import {Link} from 'react-router-dom'
 import { FormControl, FormHelperText } from 'material-ui/Form';
+import GoogleButton from 'react-google-button'
 
 const styles = theme => ({
   container: {
@@ -82,6 +84,10 @@ export  class Login extends React.Component {
           </div>
           
           <hr className="hr-text" data-content="Or"></hr>
+          <a href='http://loaclhost:3000/auth/google'>
+            <GoogleButton />
+          </a>
+        
       </div>
     );
   }

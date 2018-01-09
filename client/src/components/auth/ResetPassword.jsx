@@ -1,15 +1,19 @@
-import React, { Component } from 'react';
-import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
+import React, {Component} from 'react';
+import Input, {InputLabel, InputAdornment} from 'material-ui/Input';
 import Button from 'material-ui/Button';
 import {FormHelperText, FormControl} from 'material-ui/Form';
 import '../../css/style.css';
-import Grid from 'material-ui/Grid';
 import Visibility from 'material-ui-icons/Visibility';
 import VisibilityOff from 'material-ui-icons/VisibilityOff';
 import IconButton from 'material-ui/IconButton';
 
+/**
+ *@class
+ */
 export default class ResetPassword extends Component {
-
+  /**
+   * @constructor
+   */
   constructor() {
     super();
     this.state = {
@@ -23,19 +27,19 @@ export default class ResetPassword extends Component {
       doesPasswordContainUpperCase: 'red',
       doesPasswordContainNumber: 'red',
       doesPasswordLengthSatisfied: 'red',
-
-      //isPasswordSet: false,
-    }
-    this.validatePassword = this.validatePassword.bind(this)
-    this.confirmPassword = this.confirmPassword.bind(this)
-    this.handleClickIcon = this.handleClickIcon.bind(this)
-    this.sendResetRequest = this.sendResetRequest.bind(this)
-
+    };
+    this.validatePassword = this.validatePassword.bind(this);
+    this.confirmPassword = this.confirmPassword.bind(this);
+    this.handleClickIcon = this.handleClickIcon.bind(this);
+    this.sendResetRequest = this.sendResetRequest.bind(this);
   }
 
-
+/**
+ *
+ * @param {event} event
+ */
   validatePassword(event) {
-    this.setState({ isPasswordHelperTextVisible: 'block' });
+    this.setState({isPasswordHelperTextVisible: 'block'});
     const lowerCase = /([a-z])/g;
     const upperCase = /([A-Z])/g;
     const numbers = /([0-9])/g;
@@ -73,40 +77,55 @@ export default class ResetPassword extends Component {
               });
   }
 
-
-
+/**
+ *
+ * @param {event} event
+ */
   confirmPassword(event) {
-    this.setState({ confirmHelperText: ' block' });
+    this.setState({confirmHelperText: ' block'});
     if (this.state.password == event.target.value) {
-      this.setState({ isPasswordMatch: true, confirmPasswordColor: ' green' });
+      this.setState({isPasswordMatch: true, confirmPasswordColor: ' green'});
     } else {
-
-      this.setState({ isPasswordMatch: false, confirmPasswordColor: ' red' });
+      this.setState({isPasswordMatch: false, confirmPasswordColor: ' red'});
     }
   }
+  /**
+   * @function
+   */
   handleClickIcon() {
-    this.setState({ showPassword: !this.state.showPassword });
+    this.setState({showPassword: !this.state.showPassword});
   }
 
+  /**
+   *
+   * @param {event} event
+   */
   handleMouseDownIcon(event) {
     event.preventDefault();
   }
-  sendResetRequest(){
-    fetch("/auth/resetPassword", {
-      method: "PUT",
+  /**
+   *@function
+   */
+  sendResetRequest() {
+    fetch('/auth/resetPassword', {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         email: this.props.email,
-        password: this.state.password
-      })
-    }).then(res => res.text()).then((res) => {
+        password: this.state.password,
+      }),
+    }).then((res) => res.text()).then((res) => {
       console.log(res);
-    })
+    });
   }
-  render() {
 
+/**
+ * @function
+ * @return {resetPasswordHtml}
+ */
+  render() {
     return (
       <div>
         <FormControl className='form-elements'>
@@ -152,22 +171,22 @@ export default class ResetPassword extends Component {
               }
             }
           >
-            {this.state.isPasswordMatch ? 'Password Match' : 'Password Mismatch'}
+            {this.state.isPasswordMatch ?
+              'Password Match' : 'Password Mismatch'}
           </FormHelperText>
         </FormControl>
-        <div style={{ paddingTop: 25, textAlign: "center" }}>
+        <div style={{paddingTop: 25, textAlign: 'center'}}>
           <Button
             raised
             color="primary"
             type="submit"
             onClick={() => {
               this.sendResetRequest();
-
             }}
           > Reset Password
                 </Button>
         </div>
       </div>
-    )
+    );
   }
 }

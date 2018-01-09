@@ -143,7 +143,9 @@ export default class Login extends Component {
               </Button>
             </div>
         <div id='forgot-password'>
-            <a id='forgot-password-link' href="/reset-password">Forgot Password?</a>
+            <a id='forgot-password-link'
+            href="/reset-password">
+            Forgot Password?</a>
             </div>
           <hr className="hr-text" data-content="Or"></hr>
           <div id="google-signin">

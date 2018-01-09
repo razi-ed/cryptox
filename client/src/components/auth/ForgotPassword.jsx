@@ -54,7 +54,7 @@ export default class ForgotPassword extends Component {
             <div id='forgot-password-frame'>
                 <Grid item sm={6} md={6} lg={4}>
                 <h1>Reset Your Password</h1>
-                    <FormControl className='formElements' >
+                    <FormControl className='form-elements' >
                         <InputLabel >Email</InputLabel>
                         <Input
                         type='email'

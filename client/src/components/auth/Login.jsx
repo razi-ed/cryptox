@@ -1,4 +1,4 @@
-import {Component} from 'react';
+import React, {Component} from 'react';
 import Button from 'material-ui/Button';
 import Grid from 'material-ui/Grid/Grid';
 import {FormHelperText, FormControl} from 'material-ui/Form';
@@ -91,11 +91,11 @@ export default class Login extends Component {
  * */
   render() {
     return (
-      <div id='form'>
+      <div id='login-form'>
         <Grid item lg={12}>
             <h1 style={{textAlign: 'center'}}>Log Into Your Account</h1>
 
-          <FormControl className='formElements' >
+          <FormControl className='form-elements' >
             <InputLabel >Email</InputLabel>
             <Input
               autoFocus={true}
@@ -103,7 +103,7 @@ export default class Login extends Component {
               onChange={this.changeEmail}
             />
           </FormControl>
-          <FormControl className='formElements'>
+          <FormControl className='form-elements'>
             <InputLabel>Password</InputLabel>
             <Input
               type={this.state.showPassword ? 'text' : 'password'}
@@ -132,7 +132,7 @@ export default class Login extends Component {
             Invalid Email Or Password
             </FormHelperText>
         </Grid>
-            <div id='button_line'>
+            <div id='login-button'>
               <Button type="submit"
               raised color="primary"
               className="button"
@@ -140,11 +140,11 @@ export default class Login extends Component {
                 Log In
               </Button>
             </div>
-            <div>
-            <a id='forgPass' href="/reset-password">Forgot Password?</a>
+        <div id='forgot-password'>
+            <a id='forgot-password-link' href="/reset-password">Forgot Password?</a>
             </div>
           <hr className="hr-text" data-content="Or"></hr>
-          <div id="signG">
+          <div id="google-signin">
           <Google/>
           </div>
 

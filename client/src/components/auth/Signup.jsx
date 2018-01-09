@@ -135,7 +135,7 @@ export default class SignUp extends React.Component {
       <div>
           <h1 style={{textAlign: 'center'}} >Create New Account</h1>
           <div>
-          <FormControl className='formElements'>
+          <FormControl className='form-elements'>
             <InputLabel>Name</InputLabel>
             <Input
               autoFocus={true}
@@ -144,7 +144,7 @@ export default class SignUp extends React.Component {
           </FormControl>
           </div>
           <div>
-          <FormControl className='formElements'>
+          <FormControl className='form-elements'>
             <InputLabel >Email</InputLabel>
             <Input
               type='email'
@@ -153,7 +153,7 @@ export default class SignUp extends React.Component {
           </FormControl>
           </div>
           <div>
-          <FormControl className='formElements'>
+          <FormControl className='form-elements'>
             <InputLabel>Password</InputLabel>
             <Input
               type={this.state.showPassword?'text': 'password'}
@@ -183,7 +183,7 @@ export default class SignUp extends React.Component {
           </FormControl>
           </div>
           <div>
-          <FormControl className='formElements'>
+          <FormControl className='form-elements'>
             <InputLabel>Re-Enter Password</InputLabel>
             <Input
               type=' password'
@@ -211,7 +211,7 @@ export default class SignUp extends React.Component {
                   Create New Account
                 </Button>
                 <hr className="hr-text" data-content="Or"></hr>
-                <div id="signG">
+          <div id="google-signin">
                   <Google/>
                 </div>
               </div>

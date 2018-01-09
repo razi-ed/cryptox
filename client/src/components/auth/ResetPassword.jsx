@@ -109,7 +109,7 @@ export default class ResetPassword extends Component {
 
     return (
       <div>
-        <FormControl className='formElements'>
+        <FormControl className='form-elements'>
           <InputLabel>Password</InputLabel>
           <Input
             type={this.state.showPassword ? 'text' : 'password'}
@@ -138,7 +138,7 @@ export default class ResetPassword extends Component {
           </FormHelperText>
         </FormControl>
 
-        <FormControl className='formElements'>
+        <FormControl className='form-elements'>
           <InputLabel>Re-Enter Password</InputLabel>
           <Input
             type='password'

@@ -3,7 +3,6 @@ const Mongoose= require('mongoose');
 const bodyParser = require('body-parser');
 const path= require('path');
 const passport= require('passport');
-const keys = require('./config/keys');
 const auth= require('./routes/auth');
 const frontend= require('./routes/frontend');
 
@@ -27,7 +26,7 @@ app.use('/auth', auth);
 app.use(frontend);
 
 Mongoose
-  .connect( keys.db, {
+  .connect( 'mongodb://localhost/cryptox', {
     useMongoClient: true,
   });
 

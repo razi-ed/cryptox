@@ -21,7 +21,7 @@ module.exports = {
     // public:"/",
     filename: 'app.bundle.js',
   },
-  devtool: "source-map",
+  devtool: 'source-map',
   // Tell webpack to use html plugin
   plugins: [
     new HtmlWebpackPlugin({
@@ -38,8 +38,8 @@ module.exports = {
         use: [{
           loader: 'babel-loader',
           options: {
-            sourceMap: true
-          }
+            sourceMap: true,
+          },
         }],
       },
       // CSS loader for CSS files
@@ -61,8 +61,8 @@ module.exports = {
       },
       {
         test: /\.svg$/,
-        loader: 'svg-inline-loader'
-      }
+        loader: 'svg-inline-loader',
+      },
     ],
   },
   // Enable importing JS files without specifying their's extenstion

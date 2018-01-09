@@ -51,7 +51,7 @@ export default class ForgotPassword extends Component {
     
     render(){
         return(
-            <div id='forgFrame'>
+            <div id='forgot-password-frame'>
                 <Grid item sm={6} md={6} lg={4}>
                 <h1>Reset Your Password</h1>
                     <FormControl className='formElements' >

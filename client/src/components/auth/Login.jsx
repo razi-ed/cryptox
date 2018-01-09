@@ -6,6 +6,7 @@ import Button from 'material-ui/Button';
 import GoogleButton from 'react-google-button'
 import '../../css/style.css';
 import ForgotPassword from './ForgotPassword';
+import Google from './Google';
 
 export default class Login extends Component {
   constructor(){
@@ -83,10 +84,7 @@ export default class Login extends Component {
           
           <hr className="hr-text" data-content="Or"></hr>
           <div id="signG">
-            <GoogleButton
-              type="dark"
-              onClick={() => { console.log('this will not run on click since it is disabled') }}
-            />
+          <Google/>
           </div>
           
       </div>

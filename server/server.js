@@ -72,6 +72,6 @@ Mongoose
   .on('error', (e) => console.log('error connectin to db', e));
 
 
-app.listen(process.env.port || 5000, function() {
+app.listen(process.env.port || 3000, function() {
   console.log('now listening for requests in port 5000');
 });

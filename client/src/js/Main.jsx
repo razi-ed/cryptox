@@ -6,7 +6,6 @@ import App from '../components/App';
 
 if (module.hot) {
     module.hot.accept(App, ()=>{
-       
         render(<App/>,
         document.getElementById('app')
         );

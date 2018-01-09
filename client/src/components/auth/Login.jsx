@@ -1,9 +1,12 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import TextField from 'material-ui/TextField';
+import React, {Component} from 'react';
 import Button from 'material-ui/Button';
-import GoogleButton from 'react-google-button'
+import Grid from 'material-ui/Grid/Grid';
+import {FormHelperText, FormControl} from 'material-ui/Form';
+import Input, {InputLabel, InputAdornment} from 'material-ui/Input';
+import Visibility from 'material-ui-icons/Visibility';
+import VisibilityOff from 'material-ui-icons/VisibilityOff';
+import IconButton from 'material-ui/IconButton';
+import GoogleButton from 'react-google-button';
 import '../../css/style.css';
 import ForgotPassword from './ForgotPassword';
 
@@ -11,13 +14,17 @@ export default class Login extends Component {
   constructor(){
     super();
     this.state = {
-    email: "",
+    email: '',
     password: '',
     showPassword: false,
+    validationHelperTextVisible: 'none',
+    validationColor: 'red',  
   };
   this.changeEmail = this.changeEmail.bind(this)
   this.changePassword = this.changePassword.bind(this)
   this.loginUser = this.loginUser.bind(this)
+  this.handleClickIcon = this.handleClickIcon.bind(this)
+  this.handleMouseDownIcon = this.handleMouseDownIcon.bind(this)
 }
 
   loginUser(){
@@ -32,6 +39,11 @@ export default class Login extends Component {
         password: this.state.password
       })
     }).then(res=>res.text()).then((res)=>{
+      if (!res.success) {
+        console.log(res.message)
+        this.setState({ validationHelperTextVisible: ' block' });
+      }
+
       console.log(res);
     })
   }
@@ -50,37 +62,63 @@ export default class Login extends Component {
     console.log(this.state.password)
   }
 
+  handleClickIcon() {
+    this.setState({ showPassword: !this.state.showPassword });
+  }
+
+  handleMouseDownIcon(event) {
+    event.preventDefault();
+  }
   render() {
     return (
-      <div id="form">       
-         <div>
+      <div id='form'>       
+        <Grid item lg={12}>
             <h1 style={{textAlign:"center"}}>Log Into Your Account</h1>
-              <TextField fullWidth
-                required
-                id="log-email"
-                label="Email" 
-                onChange = {this.changeEmail}
-                type="Email"
-                margin="normal"
-              />
-              <TextField fullWidth
-                required
-                id="log-password"
-                label="Password"
-                type="password"
-                onChange = {this.changePassword}
-                margin="normal"
-              />
+          
+          <FormControl className='formElements' >
+            <InputLabel >Email</InputLabel>
+            <Input
+              autoFocus={true}
+              type='email'
+              onChange={this.changeEmail}
+            />
+          </FormControl>
+          <FormControl className='formElements'>
+            <InputLabel>Password</InputLabel>
+            <Input
+              type={this.state.showPassword ? 'text' : 'password'}
+              onChange={this.changePassword}
+              endAdornment={
+                <InputAdornment position='end' >
+                  <IconButton
+                    onClick={this.handleClickIcon}
+                    onMouseDown={this.handleMouseDownIcon}
+                  >
+                    {this.state.showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+            />
+          </FormControl>
+          <FormHelperText
+            style={
+              {
+                color: this.state.validationColor,
+                display: this.state.validationHelperTextVisible,
+              }
+            }
+          >
+            Invalid Email Or Password
+            </FormHelperText>
+        </Grid>
             <div id='button_line'>
               <Button type="submit" raised color="primary"  className="button" onClick={this.loginUser}>
                 Log In
               </Button>
             </div>
             <div>
-              <a id='forgPass' href="/reset-password">Forgot Password?</a>
+            <a id='forgPass' href="/reset-password">Forgot Password?</a>
             </div>
-          </div>
-          
           <hr className="hr-text" data-content="Or"></hr>
           <div id="signG">
             <GoogleButton

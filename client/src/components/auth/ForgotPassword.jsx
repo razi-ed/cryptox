@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
+import React, {Component } from 'react';
+import Input, {InputLabel, InputAdornment } from 'material-ui/Input';
 import Button from 'material-ui/Button';
-import { FormHelperText, FormControl } from 'material-ui/Form';
+import {FormHelperText, FormControl } from 'material-ui/Form';
 import Grid from 'material-ui/Grid';
 import Visibility from 'material-ui-icons/Visibility';
 import VisibilityOff from 'material-ui-icons/VisibilityOff';
@@ -41,7 +41,7 @@ export default class ForgotPassword extends Component {
                 
             }
             else{
-                this.setState({ emailHelperTextVisible: ' block' });
+                this.setState({emailHelperTextVisible: ' block' });
             }
             
             
@@ -51,13 +51,13 @@ export default class ForgotPassword extends Component {
     
     render(){
         return(
-            <div id="forgFrame">
+            <div id='forgFrame'>
                 <Grid item sm={6} md={6} lg={4}>
                 <h1>Reset Your Password</h1>
-                    <FormControl className="formElements" >
+                    <FormControl className='formElements' >
                         <InputLabel >Email</InputLabel>
                         <Input
-                        type="email"
+                        type='email'
                         onChange={this.changeEmail}
                         />
                         <FormHelperText
@@ -74,11 +74,11 @@ export default class ForgotPassword extends Component {
 
                     </FormControl>
             
-                    {this.state.isRegistered == false ? (<div style={{ paddingTop: 25, textAlign: "center" }}>
+                    {this.state.isRegistered == false ? (<div style={{paddingTop: 25, textAlign: 'center' }}>
                         <Button
                         raised
-                        color="primary"
-                        type="submit"
+                        color='primary'
+                        type='submit'
                         onClick={()=> {
                             this.checkEmail();    
                         }}

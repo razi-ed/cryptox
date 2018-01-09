@@ -19,7 +19,12 @@ export default class ResetPassword extends Component {
       confirmPasswordColor: ' red',
       confirmHelperText: ' none',
       isPasswordMatch: false,
-      isPasswordSet: false,
+      doesPasswordContainLowerCase: 'red',
+      doesPasswordContainUpperCase: 'red',
+      doesPasswordContainNumber: 'red',
+      doesPasswordLengthSatisfied: 'red',
+
+      //isPasswordSet: false,
     }
     this.validatePassword = this.validatePassword.bind(this)
     this.confirmPassword = this.confirmPassword.bind(this)
@@ -27,15 +32,47 @@ export default class ResetPassword extends Component {
     this.sendResetRequest = this.sendResetRequest.bind(this)
 
   }
+
+
   validatePassword(event) {
-    const pattern = new RegExp(/\w{8,}/);
-    this.setState({ passwordHelperText: ' block' });
-    if (event.target.value.match(pattern)) {
-      this.setState({ password: event.target.value, passwordColor: ' green' });
-    } else {
-      this.setState({ password: event.target.value, passwordColor: ' red' });
-    }
+    this.setState({ isPasswordHelperTextVisible: 'block' });
+    const lowerCase = /([a-z])/g;
+    const upperCase = /([A-Z])/g;
+    const numbers = /([0-9])/g;
+    const len = event.target.value.length;
+    const validator = (reg) => event.target.value.match(reg);
+    !validator(lowerCase) ?
+      this.setState(
+        {
+          passwordHelperText: 'must contain lowercase letters',
+          passwordColor: 'red',
+        }) :
+      !validator(upperCase) ?
+        this.setState(
+          {
+            passwordHelperText: 'must contain uppercase letters',
+            passwordColor: 'red',
+          }) :
+        !validator(numbers) ?
+          this.setState(
+            {
+              passwordHelperText: 'must conatin a number',
+              passwordColor: 'red',
+            }) :
+          len < 8 ?
+            this.setState(
+              {
+                passwordHelperText: 'must contain minimum of 8 characters',
+                passwordColor: 'red',
+              }) :
+            this.setState(
+              {
+                password: event.target.value,
+                passwordHelperText: 'Valid password',
+                passwordColor: 'green',
+              });
   }
+
 
 
   confirmPassword(event) {
@@ -90,10 +127,17 @@ export default class ResetPassword extends Component {
             }
           />
           <FormHelperText
-            style={{ color: this.state.passwordColor, display: this.state.passwordHelperText, }}>
-            Password length must be atleast 8 characters
-            </FormHelperText>
+            style={
+              {
+                color: this.state.passwordColor,
+                display: this.state.isPasswordHelperTextVisible,
+              }
+            }
+          >
+            {this.state.passwordHelperText}
+          </FormHelperText>
         </FormControl>
+
         <FormControl className='formElements'>
           <InputLabel>Re-Enter Password</InputLabel>
           <Input

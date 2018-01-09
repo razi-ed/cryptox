@@ -6,8 +6,8 @@ import App from '../components/App';
 
 if (module.hot) {
     module.hot.accept(App, ()=>{
-        const NextApp = App;
-        render(<NextApp/>,
+       
+        render(<App/>,
         document.getElementById('app')
         );
     });

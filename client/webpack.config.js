@@ -13,7 +13,7 @@ const paths = {
 // Webpack configuration
 module.exports = {
   entry: [
-    'webpack-hot-middleware/clien',
+    'webpack-hot-middleware/client',
     'react-hot-loader/patch',
     path.join(paths.JS, 'Main.jsx'),
   ],

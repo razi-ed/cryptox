@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
+import React, {Component } from 'react';
+import Input, {InputLabel, InputAdornment } from 'material-ui/Input';
 import Button from 'material-ui/Button';
-import { FormHelperText, FormControl } from 'material-ui/Form';
+import {FormHelperText, FormControl } from 'material-ui/Form';
 import Grid from 'material-ui/Grid';
 import Visibility from 'material-ui-icons/Visibility';
 import VisibilityOff from 'material-ui-icons/VisibilityOff';
@@ -15,7 +15,9 @@ export default class ForgotPassword extends Component {
         this.state={
             email: ' ',
             password: ' ',
-            isRegistered:false,    
+            isRegistered:false,
+            emailHelperTextVisible: 'none', 
+            emailColor: 'red',  
         }
         this.checkEmail=this.checkEmail.bind(this)
         this.changeEmail = this.changeEmail.bind(this)
@@ -38,6 +40,10 @@ export default class ForgotPassword extends Component {
                 })
                 
             }
+            else{
+                this.setState({emailHelperTextVisible: ' block' });
+            }
+            
             
         })
     }
@@ -45,22 +51,34 @@ export default class ForgotPassword extends Component {
     
     render(){
         return(
-            <div id="forgFrame">
+            <div id='forgot-password-frame'>
                 <Grid item sm={6} md={6} lg={4}>
                 <h1>Reset Your Password</h1>
-                    <FormControl className="formElements" >
+                    <FormControl className='form-elements' >
                         <InputLabel >Email</InputLabel>
                         <Input
-                        type="email"
+                        type='email'
                         onChange={this.changeEmail}
                         />
+                        <FormHelperText
+                            style={
+                                {
+                                    color: this.state.emailColor,
+                                    display: this.state.emailHelperTextVisible,
+                                }
+                            }
+                        >
+                           Email not registered
+                        </FormHelperText>
+
+
                     </FormControl>
             
-                    {this.state.isRegistered == false ? (<div style={{ paddingTop: 25, textAlign: "center" }}>
+                    {this.state.isRegistered == false ? (<div style={{paddingTop: 25, textAlign: 'center' }}>
                         <Button
                         raised
-                        color="primary"
-                        type="submit"
+                        color='primary'
+                        type='submit'
                         onClick={()=> {
                             this.checkEmail();    
                         }}

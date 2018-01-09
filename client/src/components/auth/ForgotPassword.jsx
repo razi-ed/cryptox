@@ -1,56 +1,64 @@
-import React, {Component } from 'react';
-import Input, {InputLabel, InputAdornment } from 'material-ui/Input';
+import React, {Component} from 'react';
+import Input, {InputLabel} from 'material-ui/Input';
 import Button from 'material-ui/Button';
-import {FormHelperText, FormControl } from 'material-ui/Form';
+import {FormHelperText, FormControl} from 'material-ui/Form';
 import Grid from 'material-ui/Grid';
-import Visibility from 'material-ui-icons/Visibility';
-import VisibilityOff from 'material-ui-icons/VisibilityOff';
-import IconButton from 'material-ui/IconButton';
+
 import ResetPassword from './ResetPassword';
 import '../../css/style.css';
-
+/**
+ *@class
+ */
 export default class ForgotPassword extends Component {
-    constructor(){
+    /**
+     *@constructor
+     */
+    constructor() {
         super();
         this.state={
             email: ' ',
             password: ' ',
-            isRegistered:false,
-            emailHelperTextVisible: 'none', 
-            emailColor: 'red',  
-        }
-        this.checkEmail=this.checkEmail.bind(this)
-        this.changeEmail = this.changeEmail.bind(this)
+            isRegistered: false,
+            emailHelperTextVisible: 'none',
+            emailColor: 'red',
+        };
+        this.checkEmail=this.checkEmail.bind(this);
+        this.changeEmail = this.changeEmail.bind(this);
     }
+    /**
+     *
+     * @param {event} event
+     */
     changeEmail(event) {
         this.setState({
             email: event.target.value,
         });
     }
-    
+/**
+ *@function
+*/
     checkEmail() {
-        console.log(this.state.email)
+        console.log(this.state.email);
         fetch(`/auth/validate?email=${this.state.email}`)
-        .then(res=>res.json())
+        .then((res)=>res.json())
         .then((res) => {
-            console.log(res)
-            if (res.isRegisered){
+            console.log(res);
+            if (res.isRegisered) {
                 this.setState({
                     isRegistered: res.isRegisered,
-                })
-                
+                });
+            } else {
+                this.setState({emailHelperTextVisible: ' block'});
             }
-            else{
-                this.setState({emailHelperTextVisible: ' block' });
-            }
-            
-            
-        })
+        });
     }
-    
-    
-    render(){
-        return(
+
+/**
+ * @function
+ * @return {forgotPasswordhtml}
+ */
+    render() {
+        return (
             <div id='forgot-password-frame'>
                 <Grid item sm={6} md={6} lg={4}>
                 <h1>Reset Your Password</h1>
@@ -73,22 +81,22 @@ export default class ForgotPassword extends Component {
 
 
                     </FormControl>
-            
-                    {this.state.isRegistered == false ? (<div style={{paddingTop: 25, textAlign: 'center' }}>
+
+                    {this.state.isRegistered == false ?
+                        (<div style={{paddingTop: 25, textAlign: 'center'}}>
                         <Button
                         raised
                         color='primary'
                         type='submit'
                         onClick={()=> {
-                            this.checkEmail();    
+                            this.checkEmail();
                         }}
                         > Submit
                         </Button>
                     </div>):<ResetPassword email={this.state.email}/>}
-        
+
                 </Grid>
             </div>
-        )
+        );
     }
-    
 }

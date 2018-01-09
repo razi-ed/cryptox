@@ -48,11 +48,10 @@ export default class BasicTabs extends React.Component {
    */
   render() {
     const {value} = this.state;
-
+    ;
     return (
       <div>
-      <Grid container>
-      <Grid item sm={3} xs={2}/>
+      <Grid container spacing={0} style={{justifyContent: 'center'}}>
       <Grid item sm={6} xs={2} style={{alignItems: 'center'}}>
       <div>
         <AppBar
@@ -70,7 +69,6 @@ export default class BasicTabs extends React.Component {
         </div>
         </Grid>
         </Grid>
-        <Grid item sm={3} xs={2}/>
       </div>
     );
   }

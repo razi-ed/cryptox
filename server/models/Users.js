@@ -23,7 +23,7 @@ const userSchema = new Schema({
     required: true,
   },
   password: {
-    type: String
+    type: String,
   },
   // SecretQuestion
 });
@@ -37,15 +37,15 @@ userSchema.methods.comparePassword = function(pw, cb) {
   });
 };
 
-userSchema.statics.createUser =
-  (newUser, callback) => hashPassword(newUser, callback);
+userSchema.statics.createUser = function(newUser, callback) {
+  hashPassword(newUser, callback);
+};
 
-let User = mongoose.model('User', userSchema);
-
-User.updateUser = function(user, callback) {
+userSchema.statics.updatePassword = function(user, callback) {
   hashPassword(user, callback);
 };
 
+let User = mongoose.model('User', userSchema);
 
 const hashPassword = (user, callback) => {
   bcrypt.genSalt(10, function(err, salt) {

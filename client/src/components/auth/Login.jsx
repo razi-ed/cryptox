@@ -1,67 +1,65 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import '../../css/style.css'
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
-import {Link} from 'react-router-dom'
-import { FormControl, FormHelperText } from 'material-ui/Form';
 import GoogleButton from 'react-google-button'
+import '../../css/style.css';
+import ForgotPassword from './ForgotPassword';
 
-const styles = theme => ({
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-  },
-  button: {
-    margin: theme.spacing.unit,
-
-  },
-  input: {
-    display: 'block',
-  }
-})
-
-export  class Login extends React.Component {
+export default class Login extends Component {
   constructor(){
-    super()
-    this.state={
-      email: "",
-      password: '',
-      showPassword: false,
-    }
-  }
+    super();
+    this.state = {
+    email: "",
+    password: '',
+    showPassword: false,
+  };
+  this.changeEmail = this.changeEmail.bind(this)
+  this.changePassword = this.changePassword.bind(this)
+  this.loginUser = this.loginUser.bind(this)
+}
 
   loginUser(){
-    console.log(document.getElementById('log-email').value)
+    
     fetch("/auth/login",{
       method:"POST",
       headers:{
         'Content-Type':'application/json',
       },
       body:JSON.stringify({
-        email:document.getElementById('log-email').value,
-        password: document.getElementById('log-password').value
+        email:this.state.email,
+        password: this.state.password
       })
     }).then(res=>res.text()).then((res)=>{
       console.log(res);
     })
   }
+  
+  changeEmail(event) {
+    this.setState({
+      email: event.target.value
+    });
+    console.log(this.state.email);
+  }
+
+  changePassword(event) {
+    this.setState({
+      password: event.target.value
+    });
+    console.log(this.state.password)
+  }
 
   render() {
-    const { classes } = this.props;
     return (
-      <div>       
+      <div id="form">       
          <div>
             <h1 style={{textAlign:"center"}}>Log Into Your Account</h1>
               <TextField fullWidth
                 required
                 id="log-email"
                 label="Email" 
+                onChange = {this.changeEmail}
                 type="Email"
                 margin="normal"
               />
@@ -70,31 +68,28 @@ export  class Login extends React.Component {
                 id="log-password"
                 label="Password"
                 type="password"
-                autoComplete="current-password"
+                onChange = {this.changePassword}
                 margin="normal"
               />
             <div id='button_line'>
-              <Button type="submit" raised color="primary"  className={classes.button} onClick={this.loginUser}>
+              <Button type="submit" raised color="primary"  className="button" onClick={this.loginUser}>
                 Log In
               </Button>
             </div>
             <div>
-              <a href="#">Forgot Password?</a>
+              <a id='forgPass' href="/reset-password">Forgot Password?</a>
             </div>
           </div>
           
           <hr className="hr-text" data-content="Or"></hr>
-          <a href='http://localhost:3000/auth/google'>
-            <GoogleButton />
-          </a>
-        
+          <div id="signG">
+            <GoogleButton
+              type="dark"
+              onClick={() => { console.log('this will not run on click since it is disabled') }}
+            />
+          </div>
+          
       </div>
     );
   }
 }
-
-Login.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(Login);

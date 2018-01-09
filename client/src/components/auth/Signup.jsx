@@ -5,7 +5,7 @@ import {FormHelperText, FormControl} from 'material-ui/Form';
 import Visibility from 'material-ui-icons/Visibility';
 import VisibilityOff from 'material-ui-icons/VisibilityOff';
 import IconButton from 'material-ui/IconButton';
-
+import GoogleButton from 'react-google-button';
 /**
  * this class creates a component for signup
  */
@@ -210,6 +210,13 @@ export default class SignUp extends React.Component {
                 >
                   Create New Account
                 </Button>
+                <hr className="hr-text" data-content="Or"></hr>
+                <div id="signG">
+                  <GoogleButton
+                    type="dark"
+                    onClick={()=>console.log('Clicked Google Button')}
+                  />
+                </div>
               </div>
       </div>
     );

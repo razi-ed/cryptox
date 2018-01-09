@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack --config ./client/webpack.config.js",
     "watch": "webpack -w --config ./client/webpack.config.js",
-    "dev": "nodemon server/server"
+    "dev": "nodemon server/server --ignore client"
   },
   "repository": {
     "type": "git",

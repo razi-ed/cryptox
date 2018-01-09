@@ -5,7 +5,7 @@ import {FormHelperText, FormControl} from 'material-ui/Form';
 import Visibility from 'material-ui-icons/Visibility';
 import VisibilityOff from 'material-ui-icons/VisibilityOff';
 import IconButton from 'material-ui/IconButton';
-
+import Google from './Google';
 /**
  * this class creates a component for signup
  */
@@ -29,7 +29,6 @@ export default class SignUp extends React.Component {
       doesPasswordContainNumber: 'red',
       doesPasswordLengthSatisfied: 'red',
       isPasswordMatch: false,
-      isPasswordSet: false,
     };
     this.validatePassword=this.validatePassword.bind(this);
     this.confirmPassword=this.confirmPassword.bind(this);
@@ -40,7 +39,7 @@ export default class SignUp extends React.Component {
    * this function sends a post request to registerUser api to create a new user
    */
   createUser() {
-    console.log(this.state.name, this.state.email, this.state.password);
+    console.log(this.state.name, this.state.email, this.state.isPasswordMatch);
     if (this.state.name && this.state.email && this.state.password) {
       fetch(' /auth/register', {
         method: 'POST',
@@ -211,6 +210,10 @@ export default class SignUp extends React.Component {
                 >
                   Create New Account
                 </Button>
+                <hr className="hr-text" data-content="Or"></hr>
+                <div id="signG">
+                  <Google/>
+                </div>
               </div>
       </div>
     );

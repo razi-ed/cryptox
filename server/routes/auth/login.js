@@ -16,15 +16,15 @@ const login = (req, res) => {
         throw err;
       }
       if (!user) {
-        res.send({success: false, message: 'Invalid username or password'});
+        res.send({success: false, message: 'Invalid email or password'});
       } else {
-        user.comparePassword(req.body.password, function(err, isMatch) {
+        user.comparePassword(password, function(err, isMatch) {
           if (isMatch && !err) {
             let payload = {id: user.email};
             let token = jwt.sign(payload, process.env.JWT_KEY);
             res.json({success: true, token: 'JWT ' + token});
           } else {
-            res.send({success: false, message: 'Invalid username or password'})
+            res.send({success: false, message: 'Invalid email or password'});
           }
         });
       }

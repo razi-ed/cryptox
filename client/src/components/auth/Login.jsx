@@ -6,8 +6,8 @@ import Input, {InputLabel, InputAdornment} from 'material-ui/Input';
 import Visibility from 'material-ui-icons/Visibility';
 import VisibilityOff from 'material-ui-icons/VisibilityOff';
 import IconButton from 'material-ui/IconButton';
-import GoogleButton from 'react-google-button';
 import '../../css/style.css';
+import Google from './Google';
 
 /**
  * @class
@@ -145,12 +145,7 @@ export default class Login extends Component {
             </div>
           <hr className="hr-text" data-content="Or"></hr>
           <div id="signG">
-            <GoogleButton
-              type="dark"
-              onClick={() => {
-              console.log('this will not run on click since it is disabled');
-              }}
-            />
+          <Google/>
           </div>
 
       </div>

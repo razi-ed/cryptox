@@ -44,7 +44,9 @@ export default class Login extends Component {
         email: this.state.email,
         password: this.state.password,
       }),
-    }).then((res)=>res.text()).then((res)=>{
+    }).then((res)=>res.json()).then((res)=>{
+      console.log(res.success);
+
       if (!res.success) {
         console.log(res.message);
         this.setState({validationHelperTextVisible: ' block'});

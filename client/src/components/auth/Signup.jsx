@@ -39,7 +39,6 @@ export default class SignUp extends React.Component {
    * this function sends a post request to registerUser api to create a new user
    */
   createUser() {
-    console.log(this.state.name, this.state.email, this.state.isPasswordMatch);
     if (this.state.name && this.state.email && this.state.password) {
       fetch(' /auth/register', {
         method: 'POST',
@@ -132,7 +131,7 @@ export default class SignUp extends React.Component {
    */
   render() {
     return (
-      <div>
+      <div id='signup-frame'>
           <h1 style={{textAlign: 'center'}} >Create New Account</h1>
           <div>
           <FormControl className='form-elements'>

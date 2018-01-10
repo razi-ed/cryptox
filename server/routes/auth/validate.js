@@ -5,8 +5,8 @@ const validate =(req, res)=>{
   Users
   .find({email})
   .then((Users)=>{
-    const isRegisered=Users.length>0;
-    res.json({isRegisered, email});
+    const isRegistered=Users.length>0;
+    res.json({isRegistered, email});
   })
   .catch(()=>res.status(500).json({error: 'internal system error'}));
 };

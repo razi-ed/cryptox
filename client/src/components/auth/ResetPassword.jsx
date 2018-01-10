@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Input, {InputLabel, InputAdornment} from 'material-ui/Input';
 import Button from 'material-ui/Button';
 import {FormHelperText, FormControl} from 'material-ui/Form';
@@ -10,7 +10,7 @@ import IconButton from 'material-ui/IconButton';
 /**
  *@class
  */
-export default class ResetPassword extends Component {
+export default class ResetPassword extends React.Component {
   /**
    * @constructor
    */
@@ -129,7 +129,7 @@ export default class ResetPassword extends Component {
     return (
       <div>
         <FormControl className='form-elements'>
-          <InputLabel>Password</InputLabel>
+          <InputLabel>New Password</InputLabel>
           <Input
             type={this.state.showPassword ? 'text' : 'password'}
             onChange={this.validatePassword}

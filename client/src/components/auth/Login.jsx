@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Button from 'material-ui/Button';
 import Grid from 'material-ui/Grid/Grid';
 import {FormHelperText, FormControl} from 'material-ui/Form';
@@ -12,7 +12,7 @@ import Google from './Google';
 /**
  * @class
  */
-export default class Login extends Component {
+export default class Login extends React.Component {
   /**
    * @constructor
    */
@@ -45,10 +45,7 @@ export default class Login extends Component {
         password: this.state.password,
       }),
     }).then((res)=>res.json()).then((res)=>{
-      console.log(res.success);
-
       if (!res.success) {
-        console.log(res.message);
         this.setState({validationHelperTextVisible: ' block'});
       }
 
@@ -62,7 +59,6 @@ export default class Login extends Component {
     this.setState({
       email: event.target.value,
     });
-    console.log(this.state.email);
   }
 /**
  *
@@ -72,7 +68,6 @@ export default class Login extends Component {
     this.setState({
       password: event.target.value,
     });
-    console.log(this.state.password);
   }
 /**
  *@function

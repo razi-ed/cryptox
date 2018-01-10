@@ -132,7 +132,7 @@ export default class SignUp extends React.Component {
    */
   render() {
     return (
-      <div>
+      <div id='signup-frame'>
           <h1 style={{textAlign: 'center'}} >Create New Account</h1>
           <div>
           <FormControl className='form-elements'>

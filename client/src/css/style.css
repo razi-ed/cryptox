@@ -8,12 +8,20 @@ a {
   color:white;
 }
 
+#home {
+  margin-bottom: 65vh;
+}
+
 #forgot-password {
   padding-top: 3%;
 }
 
 #forgot-password-link {
   color: blue;
+}
+
+#nav-tab-login-frame {
+  margin-bottom: 12vh;
 }
 
 .login {
@@ -24,6 +32,7 @@ a {
   width: 100%;
   justify-content: center;
   text-align: center;
+  /* margin-bottom: 12vh; */
 }
 
 #forgot-password-frame {
@@ -31,11 +40,16 @@ a {
   display: flex;
   justify-content: center;
   text-align: center;
+  margin-bottom: 38vh;
 }
 
 .form-elements {
   width: 100%;
 }
+
+/* #signup-frame {
+  margin-bottom: 6vh;
+} */
 
 #login-button {
   margin-top: 4%;
@@ -91,13 +105,13 @@ h1 {
 }
 
 #footer {
-  position: absolute;
+  /* position: absolute;
   bottom: 0;
-  left: 0;
+  left: 0; */
   background-color: black;
   text-align: center;
   color:white;
-  min-height: 20vh;
+  height: 20vh;
   width: 100%;
   display:flex;
   justify-content: center;

@@ -50,7 +50,7 @@ export default class BasicTabs extends React.Component {
     const {value} = this.state;
     ;
     return (
-      <div>
+      <div id='nav-tab-login-frame'>
       <Grid container spacing={0} style={{justifyContent: 'center'}}>
       <Grid item sm={6} xs={2} style={{alignItems: 'center'}}>
       <div>

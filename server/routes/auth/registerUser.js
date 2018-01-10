@@ -19,11 +19,20 @@ const registerUser =(req, res)=>{
       name, email, password,
     });
     User.createUser(newUser, function(err, user) {
+<<<<<<< HEAD
       if (err) {
         res.json({success: false, error: `duplicate email`});
       } else {
         res.json({success: true} );
       }
+||||||| merged common ancestors
+      if (err) throw err;
+      console.log(user);
+      res.json({success: true} );
+=======
+      if (err) throw err;
+      res.json({success: true} );
+>>>>>>> authentication
     });
     }
 };

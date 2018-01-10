@@ -20,22 +20,43 @@ export default class Header extends React.Component {
       <div style={{display: 'flex'}}>
         <AppBar position='static'>
         <Toolbar style={{display: 'flex', justifyContent: 'space-between'}}>
+        <div className="title-and-menu-button"
+        style={ {display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start',
+        }}
+        >
+        <IconButton color='contrast' aria-label='Menu'>
+          <MenuIcon />
+        </IconButton>
+        <Typography
+          type='title'
+          color='inherit'
+          style={{textAlign: 'center'}}
+        >
+        <Link to='/'>CrytpX</Link>
+        </Typography>
+        </div>
         <div
           style={ {
-                    display: 'flex', flexDirection: 'row', alignItems: 'center',
+                    display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end',
                   }}
         >
-          <IconButton color='contrast' aria-label='Menu'>
-            <MenuIcon />
-          </IconButton>
-          <Typography
-            type='title'
-            color='inherit'
-            style={{textAlign: 'center'}}
-          >
-          <Link to='/'>CrytpX</Link>
-          </Typography>
          </div>
+         <div>
+            <Button
+              color='contrast'
+              className='exchange'
+            >
+              <Link to='/exchange'>Trade</Link>
+            </Button>
+            </div>
+         <div>
+            <Button
+              color='contrast'
+              className='dashboard'
+            >
+              <Link to='/dashboard'>Dashboard</Link>
+            </Button>
+            </div>
          <div>
             <Button
               color='contrast'

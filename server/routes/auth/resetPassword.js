@@ -15,16 +15,20 @@ const resetPassword =(req, res)=>{
   } else {
     User.findOne({email})
     .then((user) => {
-      user.password = password;
-      User.updatePassword(user, function(err, user) {
-        if (err) {
-          throw err;
-        }
-        res.json({
-          success: true,
-          message: 'Successfully updated password for '+user.email,
+      if (!user) {
+        res.json({success: false, message: 'email is not registered'});
+      } else {
+        user.password = password;
+        User.updatePassword(user, function(err, user) {
+          if (err) {
+            throw err;
+          }
+          res.json({
+            success: true,
+            message: 'Successfully updated password for '+user.email,
+          });
         });
-      });
+      }
     });
   }
 };

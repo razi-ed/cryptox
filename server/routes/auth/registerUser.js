@@ -17,9 +17,11 @@ const registerUser =(req, res)=>{
       name, email, password,
     });
     User.createUser(newUser, function(err, user) {
-      if (err) throw err;
-      console.log(user);
-      res.json({success: true} );
+      if (err) {
+        res.json({success: false, error: `duplicate email`});
+      } else {
+        res.json({success: true} );
+      }
     });
     }
 // User.createUser(newUser, function(err, user) {

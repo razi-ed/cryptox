@@ -18,10 +18,10 @@ export default class ResetPassword extends Component {
     super();
     this.state = {
       showPassword: false,
-      passwordColor: ' red',
-      passwordHelperText: ' none',
-      confirmPasswordColor: ' red',
-      confirmHelperText: ' none',
+      passwordColor: 'red',
+      passwordHelperText: '',
+      confirmPasswordColor: 'red',
+      confirmHelperText: 'none',
       isPasswordMatch: false,
       doesPasswordContainLowerCase: 'red',
       doesPasswordContainUpperCase: 'red',

@@ -43,9 +43,10 @@ export default class ForgotPassword extends Component {
         .then((res)=>res.json())
         .then((res) => {
             console.log(res);
-            if (res.isRegisered) {
+            if (res.isRegistered) {
                 this.setState({
-                    isRegistered: res.isRegisered,
+                    isRegistered: res.isRegistered,
+                    emailHelperTextVisible: 'none',
                 });
             } else {
                 this.setState({emailHelperTextVisible: ' block'});

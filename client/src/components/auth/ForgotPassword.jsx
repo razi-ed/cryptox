@@ -60,7 +60,7 @@ export default class ForgotPassword extends React.Component {
     render() {
         return (
             <div id='forgot-password-frame'>
-                <Grid item sm={6} md={6} lg={4}>
+                <Grid item xs={10} sm={8} md={6} lg={4}>
                 <h1>Reset Your Password</h1>
                     <FormControl className='form-elements' >
                         <InputLabel >Email</InputLabel>

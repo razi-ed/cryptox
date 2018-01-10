@@ -52,14 +52,14 @@ export default class BasicTabs extends React.Component {
     return (
       <div id='nav-tab-login-frame'>
       <Grid container spacing={0} style={{justifyContent: 'center'}}>
-      <Grid item sm={6} xs={12} style={{alignItems: 'center'}}>
+      <Grid item xs={12} sm={8} md={8} lg={6} style={{alignItems: 'center'}}>
       <div>
         <AppBar
           className='tabs'
           position='static'
-          style={{justifyContent: 'space-around'}}
         >
-          <Tabs value={value} onChange={this.handleChange} >
+          <Tabs centered value={value} onChange={this.handleChange}
+           style={{justifyContent: 'center'}}>
             <Tab label='LogIn' />
             <Tab label='SignUp' />
           </Tabs>

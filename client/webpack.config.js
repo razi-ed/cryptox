@@ -1,8 +1,5 @@
-// We are using node's native package 'path'
-// https://nodejs.org/api/path.html
-
 const path = require('path');
-
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
@@ -15,55 +12,55 @@ const paths = {
 
 // Webpack configuration
 module.exports = {
-  entry: path.join(paths.JS, 'app.js'),
+  entry: [
+    'webpack-hot-middleware/client',
+    'react-hot-loader/patch',
+    path.join(paths.JS, 'Main.jsx'),
+  ],
   output: {
     path: paths.DIST,
+    publicPath: '/',
     filename: 'app.bundle.js',
   },
-  // Tell webpack to use html plugin
+  devtool: 'source-map',
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(paths.SRC, 'index.html'),
     }),
-    new ExtractTextPlugin('style.bundle.css'), // CSS will be extracted to this bundle file -> ADDED IN THIS STEP
+    new ExtractTextPlugin('style.bundle.css'),
+    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
   ],
-  // Loaders configuration
-  // We are telling webpack to use "babel-loader" for .js and .jsx files
   module: {
     rules: [{
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: [
-          'babel-loader',
-        ],
+        use: [{
+          loader: 'babel-loader',
+          options: {
+            sourceMap: true,
+          },
+        }],
       },
-      // CSS loader for CSS files
-      // Files will get handled by css loader and then passed to the extract text plugin
-      // which will write it to the file we defined above
       {
         test: /\.css$/,
         loader: ExtractTextPlugin.extract({
           use: 'css-loader',
         }),
       },
-      // File loader for image assets -> ADDED IN THIS STEP
-      // We'll add only image extensions, but you can things like svgs, fonts and videos
       {
         test: /\.(png|jpg|gif)$/,
         use: [
           'file-loader',
         ],
       },
+      {
+        test: /\.svg$/,
+        loader: 'svg-inline-loader',
+      },
     ],
   },
-  // Enable importing JS files without specifying their's extenstion
-  //
-  // So we can write:
-  // import MyComponent from './my-component';
-  //
-  // Instead of:
-  // import MyComponent from './my-component.jsx';
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: [' ', '.js', '.jsx']
   },
 };

@@ -38,7 +38,6 @@ export default class ForgotPassword extends Component {
  *@function
 */
     checkEmail() {
-        console.log(this.state.email);
         fetch(`/auth/validate?email=${this.state.email}`)
         .then((res)=>res.json())
         .then((res) => {

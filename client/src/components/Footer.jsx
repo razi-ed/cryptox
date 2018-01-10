@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
+import React from 'react';
 import '../css/style.css';
 
 /**
  * @class
  */
-export default class Footer extends Component {
+export default class Footer extends React.Component {
     /**
      * @function
      * @return {footerHtml}

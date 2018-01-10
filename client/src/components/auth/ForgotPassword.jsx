@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Input, {InputLabel} from 'material-ui/Input';
 import Button from 'material-ui/Button';
 import {FormHelperText, FormControl} from 'material-ui/Form';
@@ -9,7 +9,7 @@ import '../../css/style.css';
 /**
  *@class
  */
-export default class ForgotPassword extends Component {
+export default class ForgotPassword extends React.Component {
     /**
      *@constructor
      */

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Button from 'material-ui/Button';
 import Grid from 'material-ui/Grid/Grid';
 import {FormHelperText, FormControl} from 'material-ui/Form';
@@ -12,7 +12,7 @@ import Google from './Google';
 /**
  * @class
  */
-export default class Login extends Component {
+export default class Login extends React.Component {
   /**
    * @constructor
    */

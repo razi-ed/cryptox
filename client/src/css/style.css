@@ -8,6 +8,38 @@ a {
   color:white;
 }
 
+h1 {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #646c6c;
+}
+
+Button {
+  width:50%;
+}
+
+.hr-text:after {
+  content: attr(data-content);
+  position: relative;
+  display: inline-block;
+  color: black;
+  padding: 0 .5em;
+  line-height: 1.5em;
+  color: #0e0e0e;
+  background-color: #fcfcfa;
+}
+
+.login {
+  width:100%;
+}
+
+.form-elements {
+  width: 100%;
+}
+
+#home {
+  margin-bottom: 65vh;
+}
+
 #forgot-password {
   padding-top: 3%;
 }
@@ -16,8 +48,8 @@ a {
   color: blue;
 }
 
-.login {
-  width:100%;
+#nav-tab-login-frame {
+  margin-bottom: 12vh;
 }
 
 #login-form {
@@ -31,24 +63,12 @@ a {
   display: flex;
   justify-content: center;
   text-align: center;
-}
-
-.form-elements {
-  width: 100%;
+  margin-bottom: 38vh;
 }
 
 #login-button {
   margin-top: 4%;
   text-align: center;
-}
-
-Button {
-  width:50%;
-}
-
-h1 {
-  font-family: Arial, Helvetica, sans-serif;
-  color: #646c6c;
 }
 
 .hr-text {
@@ -72,16 +92,7 @@ h1 {
   height: 1px;
 }
 
-.hr-text:after {
-  content: attr(data-content);
-  position: relative;
-  display: inline-block;
-  color: black;
-  padding: 0 .5em;
-  line-height: 1.5em;
-  color: #0e0e0e;
-  background-color: #fcfcfa;
-}
+
 
 #google-signin {
   margin-top: 1%;
@@ -91,13 +102,10 @@ h1 {
 }
 
 #footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
   background-color: black;
   text-align: center;
   color:white;
-  min-height: 20vh;
+  height: 20vh;
   width: 100%;
   display:flex;
   justify-content: center;

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Input, {InputLabel} from 'material-ui/Input';
 import Button from 'material-ui/Button';
 import {FormHelperText, FormControl} from 'material-ui/Form';
@@ -9,7 +9,7 @@ import '../../css/style.css';
 /**
  *@class
  */
-export default class ForgotPassword extends Component {
+export default class ForgotPassword extends React.Component {
     /**
      *@constructor
      */
@@ -38,7 +38,6 @@ export default class ForgotPassword extends Component {
  *@function
 */
     checkEmail() {
-        console.log(this.state.email);
         fetch(`/auth/validate?email=${this.state.email}`)
         .then((res)=>res.json())
         .then((res) => {
@@ -61,7 +60,7 @@ export default class ForgotPassword extends Component {
     render() {
         return (
             <div id='forgot-password-frame'>
-                <Grid item sm={6} md={6} lg={4}>
+                <Grid item xs={10} sm={8} md={6} lg={4}>
                 <h1>Reset Your Password</h1>
                     <FormControl className='form-elements' >
                         <InputLabel >Email</InputLabel>

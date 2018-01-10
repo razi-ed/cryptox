@@ -1,94 +1,158 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import '../../css/style.css'
-import TextField from 'material-ui/TextField';
+import React, {Component} from 'react';
 import Button from 'material-ui/Button';
-import { FormControl, FormHelperText } from 'material-ui/Form';
+import Grid from 'material-ui/Grid/Grid';
+import {FormHelperText, FormControl} from 'material-ui/Form';
+import Input, {InputLabel, InputAdornment} from 'material-ui/Input';
+import Visibility from 'material-ui-icons/Visibility';
+import VisibilityOff from 'material-ui-icons/VisibilityOff';
+import IconButton from 'material-ui/IconButton';
+import '../../css/style.css';
+import Google from './Google';
 
-const styles = theme => ({
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-  },
-  button: {
-    margin: theme.spacing.unit,
-
-  },
-  input: {
-    display: 'block',
-  }
-})
-
-export  class Login extends React.Component {
-  constructor(){
-    super()
-    this.state={
-      email: "",
-      password: '',
-      showPassword: false,
-    }
-  }
-
-  loginUser(){
-    console.log(document.getElementById('log-email').value)
-    fetch("/auth/login",{
-      method:"POST",
-      headers:{
-        'Content-Type':'application/json',
+/**
+ * @class
+ */
+export default class Login extends Component {
+  /**
+   * @constructor
+   */
+  constructor() {
+    super();
+    this.state = {
+    email: '',
+    password: '',
+    showPassword: false,
+    validationHelperTextVisible: 'none',
+    validationColor: 'red',
+  };
+  this.changeEmail = this.changeEmail.bind(this);
+  this.changePassword = this.changePassword.bind(this);
+  this.loginUser = this.loginUser.bind(this);
+  this.handleClickIcon = this.handleClickIcon.bind(this);
+  this.handleMouseDownIcon = this.handleMouseDownIcon.bind(this);
+}
+/**
+ * @function
+ */
+  loginUser() {
+    fetch('/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
       },
-      body:JSON.stringify({
-        email:document.getElementById('log-email').value,
-        password: document.getElementById('log-password').value
-      })
-    }).then(res=>res.text()).then((res)=>{
-      console.log(res);
-    })
-  }
+      body: JSON.stringify({
+        email: this.state.email,
+        password: this.state.password,
+      }),
+    }).then((res)=>res.json()).then((res)=>{
+      console.log(res.success);
 
+      if (!res.success) {
+        console.log(res.message);
+        this.setState({validationHelperTextVisible: ' block'});
+      }
+
+      console.log(res);
+    });
+  }
+  /**
+   * @param {event} event
+   */
+  changeEmail(event) {
+    this.setState({
+      email: event.target.value,
+    });
+    console.log(this.state.email);
+  }
+/**
+ *
+ * @param {event} event
+ */
+  changePassword(event) {
+    this.setState({
+      password: event.target.value,
+    });
+    console.log(this.state.password);
+  }
+/**
+ *@function
+ */
+  handleClickIcon() {
+    this.setState({showPassword: !this.state.showPassword});
+  }
+/**
+ *
+ * @param {event} event
+ */
+  handleMouseDownIcon(event) {
+    event.preventDefault();
+  }
+/**
+ * @function
+ * @return {loginhtml}
+ * */
   render() {
-    const { classes } = this.props;
     return (
-      <div>       
-         <div>
-            <h1 style={{textAlign:"center"}}>Log Into Your Account</h1>
-              <TextField fullWidth
-                required
-                id="log-email"
-                label="Email" 
-                type="Email"
-                margin="normal"
-              />
-              <TextField fullWidth
-                required
-                id="log-password"
-                label="Password"
-                type="password"
-                autoComplete="current-password"
-                margin="normal"
-              />
-            <div id='button_line'>
-              <Button type="submit" raised color="primary"  className={classes.button} onClick={this.loginUser}>
+      <div id='login-form'>
+        <Grid item lg={12}>
+            <h1 style={{textAlign: 'center'}}>Log Into Your Account</h1>
+
+          <FormControl className='form-elements' >
+            <InputLabel >Email</InputLabel>
+            <Input
+              autoFocus={true}
+              type='email'
+              onChange={this.changeEmail}
+            />
+          </FormControl>
+          <FormControl className='form-elements'>
+            <InputLabel>Password</InputLabel>
+            <Input
+              type={this.state.showPassword ? 'text' : 'password'}
+              onChange={this.changePassword}
+              endAdornment={
+                <InputAdornment position='end' >
+                  <IconButton
+                    onClick={this.handleClickIcon}
+                    onMouseDown={this.handleMouseDownIcon}
+                  >
+                    {this.state.showPassword ? <VisibilityOff />
+                     : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+            />
+          </FormControl>
+          <FormHelperText
+            style={
+              {
+                color: this.state.validationColor,
+                display: this.state.validationHelperTextVisible,
+              }
+            }
+          >
+            Invalid Email Or Password
+            </FormHelperText>
+        </Grid>
+            <div id='login-button'>
+              <Button type="submit"
+              raised color="primary"
+              className="button"
+              onClick={this.loginUser}>
                 Log In
               </Button>
             </div>
-            <div>
-              <a href="#">Forgot Password?</a>
+        <div id='forgot-password'>
+            <a id='forgot-password-link'
+            href="/reset-password">
+            Forgot Password?</a>
             </div>
-          </div>
-          
           <hr className="hr-text" data-content="Or"></hr>
+          <div id="google-signin">
+          <Google/>
+          </div>
+
       </div>
     );
   }
 }
-
-Login.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(Login);

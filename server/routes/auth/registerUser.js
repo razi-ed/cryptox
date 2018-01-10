@@ -1,5 +1,6 @@
 const User= require('../../models/Users');
 const validatePassword= require('../../../utils/ValidateUser');
+
 const registerUser =(req, res)=>{
   const name=req.body.name;
   const email=req.body.email;
@@ -8,6 +9,7 @@ const registerUser =(req, res)=>{
   req.checkBody('email', 'email is required').notEmpty().isEmail();
   req.checkBody('password', 'password is required').notEmpty();
   const errors= req.validationErrors();
+
   if (errors) {
     res.json(errors[0].msg);
   } else if (validatePassword(password)!==`valid password`) {
@@ -24,12 +26,6 @@ const registerUser =(req, res)=>{
       }
     });
     }
-// User.createUser(newUser, function(err, user) {
-// if (err) throw err;
-//     console.log(user);
-//     res.json({success: true} );
-// });
-//   }
 };
 
 module.exports= registerUser;

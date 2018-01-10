@@ -5,7 +5,7 @@ import {FormHelperText, FormControl} from 'material-ui/Form';
 import Visibility from 'material-ui-icons/Visibility';
 import VisibilityOff from 'material-ui-icons/VisibilityOff';
 import IconButton from 'material-ui/IconButton';
-
+import Google from './Google';
 /**
  * this class creates a component for signup
  */
@@ -16,16 +16,19 @@ export default class SignUp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: ' ',
-      email: ' ',
-      password: ' ',
+      name: '',
+      email: '',
+      password: '',
       showPassword: false,
-      passwordColor: ' red',
-      passwordHelperText: ' none',
-      confirmPasswordColor: ' red',
-      confirmHelperText: ' none',
+      passwordColor: 'red',
+      isPasswordHelperTextVisible: 'none',
+      confirmPasswordColor: 'red',
+      confirmHelperText: 'none',
+      doesPasswordContainLowerCase: 'red',
+      doesPasswordContainUpperCase: 'red',
+      doesPasswordContainNumber: 'red',
+      doesPasswordLengthSatisfied: 'red',
       isPasswordMatch: false,
-      isPasswordSet: false,
     };
     this.validatePassword=this.validatePassword.bind(this);
     this.confirmPassword=this.confirmPassword.bind(this);
@@ -36,7 +39,7 @@ export default class SignUp extends React.Component {
    * this function sends a post request to registerUser api to create a new user
    */
   createUser() {
-    console.log(this.state.name, this.state.email, this.state.password);
+    console.log(this.state.name, this.state.email, this.state.isPasswordMatch);
     if (this.state.name && this.state.email && this.state.password) {
       fetch(' /auth/register', {
         method: 'POST',
@@ -52,7 +55,7 @@ export default class SignUp extends React.Component {
         console.log(res);
       });
     } else {
-      this.setState({isDialogOpen: true});
+        alert('Fill up all the fields ');
     }
   }
   /**
@@ -74,13 +77,42 @@ export default class SignUp extends React.Component {
    * @param {event} event
    */
   validatePassword(event) {
-    const pattern=new RegExp(/\w{8,}/);
-    this.setState({passwordHelperText: ' block'});
-    if (event.target.value.match(pattern)) {
-      this.setState({password: event.target.value, passwordColor: ' green'});
-    } else {
-      this.setState({password: event.target.value, passwordColor: ' red'});
-    }
+    this.setState({isPasswordHelperTextVisible: 'block'});
+    const lowerCase=/([a-z])/g;
+    const upperCase=/([A-Z])/g;
+    const numbers = /([0-9])/g;
+    const len= event.target.value.length;
+    const validator=(reg)=>event.target.value.match(reg);
+    !validator(lowerCase)?
+    this.setState(
+      {
+        passwordHelperText: 'must contain lowercase letters',
+        passwordColor: 'red',
+      }):
+      !validator(upperCase)?
+      this.setState(
+        {
+          passwordHelperText: 'must contain uppercase letters',
+          passwordColor: 'red',
+        }):
+        !validator(numbers)?
+        this.setState(
+          {
+            passwordHelperText: 'must conatin a number',
+            passwordColor: 'red',
+          }):
+          len<8?
+          this.setState(
+            {
+              passwordHelperText: 'must contain minimum of 8 characters',
+              passwordColor: 'red',
+            }):
+          this.setState(
+            {
+              password: event.target.value,
+              passwordHelperText: 'Valid password',
+              passwordColor: 'green',
+            });
   }
   /**
    * this function is called where there is change in Re-Enter password field
@@ -96,14 +128,14 @@ export default class SignUp extends React.Component {
   }
   /**
    * this function is called when react compnent is called to render
-   * @return {component} component to be mounted
+   * @return {component}
    */
   render() {
     return (
       <div>
           <h1 style={{textAlign: 'center'}} >Create New Account</h1>
           <div>
-          <FormControl className='formElements'>
+          <FormControl className='form-elements'>
             <InputLabel>Name</InputLabel>
             <Input
               autoFocus={true}
@@ -112,7 +144,7 @@ export default class SignUp extends React.Component {
           </FormControl>
           </div>
           <div>
-          <FormControl className='formElements'>
+          <FormControl className='form-elements'>
             <InputLabel >Email</InputLabel>
             <Input
               type='email'
@@ -121,7 +153,7 @@ export default class SignUp extends React.Component {
           </FormControl>
           </div>
           <div>
-          <FormControl className='formElements'>
+          <FormControl className='form-elements'>
             <InputLabel>Password</InputLabel>
             <Input
               type={this.state.showPassword?'text': 'password'}
@@ -142,19 +174,19 @@ export default class SignUp extends React.Component {
                 style={
                   {
                     color: this.state.passwordColor,
-                    display: this.state.passwordHelperText,
+                    display: this.state.isPasswordHelperTextVisible,
                   }
                 }
               >
-              Password length must be atleast 8 characters
+             {this.state.passwordHelperText}
               </FormHelperText>
           </FormControl>
           </div>
           <div>
-          <FormControl className='formElements'>
+          <FormControl className='form-elements'>
             <InputLabel>Re-Enter Password</InputLabel>
             <Input
-              type=' password'
+              type='password'
               onChange={this.confirmPassword}
              />
             <FormHelperText
@@ -178,6 +210,10 @@ export default class SignUp extends React.Component {
                 >
                   Create New Account
                 </Button>
+                <hr className="hr-text" data-content="Or"></hr>
+          <div id="google-signin">
+                  <Google/>
+                </div>
               </div>
       </div>
     );

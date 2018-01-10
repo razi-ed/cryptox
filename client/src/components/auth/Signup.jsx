@@ -186,7 +186,7 @@ export default class SignUp extends React.Component {
           <FormControl className='form-elements'>
             <InputLabel>Re-Enter Password</InputLabel>
             <Input
-              type=' password'
+              type='password'
               onChange={this.confirmPassword}
              />
             <FormHelperText

@@ -1,4 +1,5 @@
 import React from 'react';
+import List from './List';
 /**
  * this class creates Exchange component
  */
@@ -8,6 +9,10 @@ export default class Exchange extends React.Component {
    * @return {component}
    */
   render() {
-    return (<h1>Exchange</h1>);
+    return (
+      <div className="exchange">
+        <List/>
+      </div>
+    );
   };
 };

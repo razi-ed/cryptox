@@ -13,6 +13,7 @@ const paths = {
 // Webpack configuration
 module.exports = {
   entry: [
+    'babel-polyfill',
     'webpack-hot-middleware/client',
     'react-hot-loader/patch',
     path.join(paths.JS, 'Main.jsx'),
@@ -61,6 +62,6 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: [' ', '.js', '.jsx']
+    extensions: [' ', '.js', '.jsx'],
   },
 };

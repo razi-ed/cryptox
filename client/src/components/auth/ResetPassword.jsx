@@ -86,11 +86,11 @@ export default class ResetPassword extends React.Component {
  * @param {event} event
  */
   confirmPassword(event) {
-    this.setState({isconfirmHelperText: ' block'});
+    this.setState({isconfirmHelperText: 'block'});
     if (this.state.password == event.target.value) {
-      this.setState({isPasswordMatch: true, confirmPasswordColor: ' green'});
+      this.setState({isPasswordMatch: true, confirmPasswordColor: 'green'});
     } else {
-      this.setState({isPasswordMatch: false, confirmPasswordColor: ' red'});
+      this.setState({isPasswordMatch: false, confirmPasswordColor: 'red'});
     }
   }
   /**

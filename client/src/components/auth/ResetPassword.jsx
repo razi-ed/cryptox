@@ -16,13 +16,16 @@ export default class ResetPassword extends React.Component {
    */
   constructor() {
     super();
-    this.state = {
+      this.state = {
+      password: null,
       showPassword: false,
       passwordColor: 'red',
-      passwordHelperText: '',
+      passwordNotFound: 'Please Enter Password',
+      isPasswordHelperTextVisible: 'none',
       confirmPasswordColor: 'red',
-      confirmHelperText: 'none',
+      isconfirmHelperText: 'none',
       isPasswordMatch: false,
+      isPasswordSet: false,
       doesPasswordContainLowerCase: 'red',
       doesPasswordContainUpperCase: 'red',
       doesPasswordContainNumber: 'red',
@@ -74,6 +77,7 @@ export default class ResetPassword extends React.Component {
                 password: event.target.value,
                 passwordHelperText: 'Valid password',
                 passwordColor: 'green',
+                isPasswordSet: true,
               });
   }
 
@@ -107,18 +111,26 @@ export default class ResetPassword extends React.Component {
    *@function
    */
   sendResetRequest() {
-    fetch('/auth/resetPassword', {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: this.props.email,
-        password: this.state.password,
-      }),
-    }).then((res) => res.text()).then((res) => {
-      console.log(res);
-    });
+    if (this.state.password && this.props.email) {
+      fetch('/auth/resetPassword', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: this.props.email,
+          password: this.state.password,
+        }),
+      }).then((res) => res.text()).then((res) => {
+        console.log(res);
+      });
+    } else {
+      this.setState({
+                      isPasswordHelperTextVisible: 'block',
+                      passwordHelperText: this.state.passwordNotFound,
+                      isconfirmHelperText: 'block',
+                    });
+    }
   }
 
 /**
@@ -128,53 +140,61 @@ export default class ResetPassword extends React.Component {
   render() {
     return (
       <div>
-        <FormControl className='form-elements'>
-          <InputLabel>New Password</InputLabel>
-          <Input
-            type={this.state.showPassword ? 'text' : 'password'}
-            onChange={this.validatePassword}
-            onFocus={this.validatePassword}
-            endAdornment={
-              <InputAdornment position='end' >
-                <IconButton
+         <FormControl
+                className='form-elements'
+                >
+                <InputLabel>Password</InputLabel>
+                <Input
+                type={this.state.showPassword?'text': 'password'}
+                onChange={this.validatePassword}
+                onFocus={this.validatePassword}
+                endAdornment={
+                  <InputAdornment position='end' >
+                  <IconButton
                   onClick={this.handleClickIcon}
                   onMouseDown={this.handleMouseDownIcon}
+                  >
+                  {this.state.showPassword?<VisibilityOff/>: <Visibility/>}
+                  </IconButton>
+                  </InputAdornment>
+                }
+                />
+                <FormHelperText
+                style={
+                  {
+                    color: this.state.passwordColor,
+                    display: this.state.isPasswordHelperTextVisible,
+                  }
+                }
                 >
-                  {this.state.showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            }
-          />
-          <FormHelperText
-            style={
-              {
-                color: this.state.passwordColor,
-                display: this.state.isPasswordHelperTextVisible,
-              }
-            }
-          >
-            {this.state.passwordHelperText}
-          </FormHelperText>
-        </FormControl>
+                {this.state.passwordHelperText}
+                </FormHelperText>
+                </FormControl>
+                <FormControl
+                className='form-elements'
+                required={true}
+                >
+                <InputLabel>Re-Enter Password</InputLabel>
+                <Input
+                type='password'
+                onChange={this.confirmPassword}
+                />
+                <FormHelperText
+                style={
+                  {
+                    color: this.state.confirmPasswordColor,
+                    display: this.state.isconfirmHelperText,
+                  }
+                }
+                >
+                {this.state.isPasswordSet?
+                  (this.state.isPasswordMatch?
+                    'Password Match': 'Password Mismatch'):
+                    'Please Enter Password'
+                }
+                </FormHelperText>
+                </FormControl>
 
-        <FormControl className='form-elements'>
-          <InputLabel>Re-Enter Password</InputLabel>
-          <Input
-            type='password'
-            onChange={this.confirmPassword}
-          />
-          <FormHelperText
-            style={
-              {
-                color: this.state.confirmPasswordColor,
-                display: this.state.confirmHelperText,
-              }
-            }
-          >
-            {this.state.isPasswordMatch ?
-              'Password Match' : 'Password Mismatch'}
-          </FormHelperText>
-        </FormControl>
         <div style={{paddingTop: 25, textAlign: 'center'}}>
           <Button
             raised

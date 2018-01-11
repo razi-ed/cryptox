@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from 'material-ui/Button';
-import {FormHelperText, FormControl} from 'material-ui/Form';
+import {FormControl} from 'material-ui/Form';
 import Input, {InputLabel, InputAdornment} from 'material-ui/Input';
 import Visibility from 'material-ui-icons/Visibility';
 import VisibilityOff from 'material-ui-icons/VisibilityOff';
@@ -47,11 +47,11 @@ export default class Login extends React.Component {
       }).then((res)=>res.json()).then((res)=>{
         if (!res.success) {
           this.setState({validationHelperTextVisible: ' block'});
+        } else {
+          this.setState({validationHelperTextVisible: 'none'});
         }
         console.log(res);
       });
-  } else {
-    this.setState({isAlertVisible: 'block'});
   }
 }
   /**
@@ -92,6 +92,12 @@ export default class Login extends React.Component {
     return (
       <div id='login-form'>
       <h1 style={{textAlign: 'center'}}>Log Into Your Account</h1>
+      <h4 style={{
+                  color: 'red',
+                  display: this.state.validationHelperTextVisible,
+                  paddingTop: 12,
+                }}>
+                Invalid User Name or Password</h4>
       <form onSubmit={(e)=>e.preventDefault()}>
       <FormControl
         className='form-elements'
@@ -125,16 +131,6 @@ export default class Login extends React.Component {
         }
         />
         </FormControl>
-        <FormHelperText
-        style={
-          {
-            color: this.state.validationColor,
-            display: this.state.validationHelperTextVisible,
-          }
-        }
-        >
-        Invalid Email Or Password
-        </FormHelperText>
         <div id='login-button'>
         <Button type="submit"
         raised color="primary"

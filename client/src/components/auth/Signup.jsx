@@ -41,8 +41,8 @@ export default class SignUp extends React.Component {
   * this function sends a post request to registerUser api to create a new user
   */
   createUser() {
-    if (this.state.isPasswordMatch) {
-      if (this.state.name && this.state.email && this.state.isPasswordSet) {
+    if (this.state.isPasswordSet) {
+      if (this.state.name && this.state.email && this.state.isPasswordMatch) {
         fetch('/auth/register', {
           method: 'POST',
           headers: {
@@ -59,13 +59,13 @@ export default class SignUp extends React.Component {
       } else {
         this.setState({
                         isPasswordHelperTextVisible: 'block',
-                        passwordHelperText: this.state.passwordNotFound,
                         isconfirmHelperText: 'block',
                       });
       }
     } else {
       this.setState({
                       isPasswordHelperTextVisible: 'block',
+                      passwordHelperText: this.state.passwordNotFound,
                       isconfirmHelperText: 'block',
                     });
     }

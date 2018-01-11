@@ -111,24 +111,25 @@ export default class ResetPassword extends React.Component {
    *@function
    */
   sendResetRequest() {
-    if (this.state.isPasswordMatch) {
-      if (this.state.password && this.props.email) {
-        fetch('/auth/resetPassword', {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            email: this.props.email,
-            password: this.state.password,
-          }),
-        }).then((res) => res.text()).then((res) => {
-          console.log(res);
-        });
+    if (this.state.isPasswordSet) {
+      if (this.state.password
+        && this.props.email
+        && this.state.isPasswordMatch) {
+          fetch('/auth/resetPassword', {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              email: this.props.email,
+              password: this.state.password,
+            }),
+          }).then((res) => res.text()).then((res) => {
+            console.log(res);
+          });
       } else {
         this.setState({
                         isPasswordHelperTextVisible: 'block',
-                        passwordHelperText: this.state.passwordNotFound,
                         isconfirmHelperText: 'block',
                       });
       }

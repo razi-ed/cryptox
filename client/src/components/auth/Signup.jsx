@@ -18,16 +18,18 @@ export default class SignUp extends React.Component {
     this.state = {
       name: '',
       email: '',
-      password: '',
+      password: null,
       showPassword: false,
       passwordColor: 'red',
+      passwordNotFound: 'Please Enter Password',
       isPasswordHelperTextVisible: 'none',
       confirmPasswordColor: 'red',
-      confirmHelperText: 'none',
+      isconfirmHelperText: 'none',
       doesPasswordContainLowerCase: 'red',
       doesPasswordContainUpperCase: 'red',
       doesPasswordContainNumber: 'red',
       doesPasswordLengthSatisfied: 'red',
+      isPasswordSet: false,
       isPasswordMatch: false,
     };
     this.validatePassword=this.validatePassword.bind(this);
@@ -39,8 +41,8 @@ export default class SignUp extends React.Component {
   * this function sends a post request to registerUser api to create a new user
   */
   createUser() {
-    if (this.state.name && this.state.email && this.state.password) {
-      fetch(' /auth/register', {
+    if (this.state.name && this.state.email && this.state.isPasswordSet) {
+      fetch('/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -53,6 +55,12 @@ export default class SignUp extends React.Component {
       }).then((res)=>res.json()).then((res) => {
         console.log(res);
       });
+    } else {
+      this.setState({
+                      isPasswordHelperTextVisible: 'block',
+                      passwordHelperText: this.state.passwordNotFound,
+                      isconfirmHelperText: 'block',
+                    });
     }
   }
   /**
@@ -103,12 +111,14 @@ export default class SignUp extends React.Component {
             {
               passwordHelperText: 'must contain minimum of 8 characters',
               passwordColor: 'red',
+              isPasswordSet: false,
             }):
             this.setState(
               {
                 password: event.target.value,
                 passwordHelperText: 'Valid password',
                 passwordColor: 'green',
+                isPasswordSet: true,
               });
             }
             /**
@@ -138,9 +148,8 @@ export default class SignUp extends React.Component {
               return (
                 <div id='signup-frame'>
                 <h1 style={{textAlign: 'center'}} >Create New Account</h1>
-                <form>
+                <form onSubmit={(event)=> event.preventDefault()}>
                 <div>
-
                 <FormControl
                 className='form-elements'
                 required={true}
@@ -167,7 +176,6 @@ export default class SignUp extends React.Component {
                 <div>
                 <FormControl
                 className='form-elements'
-                required={true}
                 >
                 <InputLabel>Password</InputLabel>
                 <Input
@@ -211,12 +219,12 @@ export default class SignUp extends React.Component {
                 style={
                   {
                     color: this.state.confirmPasswordColor,
-                    display: this.state.confirmHelperText,
+                    display: this.state.isconfirmHelperText,
                   }
                 }
                 >
-                {this.state.isPasswordMatch?
-                  'Password Match': 'Password Mismatch'}
+                {this.state.isPasswordSet?(this.state.isPasswordMatch?
+                  'Password Match': 'Password Mismatch'):'Enter Password' }
                 </FormHelperText>
                 </FormControl>
 

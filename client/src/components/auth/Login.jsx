@@ -97,7 +97,8 @@ export default class Login extends React.Component {
                   display: this.state.validationHelperTextVisible,
                   paddingTop: 12,
                 }}>
-                Invalid User Name or Password</h4>
+                Invalid User Name or Password
+      </h4>
       <form onSubmit={(e)=>e.preventDefault()}>
       <FormControl
         className='form-elements'

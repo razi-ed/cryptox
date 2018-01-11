@@ -1,7 +1,7 @@
 import React from 'react';
 import Input, {InputLabel} from 'material-ui/Input';
 import Button from 'material-ui/Button';
-import {FormHelperText, FormControl} from 'material-ui/Form';
+import {FormControl} from 'material-ui/Form';
 import Grid from 'material-ui/Grid';
 
 import ResetPassword from './ResetPassword';
@@ -16,8 +16,8 @@ export default class ForgotPassword extends React.Component {
     constructor() {
         super();
         this.state={
-            email: ' ',
-            password: ' ',
+            email: null,
+            password: null,
             isRegistered: false,
             emailHelperTextVisible: 'none',
             emailColor: 'red',
@@ -38,19 +38,21 @@ export default class ForgotPassword extends React.Component {
  *@function
 */
     checkEmail() {
-        fetch(`/auth/validate?email=${this.state.email}`)
-        .then((res)=>res.json())
-        .then((res) => {
-            console.log(res);
-            if (res.isRegistered) {
-                this.setState({
-                    isRegistered: res.isRegistered,
-                    emailHelperTextVisible: 'none',
-                });
-            } else {
-                this.setState({emailHelperTextVisible: ' block'});
-            }
-        });
+        if (this.state.email) {
+            fetch(`/auth/validate?email=${this.state.email}`)
+            .then((res)=>res.json())
+            .then((res) => {
+                console.log(res);
+                if (res.isRegistered) {
+                    this.setState({
+                        isRegistered: res.isRegistered,
+                        emailHelperTextVisible: 'none',
+                    });
+                } else {
+                    this.setState({emailHelperTextVisible: ' block'});
+                }
+            });
+        }
     }
 
 /**
@@ -61,25 +63,24 @@ export default class ForgotPassword extends React.Component {
         return (
             <div id='forgot-password-frame'>
                 <Grid item xs={10} sm={8} md={6} lg={4}>
+                <form onSubmit={(e)=>e.preventDefault()}>
                 <h1>Reset Your Password</h1>
-                    <FormControl className='form-elements' >
+                <h4 style={{
+                            color: 'red',
+                            display: this.state.emailHelperTextVisible,
+                            paddingTop: 12,
+                            }}>
+               Email not Registered Please Sign Up
+                </h4>
+                    <FormControl
+                        className='form-elements'
+                        required={true}
+                     >
                         <InputLabel >Email</InputLabel>
                         <Input
                         type='email'
                         onChange={this.changeEmail}
                         />
-                        <FormHelperText
-                            style={
-                                {
-                                    color: this.state.emailColor,
-                                    display: this.state.emailHelperTextVisible,
-                                }
-                            }
-                        >
-                           Email not registered
-                        </FormHelperText>
-
-
                     </FormControl>
 
                     {this.state.isRegistered == false ?
@@ -94,7 +95,7 @@ export default class ForgotPassword extends React.Component {
                         > Submit
                         </Button>
                     </div>):<ResetPassword email={this.state.email}/>}
-
+                    </form>
                 </Grid>
             </div>
         );

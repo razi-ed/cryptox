@@ -41,20 +41,27 @@ export default class SignUp extends React.Component {
   * this function sends a post request to registerUser api to create a new user
   */
   createUser() {
-    if (this.state.name && this.state.email && this.state.isPasswordSet) {
-      fetch('/auth/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: this.state.name,
-          email: this.state.email,
-          password: this.state.password,
-        }),
-      }).then((res)=>res.json()).then((res) => {
-        console.log(res);
-      });
+    if (this.state.isPasswordSet) {
+      if (this.state.name && this.state.email && this.state.isPasswordMatch) {
+        fetch('/auth/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: this.state.name,
+            email: this.state.email,
+            password: this.state.password,
+          }),
+        }).then((res)=>res.json()).then((res) => {
+          console.log(res);
+        });
+      } else {
+        this.setState({
+                        isPasswordHelperTextVisible: 'block',
+                        isconfirmHelperText: 'block',
+                      });
+      }
     } else {
       this.setState({
                       isPasswordHelperTextVisible: 'block',
@@ -127,7 +134,7 @@ export default class SignUp extends React.Component {
             * @param {event} event
             */
             confirmPassword(event) {
-              this.setState({confirmHelperText: ' block'});
+              this.setState({isconfirmHelperText: 'block'});
               if (this.state.password==event.target.value) {
                 this.setState({
                                 isPasswordMatch: true,

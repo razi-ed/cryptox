@@ -46,7 +46,7 @@ export default class Login extends React.Component {
         }),
       }).then((res)=>res.json()).then((res)=>{
         if (!res.success) {
-          this.setState({validationHelperTextVisible: ' block'});
+          this.setState({validationHelperTextVisible: 'block'});
         } else {
           this.setState({validationHelperTextVisible: 'none'});
         }

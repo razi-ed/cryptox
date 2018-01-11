@@ -1,57 +1,31 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {withStyles} from 'material-ui/styles';
-import Card, {CardActions, CardContent} from 'material-ui/Card';
-import Button from 'material-ui/Button';
-import Typography from 'material-ui/Typography';
-
-const styles = (theme) => ({
-  card: {
-    minWidth: 275,
-  },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.6)',
-  },
-  title: {
-    marginBottom: 16,
-    fontSize: 14,
-    color: theme.palette.text.secondary,
-  },
-  pos: {
-    marginBottom: 12,
-    color: theme.palette.text.secondary,
-  },
-});
-
-function SimpleCard(props) {
-  const {classes} = props;
-  const bull = <span className={classes.bullet}>•</span>;
-
-  return (
-    <div>
-      <Card className={classes.card}>
-        <CardContent>
-          <Typography className={classes.title}>Word of the Day</Typography>
-          <Typography type="headline" component="h2">
-            be{bull}nev{bull}o{bull}lent
-          </Typography>
-          <Typography className={classes.pos}>adjective</Typography>
-          <Typography component="p">
-            well meaning and kindly.<br/> {'"a benevolent smile"'}
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button dense>Learn More</Button>
-        </CardActions>
-      </Card>
-    </div>
-  );
+/**
+ * this class creates a component of list of currencies
+ */
+export default class List extends React.Component {
+   /**
+   * @param {props} props
+   */
+  constructor(props) {
+    super(props);
+    this.state={
+      crypto: ['BTC', 'ETH', 'XRP', 'LTC', 'DASH'],
+      real: ['INR', 'USD', 'EUR', 'JPY', 'GBP'],
+    };
+  }
+  // getCrypto = () =>{
+  //   console.log('get crpto');
+  //   fetch('https://api.coinmarketcap.com/v1/ticker/?convert=INR&limit=15')
+  //     .then(response => response.json())
+  //     .then(currencies => { console.log(currencies)})
+  //     .catch(e=>console.log(e))
+  // }
+  //  componentDidMount () {
+  //   this.getCrypto();
+  // }
+  render() {
+    return (
+      <h1>list</h1>
+    );
+  }
 }
-
-SimpleCard.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(SimpleCard);

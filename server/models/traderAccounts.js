@@ -1,12 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const TraderAccountSchema= new Schema({
-  'email': {
-    type: String,
-    unique: true,
-    required: true,
-  },
+const currencies={
   'BTC': {
     type: Number,
     default: 0,
@@ -47,6 +42,15 @@ const TraderAccountSchema= new Schema({
     type: Number,
     default: 0,
   },
+};
+
+const TraderAccountSchema= new Schema({
+  'email': {
+    type: String,
+    unique: true,
+    required: true,
+  },
+  currencies,
 
 });
 const TraderAccount=mongoose.model('traderAccount', TraderAccountSchema);

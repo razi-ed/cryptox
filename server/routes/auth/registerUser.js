@@ -1,4 +1,5 @@
 const User= require('../../models/Users');
+const TraderAccount=require('../../models/traderAccounts');
 const validatePassword= require('../../../utils/ValidateUser');
 
 const registerUser =(req, res)=>{
@@ -18,6 +19,10 @@ const registerUser =(req, res)=>{
     const newUser = new User({
       name, email, password,
     });
+    const newTraderAccount=new TraderAccount({
+      email,
+    });
+    newTraderAccount.save();
     User.createUser(newUser, function(err, user) {
       if (err) {
         res.json({success: false, error: `duplicate email`});

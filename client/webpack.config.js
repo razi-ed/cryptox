@@ -9,7 +9,10 @@ const paths = {
   SRC: path.resolve(__dirname, 'src'),
   JS: path.resolve(__dirname, 'src/js'),
 };
-
+const extractSass = new ExtractTextPlugin({
+  filename: '[name].[contenthash].css',
+  disable: process.env.NODE_ENV === 'development',
+});
 // Webpack configuration
 module.exports = {
   entry: [
@@ -58,6 +61,18 @@ module.exports = {
       {
         test: /\.svg$/,
         loader: 'svg-inline-loader',
+      },
+      {
+        test: /\.scss$/,
+        use: extractSass.extract({
+          use: [{
+            loader: 'css-loader',
+          }, {
+            loader: 'sass-loader',
+          }],
+          // use style-loader in development
+          fallback: 'style-loader',
+        }),
       },
     ],
   },

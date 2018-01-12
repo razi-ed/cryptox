@@ -1,4 +1,7 @@
 import React from 'react';
+import Grid from 'material-ui/Grid';
+import Paper from 'material-ui/Paper';
+import Currency from './Currency';
 /**
  * this class creates a component of list of currencies
  */
@@ -44,7 +47,7 @@ export default class List extends React.Component {
       console.log('done')
     }
   }
-   componentDidMount () {
+  componentDidMount () {
      setInterval(()=>{
       this.getCrypto();
       this.getReal();
@@ -52,17 +55,12 @@ export default class List extends React.Component {
   }
   render() {
     return (
-      <div className="list">
-      <h1>list </h1>
-      <h2>crypros</h2>
-      <ul>
-        {this.state.crypto.map(coin => <li>{coin}:{this.state[coin]}</li>)}
-      </ul>
-      <h2>real</h2>
-      <ul>
-        {this.state.real.map(coin => <li>{coin}:{1/this.state[coin]}</li>)}
-      </ul>
-      </div>
+      <Grid className="list" item={true}  xs={10} md={4} alignItems='center'>
+      <Paper className='List' >
+        {this.state.crypto.map(coin => <Currency style={{listStyleType:'none'}}>{coin}:{this.state[coin]}</Currency>)}
+        {this.state.real.map(coin => <li style={{listStyleType:'none'}}>{coin}:{1/this.state[coin]}</li>)}
+      </Paper>
+      </Grid>
     );
   }
 }

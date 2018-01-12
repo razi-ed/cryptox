@@ -1,0 +1,19 @@
+.exchange {
+  background-color: #e0e0e0;
+  padding: 5%;
+  margin: 2%;
+  .List {
+    li {
+      padding: 5%;
+    }
+  }
+  .chart {
+    height: 60vh;
+  }
+  .currency {
+    width:80%;
+    // padding: 5% 5%;
+     margin: 5% 3%;
+    border: 1px solid;
+  }
+}

@@ -61,15 +61,15 @@ app.use(express.static(path.join(__dirname, '../dist/')));
 app.use('/auth', auth);
 app.use(frontend);
 
-Mongoose
-  .connect(process.env.DB_HOST || 'mongodb://localhost/cryptox', {
-    useMongoClient: true,
-  });
+// Mongoose
+//   .connect(process.env.DB_HOST || 'mongodb://localhost/cryptox', {
+//     useMongoClient: true,
+//   });
 
-Mongoose
-  .connection
-  .once('once', () => console.log('copnnected to db'))
-  .on('error', (e) => console.log('error connectin to db', e));
+// Mongoose
+//   .connection
+//   .once('once', () => console.log('copnnected to db'))
+//   .on('error', (e) => console.log('error connectin to db', e));
 
 
 app.listen(process.env.port || 3000, function() {

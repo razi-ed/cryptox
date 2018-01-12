@@ -55,10 +55,10 @@ export default class List extends React.Component {
   }
   render() {
     return (
-      <Grid className="list" item={true}  xs={10} md={4} alignItems='center'>
+      <Grid className="list" item={true}  xs={10} md={5} alignItems='center'>
       <Paper className='List' >
-        {this.state.crypto.map(coin => <Currency style={{listStyleType:'none'}}>{coin}:{this.state[coin]}</Currency>)}
-        {this.state.real.map(coin => <li style={{listStyleType:'none'}}>{coin}:{1/this.state[coin]}</li>)}
+          {this.state.crypto.map(coin => <Currency name={coin} type='digital' price={this.state[coin] } />)}
+          {this.state.real.map(coin => <Currency name={coin}type='real' price={1 / this.state[coin]}/>)}
       </Paper>
       </Grid>
     );

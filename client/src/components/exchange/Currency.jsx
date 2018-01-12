@@ -1,20 +1,25 @@
 import React from 'react';
-import Card, {CardActions, CardContent} from 'material-ui/Card';
 import Paper from 'material-ui/Paper';
-import Typography from 'material-ui/Typography';
 /**
  *  creates a material card class to display currency
 **/
 export default class Currency extends React.Component {
 /**
- *@returns
+* this function renders the Currency component
+* @return {component}
 */
 render() {
   return (
-    <Paper style={{display: 'flex'}}>
-      <Typography type="headline" component="h2" className='currency'>
-            headline
-      </Typography>
+    <Paper style={{display: 'flex', width: '85'}} className='currency'>
+      <div className='currency-card'
+      style={{display: 'flex', justifyContent: 'space-around', width: '100%'}}>
+         <span>
+         {this.props.name }
+         </span>
+         <span>
+          {this.props.price}
+         </span>
+      </div>
     </Paper>
   );
 };

@@ -1,10 +1,8 @@
 import React from 'react';
 import Grid from 'material-ui/Grid';
 import Paper from 'material-ui/Paper';
-import AppBar from 'material-ui/AppBar'
-import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography';
 
+import BaseCurrency from './BaseCurrency';
 import Currency from './Currency';
 /**
  * this class creates a component of list of currencies
@@ -24,11 +22,11 @@ export default class List extends React.Component {
     };
   }
   getCrypto = async () =>{
-    //console.log('get crpto');
+    // console.log('get crpto');
     try {
       const response = await fetch('https://api.coinmarketcap.com/v1/ticker/?convert=INR&limit=15');
       const currencies = await response.json();
-      //console.log(currencies);
+      // console.log(currencies);
       this.state.crypto.forEach(Rcurrency=>{
         currencies
           .filter(currency=>currency.symbol==Rcurrency)
@@ -41,11 +39,11 @@ export default class List extends React.Component {
     } catch (e) {
       console.log('error', e);
     } finally {
-      //console.log('done');
+      // console.log('done');
     }
   }
   getReal = async () =>{
-    //console.log('get real');
+    // console.log('get real');
     try {
       const response = await fetch('https://api.fixer.io/latest?base=INR');
       const currencies = await response.json();
@@ -55,19 +53,16 @@ export default class List extends React.Component {
     } catch (e) {
       console.log('error', e);
     } finally {
-      //console.log('done');
+      //  console.log('done');
     }
   }
   /**
    * this function executes when the component mounts
    */
   componentDidMount() {
-    setInterval(()=>{
-      this.getCrypto();
-      this.getReal();
-    },650)
-
-  }
+    this.getCrypto();
+    this.getReal();
+  };
   /**
    *this method renders the component
    *@return {component}
@@ -75,13 +70,7 @@ export default class List extends React.Component {
   render() {
     return (
       <Grid className="list" item container xs={10} md={5} alignItems='center'>
-      <AppBar position="static" color="primary">
-        <Toolbar>
-          <Typography type="title" color="inherit">
-            Base Currency
-          </Typography>
-        </Toolbar>
-      </AppBar>
+      <BaseCurrency/>
       <Paper className='List' >
           {this.state.crypto.map(coin =>
              <Currency name={coin}

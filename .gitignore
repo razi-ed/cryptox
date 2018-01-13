@@ -105,9 +105,6 @@ vignettes/*.pdf
 *.knit.md
 
 # End of https://www.gitignore.io/api/r,node,code
-<<<<<<< HEAD
-/dist
-=======
 /dist
 package-lock.json
->>>>>>> 6c4378c16bf33e8ea9d3ad2b36096e16e54a383c
+yarn.lock

@@ -5,6 +5,7 @@ const path = require('path');
 const passport = require('passport');
 const webpack = require('webpack');
 const auth = require('./routes/auth');
+const orders= require('./routes/order');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 
@@ -59,6 +60,7 @@ passportConfig(passport);
 
 app.use(express.static(path.join(__dirname, '../dist/')));
 app.use('/auth', auth);
+app.use('/orders', orders);
 app.use(frontend);
 
 Mongoose

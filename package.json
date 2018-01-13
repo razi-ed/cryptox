@@ -20,7 +20,7 @@
     "express": "^4.16.2",
     "express-validator": "^4.3.0",
     "jsonwebtoken": "^8.1.0",
-    "material-ui": "^1.0.0-beta.26",
+    "material-ui": "^1.0.0-beta.27",
     "material-ui-icons": "^1.0.0-beta.17",
     "mongo": "^0.1.0",
     "mongoose": "^4.13.7",
@@ -31,7 +31,8 @@
     "react-dom": "^16.2.0",
     "react-form-validator-core": "^0.3.0",
     "react-google-button": "^0.4.0",
-    "react-router-dom": "^4.2.2"
+    "react-router-dom": "^4.2.2",
+    "typeface-roboto": "0.0.50"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

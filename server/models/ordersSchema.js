@@ -1,15 +1,15 @@
 const mongoose=require('mongoose');
 
 const orders=new mongoose.Schema({
-  seller: {
+  type: {
     type: String,
-    required: true,
+  },
+  email: {
+    type: String,
   },
   commodity: {
     offer: {},
-    expecting: {
-      type: String,
-    },
+    tradeFor: {},
   },
 });
 let Orders=mongoose.model('orders', orders);

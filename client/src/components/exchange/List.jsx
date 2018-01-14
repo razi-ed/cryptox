@@ -15,9 +15,9 @@ export default class List extends React.Component {
     super(props);
     this.state={
       crypto: ['BTC', 'ETH', 'XRP', 'LTC', 'DASH'],
-      real: ['USD', 'EUR', 'JPY', 'GBP'],
+      real: ['INR','USD', 'EUR', 'JPY', 'GBP'],
       changeCrypto: [],
-      BTC: 0, ETH: 0, XRP: 0, LTC: 0, DASH: 0, USD: 0, EUR: 0, JPY: 0, GBP: 0,
+      BTC: 0, ETH: 0, XRP: 0, LTC: 0, DASH: 0,INR:1, USD: 0, EUR: 0, JPY: 0, GBP: 0,
       baseCurrency: 'INR',
     };
   }
@@ -45,8 +45,9 @@ export default class List extends React.Component {
   getReal = async () =>{
     // console.log('get real');
     try {
-      const response = await fetch('https://api.fixer.io/latest?base=INR');
+      const response = await fetch('https://api.fixer.io/latest/INR');
       const currencies = await response.json();
+      this.setState({ baseCurrency: currencies.base})
       this.state.real.forEach(Rcurrency=>{
         this.setState({[Rcurrency]: currencies.rates[Rcurrency]});
       });

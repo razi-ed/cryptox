@@ -7,29 +7,53 @@ import List, {ListItem, ListItemSecondaryAction, ListItemText} from
 'material-ui/List';
 import Checkbox from 'material-ui/Checkbox';
 import Hidden from 'material-ui/Hidden';
+import { ArrowUpward, ArrowDownward } from 'material-ui-icons';
 
-const BaseCurrency=()=>{
-  return (
-    <AppBar position="static" color="primary">
-        <Toolbar>
-          <Typography type="title" color="inherit">
-            Base Currency
-          </Typography>
-        </Toolbar>
-        <Hidden lgDown lgUp>
-          <List >
-          {[0, 1, 2, 3].map(value => (
-            <ListItem key={value} dense button >
-              <ListItemText primary={`Line item ${value + 1}`} />
-              <ListItemSecondaryAction>
-                <Checkbox/>
-              </ListItemSecondaryAction>
-            </ListItem>
-          ))}
-          </List>
-      </Hidden>
-      </AppBar>
-  );
+/**
+ * a component to chose a base currency
+ */
+class BaseCurrency extends React.Component {
+  constructor(props){
+    super(props);
+    this.state={
+      Rcurrencies: ['INR', 'USD', 'EUR', 'GBP', 'JPY'],
+      Dcurrencies: ['ETC', 'ETH', 'XRP', 'LTC', 'DASH'],
+      active:'INR'
+    }
+  }
+  getCurrentValue=(val)=>{
+   this.setState({active:val})
+  };
+  render() {
+    return (
+      <AppBar position="static" color="primary">
+          <Toolbar style={{display:'flex', justifyContent: 'space-around'}}>
+            <Typography type="title" color="inherit">
+              Base Currency
+            </Typography>
+            <span>{this.state.active}</span>
+          </Toolbar>
+          <Hidden >
+            <h2>Real currencies</h2>
+            <List >
+            {this.state.Rcurrencies.map(value => (
+              <ListItem key={value} onClick={() => this.getCurrentValue(value)} dense button >
+                <ListItemText primary={`${value}`} />
+              </ListItem>
+            ))}
+            </List>
+            <h2>Digital currencies</h2>
+            <List >
+            {this.state.Dcurrencies.map(value => (
+              <ListItem key={value} onClick={() => this.getCurrentValue(value)} dense button >
+                <ListItemText primary={`${value}`} />
+              </ListItem>
+            ))}
+            </List>
+        </Hidden>
+        </AppBar>
+    );
+  }
 };
 
 export default BaseCurrency;

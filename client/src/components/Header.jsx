@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames'
 import { withStyles } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
@@ -11,9 +12,24 @@ import Button from 'material-ui/Button';
 import AccountCircle from 'material-ui-icons/AccountCircle';
 import Switch from 'material-ui/Switch';
 import {FormControlLabel, FormGroup} from 'material-ui/Form';
-import Menu, {MenuItem} from 'material-ui/Menu';
+import Menu, { MenuList, MenuItem } from 'material-ui/Menu';
+import Paper from 'material-ui/Paper';
+import { ListItemIcon, ListItemText } from 'material-ui/List';
+import Grow from 'material-ui/transitions/Grow';
+import { Manager, Target, Popper } from 'react-popper';
+import ClickAwayListener from 'material-ui/utils/ClickAwayListener';
 
-const styles = {
+const styles = theme => ({
+  menuItem: {
+    '&:focus': {
+      backgroundColor: theme.palette.primary[500],
+      '& $text, & $icon': {
+        color: theme.palette.common.white,
+      },
+    },
+  },
+  text: {},
+  icon: {},
   root: {
     width: '100%',
     display: 'flex',
@@ -26,7 +42,11 @@ const styles = {
     marginLeft: -12,
     marginRight: 20,
   },
-};
+  popperClose: {
+    pointerEvents: 'none',
+  },
+});
+
 
 
 /**
@@ -39,25 +59,38 @@ class Header extends React.Component {
    */
   state = {
     auth: true,
-    anchorEl: null,
+    anchorElement: null,
+    open: false,
   };
 
-  handleChange = (event, checked) => {
-    this.setState({ auth: checked });
-  };
+  /*constructor(props) {
+  const { classes } = props;
+//P.S.  
+}*/
 
-  handleMenu = event => {
-    this.setState({ anchorEl: event.currentTarget });
+  handleClick = () => {
+    this.setState({ open: true });
   };
 
   handleClose = () => {
-    this.setState({ anchorEl: null });
+    this.setState({ open: false });
   };
+
+
+  // handleMenu = event => {
+  //   this.setState({ anchorElement: event.currentTarget });
+  // };
+
+  // handleClose = () => {
+  //   this.setState({ anchorElement: null });
+  // };
 
   render() {
     const { classes } = this.props;
-    const { auth, anchorEl } = this.state;
-    const open = Boolean(anchorEl);
+    const { auth, anchorElement } = this.state;
+    const openSecMenu = Boolean(anchorElement);
+    const { open } = this.state;
+
     return (
       <div className={classes.root}>
         <AppBar position="static">
@@ -69,32 +102,36 @@ class Header extends React.Component {
               CRYPTOX
             </Typography>
     {/* {auth && (  */}
-              <div>
+            <Manager>
+              <Target>
                 <IconButton
-                  aria-owns={open ? 'menu-appbar' : null}
+                  aria-owns={open ? 'menu-list' : null}
+
                   aria-haspopup="true"
-                  onClick={this.handleMenu}
+                  onClick={this.handleClick}
                 >
-                <AccountCircle style={{ fontSize: 36, color:'#fff' }}/>
+                  <AccountCircle style={{ fontSize: 36, color: '#fff' }} />
+
                 </IconButton>
-                <Menu
-                  id="menu-appbar"
-                  anchorEl={anchorEl}
-                  anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  open={open}
-                  onClose={this.handleClose}
-                >
-                  <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-                  <MenuItem onClick={this.handleClose}>My account</MenuItem>
-                </Menu>
-              </div>
+              </Target>
+              <Popper
+                placement="bottom-start"
+                eventsEnabled={open}
+                className={classNames({ [classes.popperClose]: !open })}
+              >
+                <ClickAwayListener onClickAway={this.handleClose}>
+                  <Grow in={open} id="menu-list" style={{ transformOrigin: '0 0 0' }}>
+                    <Paper>
+                      <MenuList role="menu">
+                        <MenuItem onClick={this.handleClose}>Profile</MenuItem>
+                        <MenuItem onClick={this.handleClose}>My account</MenuItem>
+                        <MenuItem onClick={this.handleClose}>Logout</MenuItem>
+                      </MenuList>
+                    </Paper>
+                  </Grow>
+                </ClickAwayListener>
+              </Popper>
+            </Manager>
             {/*    )}*/}
           </Toolbar>
         </AppBar>
@@ -104,5 +141,7 @@ class Header extends React.Component {
 }
 
 
-
+Header.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
 export default withStyles(styles)(Header);

@@ -5,22 +5,18 @@ import Header from './Header';
 import Home from '../components/Home';
 import Footer from '../components/Footer';
 import ForgotPassword from '../components/auth/ForgotPassword';
-import {createMuiTheme, MuiThemeProvider} from 'material-ui/styles';
-import lightBlue from 'material-ui/colors/lightBlue';
-import red from 'material-ui/colors/red';
+import {lightBlue, red} from 'material-ui/colors';
 import Reboot from 'material-ui/Reboot';
-import {withTheme} from 'material-ui/styles';
-import PropTypes from 'prop-types';
-import Typography from 'material-ui/Typography';
+import {withTheme, createMuiTheme, MuiThemeProvider} from 'material-ui/styles';
 
 const theme = createMuiTheme({
   palette: {
     primary: lightBlue,
     secondary: red,
+    contrast: '#FFFFFF',
   },
   status: {
     danger: 'orange',
-    contrast: 'white',
   },
 });
 

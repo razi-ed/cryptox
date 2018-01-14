@@ -18,6 +18,10 @@ import { ListItemIcon, ListItemText } from 'material-ui/List';
 import Grow from 'material-ui/transitions/Grow';
 import { Manager, Target, Popper } from 'react-popper';
 import ClickAwayListener from 'material-ui/utils/ClickAwayListener';
+import LogInIcon from 'material-ui-icons/PowerSettingsNew';
+import SignUpIcon from 'material-ui-icons/AddCircleOutline';
+import AboutUsIcon from 'material-ui-icons/InfoOutline';
+import Divider from 'material-ui/Divider';
 
 const styles = theme => ({
   menuItem: {
@@ -27,9 +31,16 @@ const styles = theme => ({
         color: theme.palette.common.white,
       },
     },
+    paddingTop: 11,
+    paddingBottom: 11,
+    paddingLeft: 12,
+    paddingRight: 12,
   },
-  text: {},
-  icon: {},
+  text: {
+    fontWeight: ['300'],
+    letterSpacing: 1.4,
+  },
+  icon: { marginRight: 0},
   root: {
     width: '100%',
     display: 'flex',
@@ -96,9 +107,16 @@ class Header extends React.Component {
         <AppBar position="static">
           <Toolbar>
             <IconButton className={classes.menuButton} aria-label="Menu">
-              <MenuIcon style={{ fontSize: 36, color:'#fff' }}/>
+              <MenuIcon style={{ fontSize: 32, color:'#fff' }}/>
             </IconButton>
-            <Typography type="title" style={{ fontSize: 32, color: '#fff' }} className={classes.flex}>
+            <Typography type="display1"
+              style={{
+                fontSize: 30,
+                fontWeight: ['300'],
+                letterSpacing: 7,
+                color: '#fff'
+              }}
+             className={classes.flex}>
               CRYPTOX
             </Typography>
     {/* {auth && (  */}
@@ -110,7 +128,7 @@ class Header extends React.Component {
                   aria-haspopup="true"
                   onClick={this.handleClick}
                 >
-                  <AccountCircle style={{ fontSize: 36, color: '#fff' }} />
+                  <AccountCircle style={{ fontSize: 32, color: '#fff' }} />
 
                 </IconButton>
               </Target>
@@ -122,10 +140,30 @@ class Header extends React.Component {
                 <ClickAwayListener onClickAway={this.handleClose}>
                   <Grow in={open} id="menu-list" style={{ transformOrigin: '0 0 0' }}>
                     <Paper>
-                      <MenuList role="menu">
-                        <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-                        <MenuItem onClick={this.handleClose}>My account</MenuItem>
-                        <MenuItem onClick={this.handleClose}>Logout</MenuItem>
+                      <MenuList style={{
+                        paddingBottom: 1,
+                        paddingTop: 1
+                      }}>
+                        <MenuItem className={classes.menuItem}>
+                          <ListItemIcon className={classes.icon}>
+                            <SignUpIcon />
+                          </ListItemIcon>
+                          <ListItemText classes={{ text: classes.text }} inset primary="Sign Up" />
+                        </MenuItem>
+                        <Divider light style={{ height: 1.15 }}/>
+                        <MenuItem className={classes.menuItem}>
+                        <ListItemIcon className={classes.icon}>
+                        <LogInIcon />
+                        </ListItemIcon>
+                        <ListItemText classes={{ text: classes.text }} inset primary="Log In" />
+                        </MenuItem>
+                        <Divider style={{height: 1.25}}/>
+                        <MenuItem className={classes.menuItem}>
+                          <ListItemIcon className={classes.icon}>
+                            <AboutUsIcon />
+                          </ListItemIcon>
+                          <ListItemText classes={{ text: classes.text }} inset primary="About Us" />
+                        </MenuItem>
                       </MenuList>
                     </Paper>
                   </Grow>

@@ -22,6 +22,7 @@ import LogInIcon from 'material-ui-icons/PowerSettingsNew';
 import SignUpIcon from 'material-ui-icons/AddCircleOutline';
 import AboutUsIcon from 'material-ui-icons/InfoOutline';
 import Divider from 'material-ui/Divider';
+import Media from "react-media"
 
 const styles = theme => ({
   menuItem: {
@@ -51,7 +52,7 @@ const styles = theme => ({
   },
   menuButton: {
     marginLeft: -12,
-    marginRight: 20,
+    marginRight: 5,
   },
   popperClose: {
     pointerEvents: 'none',
@@ -106,31 +107,105 @@ class Header extends React.Component {
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-            <IconButton className={classes.menuButton} aria-label="Menu">
-              <MenuIcon style={{ fontSize: 32, color:'#fff' }}/>
-            </IconButton>
-            <Typography type="display1"
-              style={{
-                fontSize: 30,
-                fontWeight: ['300'],
-                letterSpacing: 7,
-                color: '#fff'
-              }}
-             className={classes.flex}>
-              CRYPTOX
+          <Media query="(max-width: 599px)">
+          {matches =>
+            matches ? (
+              <IconButton className={classes.menuButton} aria-label="Menu">
+              <MenuIcon style={{ fontSize: 26, color: '#fff' }} />
+              </IconButton>
+              )
+              :
+              (
+                <IconButton className={classes.menuButton} 
+                style={{ marginRight: 20 }}
+                  aria-label="Menu">
+                <MenuIcon style={{ fontSize: 32, color:'#fff' }}/>
+                </IconButton>
+              )
+                }
+                </Media>
+            <Media query="(max-width: 599px)">
+              {matches =>
+                matches ? (
+                  <Typography type="display1"
+                    style={{
+                      fontSize: 24,
+                      fontWeight: ['300'],
+                      letterSpacing: 4,
+                      color: '#fff'
+                    }}
+                    className={classes.flex}>
+                    CRYPTOX
             </Typography>
+            )
+            :
+            (
+              <Typography type="display1"
+                style={{
+                  fontSize: 30,
+                  fontWeight: ['300'],
+                  letterSpacing: 7,
+                  color: '#fff'
+                  }}
+                className={classes.flex}>
+                CRYPTOX
+            </Typography>                  
+          )
+            }
+            </Media>
+            {/*
+              #####ADD TOGGLE SWITCH FOR LOGOUT/LOGIN IN MOBILE VIEW, AFTER AUTHENTICATION
+              ### state
+              const state= {
+              auth: true
+            }
+              ### state
+              
+              ### props
+               handleChange = (event, checked) => {
+                  this.setState({ auth: checked });
+              };
+              #### props
+              <Media
+              query="(max-width: 599px)"
+              render={() => <FormGroup>
+          <FormControlLabel
+            control={
+              <Switch checked={auth} onChange={this.handleChange} aria-label="LoginSwitch" />
+            }
+            label={auth ? 'Logout' : 'Login'}
+          />
+        </FormGroup>}
+            />
+          */}
     {/* {auth && (  */}
             <Manager>
               <Target>
-                <IconButton
-                  aria-owns={open ? 'menu-list' : null}
+                <Media query={{ maxWidth: 599 }}>
+                  {matches =>
+                    matches ? (
+                      <IconButton
+                        aria-owns={open ? 'menu-list' : null}
 
-                  aria-haspopup="true"
-                  onClick={this.handleClick}
-                >
-                  <AccountCircle style={{ fontSize: 32, color: '#fff' }} />
+                        aria-haspopup="true"
+                        onClick={this.handleClick}
+                      >
+                        <AccountCircle style={{ fontSize: 26, color: '#fff' }} />
 
-                </IconButton>
+                      </IconButton>
+                    ) : (
+                        <IconButton
+                          aria-owns={open ? 'menu-list' : null}
+
+                          aria-haspopup="true"
+                          onClick={this.handleClick}
+                        >
+                          <AccountCircle style={{ fontSize: 32, color: '#fff' }} />
+
+                        </IconButton>
+                      )
+                  }
+                </Media>
               </Target>
               <Popper
                 placement="bottom-start"

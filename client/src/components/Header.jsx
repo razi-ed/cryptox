@@ -50,8 +50,8 @@ const styles = theme => ({
     width: 20,
     height: 20  
   },
-  textLg: {},
-  iconLg: {},
+  textLg: { letterSpacing: 1.4},
+  iconLg: { marginRight: 5},
   root: {
     width: '100%',
     display: 'flex',
@@ -229,26 +229,32 @@ class Header extends React.Component {
                               paddingBottom: 1,
                               paddingTop: 1
                             }}>
+                            <Link to='/login'>
                               <MenuItem className={classes.menuItem}>
                                 <ListItemIcon className={classes.icon}>
                                   <SignUpIcon />
                                 </ListItemIcon>
                                 <ListItemText classes={{ text: classes.text }} inset primary="Sign Up" />
                               </MenuItem>
-                              <Divider light style={{ height: 1.15 }} />
+                            </Link>
+                              <Divider light style={{ height: .8 }} />
+                             <Link to='/login'>
                               <MenuItem className={classes.menuItem}>
                                 <ListItemIcon className={classes.icon}>
                                   <LogInIcon />
                                 </ListItemIcon>
                                 <ListItemText classes={{ text: classes.text }} inset primary="Log In" />
                               </MenuItem>
-                              <Divider style={{ height: 1.25 }} />
+                              </Link>
+                              <Divider style={{ height: 1 }} />
+                              <Link to='/about'>
                               <MenuItem className={classes.menuItem}>
                                 <ListItemIcon className={classes.icon}>
                                   <AboutUsIcon />
                                 </ListItemIcon>
                                 <ListItemText classes={{ text: classes.text }} inset primary="About Us" />
                               </MenuItem>
+                              </Link>
                             </MenuList>
                           </Paper>
                           </Grow>
@@ -263,26 +269,32 @@ class Header extends React.Component {
                                 paddingBottom: 1,
                                 paddingTop: 1
                               }}>
+                                <Link to='/login'>
                                 <MenuItem className={classes.menuItem}>
                                   <ListItemIcon className={classes.iconLg}>
                                     <SignUpIcon />
                                   </ListItemIcon>
                                   <ListItemText classes={{ text: classes.textLg }} inset primary="Sign Up" />
                                 </MenuItem>
+                                </Link>
                                 <Divider light style={{ height: 1.15 }} />
+                                <Link to='/login'>
                                 <MenuItem className={classes.menuItem}>
                                   <ListItemIcon className={classes.iconLg}>
                                     <LogInIcon />
                                   </ListItemIcon>
                                   <ListItemText classes={{ text: classes.textLg }} inset primary="Log In" />
                                 </MenuItem>
+                              </Link>
                                 <Divider style={{ height: 1.25 }} />
+                                <Link to='/about'>
                                 <MenuItem className={classes.menuItem}>
                                   <ListItemIcon className={classes.iconLg}>
                                     <AboutUsIcon />
                                   </ListItemIcon>
                                   <ListItemText classes={{ text: classes.textLg }} inset primary="About Us" />
                                 </MenuItem>
+                                </Link>
                               </MenuList>
                             </Paper>
                   </Grow>

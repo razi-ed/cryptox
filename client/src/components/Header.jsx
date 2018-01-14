@@ -38,10 +38,20 @@ const styles = theme => ({
     paddingRight: 12,
   },
   text: {
+    popperClose: {
+      pointerEvents: 'none',
+    },
     fontWeight: ['300'],
-    letterSpacing: 1.4,
+    fontSize: 14,
+    letterSpacing: .9,
   },
-  icon: { marginRight: 0},
+  icon: { 
+    marginRight: 0,
+    width: 20,
+    height: 20  
+  },
+  textLg: {},
+  iconLg: {},
   root: {
     width: '100%',
     display: 'flex',
@@ -53,9 +63,6 @@ const styles = theme => ({
   menuButton: {
     marginLeft: -12,
     marginRight: 5,
-  },
-  popperClose: {
-    pointerEvents: 'none',
   },
 });
 
@@ -211,38 +218,78 @@ class Header extends React.Component {
                 placement="bottom-start"
                 eventsEnabled={open}
                 className={classNames({ [classes.popperClose]: !open })}
-              >
-                <ClickAwayListener onClickAway={this.handleClose}>
+              > 
+              <Media query={{ maxWidth: 599 }}>
+              {matches =>
+                matches ? (
+                  <ClickAwayListener onClickAway={this.handleClose}>
                   <Grow in={open} id="menu-list" style={{ transformOrigin: '0 0 0' }}>
-                    <Paper>
-                      <MenuList style={{
-                        paddingBottom: 1,
-                        paddingTop: 1
-                      }}>
-                        <MenuItem className={classes.menuItem}>
-                          <ListItemIcon className={classes.icon}>
-                            <SignUpIcon />
-                          </ListItemIcon>
-                          <ListItemText classes={{ text: classes.text }} inset primary="Sign Up" />
-                        </MenuItem>
-                        <Divider light style={{ height: 1.15 }}/>
-                        <MenuItem className={classes.menuItem}>
-                        <ListItemIcon className={classes.icon}>
-                        <LogInIcon />
-                        </ListItemIcon>
-                        <ListItemText classes={{ text: classes.text }} inset primary="Log In" />
-                        </MenuItem>
-                        <Divider style={{height: 1.25}}/>
-                        <MenuItem className={classes.menuItem}>
-                          <ListItemIcon className={classes.icon}>
-                            <AboutUsIcon />
-                          </ListItemIcon>
-                          <ListItemText classes={{ text: classes.text }} inset primary="About Us" />
-                        </MenuItem>
-                      </MenuList>
-                    </Paper>
+                          <Paper>
+                            <MenuList style={{
+                              paddingBottom: 1,
+                              paddingTop: 1
+                            }}>
+                              <MenuItem className={classes.menuItem}>
+                                <ListItemIcon className={classes.icon}>
+                                  <SignUpIcon />
+                                </ListItemIcon>
+                                <ListItemText classes={{ text: classes.text }} inset primary="Sign Up" />
+                              </MenuItem>
+                              <Divider light style={{ height: 1.15 }} />
+                              <MenuItem className={classes.menuItem}>
+                                <ListItemIcon className={classes.icon}>
+                                  <LogInIcon />
+                                </ListItemIcon>
+                                <ListItemText classes={{ text: classes.text }} inset primary="Log In" />
+                              </MenuItem>
+                              <Divider style={{ height: 1.25 }} />
+                              <MenuItem className={classes.menuItem}>
+                                <ListItemIcon className={classes.icon}>
+                                  <AboutUsIcon />
+                                </ListItemIcon>
+                                <ListItemText classes={{ text: classes.text }} inset primary="About Us" />
+                              </MenuItem>
+                            </MenuList>
+                          </Paper>
+                          </Grow>
+                          </ClickAwayListener>
+                        )
+                        :
+                        (
+                        <ClickAwayListener onClickAway={this.handleClose}>
+                          <Grow in={open} id="menu-list" style={{ transformOrigin: '0 0 0' }}>
+                                              <Paper>
+                              <MenuList style={{
+                                paddingBottom: 1,
+                                paddingTop: 1
+                              }}>
+                                <MenuItem className={classes.menuItem}>
+                                  <ListItemIcon className={classes.iconLg}>
+                                    <SignUpIcon />
+                                  </ListItemIcon>
+                                  <ListItemText classes={{ text: classes.textLg }} inset primary="Sign Up" />
+                                </MenuItem>
+                                <Divider light style={{ height: 1.15 }} />
+                                <MenuItem className={classes.menuItem}>
+                                  <ListItemIcon className={classes.iconLg}>
+                                    <LogInIcon />
+                                  </ListItemIcon>
+                                  <ListItemText classes={{ text: classes.textLg }} inset primary="Log In" />
+                                </MenuItem>
+                                <Divider style={{ height: 1.25 }} />
+                                <MenuItem className={classes.menuItem}>
+                                  <ListItemIcon className={classes.iconLg}>
+                                    <AboutUsIcon />
+                                  </ListItemIcon>
+                                  <ListItemText classes={{ text: classes.textLg }} inset primary="About Us" />
+                                </MenuItem>
+                              </MenuList>
+                            </Paper>
                   </Grow>
-                </ClickAwayListener>
+                </ClickAwayListener>                        
+              )
+                    }
+                  </Media>
               </Popper>
             </Manager>
             {/*    )}*/}

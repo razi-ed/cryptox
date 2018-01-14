@@ -65,7 +65,7 @@ class Header extends React.Component {
             <IconButton className={classes.menuButton} aria-label="Menu">
               <MenuIcon style={{ fontSize: 36, color:'#fff' }}/>
             </IconButton>
-            <Typography type="display2" style={{ color: '#fff' }} className={classes.flex}>
+            <Typography type="title" style={{ fontSize: 32, color: '#fff' }} className={classes.flex}>
               CRYPTOX
             </Typography>
     {/* {auth && (  */}

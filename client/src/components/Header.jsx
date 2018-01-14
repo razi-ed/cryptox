@@ -88,7 +88,7 @@ class Header extends React.Component {
 }*/
 
   handleClick = () => {
-    this.setState({ open: true });
+    this.state.open === false ? this.setState({ open: true }) : this.setState({ open: false })
   };
 
   handleClose = () => {

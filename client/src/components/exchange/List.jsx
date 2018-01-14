@@ -45,7 +45,7 @@ export default class List extends React.Component {
   getReal = async () =>{
     // console.log('get real');
     try {
-      const response = await fetch('https://api.fixer.io/latest/INR');
+      const response = await fetch('https://api.fixer.io/latest?base=INR');
       const currencies = await response.json();
       this.setState({ baseCurrency: currencies.base})
       this.state.real.forEach(Rcurrency=>{

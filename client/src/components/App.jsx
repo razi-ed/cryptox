@@ -5,8 +5,8 @@ import Header from './Header';
 import Home from '../components/Home';
 import Footer from '../components/Footer';
 import ForgotPassword from '../components/auth/ForgotPassword';
-import 'redux';
 import {Store} from '../js/redux/store';
+import {Provider} from 'react-redux';
 
 Store.subscribe(() => {
   Store.getState();
@@ -24,6 +24,7 @@ export default class App extends React.Component {
    */
   render() {
     return (
+      <Provider store={Store}>
       <BrowserRouter>
         <div>
       <Header/>
@@ -33,6 +34,7 @@ export default class App extends React.Component {
       <Footer/>
       </div>
     </BrowserRouter>
+    </Provider>
     );
   }
 }

@@ -32,6 +32,7 @@ export default class Login extends React.Component {
     this.handleClickIcon = this.handleClickIcon.bind(this);
     this.handleMouseDownIcon = this.handleMouseDownIcon.bind(this);
   }
+
   /**
   * @function
   */
@@ -60,23 +61,7 @@ export default class Login extends React.Component {
       });
     }
   }
-  /**
-   * @method
-   */
-  isAuthorizedUser() {
-    if (localStorage.getItem('token')) {
-      fetch('/profile', {
-        method: 'GET',
-        headers: {
-          'Content-type': 'application/json',
-          'Authorization': localStorage.getItem('token'),
-        },
-      }).then((res)=>res.json())
-      .then((res) => {
-        console.log(res);
-      });
-    }
-  }
+
   /**
   * @param {event} event
   */
@@ -162,10 +147,8 @@ export default class Login extends React.Component {
         onClick={this.loginUser}>
         Log In
         </Button>
-        {this.state.success ?
-          <Redirect to = '/dashboard'/>:
-          null
-        }
+        {this.state.success?
+        <Redirect to='/dashboard'/>:null}
         </div>
         <div id='forgot-password'>
         <a id='forgot-password-link'

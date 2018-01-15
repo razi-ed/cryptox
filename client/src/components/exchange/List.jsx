@@ -4,6 +4,7 @@ import Paper from 'material-ui/Paper';
 
 import BaseCurrency from './BaseCurrency';
 import Currency from './Currency';
+import Test from './test'
 /**
  * this class creates a component of list of currencies
  */
@@ -24,7 +25,7 @@ export default class List extends React.Component {
   getCrypto = async () =>{
     // console.log('get crpto');
     try {
-      const response = await fetch('https://api.coinmarketcap.com/v1/ticker/?convert=INR&limit=15');
+      const response = await fetch(`https://api.coinmarketcap.com/v1/ticker/?convert=${this.state.baseCurrency}&limit=15`);
       const currencies = await response.json();
       // console.log(currencies);
       this.state.crypto.forEach(Rcurrency=>{
@@ -32,7 +33,7 @@ export default class List extends React.Component {
           .filter(currency=>currency.symbol==Rcurrency)
           .forEach(crypto=>
             this.setState({[crypto.symbol]: {
-              price: Number(crypto.price_inr),
+              price: Number(crypto[`price_${this.state.baseCurrency.toLowerCase()}`]),
               change: crypto.percent_change_1h,
             }}));
       });
@@ -45,9 +46,12 @@ export default class List extends React.Component {
   getReal = async () =>{
     // console.log('get real');
     try {
-      const response = await fetch('https://api.fixer.io/latest?base=INR');
+      const response = await fetch(`https://api.fixer.io/latest?base=${this.state.baseCurrency}`);
       const currencies = await response.json();
-      this.state.real.forEach(Rcurrency=>{
+      this.state.real
+      .filter(currency=>currency!==this.state.baseCurrency)
+      .forEach(Rcurrency=>{
+        console.log(Rcurrency);
         this.setState({[Rcurrency]: currencies.rates[Rcurrency]});
       });
     } catch (e) {
@@ -56,20 +60,27 @@ export default class List extends React.Component {
       //  console.log('done');
     }
   }
-  /**
-   * this function executes when the component mounts
-   */
-  componentWillReceiveProps(){
+  componentInit=()=>{
     const base=this.props.base|| 'INR';
+    console.log('component mounted',{[base]:1});
     this.setState({baseCurrency:base},()=>{
       console.log(`changed base currency to ${this.state.baseCurrency}`);
-    })
+      this.setState({[base]:1},()=>{
+        this.getCrypto();
+        this.getReal();
+      })
+    console.log('will mount');
+      })
   }
-  componentDidMount() {
-    this.getCrypto();
-    this.getReal();
-    
-  };
+  componentWillMount(){
+    this.componentInit();
+      setInterval(()=>{
+        if(this.state.baseCurrency!==this.props.base){
+          this.componentInit();
+        }
+      },500)
+  }
+ 
   /**
    *this method renders the component
    *@return {component}
@@ -79,7 +90,7 @@ export default class List extends React.Component {
     //console.log(this.state,"state");
     
     return (
-      <Grid className="list"  item container xs={10} md={5} alignItems='center'>
+      <Grid className="list"  item container xs={12} md={5} alignItems='center'>
       <BaseCurrency {...this.props}/>
       <Paper className='List' >
           {this.state.crypto.map(coin =>

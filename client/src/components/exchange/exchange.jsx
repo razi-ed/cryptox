@@ -6,15 +6,22 @@ import {Chart} from './chart';
  * this class creates Exchange component
  */
 export default class Exchange extends React.Component {
-   /**
+  /**
    * this renders the component
    * @return {component}
    */
   render() {
+    const baseCurrency=this.props.match.params.coin||'INR';
+    
     return (
-      <Grid item spacing={0} justify={'space-around'} alignItems={'stretch'}
-       container className="exchange">
-        <List/>
+      <Grid
+        item
+        spacing={0}
+        justify={'space-around'}
+        alignItems={'stretch'}
+        container
+        className="exchange">
+        <List base={baseCurrency}/>
         <Chart/>
       </Grid>
     );

@@ -26,6 +26,7 @@ export default class App extends React.Component {
       <Route exact path={'/reset-password'} component={ForgotPassword}/>
       <Route exact path={'/dashboard'} component={Dashboard}/>
       <Route exact path={'/exchange'} component={Exchange}/>
+      <Route exact path={'/exchange/:type/:coin'} component={Exchange}/>
       <Footer/>
       </div>
     </BrowserRouter>

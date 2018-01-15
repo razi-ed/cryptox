@@ -1,13 +1,13 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
 
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import List, {ListItem, ListItemSecondaryAction, ListItemText} from
 'material-ui/List';
-import Checkbox from 'material-ui/Checkbox';
 import Hidden from 'material-ui/Hidden';
-import { ArrowUpward, ArrowDownward } from 'material-ui-icons';
+import {MoreVert  } from 'material-ui-icons';
 
 /**
  * a component to chose a base currency
@@ -17,37 +17,53 @@ class BaseCurrency extends React.Component {
     super(props);
     this.state={
       Rcurrencies: ['INR', 'USD', 'EUR', 'GBP', 'JPY'],
-      Dcurrencies: ['ETC', 'ETH', 'XRP', 'LTC', 'DASH'],
-      active:'INR'
+      Dcurrencies: ['BTC', 'ETH', 'XRP', 'LTC', 'DASH'],
+      active:'INR',
+      isHidden:true
     }
   }
   getCurrentValue=(val)=>{
    this.setState({active:val})
   };
+  HideList=()=>{
+    this.setState({isHidden:!this.state.isHidden})
+  }
+  componentDidMount(){
+    const active =this.props.base || 'INR'
+    this.setState({active})
+    
+  }
   render() {
     return (
       <AppBar position="static" color="primary">
-          <Toolbar style={{display:'flex', justifyContent: 'space-around'}}>
+          <Toolbar style={{display:'flex', justifyContent: 'space-between'}}>
             <Typography type="title" color="inherit">
               Base Currency
             </Typography>
-            <span>{this.state.active}</span>
+            <Typography type='title' color="inherit" style={{display:'flex',justifyContent:'center'}} onClick={this.HideList}>
+              {this.state.active}
+              <MoreVert />
+            </Typography>
           </Toolbar>
-          <Hidden >
+          <Hidden lgUp={this.state.isHidden} lgDown={this.state.isHidden}>
             <h2>Real currencies</h2>
             <List >
             {this.state.Rcurrencies.map(value => (
-              <ListItem key={value} onClick={() => this.getCurrentValue(value)} dense button >
-                <ListItemText primary={`${value}`} />
-              </ListItem>
+              <Link to={`/exchange/real/${value}`}>
+                <ListItem key={value} onClick={() => this.getCurrentValue(value)} dense button >
+                  <ListItemText primary={`${value}`} />
+                </ListItem>
+              </Link>
             ))}
             </List>
             <h2>Digital currencies</h2>
             <List >
             {this.state.Dcurrencies.map(value => (
-              <ListItem key={value} onClick={() => this.getCurrentValue(value)} dense button >
-                <ListItemText primary={`${value}`} />
-              </ListItem>
+              <Link to={`/exchange/digital/${value}`}>
+                <ListItem key={value} onClick={() => this.getCurrentValue(value)} dense button >
+                  <ListItemText primary={`${value}`} />
+                </ListItem>
+              </Link>
             ))}
             </List>
         </Hidden>

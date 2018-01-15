@@ -47,7 +47,6 @@ export default class List extends React.Component {
     try {
       const response = await fetch('https://api.fixer.io/latest?base=INR');
       const currencies = await response.json();
-      this.setState({ baseCurrency: currencies.base})
       this.state.real.forEach(Rcurrency=>{
         this.setState({[Rcurrency]: currencies.rates[Rcurrency]});
       });
@@ -60,31 +59,41 @@ export default class List extends React.Component {
   /**
    * this function executes when the component mounts
    */
+  componentWillReceiveProps(){
+    const base=this.props.base|| 'INR';
+    this.setState({baseCurrency:base},()=>{
+      console.log(`changed base currency to ${this.state.baseCurrency}`);
+    })
+  }
   componentDidMount() {
     this.getCrypto();
     this.getReal();
+    
   };
   /**
    *this method renders the component
    *@return {component}
    */
   render() {
+    
+    //console.log(this.state,"state");
+    
     return (
-      <Grid className="list" item container xs={10} md={5} alignItems='center'>
-      <BaseCurrency/>
+      <Grid className="list"  item container xs={10} md={5} alignItems='center'>
+      <BaseCurrency {...this.props}/>
       <Paper className='List' >
           {this.state.crypto.map(coin =>
              <Currency name={coin}
               type='digital'
               price={this.state[coin].price }
               change={this.state[coin].change }
-              baseCurrency={this.state.baseCurrency}
+              baseCurrency={this.props.base||this.state.baseCurrency}
               />)}
           {this.state.real.map(coin =>
              <Currency name={coin}
              type='real'
              price={1 / this.state[coin]}
-             baseCurrency={this.state.baseCurrency}
+             baseCurrency={this.props.base||this.state.baseCurrency}
              />)}
       </Paper>
       </Grid>

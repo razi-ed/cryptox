@@ -11,7 +11,7 @@ const paths = {
 };
 const extractSass = new ExtractTextPlugin({
   filename: '[name].[contenthash].css',
-  disable: process.env.NODE_ENV === 'development',
+  //disable: process.env.NODE_ENV === 'development',
 });
 // Webpack configuration
 module.exports = {
@@ -26,10 +26,16 @@ module.exports = {
     publicPath: '/',
     filename: 'app.bundle.js',
   },
-  devtool: 'source-map',
+  // target: 'node',
+  node: {
+    __dirname: false,
+    },
+    devtool: 'source-map',
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.join(paths.SRC, 'index.html'),
+        template: path.join(paths.SRC, 'index.html'),
+        filename: path.join(paths.SRC, 'index.html'),
+
     }),
     new ExtractTextPlugin('style.bundle.css'),
     new webpack.NoEmitOnErrorsPlugin(),
@@ -37,12 +43,13 @@ module.exports = {
   ],
   module: {
     rules: [{
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: [{
-          loader: 'babel-loader',
-          options: {
-            sourceMap: true,
+      test: /\.(js|jsx)$/,
+      exclude: /node_modules/,
+      use: [{
+        loader: 'babel-loader',
+        options: {
+          sourceMap: true,
+          //baseUrl:'/',
           },
         }],
       },

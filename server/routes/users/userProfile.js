@@ -1,7 +1,10 @@
 
 const userProfile = (req, res) => {
   let user = req.user;
-  res.send(user);
+  res.json({
+    name: user.name,
+    email: user.email,
+  });
 };
 
 module.exports = userProfile;

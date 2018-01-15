@@ -6,18 +6,17 @@ const updateProfile = (req, res) => {
 
   if (fields.name) {
     User.findOneAndUpdate({email},
-      {$set: {name: fields.name}}, (err, result)=> {
-      if (err) {
-        res.json({error: 'some error'});
-      }
-      console.log(result);
+      {$set: {name: fields.name}}
+    )
+      .then((result) =>{
       res.json({success: true, message: 'name updated succesfully'});
-    });
-  }
+      })
+      .catch(()=>res.status(500).json({error: 'internal system error'}));
+    }
 
   if (fields.oldPassword && fields.newPassword) {
     User.findOne({email})
-    .then((user)=>{
+    .then((user) => {
       if ((fields.oldPassword) && (fields.newPassword)) {
             user.comparePassword(fields.oldPassword, function(err, isMatch) {
               if (isMatch && !err) {

@@ -5,6 +5,14 @@ import Header from './Header';
 import Home from '../components/Home';
 import Footer from '../components/Footer';
 import ForgotPassword from '../components/auth/ForgotPassword';
+import 'redux';
+import {Store} from '../js/redux/store';
+
+Store.subscribe(() => {
+  Store.getState();
+});
+
+Store.dispatch({type: 'ACTION_TYPE', payload:{}});
 
 /**
  * this class loads all the required components for this project

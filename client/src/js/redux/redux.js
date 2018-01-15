@@ -1,3 +1,6 @@
 import { createStore } from 'redux';
+import { Reducers } from './reducers';
 
-const store = createStore();
+const Store = createStore(Reducers);
+
+module.exports = Store;

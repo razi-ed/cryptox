@@ -5,12 +5,13 @@ const buying = (req, res)=>{
   const units=req.body.units;
   const currency=req.body.type;
   const updateTrader = {};
-  updateTrader['currencies.'+req.body.tradeFor]=(1/req.body.currentPrice)*units;
-  updateTrader['currencies.'+currency]= -units;
+  updateTrader[
+    'currencies.'+req.body.tradeFor]=-(1/req.body.currentPrice)*units;
+  updateTrader['currencies.'+currency]= +units;
   console.log(updateTrader);
   const updateAdmin = {};
-  updateAdmin['currencies.'+req.body.tradeFor]=-(1/req.body.currentPrice)*units;
-  updateAdmin['currencies.'+currency] = units;
+  updateAdmin['currencies.'+req.body.tradeFor]=+(1/req.body.currentPrice)*units;
+  updateAdmin['currencies.'+currency] = -units;
   const Order=new Orders({
     type: 'buyer',
     email,

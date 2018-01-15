@@ -26,11 +26,11 @@ const selling = (req, res)=>{
   traderAccounts.update(
     {email},
     {$inc: updateTrader}
-  );
+  ).then((result)=>console.log(result));
   traderAccounts.update(
     {email: 'admin@mountblue.io'},
     {$inc: updateAdmin}
-  );
+  ).then((result)=>console.log(result));
   res.send('Transaction is Successful');
   };
     module.exports = selling;

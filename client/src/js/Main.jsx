@@ -5,7 +5,6 @@ import '../css/exchange.scss';
 import '../css/dashboard.css';
 import App from '../components/App';
 
-
 if (module.hot) {
     module.hot.accept(App, ()=>{
         render(<App/>,

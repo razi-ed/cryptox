@@ -31,6 +31,7 @@
     "react-dom": "^16.2.0",
     "react-form-validator-core": "^0.3.0",
     "react-google-button": "^0.4.0",
+    "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2"
   },
   "devDependencies": {

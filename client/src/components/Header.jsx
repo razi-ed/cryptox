@@ -6,6 +6,7 @@ import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
+import Grid from 'material-ui/Grid/Grid';
 
 /**
  * this class creates Header section for this project
@@ -17,7 +18,9 @@ export default class Header extends React.Component {
    */
   render() {
     return (
-      <div style={{
+      <div className='header'>
+        <Grid spacing={0}>
+        <div style={{
         display: 'flex',
       }}>
         <AppBar position='static'>
@@ -70,6 +73,8 @@ export default class Header extends React.Component {
             </div>
           </Toolbar>
         </AppBar>
+      </div>
+        </Grid>
       </div>
     );
   }

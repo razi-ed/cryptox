@@ -7,6 +7,7 @@ import VisibilityOff from 'material-ui-icons/VisibilityOff';
 import IconButton from 'material-ui/IconButton';
 import '../../css/style.css';
 import Google from './Google';
+import {Redirect} from 'react-router';
 
 /**
 * @class
@@ -23,6 +24,7 @@ export default class Login extends React.Component {
       showPassword: false,
       validationHelperTextVisible: 'none',
       validationColor: 'red',
+      success: false,
     };
     this.changeEmail = this.changeEmail.bind(this);
     this.changePassword = this.changePassword.bind(this);
@@ -49,11 +51,32 @@ export default class Login extends React.Component {
           this.setState({validationHelperTextVisible: 'block'});
         } else {
           this.setState({validationHelperTextVisible: 'none'});
+          localStorage.setItem('token', res.token);
         }
         console.log(res);
+        this.setState({
+          success: res.success,
+        });
       });
+    }
   }
-}
+  /**
+   * @method
+   */
+  isAuthorizedUser() {
+    if (localStorage.getItem('token')) {
+      fetch('/profile', {
+        method: 'GET',
+        headers: {
+          'Content-type': 'application/json',
+          'Authorization': localStorage.getItem('token'),
+        },
+      }).then((res)=>res.json())
+      .then((res) => {
+        console.log(res);
+      });
+    }
+  }
   /**
   * @param {event} event
   */
@@ -139,6 +162,10 @@ export default class Login extends React.Component {
         onClick={this.loginUser}>
         Log In
         </Button>
+        {this.state.success ?
+          <Redirect to = '/dashboard'/>:
+          null
+        }
         </div>
         <div id='forgot-password'>
         <a id='forgot-password-link'

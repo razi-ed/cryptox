@@ -8,7 +8,7 @@ import ForgotPassword from '../components/auth/ForgotPassword';
 import Store, {History} from '../js/redux/store';
 import {Provider} from 'react-redux';
 
-import Dashboard from '../components/dashboard/dashboard';
+import ConnectedDashboard from '../components/dashboard/dashboard';
 import Exchange from '../components/exchange/exchange';
 import {lightBlue, red} from 'material-ui/colors';
 import Reboot from 'material-ui/Reboot';
@@ -37,19 +37,21 @@ class App extends React.Component {
   render() {
     return (
       <Provider store={Store}>
-      <BrowserRouter history={History}>
-        <div>
-      <Header/>
-      <Route exact path={'/'} component={Home}/>
-      <Route exact path={'/login'} component={LogIn}/>
-      <Route exact path={'/reset-password'} component={ForgotPassword}/>
-      <Route exact path={'/dashboard'} component={Dashboard}/>
-      <Route exact path={'/exchange'} component={Exchange}/>
-      <Footer/>
-      </div>
-        <MuiThemeProvider/>
-    </BrowserRouter>
-    </Provider>
+      <BrowserRouter>
+      <MuiThemeProvider theme={theme}>
+      <Reboot />
+      <div>
+    <Header/>
+    <Route exact path={'/'} component={Home}/>
+    <Route exact path={'/login'} component={LogIn}/>
+    <Route exact path={'/reset-password'} component={ForgotPassword}/>
+    <Route exact path={'/dashboard'} component={ConnectedDashboard}/>
+    <Route exact path={'/exchange'} component={Exchange}/>
+    <Footer/>
+    </div>
+      </MuiThemeProvider>
+  </BrowserRouter>
+  </Provider>
     );
   }
 }

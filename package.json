@@ -60,28 +60,14 @@
     "node-sass": "^4.7.2",
     "nodemon": "^1.14.3",
     "react-hot-loader": "^3.1.3",
-<<<<<<< HEAD
     "redux-devtools": "^3.4.1",
-||||||| merged common ancestors
-    "webpack-dev-middleware": "^2.0.3",
-    "webpack-hot-middleware": "^2.21.0",
-=======
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.1",
->>>>>>> dashboard
     "svg-inline-loader": "^0.8.0",
     "webpack": "^3.6.0",
-<<<<<<< HEAD
-    "webpack-dev-middleware": "^2.0.3",
-    "webpack-dev-server": "^2.10.0",
-    "webpack-hot-middleware": "^2.21.0"
-||||||| merged common ancestors
-    "webpack-dev-server": "^2.10.0"
-=======
     "webpack-dev-middleware": "^2.0.3",
     "webpack-dev-server": "^2.10.0",
     "webpack-extract-css-hot-reload": "^1.0.3",
     "webpack-hot-middleware": "^2.21.0"
->>>>>>> dashboard
   }
 }

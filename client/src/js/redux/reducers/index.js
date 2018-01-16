@@ -2,8 +2,9 @@ import { combineReducers } from 'redux';
 import UserReducer from './user';
 import { routerReducer } from 'react-router-redux';
 
-const Reducers = combineReducers({
+export const Reducers = combineReducers({
+  token: UserReducer,
   user: UserReducer,
-  history: HisoryReducer,
+  // history: HisoryReducer,
   routing: routerReducer,
 });

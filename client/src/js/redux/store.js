@@ -1,10 +1,11 @@
 import { applyMiddleware, createStore } from 'redux';
-import { Reducers } from './reducers';
+import { Reducers } from './reducers/index';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { createBrowserHistory } from 'history';
 
 
 let defaultStore = {
+  token: localStorage.getItem('token'),
   user: {
     email: 'Guest',
     Auth: {

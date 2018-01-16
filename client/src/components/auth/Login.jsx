@@ -56,9 +56,9 @@ class Login extends React.Component {
           this.props.history.push('/dashboard');
         }
         console.log(res);
-        this.setState({
-          success: res.success,
-        });
+        // this.setState({
+        //   success: res.success,
+        // });
       });
     }
   }

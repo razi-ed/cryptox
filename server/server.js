@@ -10,6 +10,7 @@ const webpackHotMiddleware = require('webpack-hot-middleware');
 
 const config = require('../client/webpack.config.js');
 const passportConfig = require('./config/passport');
+const users = require('./routes/users');
 
 const app = express();
 Mongoose.Promise = global.Promise;
@@ -33,15 +34,15 @@ app.use(
       assets: false,
       chunks: false,
       modules: false,
-      reasons: false,
+      reasons: true,
       children: false,
-      source: false,
-      errors: false,
-      errorDetails: false,
-      warnings: false,
+      source: true,
+      errors: true,
+      errorDetails: true,
+      warnings: true,
       publicPath: false,
     },
-    })
+  })
 );
 
 app.use(webpackHotMiddleware(compiler));
@@ -59,6 +60,7 @@ passportConfig(passport);
 
 app.use(express.static(path.join(__dirname, '../dist/')));
 app.use('/auth', auth);
+app.use('/profile', users);
 app.use(frontend);
 
 Mongoose

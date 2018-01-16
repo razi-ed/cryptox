@@ -7,11 +7,12 @@ import VisibilityOff from 'material-ui-icons/VisibilityOff';
 import IconButton from 'material-ui/IconButton';
 import '../../css/style.css';
 import Google from './Google';
+import {withRouter} from 'react-router-dom';
 
 /**
 * @class
 */
-export default class Login extends React.Component {
+class Login extends React.Component {
   /**
   * @constructor
   */
@@ -23,6 +24,7 @@ export default class Login extends React.Component {
       showPassword: false,
       validationHelperTextVisible: 'none',
       validationColor: 'red',
+      success: false,
     };
     this.changeEmail = this.changeEmail.bind(this);
     this.changePassword = this.changePassword.bind(this);
@@ -30,6 +32,7 @@ export default class Login extends React.Component {
     this.handleClickIcon = this.handleClickIcon.bind(this);
     this.handleMouseDownIcon = this.handleMouseDownIcon.bind(this);
   }
+
   /**
   * @function
   */
@@ -49,11 +52,17 @@ export default class Login extends React.Component {
           this.setState({validationHelperTextVisible: 'block'});
         } else {
           this.setState({validationHelperTextVisible: 'none'});
+          localStorage.setItem('token', res.token);
+          this.props.history.push('/dashboard');
         }
         console.log(res);
+        this.setState({
+          success: res.success,
+        });
       });
+    }
   }
-}
+
   /**
   * @param {event} event
   */
@@ -91,66 +100,72 @@ export default class Login extends React.Component {
   render() {
     return (
       <div id='login-form'>
-      <h1 style={{textAlign: 'center'}}>Log Into Your Account</h1>
-      <h4 style={{
-                  color: 'red',
-                  display: this.state.validationHelperTextVisible,
-                  paddingTop: 12,
-                }}>
-                Invalid User Name or Password
-      </h4>
-      <form onSubmit={(e)=>e.preventDefault()}>
-      <FormControl
-        className='form-elements'
-        required={true}
-      >
-      <InputLabel >Email</InputLabel>
-      <Input
-      autoFocus={true}
-      type='email'
-      onChange={this.changeEmail}
-      />
-      </FormControl>
-      <FormControl
-        className='form-elements'
-        required={true}
-      >
-      <InputLabel>Password</InputLabel>
-      <Input
-      type={this.state.showPassword ? 'text' : 'password'}
-      onChange={this.changePassword}
-      endAdornment={
-        <InputAdornment position='end' >
-        <IconButton
-        onClick={this.handleClickIcon}
-        onMouseDown={this.handleMouseDownIcon}
-        >
-        {this.state.showPassword ? <VisibilityOff />
-          : <Visibility />}
-          </IconButton>
-          </InputAdornment>
-        }
-        />
-        </FormControl>
-        <div id='login-button'>
-        <Button type="submit"
-        raised color="primary"
-        className="button"
-        onClick={this.loginUser}>
-        Log In
-        </Button>
-        </div>
-        <div id='forgot-password'>
-        <a id='forgot-password-link'
-        href="/reset-password">
-        Forgot Password?</a>
-        </div>
-        <hr className="hr-text" data-content="Or"></hr>
-        <div id="google-signin">
-        <Google/>
-        </div>
-        </form>
+        <h1 style={{textAlign: 'center'}}>Log Into Your Account</h1>
+        <h4 style={{
+                    color: 'red',
+                    display: this.state.validationHelperTextVisible,
+                    paddingTop: 12,
+                  }}>
+                  Invalid User Name or Password
+        </h4>
+        <form onSubmit={(e)=>e.preventDefault()}>
+          <FormControl
+            className='form-elements'
+            required={true}
+          >
+          <InputLabel >Email</InputLabel>
+          <Input
+            autoFocus={true}
+            type='email'
+            onChange={this.changeEmail}
+          />
+          </FormControl>
+            <FormControl
+              className='form-elements'
+              required={true}
+            >
+            <InputLabel>Password</InputLabel>
+
+            <Input
+              type={this.state.showPassword ? 'text' : 'password'}
+              onChange={this.changePassword}
+              endAdornment={
+                <InputAdornment position='end' >
+                <IconButton
+                onClick={this.handleClickIcon}
+                onMouseDown={this.handleMouseDownIcon}
+                >
+                {this.state.showPassword ? <VisibilityOff />
+                  : <Visibility />}
+                  </IconButton>
+                  </InputAdornment>
+                }
+              />
+            </FormControl>
+
+            <div id='login-button'>
+              <Button type="submit"
+                raised color="primary"
+                className="button"
+                onClick={this.loginUser}>
+              Log In
+              </Button>
+            </div>
+
+            <div id='forgot-password'>
+              <a id='forgot-password-link'
+              href="/reset-password">
+              Forgot Password?</a>
+            </div>
+            <hr className="hr-text" data-content="Or"></hr>
+            <div id="google-signin">
+              <Google/>
+            </div>
+          </form>
         </div>
       );
     }
   }
+
+
+export default withRouter(Login);

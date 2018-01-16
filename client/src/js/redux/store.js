@@ -1,4 +1,4 @@
-import { createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import { Reducers } from './reducers';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { createBrowserHistory } from 'history';
@@ -13,9 +13,20 @@ let defaultStore = {
   },
 };
 
-const Store = createStore(Reducers, defaultStore);
+const templateMiddlewareFunction = (store) => (next) => (action) => {
+  console.log('Action now being fired is : ', action);
+  next(action);
+};
 
-export const history = syncHistoryWithStore(
+const middlewares = applyMiddleware(templateMiddlewareFunction);
+
+const Store = createStore(Reducers, defaultStore, middlewares);
+
+Store.subscribe(() => {
+  console.log('Store updated, ', Store.getState());
+});
+
+export const History = syncHistoryWithStore(
   createBrowserHistory(),
   Store);
 

@@ -51,7 +51,6 @@ export default class List extends React.Component {
       this.state.real
       .filter(currency=>currency!==this.state.baseCurrency)
       .forEach(Rcurrency=>{
-        console.log(Rcurrency);
         this.setState({[Rcurrency]: currencies.rates[Rcurrency]});
       });
     } catch (e) {
@@ -62,14 +61,14 @@ export default class List extends React.Component {
   }
   componentInit=()=>{
     const base=this.props.base|| 'INR';
-    console.log('component mounted',{[base]:1});
+    //console.log('component mounted',{[base]:1});
     this.setState({baseCurrency:base},()=>{
-      console.log(`changed base currency to ${this.state.baseCurrency}`);
+      //console.log(`changed base currency to ${this.state.baseCurrency}`);
       this.setState({[base]:1},()=>{
         this.getCrypto();
         this.getReal();
       })
-    console.log('will mount');
+    //console.log('will mount');
       })
   }
   componentWillMount(){

@@ -3,6 +3,8 @@ import Grid from 'material-ui/Grid';
 import Paper from 'material-ui/Paper';
 
 import BuySellCard from './BuySellCard';
+import new1 from './chartData';
+
 export class Chart extends React.Component {
   render() {
     return (

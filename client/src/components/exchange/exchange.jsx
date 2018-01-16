@@ -22,7 +22,7 @@ export default class Exchange extends React.Component {
         container
         className="exchange">
         <List base={baseCurrency}/>
-        <Chart/>
+        <Chart  base={baseCurrency}/>
       </Grid>
     );
   };

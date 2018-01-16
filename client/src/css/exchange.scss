@@ -11,10 +11,17 @@
   }
   .chart {
     padding: 5% 0;
-    min-height: 60vh;
+    min-height: 40vh;
+    margin-top: 4%;
   }
   .currency {
     padding: 2% 0;
     margin: 5%;
   }
+}
+.trade{
+  height: 200px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
 }

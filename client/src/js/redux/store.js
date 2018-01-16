@@ -1,5 +1,5 @@
-import { createStore } from 'redux';
-import { Reducers } from './reducers';
+import {createStore} from 'redux';
+import {Reducers} from './reducers';
 
 let defaultStore = {
   user: {

@@ -4,6 +4,7 @@ import Currency from './Currency';
 import UserProfile from './UserProfile';
 // import history from '../history';
 import {withRouter} from 'react-router-dom';
+import * as ReactRedux from 'react-redux';
 /**
  * this class creates Dashboard component
  */
@@ -22,27 +23,28 @@ class Dashboard extends React.Component {
    * @method
    */
   componentWillMount() {
-    if (localStorage.getItem('token')) {
-      fetch('/profile', {
-        method: 'GET',
-        headers: {
-          'Authorization': localStorage.getItem('token'),
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-      }).then((res) => {
-        return res.json();
-      }).then((res) => {
-        console.log(res);
-        this.setState({
-          email: res.email,
-          name: res.name,
-        });
-      }).catch((error) => {
-        this.props.history.push('/login');
-      });
-    } else {
-      this.props.history.push('/login');
-    }
+    // if (localStorage.getItem('token')) {
+    //   fetch('/profile', {
+    //     method: 'GET',
+    //     headers: {
+    //       'Authorization': localStorage.getItem('token'),
+    //       'Content-Type': 'application/x-www-form-urlencoded',
+    //     },
+    //   }).then((res) => {
+    //     return res.json();
+    //   }).then((res) => {
+    //     console.log(res);
+    //     this.setState({
+    //       email: res.email,
+    //       name: res.name,
+    //     });
+    //   }).catch((error) => {
+    //     this.props.history.push('/login');
+    //   });
+    // } else {
+    //   this.props.history.push('/login');
+    // }
+    console.log(this.props);
   }
   /**
    * this renders the component
@@ -67,6 +69,13 @@ class Dashboard extends React.Component {
     );
   };
 };
+const DashboardWithRouter = withRouter(Dashboard);
 
-export default withRouter(Dashboard);
-;
+const mapStateToProps = (state) => {
+  return {state};
+};
+const ConnectedDashboard =
+ ReactRedux.connect(mapStateToProps)(DashboardWithRouter);
+
+export default ConnectedDashboard;
+

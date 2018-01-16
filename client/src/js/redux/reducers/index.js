@@ -1,8 +1,13 @@
 import {combineReducers} from 'redux';
 import UserReducer from './user';
+import tokenReducer from './user';
 
 const Reducers = combineReducers({
-  user: UserReducer,
+  token: tokenReducer,
+  // user: UserReducer,
 });
+console.log(Reducers);
 
-export default Reducers;
+module.exports = Reducers;
+
+// export default Reducers;

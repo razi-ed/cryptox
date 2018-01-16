@@ -1,7 +1,8 @@
 import {createStore} from 'redux';
-import {Reducers} from './reducers';
+import Reducers from './reducers/index';
 
-let defaultStore = {
+export const defaultStore = {
+  token: '',
   user: {
     email: 'Guest',
     Auth: {
@@ -9,7 +10,12 @@ let defaultStore = {
     },
   },
 };
-
+// console.log(Reducers);
 const Store = createStore(Reducers, defaultStore);
 
-module.exports = Store;
+Store.subscribe(() => {
+  console.log(Store.getState());
+});
+
+
+export default Store;

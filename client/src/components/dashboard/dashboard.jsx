@@ -45,13 +45,14 @@ class Dashboard extends React.Component {
     //   this.props.history.push('/login');
     // }
     console.log(this.props);
+    this.props.dispatch({type: 'GET_TOKEN'});
   }
   /**
    * this renders the component
    * @return {component}
    */
   render() {
-    console.log(this.state.name, this.state.email);
+   // console.log(this.props.name, this.props.email);
 
     return (
       <div className='currency-container'>
@@ -72,6 +73,7 @@ class Dashboard extends React.Component {
 const DashboardWithRouter = withRouter(Dashboard);
 
 const mapStateToProps = (state) => {
+  console.log(state);
   return {state};
 };
 const ConnectedDashboard =

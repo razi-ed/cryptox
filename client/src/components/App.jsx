@@ -11,14 +11,14 @@ import {lightBlue, red} from 'material-ui/colors';
 import Reboot from 'material-ui/Reboot';
 import {withTheme, createMuiTheme, MuiThemeProvider} from 'material-ui/styles';
 
-import {Store} from '../js/redux/store';
-import {Provider} from 'react-redux';
+// import {Store} from '../js/redux/store';
+// import {Provider} from 'react-redux';
 
-Store.subscribe(() => {
-  Store.getState();
-});
+// Store.subscribe(() => {
+//   Store.getState();
+// });
 
-Store.dispatch({type: 'ACTION_TYPE', payload: {}});
+// Store.dispatch({type: 'ACTION_TYPE', payload: {}});
 const theme = createMuiTheme({
   palette: {
     primary: lightBlue,
@@ -41,7 +41,6 @@ class App extends React.Component {
    */
   render() {
     return (
-      <Provider store={Store}>
       <BrowserRouter>
         <MuiThemeProvider theme={theme}>
         <Reboot />
@@ -56,7 +55,7 @@ class App extends React.Component {
       </div>
         </MuiThemeProvider>
     </BrowserRouter>
-    </Provider>
+
     );
   }
 }

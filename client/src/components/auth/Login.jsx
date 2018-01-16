@@ -7,7 +7,7 @@ import VisibilityOff from 'material-ui-icons/VisibilityOff';
 import IconButton from 'material-ui/IconButton';
 import '../../css/style.css';
 import Google from './Google';
-import {withRouter} from 'react-router';
+import {withRouter} from 'react-router-dom';
 
 /**
 * @class

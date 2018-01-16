@@ -1,5 +1,5 @@
 /**
- * authenticate is an actionCreator [template]
+ * authenticate is an actionCreator ###TEMPLATE###
  * @param {string} email
  * @param {string} buyingAsset
  * @param {string} UsingAsset

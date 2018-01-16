@@ -5,14 +5,9 @@ import Header from './Header';
 import Home from '../components/Home';
 import Footer from '../components/Footer';
 import ForgotPassword from '../components/auth/ForgotPassword';
-import {Store} from '../js/redux/store';
+import Store, {History} from '../js/redux/store';
 import {Provider} from 'react-redux';
 
-Store.subscribe(() => {
-  Store.getState();
-});
-
-Store.dispatch({type: 'ACTION_TYPE', payload:{}});
 
 /**
  * this class loads all the required components for this project
@@ -25,7 +20,7 @@ export default class App extends React.Component {
   render() {
     return (
       <Provider store={Store}>
-      <BrowserRouter history={history}>
+      <BrowserRouter history={History}>
         <div>
       <Header/>
       <Route exact path={'/'} component={Home}/>

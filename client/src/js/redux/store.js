@@ -1,5 +1,8 @@
 import { createStore } from 'redux';
 import { Reducers } from './reducers';
+import { syncHistoryWithStore } from 'react-router-redux';
+import { createBrowserHistory } from 'history';
+
 
 let defaultStore = {
   user: {
@@ -11,5 +14,9 @@ let defaultStore = {
 };
 
 const Store = createStore(Reducers, defaultStore);
+
+export const history = syncHistoryWithStore(
+  createBrowserHistory(),
+  Store);
 
 module.exports = Store;

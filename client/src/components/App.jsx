@@ -25,7 +25,7 @@ export default class App extends React.Component {
   render() {
     return (
       <Provider store={Store}>
-      <BrowserRouter>
+      <BrowserRouter history={history}>
         <div>
       <Header/>
       <Route exact path={'/'} component={Home}/>

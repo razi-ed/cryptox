@@ -1,6 +1,15 @@
 import { createStore } from 'redux';
 import { Reducers } from './reducers';
 
-const Store = createStore(Reducers);
+let defaultStore = {
+  user: {
+    email: 'Guest',
+    Auth: {
+      IsAuthenticated: false,
+    },
+  },
+};
+
+const Store = createStore(Reducers, defaultStore);
 
 module.exports = Store;

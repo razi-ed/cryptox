@@ -20,6 +20,7 @@
     "cryptocompare": "^0.4.0",
     "express": "^4.16.2",
     "express-validator": "^4.3.0",
+    "highcharts": "^5.0.14",
     "jsonwebtoken": "^8.1.0",
     "material-ui": "^1.0.0-beta.26",
     "moment": "^2.20.1",
@@ -29,10 +30,12 @@
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",
     "passport-jwt": "2.1.1",
+    "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-form-validator-core": "^0.3.0",
     "react-google-button": "^0.4.0",
+    "react-jsx-highcharts": "^2.0.3",
     "react-router-dom": "^4.2.2"
   },
   "devDependencies": {

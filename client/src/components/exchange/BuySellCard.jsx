@@ -1,26 +1,20 @@
 import React from 'react';
 
-import Card, {CardActions, CardContent, CardMedia} from 'material-ui/Card';
-import Button from 'material-ui/Button';
-import Typography from 'material-ui/Typography';
-import MenuItem from 'material-ui/Menu/MenuItem';
-import TextField from 'material-ui/TextField';
-import Input, { InputLabel, InputAdornment } from 'material-ui/Input'
-/**
- *@return {component} BuySellCard which will be common in both buy and sell tabs
- */
+import {Card, CardActions, CardContent,
+        CardMedia, Button, Typography, MenuItem,
+        TextField, Input} from 'material-ui';
 
-const currencies = [
-  {
-    value: 'USD',
-    label: '$',
-  },
-  {
-    value: 'EUR',
-    label: '€',
-  },
-  {
-    value: 'BTC',
+        const currencies = [
+          {
+            value: 'USD',
+            label: '$',
+          },
+          {
+            value: 'EUR',
+            label: '€',
+          },
+          {
+            value: 'BTC',
     label: '฿',
   },
   {
@@ -28,41 +22,46 @@ const currencies = [
     label: '¥',
   },
 ];
-const units=[1,0.1,0.001]
+const units=[1, 0.1, 0.001];
+/**
+ * a component that renders buy-sell component
+ * @param {object} name
+ * @return {component}
+ */
 class BuySellCard extends React.Component {
-  constructor(){
+  /**
+   *constructor for BuySellcard component
+   */
+  constructor() {
     super();
     this.state={
       currency: 'USD',
-      trade:'USD',
-      base:'INR',
-      units:1,
-      quantity:1
-    }
+      trade: 'USD',
+      base: 'INR',
+      units: 1,
+      quantity: 1,
+    };
   }
   handleChange = name => event => {
     this.setState({
       [name]: event.target.value,
     });
   };
-  componentDidMount(){
-   
-  }
+  /**
+   *@return {component} the JSX component of the class
+   */
   render() {
     return (
-      <Card raised className='BuySellCard' style={{marginTop:5}}>
+      <Card raised className='BuySellCard' style={{marginTop: 5}}>
         <CardMedia
           style={{
           height: 150,
         }}
           image="https://blink.ucsd.edu/_images/homepage/landing-pages/buy-cart.png"
           title="Contemplative Reptile"/>
-        <CardContent 
+        <CardContent
           className='trade'
         >
-          {/* <Typography type="headline" component="h2">
-            Lizard
-          </Typography> */}
         <TextField
           id="select-currency"
           select
@@ -103,7 +102,7 @@ class BuySellCard extends React.Component {
           helperText="Please select units"
           margin="normal"
         >
-          {units.map((option,index) => (
+          {units.map((option, index) => (
             <MenuItem key={index} value={option}>
               {option}
             </MenuItem>
@@ -114,17 +113,20 @@ class BuySellCard extends React.Component {
             value={this.state.quantity}
             onChange={this.handleChange('quantity')}
           />
-        
+
         </CardContent>
-        <Typography type="display1"  style={{display: 'flex',justifyContent: 'center'}} >
-          {this.state.units * this.state.quantity}  {this.state.trade} converts to
+        <Typography type="display1"
+        style={{display: 'flex', justifyContent: 'center'}} >
+          {(this.state.units * this.state.quantity).toFixed(4)} {
+            this.state.trade}
+           converts to
           {this.state.base}
         </Typography>
-        <CardActions style={{display:'flex',justifyContent:'space-around'}}>
-          <Button raised color="primary" style={{width:80}}>
+        <CardActions style={{display: 'flex', justifyContent: 'space-around'}}>
+          <Button raised color="primary" style={{width: 80}}>
             BUY
           </Button>
-          <Button raised color="primary" style={{width:80}}>
+          <Button raised color="primary" style={{width: 80}}>
             SELL
           </Button>
         </CardActions>

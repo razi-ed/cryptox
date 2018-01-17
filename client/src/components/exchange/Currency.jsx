@@ -23,7 +23,8 @@ render() {
         <ChangeArrow type={this.props.type} change={this.props.change}>
         </ChangeArrow>
         <Typography type="headline" gutterBottom>
-          {typeof(this.props.price)==='number'?(this.props.price).toFixed(2):'loading'}{this.props.baseCurrency}
+          {typeof(this.props.price)==='number'?(this.props.price).toFixed(2)
+          :'loading'}{this.props.baseCurrency}
         </Typography>
       </div>
     </Paper>

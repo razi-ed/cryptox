@@ -27,24 +27,24 @@ import Media from 'react-media';
 const styles = theme => ({
   menuItem: {
     '&:focus': {
-      "backgroundColor": theme.palette.primary[500],
-      '& $text, & $icon': {
+      'backgroundColor': theme.palette.primary[500],
+      '&  $icon': {
         color: theme.palette.common.white,
       },
     },
-    "paddingTop": 11,
-    "paddingBottom": 11,
-    "paddingLeft": 12,
-    "paddingRight": 12,
+    'paddingTop': 11,
+    'paddingBottom': 11,
+    'paddingLeft': 12,
+    'paddingRight': 12,
   },
-  text: {
-    popperClose: {
-      pointerEvents: 'none',
-    },
-    fontWeight: ['300'],
-    fontSize: 14,
-    letterSpacing: .9,
-  },
+  // text: {
+  //   popperClose: {
+  //     pointerEvents: 'none',
+  //   },
+  //   fontWeight: ['300'],
+  //   fontSize: 14,
+  //   letterSpacing: .9,
+  // },
   icon: {
     marginRight: 0,
     width: 20,
@@ -233,7 +233,7 @@ class Header extends React.Component {
                                 <ListItemIcon className={classes.icon}>
                                   <SignUpIcon />
                                 </ListItemIcon>
-                                <ListItemText classes={{text: classes.text}} inset primary="Sign Up" />
+                                <ListItemText inset primary="Sign Up" />
                               </MenuItem>
                             </Link>
                               <Divider light style={{height: .8}} />
@@ -242,7 +242,7 @@ class Header extends React.Component {
                                 <ListItemIcon className={classes.icon}>
                                   <LogInIcon />
                                 </ListItemIcon>
-                                <ListItemText classes={{text: classes.text}} inset primary="Log In" />
+                                <ListItemText inset primary="Log In" />
                               </MenuItem>
                               </Link>
                               <Divider style={{height: 1}} />
@@ -251,7 +251,7 @@ class Header extends React.Component {
                                 <ListItemIcon className={classes.icon}>
                                   <AboutUsIcon />
                                 </ListItemIcon>
-                                <ListItemText classes={{text: classes.text}} inset primary="About Us" />
+                                <ListItemText inset primary="About Us" />
                               </MenuItem>
                               </Link>
                             </MenuList>
@@ -273,7 +273,7 @@ class Header extends React.Component {
                                   <ListItemIcon className={classes.iconLg}>
                                     <SignUpIcon />
                                   </ListItemIcon>
-                                  <ListItemText classes={{text: classes.textLg}} inset primary="Sign Up" />
+                                  <ListItemText inset primary="Sign Up" />
                                 </MenuItem>
                                 </Link>
                                 <Divider light style={{height: 1.15}} />
@@ -282,7 +282,7 @@ class Header extends React.Component {
                                   <ListItemIcon className={classes.iconLg}>
                                     <LogInIcon />
                                   </ListItemIcon>
-                                  <ListItemText classes={{text: classes.textLg}} inset primary="Log In" />
+                                  <ListItemText inset primary="Log In" />
                                 </MenuItem>
                               </Link>
                                 <Divider style={{height: 1.25}} />
@@ -291,7 +291,7 @@ class Header extends React.Component {
                                   <ListItemIcon className={classes.iconLg}>
                                     <AboutUsIcon />
                                   </ListItemIcon>
-                                  <ListItemText classes={{text: classes.textLg}} inset primary="About Us" />
+                                  <ListItemText inset primary="About Us" />
                                 </MenuItem>
                                 </Link>
                               </MenuList>

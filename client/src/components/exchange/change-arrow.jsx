@@ -13,10 +13,10 @@ const ChangeArrow =(props)=> {
   if (props.type=='digital') {
     return (
       <div style={{display: 'flex', justifyContent: 'center'}}>
-        <Typography type="headline">
-          {props.change!=='undefined'?`${Math.abs(props.change)}%`:''}
+        <Typography type="title" color='inherit'>
+          {props.change!=='undefined'?`${Math.abs(props.change)}%`:'loading'}
         </Typography >
-        {props.change>0?<ArrowUpward/>:<ArrowDownward/>}
+        {props.change>0?<ArrowUpward style={{color: 'green'}}/>:<ArrowDownward style={{color: 'red'}}/>}
       </div>
     );
   } else {

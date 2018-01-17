@@ -12,10 +12,10 @@ const Exchange =(props)=> {
     return (
       <Grid
         item
+        container
         spacing={0}
         justify={'space-around'}
         alignItems={'stretch'}
-        container
         className="exchange">
         <List base={baseCurrency}/>
         <RightPane base={baseCurrency}/>

@@ -56,10 +56,10 @@ class BaseCurrency extends React.Component {
             <h2>Real currencies</h2>
             <List >
             {this.state.Rcurrencies.map(value => (
-              <Link to={`/exchange/real/${value}`}>
+              <Link key={value} to={`/exchange/real/${value}`}>
                 <ListItem key={value} onClick={() => {
-this.getCurrentValue(value); this.hideList();
-}} dense button >
+                    this.getCurrentValue(value); this.hideList();
+                    }} dense button >
                   <ListItemText primary={`${value}`} />
                 </ListItem>
               </Link>
@@ -68,7 +68,7 @@ this.getCurrentValue(value); this.hideList();
             <h2>Digital currencies</h2>
             <List >
             {this.state.Dcurrencies.map(value => (
-              <Link to={`/exchange/digital/${value}`}>
+              <Link key={value} to={`/exchange/digital/${value}`}>
                 <ListItem key={value}
                 onClick={() => this.getCurrentValue(value)}
                 dense button >

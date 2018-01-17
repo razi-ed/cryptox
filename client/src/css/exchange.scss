@@ -2,23 +2,23 @@
   background-color: #e0e0e0;
   align-items: flex-start;
   padding: 2%;
-  .list {
-    display: flex;
-    justify-content: center;
-  }
-  .List {
-    width: 100%;
-  }
   .chart {
     padding: 5% 0%;
-    margin-top: -1%;
-    margin-bottom: 2vh;
+    width: 100%;
   }
   .currency {
     padding: 2% 0;
     margin: 5%;
   }
 }
+.list {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5%!important;
+}
+  .List {
+  width: 100%;
+  }
 .trade{
   height: 200px;
   display: flex;

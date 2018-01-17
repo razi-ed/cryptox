@@ -8,7 +8,7 @@ const plotOptions = {
   },
 };
 const MyChart = () => (
-  <HighchartsChart plotOptions={plotOptions} className='plot'>
+  <HighchartsChart plotOptions={plotOptions} className='plot' >
     <Chart />
     <Title>Trends in Crypto Currencies</Title>
       <Legend layout="vertical" align="right" verticalAlign="middle" />

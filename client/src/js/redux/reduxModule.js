@@ -1,15 +1,25 @@
-import { bindActionCreators, applyMiddleware } from 'redux';
-import { connect } from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 import * as Actions from '../js/redux/actions/index';
-import Store from './store';
-import App from '../../components/App'
+// import Store from './store';
+import App from '../../components/App';
 
-function mapStateToProps(state) {
+/**
+ * This function takes state as parameter and maps state tot props
+ * @param {state} Store
+ * @return {state}
+ */
+function mapStateToProps(Store) {
   return {
-    /* wallet: state.wallet Configure required basic properties here*/
-  }
+    /* Configure required basic properties here*/
+  };
 }
 
+/**
+ * This function takes state as parameter and maps state tot props
+ * @param {dispatch} dispatch
+ * @return {action}
+ */
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(Actions, dispatch);
 }

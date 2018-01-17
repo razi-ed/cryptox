@@ -1,6 +1,6 @@
 import React from 'react';
 import Grid from 'material-ui/Grid';
-import List from './List';
+import SList from './List';
 import RightPane from './RightPane';
 /**
  *to Hold all the required components required for exchange
@@ -17,7 +17,7 @@ const Exchange =(props)=> {
         justify={'space-around'}
         alignItems={'stretch'}
         className="exchange">
-        <List base={baseCurrency}/>
+        <SList base={baseCurrency}/>
         <RightPane base={baseCurrency}/>
       </Grid>
     );

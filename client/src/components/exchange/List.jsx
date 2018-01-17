@@ -1,13 +1,21 @@
 import React from 'react';
-import Grid from 'material-ui/Grid';
-import Paper from 'material-ui/Paper';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import * as TradeActions from '../../js/redux/actions/buySellActionsCreator';
+
+import {Grid, Paper} from 'material-ui';
+
+const mapStateToProps=(state)=>{
+return {trade: state.Trade};
+};
+const mapDispatchToProps=dispatch=>bindActionCreators(TradeActions, dispatch);
 
 import BaseCurrency from './BaseCurrency';
 import Currency from './Currency';
 /**
  * this class creates a component of list of currencies
  */
-export default class List extends React.Component {
+class List extends React.Component {
   /**
    * @param {props} props
    */
@@ -110,6 +118,7 @@ export default class List extends React.Component {
    *@return {component}
    */
   render() {
+    console.log(this.props, 'props');
     return (
       <Grid className="list" item container xs={12} md={5} alignItems='center'>
         <BaseCurrency {...this.props}/>
@@ -138,3 +147,6 @@ export default class List extends React.Component {
     );
   }
 }
+const SList=connect(mapStateToProps, mapDispatchToProps)(List);
+
+export default SList;

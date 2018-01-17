@@ -7,12 +7,26 @@ import Footer from '../components/Footer';
 import ForgotPassword from '../components/auth/ForgotPassword';
 import Store, {History} from '../js/redux/store';
 import {Provider} from 'react-redux';
+import {lightBlue, red} from 'material-ui/colors';
+import Reboot from 'material-ui/Reboot';
+import {withTheme, createMuiTheme, MuiThemeProvider} from 'material-ui/styles';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: lightBlue,
+    secondary: red,
+    contrast: '#FFFFFF',
+  },
+  status: {
+    danger: 'orange',
+  },
+});
 
 
 /**
  * this class loads all the required components for this project
  */
-export default class App extends React.Component {
+class App extends React.Component {
   /**
    * this function is called by React to render components
    * @return {component}
@@ -21,15 +35,20 @@ export default class App extends React.Component {
     return (
       <Provider store={Store}>
       <BrowserRouter history={History}>
+        <MuiThemeProvider theme={theme}>
+        <Reboot />
         <div>
-      <Header/>
-      <Route exact path={'/'} component={Home}/>
-      <Route exact path={'/login'} component={LogIn}/>
-      <Route exact path={'/reset-password'} component={ForgotPassword}/>
-      <Footer/>
+          {/* <Header />*/}
+          <Route exact path={'/'} component={Home}/>
+          <Route exact path={'/login'} component={LogIn}/>
+          <Route exact path={'/reset-password'} component={ForgotPassword}/>
+      {/* <Footer/>*/}
       </div>
+        </MuiThemeProvider>
     </BrowserRouter>
     </Provider>
     );
   }
 }
+
+export default withTheme(theme)(App);

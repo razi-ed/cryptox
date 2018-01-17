@@ -20,7 +20,7 @@
     "express": "^4.16.2",
     "express-validator": "^4.3.0",
     "jsonwebtoken": "^8.1.0",
-    "material-ui": "^1.0.0-beta.26",
+    "material-ui": "^1.0.0-beta.27",
     "material-ui-icons": "^1.0.0-beta.17",
     "mongo": "^0.1.0",
     "mongoose": "^4.13.7",
@@ -35,10 +35,13 @@
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^4.0.8",
     "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "react-media": "^1.6.1",
+    "typeface-roboto": "0.0.50"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.1",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",

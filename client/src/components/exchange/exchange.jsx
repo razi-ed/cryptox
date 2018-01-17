@@ -1,7 +1,7 @@
 import React from 'react';
 import Grid from 'material-ui/Grid';
 import List from './List';
-import {RightPane} from './RightPane';
+import RightPane from './RightPane';
 /**
  *to Hold all the required components required for exchange
  * @param {*} props

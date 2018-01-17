@@ -7,15 +7,16 @@ import MyChart from './Chart';
 
 /**
  *A container for 'Chart' and 'BuySell' component
- *@return {component} a grid container that holds Chart and BuySellCard
+ * @return {component} a grid container that holds Chart and BuySellCard
+ * @param {*} props
  */
-const RightPane =()=> {
+const RightPane =(props)=> {
     return (
     <Grid item xs={12} md={6} alignItems='center'>
       <Paper className='chart' elevation={4} >
         <MyChart/>
       </Paper>
-      <BuySellCard base={this.props.base}/>
+      <BuySellCard base={props.base}/>
     </Grid>
   );
 };

@@ -1,5 +1,5 @@
 const User= require('../../models/Users');
-const TraderAccount=require('../../models/traderAccountsSchema');
+const TraderAccount=require('../../models/TraderAccount');
 const validatePassword= require('../../../utils/ValidateUser');
 
 const registerUser =(req, res)=>{

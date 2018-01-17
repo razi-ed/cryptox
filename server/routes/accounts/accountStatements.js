@@ -1,9 +1,9 @@
 const express = require('express');
 const router = new express.Router();
 const passport = require('passport');
-const orders = require('../../models/ordersSchema');
+const orders = require('../../models/Orders');
 
-module.exports= router.post('/statement',
+module.exports= router.get('/statement',
             passport.authenticate('jwt', {session: false}),
             (req, res)=>{
               const email = req.user.email;

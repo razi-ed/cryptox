@@ -1,5 +1,5 @@
-const Orders = require('../../models/ordersSchema');
-const traderAccounts= require('../../models/traderAccountsSchema');
+const Orders = require('../../models/Orders');
+const traderAccounts= require('../../models/TraderAccount');
 const selling = (req, res)=>{
   const email=req.user.email;
   const units=req.body.units;

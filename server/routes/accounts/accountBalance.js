@@ -1,9 +1,9 @@
 const express = require('express');
 const passport = require('passport');
-const traderAccount = require('../../models/traderAccountsSchema');
+const traderAccount = require('../../models/TraderAccount');
 const router = new express.Router();
 
-module.exports=router.post(
+module.exports=router.get(
   '/balance',
   passport.authenticate('jwt', {session: false}),
   (req, res)=>{

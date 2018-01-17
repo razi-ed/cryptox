@@ -13,6 +13,7 @@ const balance = require('./routes/accounts/accountBalance');
 
 const config = require('../client/webpack.config.js');
 const passportConfig = require('./config/passport');
+const users = require('./routes/users');
 
 const app = express();
 Mongoose.Promise = global.Promise;
@@ -65,6 +66,7 @@ app.use('/auth', auth);
 app.use('/orders', orders);
 app.use('/account', statement);
 app.use('/account', balance);
+app.use('/profile', users);
 app.use(frontend);
 
 Mongoose

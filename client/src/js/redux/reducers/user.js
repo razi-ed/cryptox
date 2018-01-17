@@ -18,3 +18,13 @@ export default function user(state = {}, action) {
       return state;
   }
 }
+
+export const setUser = (state = {}, action)=> {
+  if (action.type === 'SET_USER_DETAILS') {
+    console.log('in dispatch');
+
+    return {...state, email: action.email, name: action.name};
+  } else {
+    return state;
+  }
+};

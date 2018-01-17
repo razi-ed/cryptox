@@ -51,7 +51,7 @@ class Home extends React.Component {
 
     return (
       <div className = { classes.root }>
-        <Header />
+        {/* <Header /> */}
         <Grid container spacing={0} className = {classes.landingPage}>
 
           <Grid item xs={12} sm={6} md={6}>

@@ -3,7 +3,7 @@ import {Reducers} from './reducers/index';
 import {syncHistoryWithStore} from 'react-router-redux';
 import {createBrowserHistory} from 'history';
 import DevTools from '../../../utils/DevTools';
-// import ReduxThunk from 'redux-thunk';
+import ReduxThunk from 'redux-thunk';
 
 
 let initialState = {
@@ -40,7 +40,7 @@ const monitorReducer = (store) => (next) => (action) => {
 
 // https://github.com/gaearon/redux-devtools/blob/HEAD/docs/Walkthrough.md
 const enhancer = compose(
-  applyMiddleware(templateMiddlewareFunction),
+  applyMiddleware(ReduxThunk),
   // https://github.com/zalmoxisus/redux-devtools-instrument#api
   DevTools.instrument(
   monitorReducer,

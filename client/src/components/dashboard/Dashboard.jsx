@@ -4,26 +4,21 @@ import Currency from './Currency';
 import UserProfile from './UserProfile';
 // import history from '../history';
 import {withRouter} from 'react-router-dom';
+import WalletBalances from './WalletBalances';
+import * as ReactRedux from 'react-redux';
+import {getUserDetails} from '../../js/redux/actions/dashboardActionsCreator';
+import {isUserAuthenticated} from '../../js/redux/actions/dashboardActionsCreator';
 /**
  * this class creates Dashboard component
  */
 class Dashboard extends React.Component {
   /**
-   * @constructor
-   */
-  constructor() {
-    super();
-    this.state = {
-      email: '',
-      name: '',
-    };
-  }
-  /**
    * @method
    */
-  componentWillMount() {
+  componentDidMount() {
+    console.log(this.props);
     if (localStorage.getItem('token')) {
-      fetch('/profile', {
+      /* fetch('/profile', {
         method: 'GET',
         headers: {
           'Authorization': localStorage.getItem('token'),
@@ -33,13 +28,13 @@ class Dashboard extends React.Component {
         return res.json();
       }).then((res) => {
         console.log(res);
-        this.setState({
-          email: res.email,
-          name: res.name,
-        });
-      }).catch((error) => {
-        this.props.history.push('/login');
-      });
+        this.props.dispatch(getUserDetails(res.email, res.name));
+      }).catch((error, res) => {
+        console.log(error);
+        return error;
+      }); */
+      this.props.dispatch(isUserAuthenticated(localStorage.getItem('token'),
+       this.props.history));
     } else {
       this.props.history.push('/login');
     }
@@ -49,24 +44,35 @@ class Dashboard extends React.Component {
    * @return {component}
    */
   render() {
-    console.log(this.state.name, this.state.email);
+    console.log(this.props.state);
 
     return (
       <div className='currency-container'>
       <Grid className='user-profile-container' container>
-      <UserProfile name={this.state.name} email={this.state.email}/>
+      <UserProfile />
+      <WalletBalances />
       </Grid>
-      {/* <Grid className='currency-panel' container spacing={0}>
+      <Grid className='currency-panel' container spacing={0}>
       <Currency currency = 'bitcoin'/>
       <Currency currency = 'ethereum'/>
       <Currency currency = 'ripple'/>
       <Currency currency = 'litecoin'/>
       <Currency currency = 'dash'/>
-    </Grid>*/}
+    </Grid>
       </div>
     );
   };
 };
 
-export default withRouter(Dashboard);
-;
+const DashboardWithRouter = withRouter(Dashboard);
+const mapStateToProps = (state) => {
+  return {
+    state: state,
+  };
+};
+
+const ConnectedDashboard =
+  ReactRedux.connect(mapStateToProps)(DashboardWithRouter);
+
+export default ConnectedDashboard;
+

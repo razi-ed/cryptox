@@ -39,12 +39,12 @@ export default class Currency extends React.Component {
   /**
    * @method
    */
-  // componentDidMount() {
-  //   // this.getCurrencyPrice(this.props.currency);
-  //   setInterval(()=> {
-  //     this.getCurrencyPrice(this.props.currency);
-  //   }, 15000);
-  // }
+  componentDidMount() {
+    // this.getCurrencyPrice(this.props.currency);
+    setInterval(()=> {
+      this.getCurrencyPrice(this.props.currency);
+    }, 15000);
+  }
 
   /**
    * @method

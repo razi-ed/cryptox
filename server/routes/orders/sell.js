@@ -10,27 +10,41 @@ const selling = (req, res)=>{
   const updateAdmin = {};
   updateAdmin['currencies.'+currency] = +units;
   updateAdmin['currencies.'+req.body.tradeFor]=-(1/req.body.currentPrice)*units;
-  const Order=new Orders({
-    type: 'seller',
-    email,
-    commodity: {
-      offer: {
-        [currency]: units,
-      },
-      tradeFor: {
-        [req.body.tradeFor]: (1/req.body.cuurentPrice)*units,
-      },
-    },
+  // update records
+  traderAccounts.find({email}).then((result)=>{
+    // check if user has Sufficient Balance or not
+    if (result[0].currencies[currency]>units) {
+        const Order=new Orders({
+          type: 'seller',
+          email,
+          commodity: {
+            offer: {
+              [currency]: units,
+            },
+            tradeFor: {
+              [req.body.tradeFor]: (1/req.body.cuurentPrice)*units,
+            },
+          },
+        });
+        Order.save();
+      // update records of Trader
+      traderAccounts
+        .update({email}, {$inc: updateTrader})
+        .then((result) => console.log(result));
+        //  update records of Exchange
+        traderAccounts.update(
+          {email: 'admin@mountblue.io'},
+          {$inc: updateAdmin}
+        ).then((result)=>console.log(result));
+        res.send({
+                    result: 'Transaction Successful',
+                });
+      } else {
+        res.send({
+                    result: 'Transcation Failed',
+                    type: 'Insufficient Balance',
+                });
+      }
   });
-  Order.save();
-  traderAccounts.update(
-    {email},
-    {$inc: updateTrader}
-  ).then((result)=>console.log(result));
-  traderAccounts.update(
-    {email: 'admin@mountblue.io'},
-    {$inc: updateAdmin}
-  ).then((result)=>console.log(result));
-  res.send('Transaction is Successful');
   };
     module.exports = selling;

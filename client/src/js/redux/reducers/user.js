@@ -15,6 +15,7 @@ export default function user(state = {}, action) {
         state = {...state, email: 'Guest', IsAuthenticated: false};
         break;
       }
+      default:
       return state;
   }
 }

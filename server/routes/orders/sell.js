@@ -6,7 +6,7 @@ const selling = (req, res)=>{
   const currency=req.body.type;
   const updateTrader = {};
   updateTrader['currencies.'+currency] = -units;
-  updateTrader['currencies.'+req.body.tradeFor]=1/req.body.currentPrice*units;
+  updateTrader['currencies.'+req.body.tradeFor]=+1/req.body.currentPrice*units;
   const updateAdmin = {};
   updateAdmin['currencies.'+currency] = +units;
   updateAdmin['currencies.'+req.body.tradeFor]=-(1/req.body.currentPrice)*units;

@@ -7,29 +7,55 @@ import Footer from '../components/Footer';
 import ForgotPassword from '../components/auth/ForgotPassword';
 import Dashboard from '../components/dashboard/dashboard';
 import Exchange from '../components/exchange/exchange';
+import Store, {History} from '../js/redux/store';
+import {Provider} from 'react-redux';
+import {lightBlue, red} from 'material-ui/colors';
+import Reboot from 'material-ui/Reboot';
+import {withTheme, createMuiTheme, MuiThemeProvider} from 'material-ui/styles';
+
+
+const theme = createMuiTheme({
+  palette: {
+    primary: lightBlue,
+    secondary: red,
+    contrast: '#FFFFFF',
+  },
+  status: {
+    danger: 'orange',
+  },
+});
+
 
 /**
  * this class loads all the required components for this project
  */
-export default class App extends React.Component {
+class App extends React.Component {
   /**
    * this function is called by React to render components
    * @return {component}
    */
   render() {
     return (
-      <BrowserRouter>
-        <div >
-      <Header/>
-      <Route exact path={'/'} component={Home}/>
-      <Route exact path={'/login'} component={LogIn}/>
-      <Route exact path={'/reset-password'} component={ForgotPassword}/>
-      <Route exact path={'/dashboard'} component={Dashboard}/>
-      <Route exact path={'/exchange'} component={Exchange}/>
-      <Route exact path={'/exchange/:type/:coin'} component={Exchange}/>
-      <Footer/>
+      <Provider store={Store}>
+      <BrowserRouter history={History}>
+        <MuiThemeProvider theme={theme}>
+        <Reboot />
+        <div>
+          <Header />
+          <Route exact path={'/'} component={Home}/>
+          <Route exact path={'/login'} component={LogIn}/>
+          <Route exact path={'/reset-password'} component={ForgotPassword}/>
+          <Route exact path={'/dashboard'} component={Dashboard}/>
+          <Route exact path={'/exchange'} component={Exchange}/>
+          <Route exact path={'/exchange/:type/:coin'} component={Exchange}/>
+          <Footer/>
+      {/* <Footer/>*/}
       </div>
+        </MuiThemeProvider>
     </BrowserRouter>
+    </Provider>
     );
   }
 }
+
+export default withTheme(theme)(App);

@@ -1,8 +1,4 @@
-
-# Created by https://www.gitignore.io/api/r,node,code
-
-### Code ###
-# Visual Studio Code - https://code.visualstudio.com/
+### VS Code ###
 .settings/
 .vscode/
 tsconfig.json

@@ -8,15 +8,13 @@ export default function user(state = {}, action) {
   switch (action.type) {
     case 'LOG_IN_USER':
       {
-        return {...state, email: action.payload.email, IsAuthenticated: true };
-
+        return {...state, email: action.payload.email, IsAuthenticated: true};
       }
     case 'LOG_OUT_USER':
       {
-        return {...state, email: 'Guest', IsAuthenticated: false };
-
+        state = {...state, email: 'Guest', IsAuthenticated: false};
+        break;
       }
-    default:
-      return state
+      return state;
   }
 }

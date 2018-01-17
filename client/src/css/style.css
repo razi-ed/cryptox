@@ -17,6 +17,10 @@ Button {
   width:50%;
 }
 
+.header {
+  overflow-x: hidden;
+}
+
 .hr-text:after {
   content: attr(data-content);
   position: relative;
@@ -102,6 +106,7 @@ Button {
 }
 
 #footer {
+  /* position: relative; */
   background-color: black;
   text-align: center;
   color:white;

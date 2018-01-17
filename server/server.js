@@ -34,15 +34,15 @@ app.use(
       assets: false,
       chunks: false,
       modules: false,
-      reasons: false,
+      reasons: true,
       children: false,
-      source: false,
-      errors: false,
-      errorDetails: false,
-      warnings: false,
+      source: true,
+      errors: true,
+      errorDetails: true,
+      warnings: true,
       publicPath: false,
     },
-    })
+  })
 );
 
 app.use(webpackHotMiddleware(compiler));

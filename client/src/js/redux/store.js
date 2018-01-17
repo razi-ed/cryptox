@@ -1,4 +1,4 @@
-import { applyMiddleware, createStore, compose } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import { Reducers } from './reducers/index';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { createBrowserHistory } from 'history';
@@ -7,7 +7,8 @@ import { DevTools } from '../../../utils/DevTools';
 import ReduxThunk from 'redux-thunk'
 
 
-let initialState = {
+let defaultStore = {
+  token: localStorage.getItem('token'),
   user: {
     email: 'Guest',
     Auth: {

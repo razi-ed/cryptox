@@ -1,18 +1,14 @@
 import React from 'react';
 import Grid from 'material-ui/Grid';
 import List from './List';
-import {Chart} from './chart';
+import {RightPane} from './RightPane';
 /**
- * this class creates Exchange component
+ *to Hold all the required components required for exchange
+ * @param {*} props
+ * @return {component}
  */
-export default class Exchange extends React.Component {
-  /**
-   * this renders the component
-   * @return {component}
-   */
-  render() {
-    const baseCurrency=this.props.match.params.coin||'INR';
-    
+const Exchange =(props)=> {
+    const baseCurrency=props.match.params.coin||'INR';
     return (
       <Grid
         item
@@ -22,8 +18,8 @@ export default class Exchange extends React.Component {
         container
         className="exchange">
         <List base={baseCurrency}/>
-        <Chart  base={baseCurrency}/>
+        <RightPane base={baseCurrency}/>
       </Grid>
     );
-  };
 };
+export default Exchange;

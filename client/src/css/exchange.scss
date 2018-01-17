@@ -10,9 +10,9 @@
     width: 100%;
   }
   .chart {
-    padding: 5% 0;
-    min-height: 40vh;
-    margin-top: 4%;
+    padding: 5% 0%;
+    margin-top: -1%;
+    margin-bottom: 2vh;
   }
   .currency {
     padding: 2% 0;
@@ -21,7 +21,10 @@
 }
 .trade{
   height: 200px;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.plot{
+  height: 65.5vh;
 }

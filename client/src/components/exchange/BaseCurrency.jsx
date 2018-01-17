@@ -1,46 +1,53 @@
 import React from 'react';
-import {Link} from 'react-router-dom'
-
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography';
-import List, {ListItem, ListItemSecondaryAction, ListItemText} from
-'material-ui/List';
-import Hidden from 'material-ui/Hidden';
-import {MoreVert  } from 'material-ui-icons';
+import {Link} from 'react-router-dom';
+import {AppBar, Toolbar, Typography, List, ListItem, ListItemText, Hidden}
+ from 'material-ui';
+import {MoreVert} from 'material-ui-icons';
 
 /**
- * a component to chose a base currency
+ * a component that sets the base currency
+ * @param {object} val
  */
 class BaseCurrency extends React.Component {
-  constructor(props){
+  /**
+   * this has all the methods and functions of the BaseCurrency component
+   * @param {props} props
+   */
+  constructor(props) {
     super(props);
     this.state={
       Rcurrencies: ['INR', 'USD', 'EUR', 'GBP', 'JPY'],
       Dcurrencies: ['BTC', 'ETH', 'XRP', 'LTC', 'DASH'],
-      active:'INR',
-      isHidden:true
-    }
+      active: 'INR',
+      isHidden: true,
+    };
   }
   getCurrentValue=(val)=>{
-   this.setState({active:val})
+   this.setState({active: val});
   };
-  HideList=()=>{
-    this.setState({isHidden:!this.state.isHidden})
+  hideList=()=>{
+    this.setState({isHidden: !this.state.isHidden});
   }
-  componentDidMount(){
-    const active =this.props.base || 'INR'
-    this.setState({active})
-    
+  /**
+   *this will do inital actions when the component mounts
+   */
+  componentDidMount() {
+    const active =this.props.base || 'INR';
+    this.setState({active});
   }
+  /**
+   * @return {component} BaseCurrency
+   */
   render() {
     return (
       <AppBar position="static" color="primary">
-          <Toolbar style={{display:'flex', justifyContent: 'space-between'}}>
+          <Toolbar style={{display: 'flex', justifyContent: 'space-between'}}>
             <Typography type="title" color="inherit">
               Base Currency
             </Typography>
-            <Typography type='title' color="inherit" style={{display:'flex',justifyContent:'center'}} onClick={this.HideList}>
+            <Typography type='title' color="inherit"
+             style={{display: 'flex', justifyContent: 'center'}}
+             onClick={this.hideList}>
               {this.state.active}
               <MoreVert />
             </Typography>
@@ -50,7 +57,9 @@ class BaseCurrency extends React.Component {
             <List >
             {this.state.Rcurrencies.map(value => (
               <Link to={`/exchange/real/${value}`}>
-                <ListItem key={value} onClick={() => {this.getCurrentValue(value);this.HideList()}} dense button >
+                <ListItem key={value} onClick={() => {
+this.getCurrentValue(value); this.hideList();
+}} dense button >
                   <ListItemText primary={`${value}`} />
                 </ListItem>
               </Link>
@@ -60,7 +69,9 @@ class BaseCurrency extends React.Component {
             <List >
             {this.state.Dcurrencies.map(value => (
               <Link to={`/exchange/digital/${value}`}>
-                <ListItem key={value} onClick={() => this.getCurrentValue(value)} dense button >
+                <ListItem key={value}
+                onClick={() => this.getCurrentValue(value)}
+                dense button >
                   <ListItemText primary={`${value}`} />
                 </ListItem>
               </Link>

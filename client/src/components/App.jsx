@@ -33,9 +33,8 @@ class App extends React.Component {
    */
   render() {
     return (
-        client/src/components/App.jsx
       <Provider store={Store}>
-      <BrowserRouter history={History}
+      <BrowserRouter history={History}>
         <MuiThemeProvider theme={theme}>
         <Reboot />
         <div>

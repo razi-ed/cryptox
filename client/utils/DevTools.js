@@ -1,7 +1,6 @@
 import React from 'react';
-
 // Exported from redux-devtools
-import { createDevTools } from 'redux-devtools';
+import {createDevTools} from 'redux-devtools';
 
 // Monitors are separate packages
 import LogMonitor from 'redux-devtools-log-monitor';

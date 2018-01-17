@@ -37,11 +37,11 @@
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
     "react-media": "^1.6.1",
-    "react-router-dom": "^4.2.2",
     "typeface-roboto": "0.0.50"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.1",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",

@@ -1,0 +1,28 @@
+.currency-panel {
+  background-color: #e0e0e0;
+  /* display: flex; */
+  justify-content: space-around;
+  /* flex-wrap: wrap;   */
+}
+
+.user-profile-container {
+  background-color: #e0e0e0;
+  
+}
+
+.currency-container {
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+.currency {
+  align-content: center;
+  padding: 4%;
+  margin: 5%;
+}
+
+.user-profile {
+  padding: 4%;
+  margin: 5%;
+}

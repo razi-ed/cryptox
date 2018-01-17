@@ -1,0 +1,20 @@
+.exchange {
+  background-color: #e0e0e0;
+  align-items: flex-start;
+  padding: 2%;
+  .list {
+    display: flex;
+    justify-content: center;
+  }
+  .List {
+    width: 100%;
+  }
+  .chart {
+    padding: 5% 0;
+    min-height: 60vh;
+  }
+  .currency {
+    padding: 2% 0;
+    margin: 5%;
+  }
+}

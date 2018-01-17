@@ -6,15 +6,6 @@ import DevTools from '../../../utils/DevTools';
 // import ReduxThunk from 'redux-thunk';
 
 
-let initialState = {
-  user: {
-    email: 'Guest',
-    Auth: {
-      IsAuthenticated: false,
-    },
-  },
-};
-
 // const reduxMiddlewares = [templateMiddlewareFunction];
 
 /*
@@ -51,7 +42,7 @@ const enhancer = compose(
  * @param {initialState} initialState
  */
 
-  const Store = createStore(Reducers, initialState, enhancer);
+  const Store = createStore(Reducers, enhancer);
 
   Store.subscribe(() => {
     console.log('Store updated, ', Store.getState());

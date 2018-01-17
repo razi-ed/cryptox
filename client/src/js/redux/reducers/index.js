@@ -4,6 +4,6 @@ import { routerReducer } from 'react-router-redux';
 
 export const Reducers = combineReducers({
   user: UserReducer,
-  history: HisoryReducer,
+  // history: HisoryReducer, INCLUDE TO FACILITATES BACK n FORTH Navigation.
   routing: routerReducer,
 });

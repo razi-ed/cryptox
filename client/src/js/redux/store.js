@@ -1,10 +1,9 @@
-import { applyMiddleware, createStore, compose } from 'redux';
-import { Reducers } from './reducers/index';
-import { syncHistoryWithStore } from 'react-router-redux';
-import { createBrowserHistory } from 'history';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import { DevTools } from '../../../utils/DevTools';
-import ReduxThunk from 'redux-thunk'
+import {applyMiddleware, createStore, compose} from 'redux';
+import {Reducers} from './reducers/index';
+import {syncHistoryWithStore} from 'react-router-redux';
+import {createBrowserHistory} from 'history';
+import DevTools from '../../../utils/DevTools';
+// import ReduxThunk from 'redux-thunk';
 
 
 let initialState = {
@@ -16,7 +15,7 @@ let initialState = {
   },
 };
 
-const reduxMiddlewares = [ /*ReduxThunk.withExtraArgument({ api, whatever }), */ templateMiddlewareFunction];
+// const reduxMiddlewares = [templateMiddlewareFunction];
 
 /*
 Somewhere down the APP,   USING FUNCTION SIMILAR TO BELOW FUNCTION
@@ -39,20 +38,24 @@ const monitorReducer = (store) => (next) => (action) => {
 };
 
 
-//https://github.com/gaearon/redux-devtools/blob/HEAD/docs/Walkthrough.md
+// https://github.com/gaearon/redux-devtools/blob/HEAD/docs/Walkthrough.md
 const enhancer = compose(
-  applyMiddleware(...reduxMiddlewares),
-  //https://github.com/zalmoxisus/redux-devtools-instrument#api
-  DevTools.instrument(monitorReducer, { maxAge: 20, shouldCatchErrors: true, shouldHotReload: true })
+  applyMiddleware(templateMiddlewareFunction),
+  // https://github.com/zalmoxisus/redux-devtools-instrument#api
+  DevTools.instrument(
+  monitorReducer,
+  {maxAge: 20, shouldCatchErrors: true, shouldHotReload: true})
 );
+/**
+ *This function takes initial state and creates new store
+ * @param {initialState} initialState
+ */
 
-export default function configureStore(initialState) {
-  const Store = createStore(Reducers, initialState, enhancer)
+  const Store = createStore(Reducers, initialState, enhancer);
 
   Store.subscribe(() => {
     console.log('Store updated, ', Store.getState());
   });
-
   export const History = syncHistoryWithStore(
     createBrowserHistory(),
     Store);

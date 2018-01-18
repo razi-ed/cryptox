@@ -6,7 +6,9 @@ import * as TradeActions from '../../js/redux/actions/buySellActionsCreator';
 import {Grid, Paper} from 'material-ui';
 
 const mapStateToProps=(state)=>{
-return {trade: state.Trade};
+return {
+  ...state.Exchange,
+};
 };
 const mapDispatchToProps=dispatch=>bindActionCreators(TradeActions, dispatch);
 
@@ -28,7 +30,6 @@ class List extends React.Component {
       real: [
         'INR', 'USD', 'EUR', 'JPY', 'GBP',
       ],
-      changeCrypto: [],
       BTC: 0,
       ETH: 0,
       XRP: 0,

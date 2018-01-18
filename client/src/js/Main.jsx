@@ -12,4 +12,4 @@ if (module.hot) {
     });
 };
 
-render(<App />, document.getElementById('app1'));
+render(<App />, document.getElementById('app'));

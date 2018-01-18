@@ -1,4 +1,4 @@
-const exchange = {
+let Exchange = {
   activeCurrency: 'BTC',
   baseCurrency: 'INR',
   crypto: [
@@ -19,4 +19,4 @@ const exchange = {
   GBP: 0,
 };
 
-export default exchange;
+export default Exchange;

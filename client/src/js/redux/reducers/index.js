@@ -1,11 +1,11 @@
 import {combineReducers} from 'redux';
 import UserReducer from './user';
-import Trade from './TradeReducer';
+import Exchange from './ExchangeReducer';
 import {routerReducer} from 'react-router-redux';
 // import HistoryReducer from '../store';
 export const Reducers = combineReducers({
   user: UserReducer,
-  Trade,
+  Exchange,
   // history: HisoryReducer, INCLUDE TO FACILITATES BACK n FORTH Navigation.
   routing: routerReducer,
 });

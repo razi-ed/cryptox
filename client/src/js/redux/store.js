@@ -4,15 +4,12 @@ import {syncHistoryWithStore} from 'react-router-redux';
 import {createBrowserHistory} from 'history';
 import DevTools from '../../../utils/DevTools';
 // import ReduxThunk from 'redux-thunk';
-
+import Exchange from './Exchange';
+import user from './user';
 
 let initialState = {
-  user: {
-    email: 'Guest',
-    Auth: {
-      IsAuthenticated: false,
-    },
-  },
+  Exchange,
+  user,
 };
 
 // const reduxMiddlewares = [templateMiddlewareFunction];

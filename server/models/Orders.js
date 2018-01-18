@@ -7,6 +7,12 @@ const orders=new mongoose.Schema({
   email: {
     type: String,
   },
+  Date: {
+    type: String,
+  },
+  Time: {
+    type: String,
+  },
   commodity: {
     offer: {},
     tradeFor: {},

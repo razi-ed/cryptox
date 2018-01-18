@@ -17,10 +17,12 @@ const buying = (req, res)=>{
   // update records
   traderAccount.find({email}).then((result)=>{
     // check if user has Balance or not
-    if (result[0].currencies[currency]>units) {
+    if (result[0].currencies[currency]>=units) {
       const Order=new Orders({
         type: 'buyer',
         email,
+        Date: new Date().toDateString(),
+        Time: new Date().toLocaleTimeString(),
         commodity: {
           offer: {
             [currency]: units,

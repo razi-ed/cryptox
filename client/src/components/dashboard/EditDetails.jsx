@@ -6,6 +6,7 @@ import Typography from 'material-ui/Typography';
 import * as ReactRedux from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import ConnectedNameForm from './Forms/ChangeNameForm';
+import ChangePasswordForm from './Forms/ChangePasswordForm';
 import {isUserAuthenticated} from
                              '../../js/redux/actions/dashboardActionsCreator';
 
@@ -54,13 +55,28 @@ class EditDetails extends React.Component {
           onClick={() => {
               this.setState({
                 changeNameClicked: true,
+                changePasswordClicked: false,
               });
             }
           }>
         Change name
       </Button>
+      <Button color="primary"
+          onClick={() => {
+              this.setState({
+                changeNameClicked: false,
+                changePasswordClicked: true,
+              });
+            }
+          }>
+        Change password
+      </Button>
       {this.state.changeNameClicked ?
         <ConnectedNameForm/>:
+        null
+      }
+      {this.state.changePasswordClicked ?
+        <ChangePasswordForm /> :
         null
       }
       </Paper>
@@ -76,6 +92,7 @@ const mapStateToProps = (state) => {
 
 const EditDetailsWithRouter = withRouter(EditDetails);
 
-const ConnectedEditDetails = ReactRedux.connect(mapStateToProps)(EditDetailsWithRouter);
+const ConnectedEditDetails =
+ReactRedux.connect(mapStateToProps)(EditDetailsWithRouter);
 
 export default ConnectedEditDetails;

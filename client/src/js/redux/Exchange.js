@@ -12,12 +12,11 @@ let Exchange = {
   XRP: 0,
   LTC: 0,
   DASH: 0,
-  INR: 0,
+  INR: 1,
   USD: 0,
   EUR: 0,
   JPY: 0,
   GBP: 0,
-  test: 0,
 };
 
 export default Exchange;

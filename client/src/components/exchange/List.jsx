@@ -86,7 +86,6 @@ class List extends React.Component {
    *methods to initaite the state when component is mounted
    */
   componentDidMount() {
-    this.componentInit();
     setInterval(() => {
       if (this.state.baseCurrency !== this.props.base) {
         this.componentInit();
@@ -114,7 +113,8 @@ class List extends React.Component {
               type='digital'
               price={this.props.Exchange[coin].price}
               change={this.props.Exchange[coin].change}
-              baseCurrency={this.props.base || this.props.Exchange.baseCurrency}/>)}
+              baseCurrency=
+              {this.props.base || this.props.Exchange.baseCurrency}/>)}
           {this
             .props
             .Exchange
@@ -124,15 +124,14 @@ class List extends React.Component {
               key={index}
               type='real'
               price={1 / this.props.Exchange[coin]}
-              baseCurrency={this.props.base || this.props.Exchange.baseCurrency}/>)}
+              baseCurrency=
+              {this.props.base || this.props.Exchange.baseCurrency}/>)}
         </Paper>
       </Grid>
     );
   }
 }
-const mapStateToProps=(state)=>{
-  return state;
-  };
+const mapStateToProps=state=> state;
 
 
   const mapDispatchToProps=dispatch=>bindActionCreators(TradeActions, dispatch);

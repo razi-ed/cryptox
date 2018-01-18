@@ -17,6 +17,7 @@ let Exchange = {
   EUR: 0,
   JPY: 0,
   GBP: 0,
+  test: 0,
 };
 
 export default Exchange;

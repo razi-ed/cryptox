@@ -8,7 +8,6 @@ import Exchange from './Exchange';
 import user from './user';
 
 let initialState = {
-  Exchange,
   user,
 };
 

@@ -5,12 +5,6 @@ import * as TradeActions from '../../js/redux/actions/buySellActionsCreator';
 
 import {Grid, Paper} from 'material-ui';
 
-const mapStateToProps=(state)=>{
-return {
-  ...state.Exchange,
-};
-};
-const mapDispatchToProps=dispatch=>bindActionCreators(TradeActions, dispatch);
 
 import BaseCurrency from './BaseCurrency';
 import Currency from './Currency';
@@ -24,47 +18,31 @@ class List extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      crypto: [
-        'BTC', 'ETH', 'XRP', 'LTC', 'DASH',
-      ],
-      real: [
-        'INR', 'USD', 'EUR', 'JPY', 'GBP',
-      ],
-      BTC: 0,
-      ETH: 0,
-      XRP: 0,
-      LTC: 0,
-      DASH: 0,
-      INR: 0,
-      USD: 0,
-      EUR: 0,
-      JPY: 0,
-      GBP: 0,
       baseCurrency: 'INR',
     };
   }
   getCrypto = async () => {
     try {
-      const response = await fetch(`https://api.coinmarketcap.com/v1/ticker/?convert=${this.state.baseCurrency}&limit=15`);
+      const response = await fetch(`https://api.coinmarketcap.com/v1/ticker/?convert=${this.props.Exchange.baseCurrency}&limit=15`);
       const currencies = await response.json();
       // console.log(currencies);
       this
-        .state
+        .props
+        .Exchange
         .crypto
         .forEach(Rcurrency => {
           currencies
             .filter(currency => currency.symbol == Rcurrency)
-            .forEach(crypto => this.setState({
-              [crypto.symbol]: {
-                price: Number(crypto[
-                  `price_${this
-                    .state
-                    .baseCurrency
-                    .toLowerCase()}`
-                ]),
-                change: crypto.percent_change_1h,
-              },
+            .forEach(crypto => this.props.updatePrice([crypto.symbol], {
+              price: Number(crypto[
+                `price_${this
+                  .state
+                  .baseCurrency
+                  .toLowerCase()}`
+              ]),
+              change: crypto.percent_change_1h,
             }));
+            // this.props.updatePrice('BTC', this.state.BTC);
         });
     } catch (e) {
       console.log('error', e);
@@ -72,14 +50,15 @@ class List extends React.Component {
   }
   getReal = async () => {
     try {
-      const response = await fetch(`https://api.fixer.io/latest?base=${this.state.baseCurrency}`);
+      const response = await fetch(`https://api.fixer.io/latest?base=${this.props.Exchange.baseCurrency}`);
       const currencies = await response.json();
       this
-        .state
+        .props
+        .Exchange
         .real
-        .filter(currency => currency !== this.state.baseCurrency)
+        .filter(currency => currency !== this.props.Exchange.baseCurrency)
         .forEach(Rcurrency => {
-          this.setState({[Rcurrency]: currencies.rates[Rcurrency]});
+          this.props.updatePrice([Rcurrency], currencies.rates[Rcurrency]);
         });
     } catch (e) {
       console.log('error', e);
@@ -97,6 +76,7 @@ class List extends React.Component {
       this.setState({
         [base]: 1,
       }, () => {
+        this.props.updatePrice([base], 1);
         this.getCrypto();
         this.getReal();
       });
@@ -125,29 +105,38 @@ class List extends React.Component {
         <BaseCurrency {...this.props}/>
         <Paper className='List'>
           {this
-            .state
+            .props
+            .Exchange
             .crypto
             .map((coin, index) => <Currency
               name={coin}
               key={index}
               type='digital'
-              price={this.state[coin].price}
-              change={this.state[coin].change}
-              baseCurrency={this.props.base || this.state.baseCurrency}/>)}
+              price={this.props.Exchange[coin].price}
+              change={this.props.Exchange[coin].change}
+              baseCurrency={this.props.base || this.props.Exchange.baseCurrency}/>)}
           {this
-            .state
+            .props
+            .Exchange
             .real
             .map((coin, index) => <Currency
               name={coin}
               key={index}
               type='real'
-              price={1 / this.state[coin]}
-              baseCurrency={this.props.base || this.state.baseCurrency}/>)}
+              price={1 / this.props.Exchange[coin]}
+              baseCurrency={this.props.base || this.props.Exchange.baseCurrency}/>)}
         </Paper>
       </Grid>
     );
   }
 }
+const mapStateToProps=(state)=>{
+  return state;
+  };
+
+
+  const mapDispatchToProps=dispatch=>bindActionCreators(TradeActions, dispatch);
+
 const SList=connect(mapStateToProps, mapDispatchToProps)(List);
 
 export default SList;

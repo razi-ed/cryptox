@@ -5,6 +5,8 @@ import Header from './Header';
 import Home from './Home';
 import Footer from '../components/Footer';
 import ForgotPassword from '../components/auth/ForgotPassword';
+import Store, {History} from '../js/redux/store';
+import {Provider} from 'react-redux';
 import {lightBlue, red} from 'material-ui/colors';
 import Reboot from 'material-ui/Reboot';
 import {withTheme, createMuiTheme, MuiThemeProvider} from 'material-ui/styles';
@@ -31,7 +33,8 @@ class App extends React.Component {
    */
   render() {
     return (
-      <BrowserRouter>
+      <Provider store={Store}>
+      <BrowserRouter history={History}>
         <MuiThemeProvider theme={theme}>
         <Reboot />
         <div>
@@ -43,6 +46,7 @@ class App extends React.Component {
       </div>
         </MuiThemeProvider>
     </BrowserRouter>
+    </Provider>
     );
   }
 }

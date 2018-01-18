@@ -8,6 +8,8 @@ import {Grid, Paper} from 'material-ui';
 
 import BaseCurrency from './BaseCurrency';
 import Currency from './Currency';
+
+import {getReal, getCrypto} from '../../../utils/getCurrencies';
 /**
  * this class creates a component of list of currencies
  */
@@ -21,52 +23,7 @@ class List extends React.Component {
       baseCurrency: 'INR',
     };
   }
-  getCrypto = async () => {
-    try {
-      const response = await fetch(`https://api.coinmarketcap.com/v1/ticker/?convert=${this.props.Exchange.baseCurrency}&limit=15`);
-      const currencies = await response.json();
-      // console.log(currencies);
-      this
-        .props
-        .Exchange
-        .crypto
-        .forEach(Rcurrency => {
-          currencies
-            .filter(currency => currency.symbol == Rcurrency)
-            .forEach(crypto => this.props.updatePrice([crypto.symbol], {
-              price: Number(crypto[
-                `price_${this
-                  .state
-                  .baseCurrency
-                  .toLowerCase()}`
-              ]),
-              change: crypto.percent_change_1h,
-            }));
-            // this.props.updatePrice('BTC', this.state.BTC);
-        });
-    } catch (e) {
-      console.log('error', e);
-    }
-  }
-  getReal = async () => {
-    try {
-      const response = await fetch(`https://api.fixer.io/latest?base=${this.props.Exchange.baseCurrency}`);
-      const currencies = await response.json();
-      this
-        .props
-        .Exchange
-        .real
-        .filter(currency => currency !== this.props.Exchange.baseCurrency)
-        .forEach(Rcurrency => {
-          this.props.updatePrice([Rcurrency], currencies.rates[Rcurrency]);
-        });
-    } catch (e) {
-      console.log('error', e);
-    } finally {
-      //  console.log('done');
-    }
-  }
-  componentInit = () => {
+   componentInit = () => {
     const base = this.props.base || 'INR';
     // console.log('component mounted',{[base]:1});
     this.setState({
@@ -77,8 +34,8 @@ class List extends React.Component {
         [base]: 1,
       }, () => {
         this.props.updatePrice([base], 1);
-        this.getCrypto();
-        this.getReal();
+        getCrypto(this.props);
+        getReal(this.props);
       });
     });
   }
@@ -132,10 +89,7 @@ class List extends React.Component {
   }
 }
 const mapStateToProps=state=> state;
-
-
-  const mapDispatchToProps=dispatch=>bindActionCreators(TradeActions, dispatch);
-
+const mapDispatchToProps=dispatch=>bindActionCreators(TradeActions, dispatch);
 const SList=connect(mapStateToProps, mapDispatchToProps)(List);
 
 export default SList;

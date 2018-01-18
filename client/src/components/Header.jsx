@@ -40,6 +40,7 @@ const styles = theme => ({
   text: {
     popperClose: {
       pointerEvents: 'none',
+      display: 'none'
     },
     fontWeight: ['300'],
     fontSize: 14,
@@ -55,7 +56,7 @@ const styles = theme => ({
   root: {
     width: '100%',
     display: 'flex',
-    justifyContent: 'spaceBetween'
+    justifyContent: 'spaceBetween',
   },
   flex: {
     flex: 1,
@@ -76,19 +77,25 @@ class Header extends React.Component {
    * this function is called by React to render the component
    * @return {component}
    */
-  state = {
-    auth: true,
-    anchorElement: null,
-    open: false,
-  };
+  
 
-  /*constructor(props) {
+  constructor(props) {
+    super(props);
   const { classes } = props;
+    this.state = {
+      auth: true,
+      anchorElement: null,
+      open: false,
+    };
 //P.S.  
-}*/
+}
 
   handleClick = () => {
-    this.state.open === false ? this.setState({ open: true }) : this.setState({ open: false })
+    if (this.state.open) {
+      this.setState({ open: false })
+    } else {
+      this.setState({ open: true })
+    }
   };
 
   handleClose = () => {
@@ -112,7 +119,7 @@ class Header extends React.Component {
 
     return (
       <div className={classes.root}>
-        <AppBar position="static">
+        <AppBar position='fixed' elevation={this.props.elevationValue}>
           <Toolbar>
           <Media query="(max-width: 599px)">
           {matches =>
@@ -161,6 +168,7 @@ class Header extends React.Component {
             }
             </Media>
             {/*
+              https://material-ui-next.com/demos/chips/ use chips with name of trader after login
               #####ADD TOGGLE SWITCH FOR LOGOUT/LOGIN IN MOBILE VIEW, AFTER AUTHENTICATION
               ### state
               const state= {
@@ -234,7 +242,7 @@ class Header extends React.Component {
                                 <ListItemIcon className={classes.icon}>
                                   <SignUpIcon />
                                 </ListItemIcon>
-                                <ListItemText classes={{ text: classes.text }} inset primary="Sign Up" />
+                                <ListItemText  inset primary="Sign Up" />
                               </MenuItem>
                             </Link>
                               <Divider light style={{ height: .8 }} />
@@ -243,7 +251,7 @@ class Header extends React.Component {
                                 <ListItemIcon className={classes.icon}>
                                   <LogInIcon />
                                 </ListItemIcon>
-                                <ListItemText classes={{ text: classes.text }} inset primary="Log In" />
+                                <ListItemText inset primary="Log In" />
                               </MenuItem>
                               </Link>
                               <Divider style={{ height: 1 }} />
@@ -252,7 +260,7 @@ class Header extends React.Component {
                                 <ListItemIcon className={classes.icon}>
                                   <AboutUsIcon />
                                 </ListItemIcon>
-                                <ListItemText classes={{ text: classes.text }} inset primary="About Us" />
+                                <ListItemText inset primary="About Us" />
                               </MenuItem>
                               </Link>
                             </MenuList>
@@ -274,7 +282,7 @@ class Header extends React.Component {
                                   <ListItemIcon className={classes.iconLg}>
                                     <SignUpIcon />
                                   </ListItemIcon>
-                                  <ListItemText classes={{ text: classes.textLg }} inset primary="Sign Up" />
+                                  <ListItemText inset primary="Sign Up" />
                                 </MenuItem>
                                 </Link>
                                 <Divider light style={{ height: 1.15 }} />
@@ -283,7 +291,7 @@ class Header extends React.Component {
                                   <ListItemIcon className={classes.iconLg}>
                                     <LogInIcon />
                                   </ListItemIcon>
-                                  <ListItemText classes={{ text: classes.textLg }} inset primary="Log In" />
+                                  <ListItemText inset primary="Log In" />
                                 </MenuItem>
                               </Link>
                                 <Divider style={{ height: 1.25 }} />
@@ -292,7 +300,7 @@ class Header extends React.Component {
                                   <ListItemIcon className={classes.iconLg}>
                                     <AboutUsIcon />
                                   </ListItemIcon>
-                                  <ListItemText classes={{ text: classes.textLg }} inset primary="About Us" />
+                                  <ListItemText inset primary="About Us" />
                                 </MenuItem>
                                 </Link>
                               </MenuList>

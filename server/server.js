@@ -5,8 +5,11 @@ const path = require('path');
 const passport = require('passport');
 const webpack = require('webpack');
 const auth = require('./routes/auth');
+const orders= require('./routes/order');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
+const statement = require('./routes/accounts/accountStatements');
+const balance = require('./routes/accounts/accountBalance');
 
 const config = require('../client/webpack.config.js');
 const passportConfig = require('./config/passport');
@@ -60,6 +63,9 @@ passportConfig(passport);
 
 app.use(express.static(path.join(__dirname, '../dist/')));
 app.use('/auth', auth);
+app.use('/orders', orders);
+app.use('/account', statement);
+app.use('/account', balance);
 app.use('/profile', users);
 app.use(frontend);
 

@@ -22,7 +22,7 @@ const selling = (req, res)=>{
               [currency]: units,
             },
             tradeFor: {
-              [req.body.tradeFor]: (1/req.body.cuurentPrice)*units,
+              [req.body.tradeFor]: (1/req.body.currentPrice)*units,
             },
           },
         });

@@ -14,12 +14,20 @@ export default function user(state = {}, action) {
       {
         return {...state, email: 'Guest', IsAuthenticated: false};
       }
+    case 'CHANGE_NAME':
+    {
+      return {...state, name: action.name};
+    }
+    case 'SET_USER_DETAILS':
+    {
+      return {...state, email: action.email, name: action.name};
+    }
     default:
       return state;
   }
 }
 
-export const setUser = (state = {}, action)=> {
+/* export const setUser = (state = {}, action)=> {
   if (action.type === 'SET_USER_DETAILS') {
     console.log('in dispatch');
 
@@ -28,3 +36,12 @@ export const setUser = (state = {}, action)=> {
     return state;
   }
 };
+
+export const changeName = (state = {}, action) => {
+  if (action.type === 'CHANGE_NAME') {
+    return {...state, name: action.name};
+  } else {
+    return state;
+  }
+};
+ */

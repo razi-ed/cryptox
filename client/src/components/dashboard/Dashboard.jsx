@@ -8,6 +8,7 @@ import WalletBalances from './WalletBalances';
 import * as ReactRedux from 'react-redux';
 import {getUserDetails} from '../../js/redux/actions/dashboardActionsCreator';
 import {isUserAuthenticated} from '../../js/redux/actions/dashboardActionsCreator';
+import LogOutIcon from 'material-ui-icons/PowerSettingsNew';
 /**
  * this class creates Dashboard component
  */
@@ -48,6 +49,7 @@ class Dashboard extends React.Component {
 
     return (
       <div className='currency-container'>
+      {/* <LogOutIcon style={{float: 'left'}}/> */}
       <Grid className='user-profile-container' container>
       <UserProfile />
       <WalletBalances />

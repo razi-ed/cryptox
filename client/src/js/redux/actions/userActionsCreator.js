@@ -11,3 +11,14 @@ export function authenticate(email) {
     },
   };
 }
+
+/**
+ *
+ * @param {name} name
+ * @return {function}
+ */
+export function changeName(name) {
+  return (dispatch) => {
+    dispatch({type: 'CHANGE_NAME', name: name});
+  };
+}

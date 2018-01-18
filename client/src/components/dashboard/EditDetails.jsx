@@ -4,6 +4,10 @@ import Grid from 'material-ui/Grid';
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 import * as ReactRedux from 'react-redux';
+import {withRouter} from 'react-router-dom';
+import ConnectedNameForm from './Forms/ChangeNameForm';
+import {isUserAuthenticated} from
+                             '../../js/redux/actions/dashboardActionsCreator';
 
 
 /**
@@ -24,7 +28,14 @@ class EditDetails extends React.Component {
   /**
    * @method
    */
-
+  componentDidMount() {
+    if (localStorage.getItem('token')) {
+      this.props.dispatch(isUserAuthenticated(localStorage.getItem('token'),
+       this.props.history));
+    } else {
+      this.props.history.push('/login');
+    }
+  }
   /**
    * @method
    * @return {EditeDetialsHTML}
@@ -39,10 +50,19 @@ class EditDetails extends React.Component {
           {this.props.state.user.name}
           </Typography>
         </Typography>
-        <Button color="primary">
+        <Button color="primary"
+          onClick={() => {
+              this.setState({
+                changeNameClicked: true,
+              });
+            }
+          }>
         Change name
       </Button>
-
+      {this.state.changeNameClicked ?
+        <ConnectedNameForm/>:
+        null
+      }
       </Paper>
     );
   }
@@ -54,6 +74,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-const ConnectedEditDetails = ReactRedux.connect(mapStateToProps)(EditDetails);
+const EditDetailsWithRouter = withRouter(EditDetails);
+
+const ConnectedEditDetails = ReactRedux.connect(mapStateToProps)(EditDetailsWithRouter);
 
 export default ConnectedEditDetails;

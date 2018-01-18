@@ -36,11 +36,11 @@ const selling = (req, res)=>{
           {email: 'admin@mountblue.io'},
           {$inc: updateAdmin}
         ).then((result)=>console.log(result));
-        res.send({
+        res.status(200).send({
                     result: 'Transaction Successful',
                 });
       } else {
-        res.send({
+        res.status(400).send({
                     result: 'Transcation Failed',
                     type: 'Insufficient Balance',
                 });

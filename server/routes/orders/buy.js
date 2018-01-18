@@ -39,11 +39,11 @@ const buying = (req, res)=>{
       traderAccount.update(
         {email: 'admin@mountblue.io'},
         {$inc: updateAdmin}).then((result)=>console.log(result));
-      res.send({
+      res.status(200).send({
                   result: 'Transaction is Successful',
               });
     } else {
-      res.send({
+      res.status(400).send({
                   result: 'Transaction Failed',
                   type: 'Insufficient Balance',
               });

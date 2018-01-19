@@ -20,4 +20,4 @@ if (module.hot) {
 
 render( <Provider store={Store}>
     <App/>
-</Provider>, document.getElementById('app'));
+</Provider>, document.getElementById('app1'));

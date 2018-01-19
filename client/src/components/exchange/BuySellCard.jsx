@@ -12,6 +12,10 @@ import {
   Input,
 } from 'material-ui';
 
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import * as TradeActions from '../../js/redux/actions/buySellActionsCreator';
+
 const currencies = [
   {
     value: 'USD',
@@ -64,35 +68,16 @@ class BuySellCard extends React.Component {
         }}
           image="https://blink.ucsd.edu/_images/homepage/landing-pages/buy-cart.png"
           title="Contemplative Reptile"/>
+          <Typography
+          type="display1"
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+          }}
+          >
+          {`base currency ${this.props.baseCurrency}`}
+          </Typography>
         <CardContent className='trade'>
-          <TextField
-            id="select-currency"
-            select
-            label="base currency"
-            value={this.state.currency}
-            onChange={this.handleChange('base')}
-            helperText="from"
-            margin="normal">
-            {currencies.map(option => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
-          <TextField
-            id="select-currency"
-            select
-            label="trade for"
-            value={this.state.trade}
-            onChange={this.handleChange('trade')}
-            helperText="to"
-            margin="normal">
-            {currencies.map(option => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
           <TextField
             id="select-currency"
             select
@@ -107,10 +92,26 @@ class BuySellCard extends React.Component {
               </MenuItem>
             ))}
           </TextField>
+
           <Input
             id="quantity"
+            type='number'
             value={this.state.quantity}
             onChange={this.handleChange('quantity')}/>
+          <TextField
+            id="select-currency"
+            select
+            label="trade for"
+            value={this.state.trade}
+            onChange={this.handleChange('trade')}
+            helperText="to"
+            margin="normal">
+            {this.props.real.map(option => (
+              <MenuItem key={option} value={option}>
+                {option}
+              </MenuItem>
+            ))}
+          </TextField>
 
         </CardContent>
         <Typography
@@ -119,9 +120,9 @@ class BuySellCard extends React.Component {
           display: 'flex',
           justifyContent: 'center',
         }}>
-          {`${(this.state.units * this.state.quantity).toFixed(4)}
+          {`${(this.state.units * this.state.quantity).toFixed(3)}
            ${this.state.trade}
-          converts to ${this.state.base}`}
+      = ${((this.state.units * this.state.quantity)/this.props[this.state.trade]).toFixed(3)} ${this.props.baseCurrency}`}
         </Typography>
         <CardActions
           style={{
@@ -144,4 +145,9 @@ class BuySellCard extends React.Component {
   }
 };
 
-export default BuySellCard;
+const mapStateToProps = state => state.Exchange;
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(TradeActions, dispatch);
+const SBuySellCard = connect(mapStateToProps, mapDispatchToProps)(BuySellCard);
+
+export default SBuySellCard;

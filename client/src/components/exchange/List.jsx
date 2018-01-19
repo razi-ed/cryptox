@@ -29,22 +29,18 @@ class List extends React.Component {
     this.setState({
       baseCurrency: base,
     }, () => {
-      // console.log(`changed base currency to ${this.state.baseCurrency}`);
-      this.setState({
-        [base]: 1,
-      }, () => {
-        this.props.updatePrice([base], 1);
+        this.props.updatePrice(`${[base]}`, 1);
+        this.props.updatePrice('baseCurrency', base);
         getCrypto(this.props);
         getReal(this.props);
       });
-    });
-  }
+    };
   /**
    *methods to initaite the state when component is mounted
    */
   componentDidMount() {
     setInterval(() => {
-      if (this.state.baseCurrency !== this.props.base) {
+      if (this.props.baseCurrency !== this.props.base) {
         this.componentInit();
       }
     }, 500);

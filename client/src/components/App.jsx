@@ -11,11 +11,11 @@ import Footer from '../components/Footer';
 import ForgotPassword from '../components/auth/ForgotPassword';
 import Dashboard from '../components/dashboard/dashboard';
 import Exchange from '../components/exchange/Exchange';
-import Store, {History} from '../js/redux/store';
+import Store, {History} from '../store';
 import {lightBlue, red} from 'material-ui/colors';
 import Reboot from 'material-ui/Reboot';
 import {withTheme, createMuiTheme, MuiThemeProvider} from 'material-ui/styles';
-import * as TradeActions from '../js/redux/actions/buySellActionsCreator';
+import * as TradeActions from '../actions/buySellActionsCreator';
 import {getCrypto, getReal} from '../../utils/getCurrencies';
 const theme = createMuiTheme({
   palette: {

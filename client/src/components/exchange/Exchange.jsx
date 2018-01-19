@@ -3,7 +3,7 @@ import Grid from 'material-ui/Grid';
 import SList from './List';
 import RightPane from './RightPane';
 import {connect} from 'react-redux';
-import {getExchangeRates} from '../../js/redux/actions/exchange';
+import {getExchangeRates} from '../../actions/exchange';
 /**
  *to Hold all the required components required for exchange
  * @param {*} props

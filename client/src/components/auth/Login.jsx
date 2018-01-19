@@ -7,7 +7,7 @@ import VisibilityOff from 'material-ui-icons/VisibilityOff';
 import IconButton from 'material-ui/IconButton';
 import '../../css/style.css';
 import Google from './Google';
-import {changeEmail} from '../../js/redux/actions/userActionsCreator';
+import {changeEmail} from '../../actions/userActionsCreator';
 import * as ReactRedux from 'react-redux';
 
 /**

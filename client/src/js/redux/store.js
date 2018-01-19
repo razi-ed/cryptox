@@ -25,11 +25,11 @@ function fetchUser(id) {
 */
 
 const templateMiddlewareFunction = (store) => (next) => (action) => {
-  //console.log('Action now being fired is ~~~> ');
+  // console.log('Action now being fired is ~~~> ');
   next(action);
 };
 const monitorReducer = (store) => (next) => (action) => {
-  //console.log(action);
+  // console.log(action);
   next(action);
 };
 
@@ -50,9 +50,9 @@ const monitorReducer = (store) => (next) => (action) => {
 const composeEnhancers =
 typeof window === 'object' &&
 window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
-window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) : compose
+window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) : compose;
 const Store = createStore(Reducers, initialState, composeEnhancers(
-    applyMiddleware(thunk)))
+    applyMiddleware(thunk)));
 
   // Store.subscribe(() => {
   //   console.log('Store updated, ', Store.getState());

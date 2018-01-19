@@ -1,13 +1,26 @@
 /**
- * authenticate is an actionCreator ###TEMPLATE###
- * @param {string} email
- * @return {object} action
+ *
+ * @param {email} email
+ * @return {action} action
  */
-export function authenticate(email) {
+export function changeEmail(email) {
   return {
-    type: 'LOG_IN_USER',
+    type: 'CHANGE_EMAIL',
     payload: {
       email,
+    },
+  };
+}
+
+/**
+ * @param {name} name
+ * @return {action} action
+ */
+export function changeName(name) {
+  return {
+    type: 'CHANGE_NAME',
+    payload: {
+      name,
     },
   };
 }

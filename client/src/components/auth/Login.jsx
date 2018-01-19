@@ -7,24 +7,24 @@ import VisibilityOff from 'material-ui-icons/VisibilityOff';
 import IconButton from 'material-ui/IconButton';
 import '../../css/style.css';
 import Google from './Google';
+import {changeEmail} from '../../js/redux/actions/userActionsCreator';
+import * as ReactRedux from 'react-redux';
 
 /**
 * @class
 */
-export default class Login extends React.Component {
+class Login extends React.Component {
   /**
   * @constructor
   */
   constructor() {
     super();
     this.state = {
-      email: null,
       password: null,
       showPassword: false,
       validationHelperTextVisible: 'none',
       validationColor: 'red',
     };
-    this.changeEmail = this.changeEmail.bind(this);
     this.changePassword = this.changePassword.bind(this);
     this.loginUser = this.loginUser.bind(this);
     this.handleClickIcon = this.handleClickIcon.bind(this);
@@ -34,14 +34,14 @@ export default class Login extends React.Component {
   * @function
   */
   loginUser() {
-    if (this.state.email&&this.state.password) {
+    if (this.props.email && this.state.password) {
       fetch('/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          email: this.state.email,
+          email: this.props.email,
           password: this.state.password,
         }),
       }).then((res)=>res.json()).then((res)=>{
@@ -54,14 +54,6 @@ export default class Login extends React.Component {
       });
   }
 }
-  /**
-  * @param {event} event
-  */
-  changeEmail(event) {
-    this.setState({
-      email: event.target.value,
-    });
-  }
   /**
   *
   * @param {event} event
@@ -108,7 +100,10 @@ export default class Login extends React.Component {
       <Input
       autoFocus={true}
       type='email'
-      onChange={this.changeEmail}
+      onChange={(event) => {
+        this.props.dispatch(
+        changeEmail(event.target.value));
+      }}
       />
       </FormControl>
       <FormControl
@@ -154,3 +149,11 @@ export default class Login extends React.Component {
       );
     }
   }
+
+  const mapStateToProps = (state) => {
+    return {
+      email: state.user.email,
+    };
+  };
+     const ConnectLogin = ReactRedux.connect(mapStateToProps)(Login);
+     export default ConnectLogin;

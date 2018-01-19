@@ -1,14 +1,26 @@
 /**
  *
  * @param {email} email
- * @return {object} action
+ * @return {action} action
  */
 export function changeEmail(email) {
-  console.log(event);
   return {
     type: 'CHANGE_EMAIL',
     payload: {
       email,
+    },
+  };
+}
+
+/**
+ * @param {name} name
+ * @return {action} action
+ */
+export function changeName(name) {
+  return {
+    type: 'CHANGE_NAME',
+    payload: {
+      name,
     },
   };
 }

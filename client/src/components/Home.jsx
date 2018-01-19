@@ -51,7 +51,7 @@ class Home extends React.Component {
 
     return (
       <div className = { classes.root }>
-        <Header />
+        {/* <Header /> */}
         <Grid container spacing={0} className = {classes.landingPage}>
 
           <Grid item xs={12} sm={6} md={6}>
@@ -64,7 +64,7 @@ class Home extends React.Component {
       </Typography>
              <Button raised color="accent"
              className={classes.button}
-             component={Link} to='/login'>
+             component={Link} to='/exchange/real/INR'>
         Start Trading
           </Button>
       </Paper>

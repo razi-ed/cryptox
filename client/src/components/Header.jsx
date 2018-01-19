@@ -1,30 +1,21 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import {withStyles} from 'material-ui/styles';
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography';
-import {Link} from 'react-router-dom';
-import IconButton from 'material-ui/IconButton';
-import MenuIcon from 'material-ui-icons/Menu';
-import Button from 'material-ui/Button';
-import AccountCircle from 'material-ui-icons/AccountCircle';
-import Switch from 'material-ui/Switch';
-import {FormControlLabel, FormGroup} from 'material-ui/Form';
-import Menu, {MenuList, MenuItem} from 'material-ui/Menu';
-import Paper from 'material-ui/Paper';
-import {ListItemIcon, ListItemText} from 'material-ui/List';
-import Grow from 'material-ui/transitions/Grow';
+import Media from 'react-media';
 import {Manager, Target, Popper} from 'react-popper';
+import {AppBar, Button, Switch, Typography, Paper,
+Menu, Divider, Toolbar, List, MenuList, MenuItem,
+ListItemIcon, ListItemText, IconButton} from 'material-ui';
+import {withStyles} from 'material-ui/styles';
+import Grow from 'material-ui/transitions/Grow';
 import ClickAwayListener from 'material-ui/utils/ClickAwayListener';
-import LogInIcon from 'material-ui-icons/PowerSettingsNew';
 import SignUpIcon from 'material-ui-icons/AddCircleOutline';
 import AboutUsIcon from 'material-ui-icons/InfoOutline';
-import Divider from 'material-ui/Divider';
-import Media from 'react-media';
-import Drawer from 'material-ui/Drawer';
-
+import MenuIcon from 'material-ui-icons/Menu';
+import AccountCircle from 'material-ui-icons/AccountCircle';
+import LogInIcon from 'material-ui-icons/PowerSettingsNew';
+import Drawer from './header/drawer'
 
 const styles = (theme) => ({
   menuItem: {
@@ -67,6 +58,9 @@ const styles = (theme) => ({
     marginLeft: -12,
     marginRight: 5,
   },
+  list: {
+    width: 250,
+  },
 });
 
 /**
@@ -103,16 +97,17 @@ class Header extends React.Component {
   };
 
   toggleDrawer = () => {
+    console.log('toggleDrawer ', this.state.DrawerState);
     if (this.state.DrawerState) {
-      this.setState({ DrawerState: false });
+      this.setState({DrawerState: false});
     } else {
-      this.setState({ DrawerState: true });
+      this.setState({DrawerState: true});
     }
   };
 
-  closeDrawer = () => {
-    this.setState({ DrawerState: false });
-  } 
+  // closeDrawer = () => {
+  //   this.setState({DrawerState: false});
+  // }
 
   // handleMenu = event => {
   //   this.setState({ anchorElement: event.currentTarget });
@@ -127,6 +122,7 @@ class Header extends React.Component {
     const {auth, anchorElement} = this.state;
     const openSecMenu = Boolean(anchorElement);
     const {open} = this.state;
+
 
     return (
       <div className={classes.root}>
@@ -150,7 +146,7 @@ class Header extends React.Component {
               )
                 }
                 </Media>
-      
+
             <Media query="(max-width: 599px)">
               {(matches) =>
                 matches ? (
@@ -328,17 +324,10 @@ class Header extends React.Component {
             </Manager>
             {/*    )}*/}
           </Toolbar>
-          <Drawer anchor="left" open={this.state.DrawerState}
-            onClose={this.toggleDrawer}>
-            <div
-              tabIndex={0}
-              role="button"
-              onClick={this.closeDrawer}
-            >
-            </div>
+          <Drawer toggleDrawer={this.state.DrawerState}>
           </Drawer>
         </AppBar>
-        
+
       </div>
     );
   }

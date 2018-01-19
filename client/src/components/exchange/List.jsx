@@ -58,33 +58,33 @@ class List extends React.Component {
         <Paper className='List'>
           {this
             .props
-            .Exchange
+
             .crypto
             .map((coin, index) => <Currency
               name={coin}
               key={index}
               type='digital'
-              price={this.props.Exchange[coin].price}
-              change={this.props.Exchange[coin].change}
+              price={this.props[coin].price}
+              change={this.props[coin].change}
               baseCurrency=
-              {this.props.base || this.props.Exchange.baseCurrency}/>)}
+              {this.props.base || this.props.baseCurrency}/>)}
           {this
             .props
-            .Exchange
+
             .real
             .map((coin, index) => <Currency
               name={coin}
               key={index}
               type='real'
-              price={1 / this.props.Exchange[coin]}
+              price={1 / this.props[coin]}
               baseCurrency=
-              {this.props.base || this.props.Exchange.baseCurrency}/>)}
+              {this.props.base || this.props.baseCurrency}/>)}
         </Paper>
       </Grid>
     );
   }
 }
-const mapStateToProps=state=> state;
+const mapStateToProps=state=> state.Exchange;
 const mapDispatchToProps=dispatch=>bindActionCreators(TradeActions, dispatch);
 const SList=connect(mapStateToProps, mapDispatchToProps)(List);
 

@@ -75,10 +75,8 @@ const styles = (theme) => ({
 class Header extends React.Component {
   /**
    * this function is called by React to render the component
-   * @return {component}
+   * @param {object} props
    */
-
-
   constructor(props) {
     super(props);
   const {classes} = props;

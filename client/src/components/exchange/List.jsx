@@ -29,7 +29,7 @@ class List extends React.Component {
     this.setState({
       baseCurrency: base,
     }, () => {
-        this.props.updatePrice(`${[base]}`, 1);
+        this.props.updatePrice(`${base}`, {price: 1});
         this.props.updatePrice('baseCurrency', base);
         getCrypto(this.props);
         getReal(this.props);
@@ -76,7 +76,7 @@ class List extends React.Component {
               name={coin}
               key={index}
               type='real'
-              price={1 / this.props[coin]}
+              price={1 / this.props[coin].price}
               baseCurrency=
               {this.props.base || this.props.baseCurrency}/>)}
         </Paper>

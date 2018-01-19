@@ -47,7 +47,6 @@ class App extends React.Component {
    *@return {component}
    */
   render() {
-    console.log(this.props);
     return (
       <BrowserRouter history={History}>
         <MuiThemeProvider theme={theme}>

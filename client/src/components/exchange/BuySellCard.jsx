@@ -16,21 +16,6 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as TradeActions from '../../js/redux/actions/buySellActionsCreator';
 
-const currencies = [
-  {
-    value: 'USD',
-    label: '$',
-  }, {
-    value: 'EUR',
-    label: '€',
-  }, {
-    value: 'BTC',
-    label: '฿',
-  }, {
-    value: 'JPY',
-    label: '¥',
-  },
-];
 const units = [1, 0.1, 0.001];
 /**
  * a component that renders buy-sell component
@@ -122,7 +107,7 @@ class BuySellCard extends React.Component {
         }}>
           {`${(this.state.units * this.state.quantity).toFixed(3)}
            ${this.state.trade}
-      = ${((this.state.units * this.state.quantity)/this.props[this.state.trade]).toFixed(3)} ${this.props.baseCurrency}`}
+      = ${((this.state.units * this.state.quantity)/this.props[this.state.trade].price).toFixed(3)} ${this.props.baseCurrency}`}
         </Typography>
         <CardActions
           style={{

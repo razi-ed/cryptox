@@ -6,18 +6,19 @@ import Visibility from 'material-ui-icons/Visibility';
 import VisibilityOff from 'material-ui-icons/VisibilityOff';
 import IconButton from 'material-ui/IconButton';
 import Google from './Google';
+import {changeName, changeEmail} from
+'../../js/redux/actions/userActionsCreator';
+import * as ReactRedux from 'react-redux';
 /**
 * this class creates a component for signup
 */
-export default class SignUp extends React.Component {
+class SignUp extends React.Component {
   /**
   * @param {props} props
   */
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      email: '',
       password: null,
       showPassword: false,
       passwordColor: 'red',
@@ -42,15 +43,15 @@ export default class SignUp extends React.Component {
   */
   createUser() {
     if (this.state.isPasswordSet) {
-      if (this.state.name && this.state.email && this.state.isPasswordMatch) {
+      if (this.props.name && this.props.email && this.state.isPasswordMatch) {
         fetch('/auth/register', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            name: this.state.name,
-            email: this.state.email,
+            name: this.props.name,
+            email: this.props.email,
             password: this.state.password,
           }),
         }).then((res)=>res.json()).then((res) => {
@@ -58,16 +59,16 @@ export default class SignUp extends React.Component {
         });
       } else {
         this.setState({
-                        isPasswordHelperTextVisible: 'block',
-                        isconfirmHelperText: 'block',
-                      });
+          isPasswordHelperTextVisible: 'block',
+          isconfirmHelperText: 'block',
+        });
       }
     } else {
       this.setState({
-                      isPasswordHelperTextVisible: 'block',
-                      passwordHelperText: this.state.passwordNotFound,
-                      isconfirmHelperText: 'block',
-                    });
+        isPasswordHelperTextVisible: 'block',
+        passwordHelperText: this.state.passwordNotFound,
+        isconfirmHelperText: 'block',
+      });
     }
   }
   /**
@@ -128,131 +129,143 @@ export default class SignUp extends React.Component {
                 isPasswordSet: true,
               });
             }
-            /**
-            * this function is called when there is
-              change in Re-Enter password field
-            * @param {event} event
-            */
-            confirmPassword(event) {
-              this.setState({isconfirmHelperText: 'block'});
-              if (this.state.password==event.target.value) {
-                this.setState({
-                                isPasswordMatch: true,
-                                confirmPasswordColor: 'green',
-                              });
-              } else {
-                this.setState({
-                                isPasswordMatch: false,
-                                confirmPasswordColor: 'red',
-                              });
-              }
-            }
-            /**
-            * this function is called when react compnent is called to render
-            * @return {component}
-            */
-            render() {
-              return (
-                <div id='signup-frame'>
-                <h1 style={{textAlign: 'center'}} >Create New Account</h1>
-                <form onSubmit={(event)=> event.preventDefault()}>
-                <div>
-                <FormControl
-                className='form-elements'
-                required={true}
-                >
-                <InputLabel>Name</InputLabel>
-                <Input
-                autoFocus={true}
-                onChange={(event)=>this.setState({name: event.target.value})}
-                />
-                </FormControl>
-                </div>
-                <div>
-                <FormControl
-                className='form-elements'
-                required={true}
-                >
-                <InputLabel >Email</InputLabel>
-                <Input
-                type='email'
-                onChange={(event)=>this.setState({email: event.target.value})}
-                />
-                </FormControl>
-                </div>
-                <div>
-                <FormControl
-                className='form-elements'
-                >
-                <InputLabel>Password</InputLabel>
-                <Input
-                type={this.state.showPassword?'text': 'password'}
-                onChange={this.validatePassword}
-                onFocus={this.validatePassword}
-                endAdornment={
-                  <InputAdornment position='end' >
-                  <IconButton
-                  onClick={this.handleClickIcon}
-                  onMouseDown={this.handleMouseDownIcon}
-                  >
-                  {this.state.showPassword?<VisibilityOff/>: <Visibility/>}
-                  </IconButton>
-                  </InputAdornment>
-                }
-                />
-                <FormHelperText
-                style={
-                  {
-                    color: this.state.passwordColor,
-                    display: this.state.isPasswordHelperTextVisible,
-                  }
-                }
-                >
-                {this.state.passwordHelperText}
-                </FormHelperText>
-                </FormControl>
-                </div>
-                <div>
-                <FormControl
-                className='form-elements'
-                required={true}
-                >
-                <InputLabel>Re-Enter Password</InputLabel>
-                <Input
-                type='password'
-                onChange={this.confirmPassword}
-                />
-                <FormHelperText
-                style={
-                  {
-                    color: this.state.confirmPasswordColor,
-                    display: this.state.isconfirmHelperText,
-                  }
-                }
-                >
-                {this.state.isPasswordSet?(this.state.isPasswordMatch?
-                  'Password Match': 'Password Mismatch'):'Enter Password' }
-                </FormHelperText>
-                </FormControl>
+    /**
+    * this function is called when there is change in Re-Enter password field
+    * @param {event} event
+    */
+    confirmPassword(event) {
+    this.setState({isconfirmHelperText: 'block'});
+    if (this.state.password==event.target.value) {
+      this.setState({
+        isPasswordMatch: true,
+        confirmPasswordColor: 'green',
+      });
+    } else {
+      this.setState({
+        isPasswordMatch: false,
+        confirmPasswordColor: 'red',
+      });
+    }
+  }
+/**
+* this function is called when react compnent is called to render
+* @return {component}
+*/
+  render() {
+    return (
+      <div id='signup-frame'>
+      <h1 style={{textAlign: 'center'}} >Create New Account</h1>
+      <form onSubmit={(event)=> event.preventDefault()}>
+      <div>
+      <FormControl
+      className='form-elements'
+      required={true}
+      >
+      <InputLabel>Name</InputLabel>
+      <Input
+      autoFocus={true}
+      onChange={(event)=>this.props.dispatch(changeName(event.target.value))}
+      />
+      </FormControl>
+      </div>
+      <div>
+      <FormControl
+      className='form-elements'
+      required={true}
+      >
+      <InputLabel >Email</InputLabel>
+      <Input
+      type='email'
+      onChange={(event)=>this.props.dispatch(changeEmail(event.target.value))}
+      />
+      </FormControl>
+      </div>
+      <div>
+      <FormControl
+      className='form-elements'
+      >
+      <InputLabel>Password</InputLabel>
+      <Input
+      type={this.state.showPassword?'text': 'password'}
+      onChange={this.validatePassword}
+      onFocus={this.validatePassword}
+      endAdornment={
+        <InputAdornment position='end' >
+        <IconButton
+        onClick={this.handleClickIcon}
+        onMouseDown={this.handleMouseDownIcon}
+        >
+        {this.state.showPassword?<VisibilityOff/>: <Visibility/>}
+        </IconButton>
+        </InputAdornment>
+      }
+      />
+      <FormHelperText
+      style={
+        {
+          color: this.state.passwordColor,
+          display: this.state.isPasswordHelperTextVisible,
+        }
+      }
+      >
+      {this.state.passwordHelperText}
+      </FormHelperText>
+      </FormControl>
+      </div>
+      <div>
+      <FormControl
+      className='form-elements'
+      required={true}
+      >
+      <InputLabel>Re-Enter Password</InputLabel>
+      <Input
+      type='password'
+      onChange={this.confirmPassword}
+      />
+      <FormHelperText
+      style={
+        {
+          color: this.state.confirmPasswordColor,
+          display: this.state.isconfirmHelperText,
+        }
+      }
+      >
+      {this.state.isPasswordSet?(this.state.isPasswordMatch?
+        'Password Match': 'Password Mismatch'):'Enter Password' }
+        </FormHelperText>
+        </FormControl>
 
-                </div>
-                <div style={{paddingTop: 25, textAlign: ' center'}}>
-                <Button
-                raised
-                color='primary'
-                type='submit'
-                onClick={this.createUser}
-                >
-                Create New Account
-                </Button>
-                <hr className="hr-text" data-content="Or"></hr>
-                <div id="google-signin">
-                <Google/>
-                </div>
-                </div>
-                </form>
-                </div>
-              );
-            }
-          }
+        </div>
+        <div style={{paddingTop: 25, textAlign: ' center'}}>
+        <Button
+        raised
+        color='primary'
+        type='submit'
+        onClick={this.createUser}
+        >
+        Create New Account
+        </Button>
+        <hr className="hr-text" data-content="Or"></hr>
+        <div id="google-signin">
+        <Google/>
+        </div>
+        </div>
+        </form>
+        </div>
+      );
+  }
+}
+/**
+ *
+ * @param {state} state
+ * @return {state} user
+ */
+function mapStateToProps(state) {
+  return {
+    email: state.user.email,
+    name: state.user.name,
+  };
+}
 
+const connectSignUp = ReactRedux.connect(mapStateToProps)(SignUp);
+export default connectSignUp;

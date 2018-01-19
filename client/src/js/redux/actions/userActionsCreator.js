@@ -4,7 +4,7 @@
  * @return {object} action
  */
 export function changeEmail(email) {
-  console.log(event);
+  // console.log(event);
   return {
     type: 'CHANGE_EMAIL',
     payload: {

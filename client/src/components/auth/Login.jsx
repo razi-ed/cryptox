@@ -20,6 +20,7 @@ class Login extends React.Component {
   constructor() {
     super();
     this.state = {
+      email: null,
       password: null,
       showPassword: false,
       validationHelperTextVisible: 'none',
@@ -34,20 +35,21 @@ class Login extends React.Component {
   * @function
   */
   loginUser() {
-    if (this.props.email && this.state.password) {
+    if (this.state.email && this.state.password) {
       fetch('/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          email: this.props.email,
+          email: this.state.email,
           password: this.state.password,
         }),
       }).then((res)=>res.json()).then((res)=>{
         if (!res.success) {
           this.setState({validationHelperTextVisible: 'block'});
         } else {
+          this.props.dispatch(changeEmail(this.state.email));
           this.setState({validationHelperTextVisible: 'none'});
         }
         console.log(res);
@@ -101,8 +103,7 @@ class Login extends React.Component {
       autoFocus={true}
       type='email'
       onChange={(event) => {
-        this.props.dispatch(
-        changeEmail(event.target.value));
+        this.setState({email: event.target.value});
       }}
       />
       </FormControl>
@@ -129,9 +130,10 @@ class Login extends React.Component {
         </FormControl>
         <div id='login-button'>
         <Button type="submit"
-        raised color="primary"
-        className="button"
-        onClick={this.loginUser}>
+          raised color="primary"
+          className="button"
+          onClick={this.loginUser}
+        >
         Log In
         </Button>
         </div>

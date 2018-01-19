@@ -28,7 +28,7 @@ app.use(
   webpackDevMiddleware(compiler, {
     hot: true,
     publicPath: config.output.publicPath,
-    historyApiFallback: true,
+     historyApiFallback: true,
     stats: {
       colors: true,
       hash: false,
@@ -37,15 +37,15 @@ app.use(
       assets: false,
       chunks: false,
       modules: false,
-      reasons: false,
+      reasons: true,
       children: false,
-      source: false,
-      errors: false,
-      errorDetails: false,
-      warnings: false,
-      publicPath: false,
+      source: true,
+      errors: true,
+      errorDetails: true,
+      warnings: true,
+      publicPath: true,
     },
-    })
+  })
 );
 
 app.use(webpackHotMiddleware(compiler));
@@ -79,7 +79,7 @@ Mongoose
   .once('once', () => console.log('copnnected to db'))
   .on('error', (e) => console.log('error connectin to db', e));
 
-
-app.listen(process.env.port || 3000, function() {
-  console.log('now listening for requests in port 5000');
+app.set('port', 3000);
+app.listen(process.env.port || app.get('port'), function() {
+  console.log('now listening for requests in port %d', app.get('port'));
 });

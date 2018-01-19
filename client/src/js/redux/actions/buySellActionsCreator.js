@@ -1,26 +1,22 @@
 /**
  * authenticate is an actionCreator ###TEMPLATE###
- * @param {string} email
- * @param {string} buyingAsset
- * @param {string} UsingAsset
- * @param {number} buyingAssetQuantity
- * @param {number} UsingAssetQuantity
  * @return {object} action
+ * @param {string} currency
+ * @param {object} price
  */
-export function authenticate(
-  email,
-  buyingAsset,
-  UsingAsset,
-  buyingAssetQuantity,
-  UsingAssetQuantity) {
+
+/**
+ *to update the price of the specified currency
+ *@param {string} currency
+ *@param {object} price
+ *@param {object} action
+ *@return {object} state
+ */
+export function updatePrice(currency, price, action) {
   return {
-    type: 'LOG_IN',
+    type: 'update_currency',
     payload: {
-      email,
-      buyingAsset,
-      UsingAsset,
-      buyingAssetQuantity,
-      UsingAssetQuantity,
+      currency, price,
     },
   };
 }

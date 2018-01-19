@@ -102,6 +102,7 @@ Button {
 }
 
 #footer {
+  /* position: relative; */
   background-color: black;
   text-align: center;
   color:white;

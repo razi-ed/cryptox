@@ -19,46 +19,24 @@ class List extends React.Component {
    */
   constructor(props) {
     super(props);
-    this.state = {
-      baseCurrency: 'INR',
-    };
   }
-   componentInit = () => {
-    const base = this.props.base || 'INR';
-    // console.log('component mounted',{[base]:1});
-    this.setState({
-      baseCurrency: base,
-    }, () => {
-        this.props.updatePrice(`${base}`, {price: 1});
-        this.props.updatePrice('baseCurrency', base);
-        getCrypto(this.props);
-        getReal(this.props);
-      });
-    };
+  
   /**
    *methods to initaite the state when component is mounted
    */
-  componentDidMount() {
-    setInterval(() => {
-      if (this.props.baseCurrency !== this.props.base) {
-        this.componentInit();
-      }
-    }, 500);
-  }
+ 
 
   /**
    *this method renders the component
    *@return {component}
    */
   render() {
-    console.log(this.props, 'props');
     return (
       <Grid className="list" item container xs={12} md={5} alignItems='center'>
         <BaseCurrency {...this.props}/>
         <Paper className='List'>
           {this
             .props
-
             .crypto
             .map((coin, index) => <Currency
               name={coin}
@@ -67,7 +45,7 @@ class List extends React.Component {
               price={this.props[coin].price}
               change={this.props[coin].change}
               baseCurrency=
-              {this.props.base || this.props.baseCurrency}/>)}
+              {this.props.baseCurrency }/>)}
           {this
             .props
 
@@ -78,13 +56,13 @@ class List extends React.Component {
               type='real'
               price={1 / this.props[coin].price}
               baseCurrency=
-              {this.props.base || this.props.baseCurrency}/>)}
+              {this.props.baseCurrency }/>)}
         </Paper>
       </Grid>
     );
   }
 }
-const mapStateToProps=state=> state.Exchange;
+const mapStateToProps=state=> state.exchange;
 const mapDispatchToProps=dispatch=>bindActionCreators(TradeActions, dispatch);
 const SList=connect(mapStateToProps, mapDispatchToProps)(List);
 

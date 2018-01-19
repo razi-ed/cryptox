@@ -10,7 +10,7 @@ import Home from '../components/Home';
 import Footer from '../components/Footer';
 import ForgotPassword from '../components/auth/ForgotPassword';
 import Dashboard from '../components/dashboard/dashboard';
-import Exchange from '../components/exchange/exchange';
+import Exchange from '../components/exchange/Exchange';
 import Store, {History} from '../js/redux/store';
 import {lightBlue, red} from 'material-ui/colors';
 import Reboot from 'material-ui/Reboot';
@@ -36,12 +36,10 @@ class App extends React.Component {
    *this function is called by React to render components
    */
   componentDidMount() {
-    getCrypto(this.props);
-    getReal(this.props);
-    setInterval(() => {
-      getCrypto(this.props);
-      getReal(this.props);
-    }, 10000);
+    // setInterval(() => {
+    //   getCrypto(this.props);
+    //   getReal(this.props);
+    // }, 10000);
   }
   /**
    *@return {component}
@@ -69,7 +67,7 @@ class App extends React.Component {
 }
 
 // export default withTheme(theme)(App);
-const mapStateToProps = state => state.Exchange;
+const mapStateToProps = state => state.exchange;
 
 const mapDispatchToProps =
 dispatch => bindActionCreators(TradeActions, dispatch);

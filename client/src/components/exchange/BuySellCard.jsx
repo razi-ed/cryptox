@@ -130,7 +130,7 @@ class BuySellCard extends React.Component {
   }
 };
 
-const mapStateToProps = state => state.Exchange;
+const mapStateToProps = state => state.exchange;
 const mapDispatchToProps = dispatch =>
   bindActionCreators(TradeActions, dispatch);
 const SBuySellCard = connect(mapStateToProps, mapDispatchToProps)(BuySellCard);

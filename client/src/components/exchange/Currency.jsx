@@ -1,7 +1,6 @@
 import React from 'react';
-import Paper from 'material-ui/Paper';
-import Typography from 'material-ui/Typography';
 
+import {Paper, Typography} from 'material-ui';
 import ChangeArrow from './change-arrow';
 /**
  *  creates a material card class to display currency

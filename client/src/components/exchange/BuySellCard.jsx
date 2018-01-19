@@ -106,8 +106,10 @@ class BuySellCard extends React.Component {
           justifyContent: 'center',
         }}>
           {`${(this.state.units * this.state.quantity).toFixed(3)}
-           ${this.state.trade}
-      = ${((this.state.units * this.state.quantity)/this.props[this.state.trade].price).toFixed(3)} ${this.props.baseCurrency}`}
+           ${this.state.trade}=
+           ${((this.state.units * this.state.quantity)/
+            this.props[this.state.trade].price).toFixed(3)}
+            ${this.props.baseCurrency}`}
         </Typography>
         <CardActions
           style={{

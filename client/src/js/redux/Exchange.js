@@ -1,4 +1,4 @@
-let Exchange = {
+const Exchange = {
   activeCurrency: 'BTC',
   baseCurrency: 'INR',
   crypto: [

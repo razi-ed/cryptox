@@ -1,14 +1,15 @@
-import {updatePrice} from './buySellActionsCreator'
-import { buySellActions } from "./index";
+import {updatePrice} from './buySellActionsCreator';
+import {buySellActions} from './index';
+import {getCrypto, getFiat} from '../../../ajax-calls/getExchange';
 
-export const getExchangeRates = (baseCurrency='INR') => (dispatch, getState) => {
-  dispatch(updatePrice('baseCurrency',baseCurrency))
-  let state = getState().exchange
-  dispatch(updatePrice(`${state.baseCurrency}`,{price:1}))
+export const getExchangeRates =
+(baseCurrency='INR') => (dispatch, getState) => {
+  dispatch(updatePrice('baseCurrency', baseCurrency));
+  let state = getState().exchange;
+  dispatch(updatePrice(`${state.baseCurrency}`, {price: 1}));
 
-  console.log('state', getState())
- fetch(`https://api.coinmarketcap.com/v1/ticker/?convert=${state.baseCurrency}&limit=15`)
-      .then(response => response.json())
+  console.log('state', getState());
+      getCrypto(state)
       .then(currencies => {
         state
         .crypto
@@ -27,18 +28,17 @@ export const getExchangeRates = (baseCurrency='INR') => (dispatch, getState) => 
         });
       }).catch(e => {
         console.log('error', e);
-      })     
-      fetch(`https://api.fixer.io/latest?base=${state.baseCurrency}`)
-       .then(response=> response.json())
+      });
+      getFiat(state)
        .then(currencies=>{
-         console.log('reducer', state.baseCurrency)
+         console.log('reducer', state.baseCurrency);
            state
            .real
            .filter(currency => currency !== state.baseCurrency)
            .forEach(Rcurrency => {
-             dispatch(updatePrice([Rcurrency], {price: currencies.rates[Rcurrency]}));
+             dispatch(
+              updatePrice([Rcurrency], {price: currencies.rates[Rcurrency]}));
            });
        })
-       .catch(e=>console.log(e))
- 
-}
+       .catch(e=>console.log(e));
+};

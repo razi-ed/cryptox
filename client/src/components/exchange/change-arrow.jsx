@@ -16,7 +16,9 @@ const ChangeArrow =(props)=> {
         <Typography type="title" color='inherit'>
           {props.change!=='undefined'?`${Math.abs(props.change)}%`:'loading'}
         </Typography >
-        {props.change>0?<ArrowUpward style={{color: 'green'}}/>:<ArrowDownward style={{color: 'red'}}/>}
+        {props.change>0?
+          <ArrowUpward style={{color: 'green'}}/>:
+          <ArrowDownward style={{color: 'red'}}/>}
       </div>
     );
   } else {

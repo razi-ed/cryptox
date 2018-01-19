@@ -36,10 +36,10 @@ class App extends React.Component {
    *this function is called by React to render components
    */
   componentDidMount() {
-    // setInterval(() => {
-    //   getCrypto(this.props);
-    //   getReal(this.props);
-    // }, 10000);
+    setInterval(() => {
+      getCrypto(this.props);
+      getReal(this.props);
+    }, 15000);
   }
   /**
    *@return {component}
@@ -57,16 +57,13 @@ class App extends React.Component {
             <Route exact path={'/dashboard'} component={Dashboard}/>
             <Route exact path={'/exchange'} component={Exchange}/>
             <Route exact path={'/exchange/:type/:coin'} component={Exchange}/>
-            <Footer/> {/* <Footer/>*/}
+            <Footer/>
           </div>
         </MuiThemeProvider>
       </BrowserRouter>
-
     );
   }
 }
-
-// export default withTheme(theme)(App);
 const mapStateToProps = state => state.exchange;
 
 const mapDispatchToProps =

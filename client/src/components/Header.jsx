@@ -66,7 +66,7 @@ const styles = (theme) => ({
     marginRight: 5,
   },
   list: {
-    width: 250,
+    width: 200,
   },
 });
 
@@ -86,6 +86,7 @@ class Header extends React.Component {
       anchorElement: null,
       open: false,
       DrawerState: false,
+      elevationValue: 0,
     };
     // this.clicker = this.clicker.bind(this)
 // P.S.
@@ -134,7 +135,7 @@ handleToggle=()=>this.props.openDrawer()
 
     return (
       <div className={classes.root}>
-        <AppBar position='fixed' elevation={this.props.elevationValue}>
+        <AppBar position='fixed' elevation={this.state.elevationValue}>
           <Toolbar>
           <Media query="(max-width: 599px)">
           {(matches) =>
@@ -256,32 +257,7 @@ handleToggle=()=>this.props.openDrawer()
                               paddingBottom: 1,
                               paddingTop: 1,
                             }}>
-                            <Link to='/login'>
-                              <MenuItem className={classes.menuItem}>
-                                <ListItemIcon className={classes.icon}>
-                                  <SignUpIcon />
-                                </ListItemIcon>
-                                <ListItemText inset primary="Sign Up" />
-                              </MenuItem>
-                            </Link>
-                              <Divider light style={{height: .8}} />
-                             <Link to='/login'>
-                              <MenuItem className={classes.menuItem}>
-                                <ListItemIcon className={classes.icon}>
-                                  <LogInIcon />
-                                </ListItemIcon>
-                                <ListItemText inset primary="Log In" />
-                              </MenuItem>
-                              </Link>
-                              <Divider style={{height: 1}} />
-                              <Link to='/about'>
-                              <MenuItem className={classes.menuItem}>
-                                <ListItemIcon className={classes.icon}>
-                                  <AboutUsIcon />
-                                </ListItemIcon>
-                                <ListItemText inset primary="About Us" />
-                              </MenuItem>
-                              </Link>
+                              {sideList}
                             </MenuList>
                           </Paper>
                           </Grow>
@@ -296,32 +272,7 @@ handleToggle=()=>this.props.openDrawer()
                                 paddingBottom: 1,
                                 paddingTop: 1,
                               }}>
-                                <Link to='/login'>
-                                <MenuItem className={classes.menuItem}>
-                                  <ListItemIcon className={classes.iconLg}>
-                                    <SignUpIcon />
-                                  </ListItemIcon>
-                                  <ListItemText inset primary="Sign Up" />
-                                </MenuItem>
-                                </Link>
-                                <Divider light style={{height: 1.15}} />
-                                <Link to='/login'>
-                                <MenuItem className={classes.menuItem}>
-                                  <ListItemIcon className={classes.iconLg}>
-                                    <LogInIcon />
-                                  </ListItemIcon>
-                                  <ListItemText inset primary="Log In" />
-                                </MenuItem>
-                              </Link>
-                                <Divider style={{height: 1.25}} />
-                                <Link to='/about'>
-                                <MenuItem className={classes.menuItem}>
-                                  <ListItemIcon className={classes.iconLg}>
-                                    <AboutUsIcon />
-                                  </ListItemIcon>
-                                  <ListItemText inset primary="About Us" />
-                                </MenuItem>
-                                </Link>
+                                {sideList}
                               </MenuList>
                             </Paper>
                   </Grow>
@@ -333,7 +284,6 @@ handleToggle=()=>this.props.openDrawer()
             </Manager>
             {/*    )}*/}
           </Toolbar>
-          <div>
             <Drawer open={this.state.DrawerState} onClose={this.closeDrawer}>
               <div
                 tabIndex={0}
@@ -344,7 +294,6 @@ handleToggle=()=>this.props.openDrawer()
                 {sideList}
               </div>
             </Drawer>
-          </div>
         </AppBar>
 
       </div>

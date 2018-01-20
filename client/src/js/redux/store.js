@@ -6,6 +6,8 @@ import DevTools from '../../../utils/DevTools';
 import thunk from 'redux-thunk';
 import Exchange from './Exchange';
 import user from './user';
+import ReduxThunk from 'redux-thunk';
+
 
 let initialState = {
   user,

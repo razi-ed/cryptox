@@ -9,9 +9,10 @@ import Header from './Header';
 import Home from '../components/Home';
 import Footer from '../components/Footer';
 import ForgotPassword from '../components/auth/ForgotPassword';
-import Dashboard from '../components/dashboard/dashboard';
 import Exchange from '../components/exchange/Exchange';
 import Store, {History} from '../js/redux/store';
+import ConnectedDashboard from '../components/dashboard/Dashboard';
+import EditDetails from '../components/dashboard/EditDetails';
 import {lightBlue, red} from 'material-ui/colors';
 import Reboot from 'material-ui/Reboot';
 import {withTheme, createMuiTheme, MuiThemeProvider} from 'material-ui/styles';
@@ -48,17 +49,18 @@ class App extends React.Component {
     return (
       <BrowserRouter history={History}>
         <MuiThemeProvider theme={theme}>
-          <Reboot/>
-          <div>
-            <Header/>
-            <Route exact path={'/'} component={Home}/>
-            <Route exact path={'/login'} component={LogIn}/>
-            <Route exact path={'/reset-password'} component={ForgotPassword}/>
-            <Route exact path={'/dashboard'} component={Dashboard}/>
-            <Route exact path={'/exchange'} component={Exchange}/>
-            <Route exact path={'/exchange/:type/:coin'} component={Exchange}/>
-            <Footer/>
-          </div>
+        <Reboot/>
+        <div>
+      <Header/>
+      <Route exact path={'/'} component={Home}/>
+      <Route exact path={'/login'} component={LogIn}/>
+      <Route exact path={'/reset-password'} component={ForgotPassword}/>
+      <Route exact path={'/dashboard'} component={ConnectedDashboard}/>
+      <Route exact path={'/edit-profile'} component={EditDetails}/>
+      <Route exact path={'/exchange'} component={Exchange}/>
+      <Route exact path={'/exchange/:type/:coin'} component={Exchange}/>
+      <Footer/>
+      </div>
         </MuiThemeProvider>
       </BrowserRouter>
     );

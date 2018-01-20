@@ -102,7 +102,10 @@ class Header extends React.Component {
   // handleClose = () => {
   //   this.setState({ anchorElement: null });
   // };
-
+  /**
+   * @method
+   * @return {Html}
+   */
   render() {
     const {classes} = this.props;
     const {auth, anchorElement} = this.state;

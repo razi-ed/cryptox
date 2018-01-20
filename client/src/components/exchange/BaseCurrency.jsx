@@ -65,18 +65,18 @@ class BaseCurrency extends React.Component {
               </Link>
             ))}
             </List>
-            <h2>Digital currencies</h2>
-            <List >
-            {this.state.Dcurrencies.map(value => (
-              <Link key={value} to={`/exchange/digital/${value}`}>
-                <ListItem key={value}
-                onClick={() => this.getCurrentValue(value)}
-                dense button >
-                  <ListItemText primary={`${value}`} />
-                </ListItem>
-              </Link>
-            ))}
-            </List>
+              {/* <h2>Digital currencies</h2>
+              <List >
+              {this.state.Dcurrencies.map(value => (
+                <Link key={value} to={`/exchange/digital/${value}`}>
+                  <ListItem key={value}
+                  onClick={() => this.getCurrentValue(value)}
+                  dense button >
+                    <ListItemText primary={`${value}`} />
+                  </ListItem>
+                </Link>
+              ))}
+              </List> */}
         </Hidden>
         </AppBar>
     );

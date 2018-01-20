@@ -29,7 +29,6 @@ class BuySellCard extends React.Component {
   constructor() {
     super();
     this.state = {
-      currency: 'USD',
       trade: 'USD',
       base: 'INR',
       units: 1,
@@ -43,6 +42,13 @@ class BuySellCard extends React.Component {
    *@return {component} the JSX component of the class
    */
   render() {
+    const mulFactor=(Currency)=>{
+      if (this.props.real.indexOf(this.props[Currency])===-1) {
+        return this.props[Currency].price;
+      } else {
+        return (1/this.props[Currency].price);
+      }
+    };
     return (
       <Card raised className='BuySellCard' style={{
         marginTop: 5, width: '100vw',
@@ -91,7 +97,7 @@ class BuySellCard extends React.Component {
             onChange={this.handleChange('trade')}
             helperText="to"
             margin="normal">
-            {this.props.real.map(option => (
+            {this.props.real.concat(this.props.crypto).map(option => (
               <MenuItem key={option} value={option}>
                 {option}
               </MenuItem>
@@ -107,8 +113,7 @@ class BuySellCard extends React.Component {
         }}>
           {`${(this.state.units * this.state.quantity).toFixed(3)}
            ${this.state.trade}=
-           ${((this.state.units * this.state.quantity)/
-            this.props[this.state.trade].price).toFixed(3)}
+           ${((this.state.units * this.state.quantity)*mulFactor(this.state.trade)).toFixed(3)}
             ${this.props.baseCurrency}`}
         </Typography>
         <CardActions

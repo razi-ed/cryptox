@@ -1,0 +1,30 @@
+.exchange {
+  background-color: #e0e0e0;
+  align-items: flex-start;
+  padding: 2%;
+  .chart {
+    padding: 5% 0%;
+    width: 100%;
+  }
+  .currency {
+    padding: 2% 0;
+    margin: 5%;
+  }
+}
+.list {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5%!important;
+}
+  .List {
+  width: 100%;
+  }
+.trade{
+  height: 200px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.plot{
+  height: 65.5vh;
+}

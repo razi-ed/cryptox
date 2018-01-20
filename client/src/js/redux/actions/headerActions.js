@@ -26,6 +26,26 @@ export function removeElevation() {
  * removeElevation is an actionCreator
  * @return {object} action
  */
+export function openDrawer() {
+  return {
+    type: 'OPEN_APPBAR_DRAWER',
+  };
+}
+
+/**
+ * removeElevation is an actionCreator
+ * @return {object} action
+ */
+export function closeDrawer() {
+  return {
+    type: 'CLOSE_APPBAR_DRAWER',
+  };
+}
+
+/**
+ * removeElevation is an actionCreator
+ * @return {object} action
+ */
 export function addElevation() {
   return {
     type: 'ADD_ELEVATION_TO_APPBAR',

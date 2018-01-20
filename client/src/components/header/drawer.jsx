@@ -5,7 +5,9 @@ import Drawer from 'material-ui/Drawer';
 import Button from 'material-ui/Button';
 import List from 'material-ui/List';
 import Divider from 'material-ui/Divider';
-import { mailFolderListItems, otherMailFolderListItems} from './drawerList'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as headerActions from '../../js/redux/actions/headerActions';
 
 const styles =(theme)=> ({
   list: {
@@ -18,20 +20,21 @@ class drawer extends React.Component {
     super(props)
     this.state = {
       open: false,
+      booly: true,
     };
   }
 
-  openDrawer = () => {
-    this.setState({
-      open: true,
-    });
-  };
+  // openDrawer = () => {
+    // this.setState({
+    //   open: true,
+    // });
+  //   props.openAppDrawer()
+  // };
 
   closeDrawer = () =>{
-    // this.setState({
-    //   open: false
-    // });
-    this.props.toggleDrawer = false;
+    this.setState({
+      booly: false
+    });
   }
 
   whenToggleDrawerChanges = (booly) => {
@@ -57,12 +60,12 @@ class drawer extends React.Component {
 
     return (
       <div>
-        <Drawer open={this.props.toggleDrawer} onClose={this.closeDrawer}>
+        <Drawer open={true} onClose={this.props.closeDrawer}>
           <div
             tabIndex={0}
             role="button"
-            onClick={this.closeDrawer}
-            onKeyDown={this.closeDrawer}
+            onClick={this.props.closeDrawer}
+            onKeyDown={this.props.closeDrawer}
           >
             {sideList}
           </div>
@@ -76,4 +79,8 @@ drawer.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(drawer);
+const mapStateToProps = state => state;
+const mapDispatchToProps = dispatch => bindActionCreators(headerActions, dispatch);
+const AppBarDrawer = connect(mapStateToProps, mapDispatchToProps)(drawer);
+
+export default withStyles(styles)(AppBarDrawer);

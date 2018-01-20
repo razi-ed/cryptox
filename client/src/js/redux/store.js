@@ -9,9 +9,11 @@ import DevTools from '../../../utils/DevTools';
 let initialState = {
   user: {
     email: 'Guest',
-    Auth: {
-      IsAuthenticated: false,
-    },
+    isAuthenticated: false,
+    header: {
+      authenticated: false,
+      elevated: true,
+    }
   },
 };
 
@@ -32,26 +34,12 @@ const templateMiddlewareFunction = (store) => (next) => (action) => {
   console.log('Action now being fired is ~~~> ');
   next(action);
 };
-const monitorReducer = (store) => (next) => (action) => {
-  console.log(action);
-  next(action);
-};
-
-
-// https://github.com/gaearon/redux-devtools/blob/HEAD/docs/Walkthrough.md
-const enhancer = compose(
-  applyMiddleware(templateMiddlewareFunction),
-  // https://github.com/zalmoxisus/redux-devtools-instrument#api
-  DevTools.instrument(
-  monitorReducer,
-  {maxAge: 20, shouldCatchErrors: true, shouldHotReload: true})
-);
-/**
- *This function takes initial state and creates new store
- * @param {initialState} initialState
- */
-
-  const Store = createStore(Reducers, initialState, enhancer);
+const composeEnhancers =
+  typeof window === 'object' &&
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) : compose;
+const Store = createStore(Reducers, initialState, composeEnhancers(
+  applyMiddleware(templateMiddlewareFunction)));
 
   Store.subscribe(() => {
     console.log('Store updated, ', Store.getState());

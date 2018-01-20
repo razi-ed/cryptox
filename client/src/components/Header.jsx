@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import Media from 'react-media';
 import {Manager, Target, Popper} from 'react-popper';
 import {AppBar, Button, Switch, Typography, Paper,
-Menu, Divider, Toolbar, List, MenuList, MenuItem,
+Menu, Divider,Drawer, Toolbar, List, MenuList, MenuItem,
 ListItemIcon, ListItemText, IconButton} from 'material-ui';
 import {withStyles} from 'material-ui/styles';
 import Grow from 'material-ui/transitions/Grow';
@@ -15,7 +15,14 @@ import AboutUsIcon from 'material-ui-icons/InfoOutline';
 import MenuIcon from 'material-ui-icons/Menu';
 import AccountCircle from 'material-ui-icons/AccountCircle';
 import LogInIcon from 'material-ui-icons/PowerSettingsNew';
-import Drawer from './header/drawer'
+import AppBarDrawer from './header/drawer'
+import { mailFolderListItems, otherMailFolderListItems } from './drawerList'
+
+import { bindActionCreators } from 'redux';
+
+import { connect } from 'react-redux';
+
+import * as headerActions from '../js/redux/actions/headerActions';
 
 const styles = (theme) => ({
   menuItem: {
@@ -96,18 +103,13 @@ class Header extends React.Component {
     this.setState({open: false});
   };
 
-  toggleDrawer = () => {
-    console.log('toggleDrawer ', this.state.DrawerState);
-    if (this.state.DrawerState) {
-      this.setState({DrawerState: false});
-    } else {
-      this.setState({DrawerState: true});
-    }
+  openDrawer = () => {
+    this.setState({DrawerState: true});
   };
 
-  // closeDrawer = () => {
-  //   this.setState({DrawerState: false});
-  // }
+  closeDrawer = () => {
+    this.setState({DrawerState: false});
+  }
 
   // handleMenu = event => {
   //   this.setState({ anchorElement: event.currentTarget });
@@ -116,13 +118,19 @@ class Header extends React.Component {
   // handleClose = () => {
   //   this.setState({ anchorElement: null });
   // };
-
+handleToggle=()=>this.props.openDrawer()
   render() {
     const {classes} = this.props;
     const {auth, anchorElement} = this.state;
     const openSecMenu = Boolean(anchorElement);
     const {open} = this.state;
-
+    const sideList = (
+      <div className={classes.list}>
+        <List>{mailFolderListItems}</List>
+        <Divider />
+        <List>{otherMailFolderListItems}</List>
+      </div>
+    );
 
     return (
       <div className={classes.root}>
@@ -131,7 +139,8 @@ class Header extends React.Component {
           <Media query="(max-width: 599px)">
           {(matches) =>
             matches ? (
-              <IconButton className={classes.menuButton} aria-label="Menu" onClick={this.toggleDrawer}>
+              <IconButton className={classes.menuButton} aria-label="Menu"
+              onClick={this.openDrawer}>
               <MenuIcon style={{fontSize: 26, color: '#fff'}} />
               </IconButton>
               )
@@ -140,7 +149,7 @@ class Header extends React.Component {
                 <IconButton className={classes.menuButton}
                 style={{marginRight: 20}}
                   aria-label="Menu"
-                  onClick={this.toggleDrawer}>
+                  onClick={this.openDrawer}>
                 <MenuIcon style={{fontSize: 32, color: '#fff'}}/>
                 </IconButton>
               )
@@ -324,8 +333,18 @@ class Header extends React.Component {
             </Manager>
             {/*    )}*/}
           </Toolbar>
-          <Drawer toggleDrawer={this.state.DrawerState}>
-          </Drawer>
+          <div>
+            <Drawer open={this.state.DrawerState} onClose={this.closeDrawer}>
+              <div
+                tabIndex={0}
+                role="button"
+                onClick={this.closeDrawer}
+                onKeyDown={this.closeDrawer}
+              >
+                {sideList}
+              </div>
+            </Drawer>
+          </div>
         </AppBar>
 
       </div>
@@ -338,4 +357,8 @@ Header.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Header);
+const mapStateToProps = state => state;
+const mapDispatchToProps = dispatch => bindActionCreators(headerActions, dispatch);
+const AppHeader = connect(mapStateToProps, mapDispatchToProps)(Header);
+
+export default withStyles(styles)(AppHeader);

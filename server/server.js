@@ -4,22 +4,24 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const passport = require('passport');
 const webpack = require('webpack');
+require('dotenv').config();
+
+const config = require('../client/webpack.config.js');
+const passportConfig = require('./config/passport');
+const app = express();
+Mongoose.Promise = global.Promise;
+const compiler = webpack(config);
+
+const frontend = require('./routes/frontend');
+
 const auth = require('./routes/auth');
 const orders= require('./routes/order');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const statement = require('./routes/accounts/accountStatements');
 const balance = require('./routes/accounts/accountBalance');
-
-const config = require('../client/webpack.config.js');
-const passportConfig = require('./config/passport');
 const users = require('./routes/users');
 
-const app = express();
-Mongoose.Promise = global.Promise;
-const compiler = webpack(config);
-
-const frontend = require('./routes/frontend');
 
 // key
 process.env.JWT_KEY = '587b2cc7-5a21-447f-8aef-28c2857a5db6';

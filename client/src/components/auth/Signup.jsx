@@ -6,8 +6,7 @@ import Visibility from 'material-ui-icons/Visibility';
 import VisibilityOff from 'material-ui-icons/VisibilityOff';
 import IconButton from 'material-ui/IconButton';
 import Google from './Google';
-import {changeName, changeEmail} from
-'../../js/redux/actions/userActionsCreator';
+import {changeName, changeEmail} from '../../actions/userActionsCreator';
 import * as ReactRedux from 'react-redux';
 /**
 * this class creates a component for signup

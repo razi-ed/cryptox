@@ -14,7 +14,7 @@ import {
 
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import * as TradeActions from '../../js/redux/actions/buySellActionsCreator';
+import * as TradeActions from '../../actions/buySellActionsCreator';
 
 const units = [1, 0.1, 0.001];
 /**

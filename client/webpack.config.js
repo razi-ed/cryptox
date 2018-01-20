@@ -7,7 +7,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const paths = {
   DIST: path.resolve(__dirname, '../dist'),
   SRC: path.resolve(__dirname, 'src'),
-  JS: path.resolve(__dirname, 'src/js'),
+  // JS: path.resolve(__dirname, 'src/js'),
 };
 const extractSass = new ExtractTextPlugin({
   filename: '[name].[contenthash].css',
@@ -19,7 +19,7 @@ module.exports = {
     'babel-polyfill',
     'webpack-hot-middleware/client',
     'react-hot-loader/patch',
-    path.join(paths.JS, 'Main.jsx'),
+    path.join(paths.SRC, 'Main.jsx'),
   ],
   output: {
     path: paths.DIST,

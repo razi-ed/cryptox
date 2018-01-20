@@ -18,6 +18,8 @@ class SignUp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      name: null,
+      email: null,
       password: null,
       showPassword: false,
       passwordColor: 'red',
@@ -42,15 +44,17 @@ class SignUp extends React.Component {
   */
   createUser() {
     if (this.state.isPasswordSet) {
-      if (this.props.name && this.props.email && this.state.isPasswordMatch) {
+      if (this.state.name && this.state.email && this.state.isPasswordMatch) {
+        this.props.dispatch(changeName(this.state.name));
+        this.props.dispatch(changeEmail(this.state.email));
         fetch('/auth/register', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            name: this.props.name,
-            email: this.props.email,
+            name: this.state.name,
+            email: this.state.email,
             password: this.state.password,
           }),
         }).then((res)=>res.json()).then((res) => {
@@ -163,7 +167,7 @@ class SignUp extends React.Component {
       <InputLabel>Name</InputLabel>
       <Input
       autoFocus={true}
-      onChange={(event)=>this.props.dispatch(changeName(event.target.value))}
+      onChange={(event)=>this.setState({name: event.target.value})}
       />
       </FormControl>
       </div>
@@ -175,7 +179,7 @@ class SignUp extends React.Component {
       <InputLabel >Email</InputLabel>
       <Input
       type='email'
-      onChange={(event)=>this.props.dispatch(changeEmail(event.target.value))}
+      onChange={(event)=>this.setState({email: event.target.value})}
       />
       </FormControl>
       </div>

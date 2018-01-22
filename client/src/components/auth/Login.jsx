@@ -7,11 +7,13 @@ import VisibilityOff from 'material-ui-icons/VisibilityOff';
 import IconButton from 'material-ui/IconButton';
 import '../../css/style.css';
 import Google from './Google';
+import {changeEmail} from '../../actions/userActionsCreator';
+import * as ReactRedux from 'react-redux';
 
 /**
 * @class
 */
-export default class Login extends React.Component {
+class Login extends React.Component {
   /**
   * @constructor
   */
@@ -24,7 +26,6 @@ export default class Login extends React.Component {
       validationHelperTextVisible: 'none',
       validationColor: 'red',
     };
-    this.changeEmail = this.changeEmail.bind(this);
     this.changePassword = this.changePassword.bind(this);
     this.loginUser = this.loginUser.bind(this);
     this.handleClickIcon = this.handleClickIcon.bind(this);
@@ -34,7 +35,7 @@ export default class Login extends React.Component {
   * @function
   */
   loginUser() {
-    if (this.state.email&&this.state.password) {
+    if (this.state.email && this.state.password) {
       fetch('/auth/login', {
         method: 'POST',
         headers: {
@@ -48,20 +49,13 @@ export default class Login extends React.Component {
         if (!res.success) {
           this.setState({validationHelperTextVisible: 'block'});
         } else {
+          this.props.dispatch(changeEmail(this.state.email));
           this.setState({validationHelperTextVisible: 'none'});
         }
         console.log(res);
       });
   }
 }
-  /**
-  * @param {event} event
-  */
-  changeEmail(event) {
-    this.setState({
-      email: event.target.value,
-    });
-  }
   /**
   *
   * @param {event} event
@@ -108,7 +102,9 @@ export default class Login extends React.Component {
       <Input
       autoFocus={true}
       type='email'
-      onChange={this.changeEmail}
+      onChange={(event) => {
+        this.setState({email: event.target.value});
+      }}
       />
       </FormControl>
       <FormControl
@@ -134,9 +130,10 @@ export default class Login extends React.Component {
         </FormControl>
         <div id='login-button'>
         <Button type="submit"
-        raised color="primary"
-        className="button"
-        onClick={this.loginUser}>
+          raised color="primary"
+          className="button"
+          onClick={this.loginUser}
+        >
         Log In
         </Button>
         </div>
@@ -154,3 +151,11 @@ export default class Login extends React.Component {
       );
     }
   }
+
+  const mapStateToProps = (state) => {
+    return {
+      email: state.user.email,
+    };
+  };
+     const ConnectLogin = ReactRedux.connect(mapStateToProps)(Login);
+     export default ConnectLogin;

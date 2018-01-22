@@ -5,8 +5,11 @@ const path = require('path');
 const passport = require('passport');
 const webpack = require('webpack');
 const auth = require('./routes/auth');
+const orders= require('./routes/order');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
+const statement = require('./routes/accounts/accountStatements');
+const balance = require('./routes/accounts/accountBalance');
 
 const config = require('../client/webpack.config.js');
 const passportConfig = require('./config/passport');
@@ -25,7 +28,7 @@ app.use(
   webpackDevMiddleware(compiler, {
     hot: true,
     publicPath: config.output.publicPath,
-    historyApiFallback: true,
+     historyApiFallback: true,
     stats: {
       colors: true,
       hash: false,
@@ -34,15 +37,15 @@ app.use(
       assets: false,
       chunks: false,
       modules: false,
-      reasons: false,
+      reasons: true,
       children: false,
-      source: false,
+      source: true,
       errors: true,
-      errorDetails: false,
-      warnings: false,
-      publicPath: false,
+      errorDetails: true,
+      warnings: true,
+      publicPath: true,
     },
-    })
+  })
 );
 
 app.use(webpackHotMiddleware(compiler));
@@ -60,6 +63,9 @@ passportConfig(passport);
 
 app.use(express.static(path.join(__dirname, '../dist/')));
 app.use('/auth', auth);
+app.use('/orders', orders);
+app.use('/account', statement);
+app.use('/account', balance);
 app.use('/profile', users);
 app.use(frontend);
 
@@ -73,7 +79,7 @@ Mongoose
   .once('once', () => console.log('copnnected to db'))
   .on('error', (e) => console.log('error connectin to db', e));
 
-
-app.listen(process.env.port || 3000, function() {
-  console.log('now listening for requests in port 5000');
+app.set('port', 3000);
+app.listen(process.env.port || app.get('port'), function() {
+  console.log('now listening for requests in port %d', app.get('port'));
 });

@@ -2,9 +2,10 @@ import {applyMiddleware, createStore, compose} from 'redux';
 import {Reducers} from './reducers/index';
 import {syncHistoryWithStore} from 'react-router-redux';
 import {createBrowserHistory} from 'history';
-import DevTools from '../../../utils/DevTools';
-// import ReduxThunk from 'redux-thunk';
-
+import DevTools from '../utils/DevTools';
+import thunk from 'redux-thunk';
+import Exchange from './reducers/Exchange';
+import user from './reducers/user';
 
 let initialState = {
   user: {
@@ -31,19 +32,34 @@ function fetchUser(id) {
 */
 
 const templateMiddlewareFunction = (store) => (next) => (action) => {
-  console.log('Action now being fired is ~~~> ');
+  // console.log('Action now being fired is ~~~> ');
   next(action);
 };
-const composeEnhancers =
-  typeof window === 'object' &&
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) : compose;
-const Store = createStore(Reducers, initialState, composeEnhancers(
-  applyMiddleware(templateMiddlewareFunction)));
+const monitorReducer = (store) => (next) => (action) => {
+  // console.log(action);
+  next(action);
+};
 
-  Store.subscribe(() => {
-    console.log('Store updated, ', Store.getState());
-  });
+
+// https://github.com/gaearon/redux-devtools/blob/HEAD/docs/Walkthrough.md
+// const enhancer = compose(
+//   applyMiddleware(templateMiddlewareFunction),
+//   // https://github.com/zalmoxisus/redux-devtools-instrument#api
+//   DevTools.instrument(
+//   monitorReducer,
+//   {maxAge: 20, shouldCatchErrors: true, shouldHotReload: true})
+// );
+/**
+ *This function takes initial state and creates new store
+ * @param {initialState} initialState
+ */
+const composeEnhancers =
+typeof window === 'object' &&
+window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
+window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) : compose;
+const Store = createStore(Reducers, initialState, composeEnhancers(
+    applyMiddleware(thunk)));
+
   export const History = syncHistoryWithStore(
     createBrowserHistory(),
     Store);

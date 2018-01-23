@@ -38,70 +38,37 @@ class BuySellCard extends React.Component {
       message: '',
     };
   }
-  buy = () => {
-    fetch('/orders/buy', {
-      method: 'POST',
-      headers: {
-        'Authorization': localStorage.getItem('token'),
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        units: ((this.state.units *
-          this.state.quantity) * (this.mulFactor(this.state.trade))).toFixed(3),
-        type: this.props.baseCurrency,
-        tradeFor: this.state.trade,
-        currentPrice: this.mulFactor(this.state.trade),
-          // currentPrice: 100,
-        }),
-      })
-      .then(r => r.json())
-      .then(r => {
-        console.log(r);
-        this.setState({open: true}, ()=>{
-          this.setState({
-            message: `successfully bought ${
-               (this.state.units * this.state.quantity).toFixed(3)}
-        ${this.state.trade}`,
-          });
-        });
-        Promise.resolve(r);
-      })
-      .then(() => console.log('fetch request sent'))
-      .catch(e => console.log('error'));
-  }
-  sell = () => {
-    fetch('/orders/sell', {
-      method: 'POST',
-      headers: {
-        'Authorization': localStorage.getItem('token'),
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        units: ((this.state.units *
-          this.state.quantity) * (this.mulFactor(this.state.trade))).toFixed(3),
+  action = async (action) => {
+    try {
+      let response =await fetch(`/orders/${action}`, {
+        method: 'POST',
+        headers: {
+          'Authorization': localStorage.getItem('token'),
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          units: ((this.state.units *
+            this.state.quantity) * (this.mulFactor(this.state.trade))).toFixed(3),
           type: this.props.baseCurrency,
           tradeFor: this.state.trade,
           currentPrice: this.mulFactor(this.state.trade),
-        }),
-      })
-      .then(r => r.json())
-      .then(r => {
-        console.log(r);
-        this.setState({open: true}, ()=>{
-          this.setState({
-            message: `successfully sold ${ (this.state.units *
-               this.state.quantity).toFixed(3)}
-        ${this.state.trade}`,
-          });
+          }),
         });
-        Promise.resolve(r);
-      })
-      .then(() => console.log('fetch request sent'))
-      .catch(e => console.log('error'));
-  }
-  handleChange = name => event => {
-    this.setState({[name]: event.target.value});
-  };
+        let r= await response.json();
+          console.log(r);
+          this.setState({open: true}, ()=>{
+            this.setState({
+              message: `successfully ${action=='buy'?'bought':'sold'} ${
+                 (this.state.units * this.state.quantity).toFixed(3)}
+          ${this.state.trade}`,
+            });
+          });
+    } catch (e) {
+console.log(e);
+}
+      }
+
+  handleChange = name => event =>this.setState({[name]: event.target.value});
   mulFactor = (Currency) => {
     if (this.props.real.indexOf(Currency) === -1) {
       return this.props[Currency].price;
@@ -163,10 +130,7 @@ class BuySellCard extends React.Component {
             onChange={this.handleChange('trade')}
             helperText="to"
             margin="normal">
-            {this
-              .props
-              .real
-              .concat(this.props.crypto)
+            {this.props.real.concat(this.props.crypto)
               .map(option => (
                 <MenuItem key={option} value={option}>
                   {option}
@@ -199,7 +163,7 @@ class BuySellCard extends React.Component {
             style={{
             width: 80,
           }}
-            onClick={this.buy}>
+            onClick={()=>this.action('buy')}>
             BUY
           </Button>
           <Button
@@ -208,7 +172,7 @@ class BuySellCard extends React.Component {
             style={{
             width: 80,
           }}
-            onClick={this.sell}>
+            onClick={()=>this.action('sell')}>
             SELL
           </Button>
         </CardActions>

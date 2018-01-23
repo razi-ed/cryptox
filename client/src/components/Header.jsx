@@ -144,7 +144,9 @@ class Header extends React.Component {
                       color: '#fff',
                     }}
                     className={classes.flex}>
+                    <Link to='/'>
                     CRYPTOX
+                    </Link>
             </Typography>
             )
             :

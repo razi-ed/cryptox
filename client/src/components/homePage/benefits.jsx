@@ -5,24 +5,14 @@ import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
 import classNames from 'classnames';
 import Typography from 'material-ui/Typography';
-import {createMuiTheme} from 'material-ui/styles';
-import {red, lightBlue} from 'material-ui/colors';
 import {Link} from 'react-router-dom';
 import Card, {CardActions, CardContent} from 'material-ui/Card';
 import Button from 'material-ui/Button';
 import SignUpIcon from 'material-ui-icons/AddCircleOutline';
-import ThreeDRotation from 'material-ui-icons/ThreeDRotation';
+import EncryptedIcon from 'material-ui-icons/LockOutline';
+import ExchangeIcon from 'material-ui-icons/ShowChart';
+import DesignIcon from 'material-ui-icons/ViewQuilt';
 
-
-const theme = createMuiTheme({
-  palette: {
-    primary: lightBlue,
-    accent: red,
-  },
-  status: {
-    danger: 'orange',
-  },
-});
 
 const styles = (theme) => ({
   icon: {
@@ -36,6 +26,11 @@ const styles = (theme) => ({
     margin: theme.spacing.unit,
     height: theme.spacing.unit * 6,
     width: theme.spacing.unit * 6,
+  },
+  CardTextsContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'spaceAround',
   },
 });
 
@@ -58,60 +53,38 @@ class Benefits extends Component {
       alignItems='center'
       direction='row'
       justify='space-around'>
+
       <Grid item xs={10} md={3}>
         <Card className={classes.card}>
           <CardContent>
-            <Grid container
-              spacing={0}
-              alignItems='flex-start'
-              direction='row'
-              justify='space-between'>
-            <Grid item>
-            <ThreeDRotation className={classes.icon}/>
-            </Grid>
-            <Grid item>
-            <Typography align='left' type='headline'>
-            Card 1
+          <div className={classes.CardTextsContainer}>
+          <EncryptedIcon className={classes.icon}/>
+          <Typography type='headline'>
+        Data Security
+        </Typography>
+          </div>
+            <Typography type='subheading' component="p">
+            Cryptox encrypts user and transaction data with strong tools.
+            Your data remains private.
             </Typography>
-            </Grid>
-            </Grid>
           </CardContent>
-          <CardActions>
-          <Link to='/login'>
-            <Button color='accent' raised className={classes.cardActionButton}>
-              <SignUpIcon style={{fontSize: 26, color: '#fff'}} />
-            </Button>
-          </Link>
-          </CardActions>
         </Card>
       </Grid>
 
 
           <Grid item xs={10} md={3}>
             <Card className={classes.card}>
-              <CardContent>
-                <Grid container
-                  spacing={0}
-                  alignItems='flex-start'
-                  direction='row'
-                  justify='space-between'>
-                  <Grid item>
-                    <ThreeDRotation className={classes.icon} />
-                  </Grid>
-                  <Grid item>
-                    <Typography align='left' type='headline' gutterBottom>
-                      Card 2
-                    </Typography>
-                  </Grid>
-                </Grid>
+                <CardContent>
+                <div className={classes.CardTextsContainer}>
+                <ExchangeIcon className={classes.icon} />
+              <Typography type='headline'>
+              BEAUTIFUL LIVE CHARTS
+              </Typography>
+                </div>
+                  <Typography type='subheading' component="p">
+                  Real time charts as per market condition changes, which facilitate easy tracking of assets.
+                  </Typography>
               </CardContent>
-              <CardActions>
-                <Button color='accent' raised className={classes.cardActionButton}>
-                  <Link to='/login'>
-                    <SignUpIcon style={{fontSize: 26, color: '#fff'}} />
-                  </Link>
-                </Button>
-              </CardActions>
             </Card>
           </Grid>
 
@@ -119,28 +92,17 @@ class Benefits extends Component {
           <Grid item xs={10} md={3}>
             <Card className={classes.card}>
               <CardContent>
-                <Grid container
-                  spacing={0}
-                  alignItems='flex-start'
-                  direction='row'
-                  justify='space-between'>
-                  <Grid item>
-                    <ThreeDRotation className={classes.icon} />
-                  </Grid>
-                  <Grid item>
-                    <Typography align='left' type='headline' gutterBottom>
-                    Card 3
-                  </Typography>
-                  </Grid>
-                </Grid>
+              <div className={classes.CardTextsContainer}>
+              <DesignIcon className={classes.icon} />
+              <Typography type='headline'>
+              INTUITIVE INTERFACE
+            </Typography>
+              </div>
+                <Typography type='subheading' component="p">
+                  Cryptox provide hassle-free yet
+                  intuitive interface, along with an elegant experience.
+                </Typography>
               </CardContent>
-              <CardActions>
-                <Button color='accent' raised className={classes.cardActionButton}>
-                  <Link to='/login'>
-                    <SignUpIcon style={{fontSize: 26, color: '#fff'}} />
-                  </Link>
-                </Button>
-              </CardActions>
             </Card>
           </Grid>
       </Grid>

@@ -15,14 +15,14 @@ import AboutUsIcon from 'material-ui-icons/InfoOutline';
 import MenuIcon from 'material-ui-icons/Menu';
 import AccountCircle from 'material-ui-icons/AccountCircle';
 import LogInIcon from 'material-ui-icons/PowerSettingsNew';
-import AppBarDrawer from './header/drawer'
+import AppBarDrawer from './drawer'
 import { mailFolderListItems, otherMailFolderListItems } from './drawerList'
 
 import { bindActionCreators } from 'redux';
 
 import { connect } from 'react-redux';
 
-import * as headerActions from '../js/redux/actions/headerActions';
+import * as headerActions from '../../js/redux/actions/headerActions';
 
 const styles = (theme) => ({
   menuItem: {
@@ -87,7 +87,7 @@ class Header extends React.Component {
       anchorElement: null,
       open: false,
       DrawerState: false,
-      elevationValue: 0,
+      elevationValue: 4,
     };
     // this.clicker = this.clicker.bind(this)
 // P.S.
@@ -136,7 +136,7 @@ handleToggle=()=>this.props.openDrawer()
 
     return (
       <div className={classes.root}>
-        <AppBar position='fixed' elevation={this.state.elevationValue}>
+        <AppBar position='fixed' elevation={24} square={true}>
           <Toolbar>
           <Media query="(max-width: 599px)">
           {(matches) =>

@@ -1,17 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import {withStyles} from 'material-ui/styles';
-import { Paper, Grid, Typography} from 'material-ui';
-// import Grid from 'material-ui/Grid';
+import {Paper, Grid, Typography} from 'material-ui';
 import classNames from 'classnames';
-// import Typography from 'material-ui/Typography';
 import {withStyles, createMuiTheme} from 'material-ui/styles';
 import {red, lightBlue} from 'material-ui/colors';
 import Button from 'material-ui/Button';
 import {Link} from 'react-router-dom';
 import Card, {CardActions, CardContent, CardMedia} from 'material-ui/Card';
-import HeroImage from '../../utils/landing_page.png';
-import Benefits from './homePage/benefits';
+import HeroImage from '../../../utils/landing_page.png';
+import Benefits from './benefits';
 const theme = createMuiTheme({
   palette: {
     primary: lightBlue,
@@ -100,7 +97,7 @@ class Home extends React.Component {
       direction: 'row',
       justify: 'center',
       alignItems: 'center',
-      elevationValue: 0,
+      elevationValue: 4,
       cardElevationValue1: 1,
       cardElevationValue2: 1,
       cardElevationValue3: 1,
@@ -132,6 +129,7 @@ class Home extends React.Component {
             direction='column'
             justify='space-around'
           >
+
           <Grid item>
           <img className={classes.heroImage} src={HeroImage}/>
           </Grid>
@@ -141,7 +139,9 @@ class Home extends React.Component {
           </Typography>
           </Grid>
               <Grid item>
-                <Typography type="subheading">secure, manage and exchange cryptocurrencies</Typography>
+              <Typography type="subheading">
+              secure, manage and exchange cryptocurrencies
+              </Typography>
               </Grid>
               <Grid item>
               <Button raised color="accent"
@@ -170,18 +170,20 @@ class Home extends React.Component {
                 onMouseOver={() => this.raiseCards('1')}>
                   <CardMedia
                     className={classes.media}
-                    image="https://s3.amazonaws.com/dsg.files.app.content.prod/gereports/wp-content/uploads/2017/05/16133617/GettyImages-645390792-1024x661.jpg"
+                    image="https://images.pexels.com/photos/730564/pexels-photo-730564.jpeg?w=940&h=650&auto=compress&cs=tinysrgb"
                     title="Contemplative Reptile"
                   />
                   <CardContent>
-                    <Typography type="headline" component="h2">Feature 1</Typography>
-                    <Typography component="p">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam porro nobis, earum necessitatibus unde deserunt a aperiam? Culpa ea est excepturi odio necessitatibus doloribus, fuga deleniti dolore nam expedita numquam!
+                    <Typography type="headline" component="h2">
+                    MULTI-FIAT CURRENCIES
+                    </Typography>
+                    <Typography component="p" type='subheading'>
+                    multiple feat currencies available.
                     </Typography>
                   </CardContent>
                   <CardActions style={{justifyContent: 'space-around'}}>
                     <Button raised color="primary">
-                      YYOOOO
+                      SIGN IN
                     </Button>
                   </CardActions>
                 </Card>
@@ -194,17 +196,19 @@ class Home extends React.Component {
                   <CardMedia
                     className={classes.media}
                     image="https://images.pexels.com/photos/730569/pexels-photo-730569.jpeg?w=940&h=650&auto=compress&cs=tinysrgb"
-                    title="Contemplative Reptile"
+                    title="Seamless Exchange"
                   />
                   <CardContent>
-                    <Typography type="headline" component="h2">feature2</Typography>
-                    <Typography component="p">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam porro nobis, earum necessitatibus unde deserunt a aperiam? Culpa ea est excepturi odio necessitatibus doloribus, fuga deleniti dolore nam expedita numquam!
+                    <Typography type="headline" component="h2">
+                    EXCHANGE
+                    </Typography>
+                    <Typography component="p" type='subheading'>
+                    A seamless exchange experience.
                     </Typography>
                   </CardContent>
                   <CardActions style={{justifyContent: 'space-around'}}>
                     <Button raised color="primary">
-                      YYOOOO2
+                      EXCHANGE
                     </Button>
                   </CardActions>
                 </Card>
@@ -216,18 +220,21 @@ class Home extends React.Component {
                   onMouseOver={() => this.raiseCards('3')}>
                   <CardMedia
                     className={classes.cardMedia}
-                    image="https://images.pexels.com/photos/730564/pexels-photo-730564.jpeg?w=940&h=650&auto=compress&cs=tinysrgb"
-                    title="Contemplative Reptile"
+                    image="https://s3.amazonaws.com/dsg.files.app.content.prod/gereports/wp-content/uploads/2017/05/16133617/GettyImages-645390792-1024x661.jpg"
+                    title="Multi-Asset Wallet"
                   />
                   <CardContent>
-                    <Typography type="headline" component="h2">feature3</Typography>
-                    <Typography component="p">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam porro nobis, earum necessitatibus unde deserunt a aperiam? Culpa ea est excepturi odio necessitatibus doloribus, fuga deleniti dolore nam expedita numquam!
+                    <Typography type="headline"
+                    component="h2">
+                    MULTI-ASSET WALLET
+                    </Typography>
+                    <Typography component="p" type='subheading'>
+                    Bitcoin, Ethereum, Litecoin and more.
                     </Typography>
                   </CardContent>
                   <CardActions style={{justifyContent: 'space-around'}}>
                     <Button raised color="primary">
-                      YYOOOO3
+                      KNOW MORE
                     </Button>
                   </CardActions>
                 </Card>

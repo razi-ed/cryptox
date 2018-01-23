@@ -64,7 +64,7 @@ class Home extends React.Component {
       </Typography>
              <Button raised color="accent"
              className={classes.button}
-             component={Link} to='/exchange/real/INR'>
+             component={Link} to='/exchange/fiat/INR'>
         Start Trading
           </Button>
       </Paper>

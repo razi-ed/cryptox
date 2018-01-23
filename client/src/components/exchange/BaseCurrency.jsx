@@ -1,4 +1,8 @@
 import React from 'react';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import * as TradeActions from '../../js/redux/actions/buySellActionsCreator';
+
 import {Link} from 'react-router-dom';
 import {AppBar, Toolbar, Typography, List, ListItem, ListItemText, Hidden}
  from 'material-ui';
@@ -16,8 +20,6 @@ class BaseCurrency extends React.Component {
   constructor(props) {
     super(props);
     this.state={
-      Rcurrencies: ['INR', 'USD', 'EUR', 'GBP', 'JPY'],
-      Dcurrencies: ['BTC', 'ETH', 'XRP', 'LTC', 'DASH'],
       active: 'INR',
       isHidden: true,
     };
@@ -55,8 +57,8 @@ class BaseCurrency extends React.Component {
           <Hidden lgUp={this.state.isHidden} lgDown={this.state.isHidden}>
             <h2>Real currencies</h2>
             <List >
-            {this.state.Rcurrencies.map(value => (
-              <Link key={value} to={`/exchange/real/${value}`}>
+            {this.props.real.map(value => (
+              <Link key={value} to={`/exchange/fiat/${value}`}>
                 <ListItem key={value} onClick={() => {
                     this.getCurrentValue(value); this.hideList();
                     }} dense button >
@@ -82,5 +84,7 @@ class BaseCurrency extends React.Component {
     );
   }
 };
-
-export default BaseCurrency;
+const mapStateToProps=state=> state.exchange;
+const mapDispatchToProps=dispatch=>bindActionCreators(TradeActions, dispatch);
+// const SList=connect(mapStateToProps, mapDispatchToProps)(List);
+export default connect(mapStateToProps, mapDispatchToProps)(BaseCurrency);

@@ -8,7 +8,6 @@ export const getExchangeRates =
   let state = getState().exchange;
   dispatch(updatePrice(`${state.baseCurrency}`, {price: 1}));
 
-  console.log('state', getState());
       getCrypto(state)
       .then(currencies => {
         state

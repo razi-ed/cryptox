@@ -1,5 +1,4 @@
 const getCrypto = async (props) => {
-  console.log('getCrypto called');
   try {
     const response = await fetch(`https://api.coinmarketcap.com/v1/ticker/?convert=${props.baseCurrency}&limit=15`);
     const currencies = await response.json();
@@ -24,11 +23,9 @@ const getCrypto = async (props) => {
   }
 };
 const getReal = async (props) => {
-  console.log(props.baseCurrency, 'real');
   try {
     const response = await fetch(`https://api.fixer.io/latest?base=${props.baseCurrency}`);
     const currencies = await response.json();
-    console.log('reducer', props.baseCurrency);
     props.updatePrice(`${props.baseCurrency}`, {price: 1});
       props
       .real
@@ -44,5 +41,4 @@ const getReal = async (props) => {
 module.exports={
   getCrypto,
   getReal,
-}
-;
+};

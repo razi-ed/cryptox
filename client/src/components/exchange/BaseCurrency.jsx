@@ -34,7 +34,7 @@ class BaseCurrency extends React.Component {
    *this will do inital actions when the component mounts
    */
   componentDidMount() {
-    const active =this.props.base || 'INR';
+    const active =this.props.baseCurrency;
     this.setState({active});
   }
   /**

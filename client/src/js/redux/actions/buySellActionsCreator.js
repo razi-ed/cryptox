@@ -20,3 +20,17 @@ export function updatePrice(currency, price, action) {
     },
   };
 }
+/**
+ *A reducer to a set base currenct
+ * @param {*} currency
+ * @param {*} action
+ * @return {object} state
+ */
+export function setbaseCurrency(currency, action) {
+  return {
+    type: 'set_baseCurrency',
+    payload: {
+      currency,
+    },
+  };
+}

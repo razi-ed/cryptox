@@ -18,9 +18,9 @@ import * as TradeActions from '../../js/redux/actions/buySellActionsCreator';
 
 const units = [1, 0.1, 0.001];
 /**
- * a component that renders buy-sell component
- * @param {object} name
- * @return {component}
+ *A component to facilitate buy and sell opertaions
+ * @param {*} name
+ * @param {*} Currency
  */
 class BuySellCard extends React.Component {
   /**
@@ -35,68 +35,95 @@ class BuySellCard extends React.Component {
       quantity: 1,
     };
   }
+  buy=()=>{
+    fetch('/orders/buy', {
+      method: 'POST',
+          headers: {
+            'Authorization': localStorage.getItem('token'),
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            units: ((this.state.units * this.state.quantity)*
+            (this.mulFactor( this.state.trade))).toFixed(3),
+           type: this.props.baseCurrency,
+            tradeFor: this.state.trade,
+            currentPrice: this.mulFactor(this.state.trade),
+            // currentPrice: 100,
+          }),
+    })
+    .then(r=>r.json())
+    .then(r=>{
+      console.log(r);
+      Promise.resolve(r);
+    })
+    .then(()=>console.log('fetch request sent'))
+    .catch(e=>console.log('error'));
+  }
+  sell=()=>{
+    fetch('/orders/sell', {
+      method: 'POST',
+          headers: {
+            'Authorization': localStorage.getItem('token'),
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            units: ((this.state.units * this.state.quantity)*
+            (this.mulFactor( this.state.trade))).toFixed(3),
+           type: this.props.baseCurrency,
+            tradeFor: this.state.trade,
+            currentPrice: this.mulFactor(this.state.trade),
+          }),
+    })
+    .then(r=>r.json())
+    .then(r=>{
+      console.log(r);
+      Promise.resolve(r);
+    })
+    .then(()=>console.log('fetch request sent'))
+    .catch(e=>console.log('error'));
+  }
   handleChange = name => event => {
     this.setState({[name]: event.target.value});
+  };
+  mulFactor=(Currency)=>{
+    if (this.props.real.indexOf(Currency)===-1) {
+      return this.props[Currency].price;
+    } else {
+      return (1/this.props[Currency].price);
+    }
   };
   /**
    *@return {component} the JSX component of the class
    */
   render() {
-    const mulFactor=(Currency)=>{
-      if (this.props.real.indexOf(this.props[Currency])===-1) {
-        return this.props[Currency].price;
-      } else {
-        return (1/this.props[Currency].price);
-      }
-    };
     return (
       <Card raised className='BuySellCard' style={{
-        marginTop: 5, width: '100vw',
-      }}>
+        marginTop: 5, width: '100vw'}}>
         <CardMedia
-          style={{
-          height: 150,
-        }}
+          style={{height: 150}}
           image="https://blink.ucsd.edu/_images/homepage/landing-pages/buy-cart.png"
           title="Contemplative Reptile"/>
-          <Typography
-          type="display1"
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-          }}
-          >
+          <Typography type="display1"
+          style={{display: 'flex', justifyContent: 'center'}}>
           {`base currency ${this.props.baseCurrency}`}
           </Typography>
         <CardContent className='trade'>
-          <TextField
-            id="select-currency"
-            select
-            label="units"
-            value={this.state.units}
-            onChange={this.handleChange('units')}
-            helperText="Please select units"
-            margin="normal">
+          <TextField id="select-currency" select label="units"
+            value={this.state.units} onChange={this.handleChange('units')}
+            helperText="Please select units" margin="normal">
             {units.map((option, index) => (
               <MenuItem key={index} value={option}>
                 {option}
               </MenuItem>
             ))}
           </TextField>
-
           <Input
-            id="quantity"
-            type='number'
-            value={this.state.quantity}
+            id="quantity" type='number' value={this.state.quantity}
             onChange={this.handleChange('quantity')}/>
           <TextField
-            id="select-currency"
-            select
-            label="trade for"
-            value={this.state.trade}
-            onChange={this.handleChange('trade')}
-            helperText="to"
-            margin="normal">
+            id="select-currency" select label="trade for"
+            value={this.state.trade} onChange={this.handleChange('trade')}
+            helperText="to"margin="normal">
             {this.props.real.concat(this.props.crypto).map(option => (
               <MenuItem key={option} value={option}>
                 {option}
@@ -113,7 +140,8 @@ class BuySellCard extends React.Component {
         }}>
           {`${(this.state.units * this.state.quantity).toFixed(3)}
            ${this.state.trade}=
-           ${((this.state.units * this.state.quantity)*mulFactor(this.state.trade)).toFixed(3)}
+           ${((this.state.units * this.state.quantity)*
+            (this.mulFactor( this.state.trade))).toFixed(3)}
             ${this.props.baseCurrency}`}
         </Typography>
         <CardActions
@@ -122,13 +150,11 @@ class BuySellCard extends React.Component {
           justifyContent: 'space-around',
         }}>
           <Button raised color="primary" style={{
-            width: 80,
-          }}>
+            width: 80}} onClick={this.buy}>
             BUY
           </Button>
-          <Button raised color="primary" style={{
-            width: 80,
-          }}>
+          <Button raised color="primary" style={{width: 80}}
+          onClick={this.sell}>
             SELL
           </Button>
         </CardActions>

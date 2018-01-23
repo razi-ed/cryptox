@@ -43,7 +43,7 @@ class BuySellCard extends React.Component {
   action = async (action) => {
     try {
       let response =await bsAction(action, this.state);
-        let response= await response.json();
+        console.log(response);
           this.setState({open: true}, ()=>{
             this.setState({
               message: `successfully ${action=='buy'?'bought':'sold'} ${

@@ -11,4 +11,5 @@ export const Action = (action, state) => fetch(`/orders/${action}`, {
         tradeFor: state.trade,
         currentPrice: this.mulFactor(state.trade),
     }),
-});
+})
+.then(r=>r.json());

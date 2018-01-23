@@ -1,4 +1,4 @@
-export const Action = (action, state) => fetch(`/orders/${action}`, {
+export const bsAction = (action, state, mulFactor, props) => fetch(`/orders/${action}`, {
     method: 'POST',
     headers: {
         'Authorization': localStorage.getItem('token'),
@@ -6,10 +6,10 @@ export const Action = (action, state) => fetch(`/orders/${action}`, {
     },
     body: JSON.stringify({
         units: ((state.units *
-            state.quantity) * (this.mulFactor(state.trade))).toFixed(3),
-        type: this.props.baseCurrency,
+            state.quantity) * (mulFactor(state.trade))).toFixed(3),
+        type: props.baseCurrency,
         tradeFor: state.trade,
-        currentPrice: this.mulFactor(state.trade),
+        currentPrice: mulFactor(state.trade),
     }),
 })
 .then(r=>r.json());

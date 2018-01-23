@@ -15,8 +15,8 @@ import {
 
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import * as TradeActions from '../../js/redux/actions/buySellActionsCreator';
 import {bsAction} from '../../ajax-calls/BuySellActions';
+import * as TradeActions from '../../actions/buySellActionsCreator';
 
 const units = [1, 0.1, 0.001];
 /**
@@ -42,7 +42,7 @@ class BuySellCard extends React.Component {
   baseUnits = () => (this.state.units * this.state.quantity).toFixed(3)
   action = async (action) => {
     try {
-      let response =await bsAction(action, this.state);
+      let response =await bsAction(action, this.state, this.mulFactor, this.props);
         console.log(response);
           this.setState({open: true}, ()=>{
             this.setState({

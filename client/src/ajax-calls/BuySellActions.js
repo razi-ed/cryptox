@@ -1,4 +1,5 @@
-export const bsAction = (action, state, mulFactor, props) => fetch(`/orders/${action}`, {
+export const bsAction =
+(action, state, mulFactor, props) => fetch(`/orders/${action}`, {
     method: 'POST',
     headers: {
         'Authorization': localStorage.getItem('token'),

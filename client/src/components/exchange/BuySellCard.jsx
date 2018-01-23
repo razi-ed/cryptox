@@ -42,7 +42,8 @@ class BuySellCard extends React.Component {
   baseUnits = () => (this.state.units * this.state.quantity).toFixed(3)
   action = async (action) => {
     try {
-      let response =await bsAction(action, this.state, this.mulFactor, this.props);
+      let response =await bsAction(action,
+         this.state, this.mulFactor, this.props);
         console.log(response);
           this.setState({open: true}, ()=>{
             this.setState({

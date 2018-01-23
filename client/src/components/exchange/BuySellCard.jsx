@@ -16,11 +16,12 @@ import {
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as TradeActions from '../../js/redux/actions/buySellActionsCreator';
+import {bsAction} from '../../ajax-calls/BuySellActions';
 
 const units = [1, 0.1, 0.001];
 /**
  *A component to facilitate buy and sell opertaions
- * @param {*} name
+ * @param {action} action
  * @param {*} Currency
  */
 class BuySellCard extends React.Component {
@@ -38,38 +39,25 @@ class BuySellCard extends React.Component {
       message: '',
     };
   }
+  baseUnits = () => (this.state.units * this.state.quantity).toFixed(3)
   action = async (action) => {
     try {
-      let response =await fetch(`/orders/${action}`, {
-        method: 'POST',
-        headers: {
-          'Authorization': localStorage.getItem('token'),
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          units: ((this.state.units *
-            this.state.quantity) * (this.mulFactor(this.state.trade))).toFixed(3),
-          type: this.props.baseCurrency,
-          tradeFor: this.state.trade,
-          currentPrice: this.mulFactor(this.state.trade),
-          }),
-        });
-        let r= await response.json();
-          console.log(r);
+      let response =await bsAction(action, this.state);
+        let response= await response.json();
           this.setState({open: true}, ()=>{
             this.setState({
               message: `successfully ${action=='buy'?'bought':'sold'} ${
-                 (this.state.units * this.state.quantity).toFixed(3)}
-          ${this.state.trade}`,
+                 this.baseUnits()} ${this.state.trade}`,
             });
           });
     } catch (e) {
-console.log(e);
-}
+        console.log(e);
+        }
       }
 
-  handleChange = name => event =>this.setState({[name]: event.target.value});
-  mulFactor = (Currency) => {
+handleChange = name => event =>this.setState({[name]: event.target.value});
+
+mulFactor = Currency => {
     if (this.props.real.indexOf(Currency) === -1) {
       return this.props[Currency].price;
     } else {
@@ -82,31 +70,21 @@ console.log(e);
   render() {
     return (
       <Card
-        raised
-        className='BuySellCard'
-        style={{
-        marginTop: 5,
-        width: '100vw',
-      }}>
+        raised className='BuySellCard'
+        style={{marginTop: 5, width: '100vw'}}>
         <CardMedia
-          style={{
-          height: 150,
-        }}
+          style={{height: 150}}
           image="https://blink.ucsd.edu/_images/homepage/landing-pages/buy-cart.png"
           title="Contemplative Reptile"/>
         <Typography
-          type="display1"
-          style={{
-          display: 'flex',
-          justifyContent: 'center',
-        }}>
+          type="display1" style={{
+          display: 'flex', justifyContent: 'center'}}>
           {`base currency ${this.props.baseCurrency}`}
         </Typography>
         <CardContent className='trade'>
           <TextField
             id="select-currency"
-            select
-            label="units"
+            select label="units"
             value={this.state.units}
             onChange={this.handleChange('units')}
             helperText="Please select units"
@@ -124,8 +102,7 @@ console.log(e);
             onChange={this.handleChange('quantity')}/>
           <TextField
             id="select-currency"
-            select
-            label="trade for"
+            select label="trade for"
             value={this.state.trade}
             onChange={this.handleChange('trade')}
             helperText="to"
@@ -137,7 +114,6 @@ console.log(e);
                 </MenuItem>
               ))}
           </TextField>
-
         </CardContent>
         <Typography
           type="display1"
@@ -145,7 +121,7 @@ console.log(e);
           display: 'flex',
           justifyContent: 'center',
         }}>
-          {`${ (this.state.units * this.state.quantity).toFixed(3)}
+          {`${ this.baseUnits()}
            ${this.state.trade}=
            ${ ((this.state.units *
             this.state.quantity) *
@@ -160,18 +136,14 @@ console.log(e);
           <Button
             raised
             color="primary"
-            style={{
-            width: 80,
-          }}
+            style={{width: 80}}
             onClick={()=>this.action('buy')}>
             BUY
           </Button>
           <Button
             raised
             color="primary"
-            style={{
-            width: 80,
-          }}
+            style={{width: 80}}
             onClick={()=>this.action('sell')}>
             SELL
           </Button>
@@ -187,8 +159,8 @@ console.log(e);
 };
 
 const mapStateToProps = state => state.exchange;
+
 const mapDispatchToProps = dispatch =>
  bindActionCreators(TradeActions, dispatch);
-const SBuySellCard = connect(mapStateToProps, mapDispatchToProps)(BuySellCard);
 
-export default SBuySellCard;
+export default connect(mapStateToProps, mapDispatchToProps)(BuySellCard);

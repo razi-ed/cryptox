@@ -7,8 +7,6 @@ export const getExchangeRates =
   dispatch(updatePrice('baseCurrency', baseCurrency));
   let state = getState().exchange;
   dispatch(updatePrice(`${state.baseCurrency}`, {price: 1}));
-
-  console.log('state', getState());
       getCrypto(state)
       .then(currencies => {
         state
@@ -31,7 +29,6 @@ export const getExchangeRates =
       });
       getFiat(state)
        .then(currencies=>{
-         console.log('reducer', state.baseCurrency);
            state
            .real
            .filter(currency => currency !== state.baseCurrency)

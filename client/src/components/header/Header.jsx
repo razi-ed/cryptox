@@ -14,7 +14,7 @@ import AccountCircle from 'material-ui-icons/AccountCircle';
 import {mailFolderListItems, otherMailFolderListItems} from './drawerList';
 
 import {bindActionCreators} from 'redux';
-
+import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import * as headerActions from '../../js/redux/actions/headerActions';
@@ -115,7 +115,10 @@ class Header extends React.Component {
   // handleClose = () => {
   //   this.setState({ anchorElement: null });
   // };
-handleToggle=()=>this.props.openDrawer()
+  /**
+   * @method
+   * @return {Html}
+   */
   render() {
     const {classes} = this.props;
     const {auth, anchorElement} = this.state;
@@ -164,7 +167,9 @@ handleToggle=()=>this.props.openDrawer()
                       color: '#fff',
                     }}
                     className={classes.flex}>
+                    <Link to='/'>
                     CRYPTOX
+                    </Link>
             </Typography>
             )
             :
@@ -177,7 +182,9 @@ handleToggle=()=>this.props.openDrawer()
                   color: '#fff',
                   }}
                 className={classes.flex}>
-                CRYPTOX
+                <Link to='/'>
+                    CRYPTOX
+                </Link>
             </Typography>
           )
             }

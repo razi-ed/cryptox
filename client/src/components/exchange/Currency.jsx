@@ -18,7 +18,7 @@ const Currency =(props)=> (
         <ChangeArrow type={props.type} change={props.change}>
         </ChangeArrow>
         <Typography type="title" color='secondary' >
-          {typeof(props.price)==='number'?(props.price).toFixed(2)
+          {typeof(props.price)==='number'?(props.price).toFixed(3)
           :'loading'}{props.baseCurrency}
         </Typography>
       </div>

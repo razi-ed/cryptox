@@ -1,19 +1,43 @@
 import React from 'react';
-import '../css/style.css';
+import withStyles from 'material-ui/styles/withStyles';
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import {Paper, Grid, Typography} from 'material-ui';
+
+const styles = (theme) => ({
+root: {
+    backgroundColor: theme.palette.primary[500],
+    height: theme.spacing.unit*7,
+},
+footerText: {
+    fontSize: theme.spacing.unit * 3,
+    textAlign: 'right',
+    color: theme.palette.text.primary,
+},
+});
+
 
 /**
  * @class
  */
-export default class Footer extends React.Component {
+class Footer extends React.Component {
     /**
      * @function
      * @return {footerHtml}
      */
     render() {
+        const {classes} = this.props;
+
         return (
-            <footer id="footer" >
-            <p>&copy; Team CryptX</p>
+            <footer className={classes.root}>
+            <p className={classes.footerText}>&copy; Team CryptoX</p>
             </footer>
         );
     }
 }
+
+Footer.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(Footer);

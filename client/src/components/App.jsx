@@ -5,8 +5,8 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 import LogIn from './auth/TabForSignUp';
-import Header from './Header';
-import Home from '../components/Home';
+import Header from './header/Header';
+import Home from './homePage/Home';
 import Footer from '../components/Footer';
 import ForgotPassword from '../components/auth/ForgotPassword';
 import Exchange from '../components/exchange/Exchange';

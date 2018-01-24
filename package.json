@@ -80,6 +80,7 @@
     "webpack-dev-middleware": "^2.0.3",
     "webpack-dev-server": "^2.10.0",
     "webpack-extract-css-hot-reload": "^1.0.3",
-    "webpack-hot-middleware": "^2.21.0"
+    "webpack-hot-middleware": "^2.21.0",
+    "webpack-jarvis": "^0.2.2"
   }
 }

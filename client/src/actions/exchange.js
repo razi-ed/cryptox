@@ -4,7 +4,6 @@ import {getCrypto, getFiat} from '../ajax-calls/getExchange';
 
 export const getExchangeRates =
 (baseCurrency='INR') => (dispatch, getState) => {
-  dispatch(updatePrice('baseCurrency', baseCurrency));
   let state = getState().exchange;
   dispatch(updatePrice(`${state.baseCurrency}`, {price: 1}));
       getCrypto(state)

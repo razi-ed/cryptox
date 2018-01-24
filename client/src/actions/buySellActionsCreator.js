@@ -20,3 +20,17 @@ export function updatePrice(currency, price, action) {
     },
   };
 }
+/**
+ *
+ * @param {*} baseCurrency
+ * @param {*} action
+ * @return {object} state
+ */
+export function setbaseCurrency( baseCurrency, action) {
+  return {
+    type: 'Set_baseCurrency',
+    payload: {
+      baseCurrency,
+    },
+  };
+}

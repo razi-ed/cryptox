@@ -2,8 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-
-// Constant with our paths
+const Jarvis = require('webpack-jarvis');
 const paths = {
   DIST: path.resolve(__dirname, '../dist'),
   SRC: path.resolve(__dirname, 'src'),
@@ -21,6 +20,7 @@ module.exports = {
     'react-hot-loader/patch',
     path.join(paths.SRC, 'Main.jsx'),
   ],
+  //watch: true,
   output: {
     path: paths.DIST,
     publicPath: '/',
@@ -29,27 +29,30 @@ module.exports = {
   // target: 'node',
   node: {
     __dirname: false,
-    },
-    devtool: 'source-map',
+  },
+  devtool: 'source-map',
   plugins: [
     new HtmlWebpackPlugin({
-        template: path.join(paths.SRC, 'index.html'),
-        filename: path.join(paths.SRC, 'index.html'),
+      template: path.join(paths.SRC, 'index.html'),
+      filename: path.join(paths.SRC, 'index.html'),
 
     }),
     new ExtractTextPlugin('style.bundle.css'),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.HotModuleReplacementPlugin(),
+    new Jarvis({
+      port: 4477, // optional: set a port
+    }),
   ],
   module: {
     rules: [{
-      test: /\.(js|jsx)$/,
-      exclude: /node_modules/,
-      use: [{
-        loader: 'babel-loader',
-        options: {
-          sourceMap: true,
-          // baseUrl:'/',
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: [{
+          loader: 'babel-loader',
+          options: {
+            sourceMap: true,
+            // baseUrl:'/',
           },
         }],
       },

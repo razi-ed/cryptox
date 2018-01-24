@@ -8,6 +8,14 @@ import Exchange from './reducers/Exchange';
 import user from './reducers/user';
 
 let initialState = {
+  user: {
+    email: 'Guest',
+    isAuthenticated: false,
+    header: {
+      authenticated: false,
+      elevated: true,
+    }
+  },
 };
 
 // const reduxMiddlewares = [templateMiddlewareFunction];

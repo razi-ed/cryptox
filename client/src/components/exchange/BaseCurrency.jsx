@@ -42,7 +42,7 @@ class BaseCurrency extends React.Component {
    */
   render() {
     return (
-      <AppBar position="static" color="primary">
+      <AppBar position="static" color="primary" >
           <Toolbar style={{display: 'flex', justifyContent: 'space-between'}}>
             <Typography type="title" color="inherit">
               Base Currency

@@ -10,17 +10,19 @@ import {
   MenuItem,
   TextField,
   Input,
+  Snackbar,
 } from 'material-ui';
 
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import * as TradeActions from '../../js/redux/actions/buySellActionsCreator';
+import {bsAction} from '../../ajax-calls/BuySellActions';
+import * as TradeActions from '../../actions/buySellActionsCreator';
 
 const units = [1, 0.1, 0.001];
 /**
- * a component that renders buy-sell component
- * @param {object} name
- * @return {component}
+ *A component to facilitate buy and sell opertaions
+ * @param {action} action
+ * @param {*} Currency
  */
 class BuySellCard extends React.Component {
   /**
@@ -33,46 +35,64 @@ class BuySellCard extends React.Component {
       base: 'INR',
       units: 1,
       quantity: 1,
+      open: false,
+      message: '',
     };
   }
-  handleChange = name => event => {
-    this.setState({[name]: event.target.value});
+  setMessage=(message)=>
+  this.setState({open: true}, ()=>{
+    this.setState({
+      message,
+    });
+  })
+  baseUnits = () => (this.state.units * this.state.quantity).toFixed(3)
+  action = async (action) => {
+    try {
+      let response =await bsAction(action,
+         this.state, this.mulFactor, this.props);
+        console.log(response);
+        if (response.result== 'Transaction is Successful') {
+          this.setMessage(`successfully ${action=='buy'?'purchased':'sold'} ${
+               this.baseUnits()} ${this.state.trade}`,
+          );
+        } else {
+          this.setMessage(`transation failed due to insufficient funds`);
+        }
+      } catch (e) {
+        this.setMessage(`failed to connect`);
+        console.log(e);
+        }
+      }
+
+handleChange = name => event =>this.setState({[name]: event.target.value});
+
+mulFactor = Currency => {
+    if (this.props.real.indexOf(Currency) === -1) {
+      return this.props[Currency].price;
+    } else {
+      return (1 / this.props[Currency].price);
+    }
   };
   /**
    *@return {component} the JSX component of the class
    */
   render() {
-    const mulFactor=(Currency)=>{
-      if (this.props.real.indexOf(this.props[Currency])===-1) {
-        return this.props[Currency].price;
-      } else {
-        return (1/this.props[Currency].price);
-      }
-    };
     return (
-      <Card raised className='BuySellCard' style={{
-        marginTop: 5, width: '100vw',
-      }}>
+      <Card
+        raised className='BuySellCard'
+        style={{marginTop: 5, width: '100vw'}}>
         <CardMedia
-          style={{
-          height: 150,
-        }}
-          image="https://blink.ucsd.edu/_images/homepage/landing-pages/buy-cart.png"
-          title="Contemplative Reptile"/>
-          <Typography
-          type="display1"
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-          }}
-          >
+          style={{height: 150}}
+          image="https://blink.ucsd.edu/_images/homepage/landing-pages/buy-cart.png"/>
+        <Typography
+          type="display1" style={{
+          display: 'flex', justifyContent: 'center'}}>
           {`base currency ${this.props.baseCurrency}`}
-          </Typography>
+        </Typography>
         <CardContent className='trade'>
           <TextField
             id="select-currency"
-            select
-            label="units"
+            select label="units"
             value={this.state.units}
             onChange={this.handleChange('units')}
             helperText="Please select units"
@@ -83,7 +103,6 @@ class BuySellCard extends React.Component {
               </MenuItem>
             ))}
           </TextField>
-
           <Input
             id="quantity"
             type='number'
@@ -91,19 +110,18 @@ class BuySellCard extends React.Component {
             onChange={this.handleChange('quantity')}/>
           <TextField
             id="select-currency"
-            select
-            label="trade for"
+            select label="trade for"
             value={this.state.trade}
             onChange={this.handleChange('trade')}
             helperText="to"
             margin="normal">
-            {this.props.real.concat(this.props.crypto).map(option => (
-              <MenuItem key={option} value={option}>
-                {option}
-              </MenuItem>
-            ))}
+            {this.props.real.concat(this.props.crypto)
+              .map(option => (
+                <MenuItem key={option} value={option}>
+                  {option}
+                </MenuItem>
+              ))}
           </TextField>
-
         </CardContent>
         <Typography
           type="display1"
@@ -111,9 +129,11 @@ class BuySellCard extends React.Component {
           display: 'flex',
           justifyContent: 'center',
         }}>
-          {`${(this.state.units * this.state.quantity).toFixed(3)}
+          {`${ this.baseUnits()}
            ${this.state.trade}=
-           ${((this.state.units * this.state.quantity)*mulFactor(this.state.trade)).toFixed(3)}
+           ${ ((this.state.units *
+            this.state.quantity) *
+             (this.mulFactor(this.state.trade))).toFixed(3)}
             ${this.props.baseCurrency}`}
         </Typography>
         <CardActions
@@ -121,25 +141,34 @@ class BuySellCard extends React.Component {
           display: 'flex',
           justifyContent: 'space-around',
         }}>
-          <Button raised color="primary" style={{
-            width: 80,
-          }}>
+          <Button
+            raised
+            color="primary"
+            style={{width: 80}}
+            onClick={()=>this.action('buy')}>
             BUY
           </Button>
-          <Button raised color="primary" style={{
-            width: 80,
-          }}>
+          <Button
+            raised
+            color="primary"
+            style={{width: 80}}
+            onClick={()=>this.action('sell')}>
             SELL
           </Button>
         </CardActions>
+        <Snackbar
+          open={this.state.open}
+          autoHideDuration={3000}
+          message={this.state.message}
+          onClose={() => this.setState({open: false})}/>
       </Card>
     );
   }
 };
 
 const mapStateToProps = state => state.exchange;
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(TradeActions, dispatch);
-const SBuySellCard = connect(mapStateToProps, mapDispatchToProps)(BuySellCard);
 
-export default SBuySellCard;
+const mapDispatchToProps = dispatch =>
+ bindActionCreators(TradeActions, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(BuySellCard);

@@ -1,6 +1,6 @@
 import {updatePrice, setbaseCurrency} from './buySellActionsCreator';
 import {buySellActions} from './index';
-import {getCrypto, getFiat} from '../../../ajax-calls/getExchange';
+import {getCrypto, getFiat} from '../ajax-calls/getExchange';
 
 export const getExchangeRates =
 (baseCurrency='INR') => (dispatch, getState) => {

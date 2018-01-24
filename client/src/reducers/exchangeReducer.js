@@ -1,4 +1,4 @@
-import Exchange from '../Exchange';
+import Exchange from './Exchange';
 /**
  *Reducer for trade-exchage
  * @param {*} state

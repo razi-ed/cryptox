@@ -1,7 +1,7 @@
 import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import * as TradeActions from '../../js/redux/actions/buySellActionsCreator';
+import * as TradeActions from '../../actions/buySellActionsCreator';
 
 import {Link} from 'react-router-dom';
 import {AppBar, Toolbar, Typography, List, ListItem, ListItemText, Hidden}

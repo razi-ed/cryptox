@@ -39,19 +39,27 @@ class BuySellCard extends React.Component {
       message: '',
     };
   }
+  setMessage=(message)=>
+  this.setState({open: true}, ()=>{
+    this.setState({
+      message,
+    });
+  })
   baseUnits = () => (this.state.units * this.state.quantity).toFixed(3)
   action = async (action) => {
     try {
       let response =await bsAction(action,
          this.state, this.mulFactor, this.props);
         console.log(response);
-          this.setState({open: true}, ()=>{
-            this.setState({
-              message: `successfully ${action=='buy'?'bought':'sold'} ${
-                 this.baseUnits()} ${this.state.trade}`,
-            });
-          });
-    } catch (e) {
+        if (response.result== 'Transaction is Successful') {
+          this.setMessage(`successfully ${action=='buy'?'purchased':'sold'} ${
+               this.baseUnits()} ${this.state.trade}`,
+          );
+        } else {
+          this.setMessage(`transation failed due to insufficient funds`);
+        }
+      } catch (e) {
+        this.setMessage(`failed to connect`);
         console.log(e);
         }
       }

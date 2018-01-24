@@ -1,4 +1,4 @@
-import {updatePrice} from './buySellActionsCreator';
+import {updatePrice, setbaseCurrency} from './buySellActionsCreator';
 import {buySellActions} from './index';
 import {getCrypto, getFiat} from '../ajax-calls/getExchange';
 

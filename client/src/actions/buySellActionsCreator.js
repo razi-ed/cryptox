@@ -20,6 +20,7 @@ export function updatePrice(currency, price, action) {
     },
   };
 }
+<<<<<<< HEAD
 /**
  *
  * @param {*} baseCurrency
@@ -34,3 +35,20 @@ export function setbaseCurrency( baseCurrency, action) {
     },
   };
 }
+||||||| merged common ancestors
+=======
+/**
+ *A reducer to a set base currenct
+ * @param {*} currency
+ * @param {*} action
+ * @return {object} state
+ */
+export function setbaseCurrency(currency, action) {
+  return {
+    type: 'set_baseCurrency',
+    payload: {
+      currency,
+    },
+  };
+}
+>>>>>>> 49d738dd503b30b0e23b4bd37f53ffb1aa711af2

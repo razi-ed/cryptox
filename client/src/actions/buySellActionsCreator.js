@@ -1,9 +1,3 @@
-/**
- * authenticate is an actionCreator ###TEMPLATE###
- * @return {object} action
- * @param {string} currency
- * @param {object} price
- */
 
 /**
  *to update the price of the specified currency

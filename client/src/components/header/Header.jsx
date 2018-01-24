@@ -1,34 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import {withStyles} from 'material-ui/styles';
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography';
-import {Link} from 'react-router-dom';
-import IconButton from 'material-ui/IconButton';
-import MenuIcon from 'material-ui-icons/Menu';
-import Button from 'material-ui/Button';
-import AccountCircle from 'material-ui-icons/AccountCircle';
-import Switch from 'material-ui/Switch';
-import {FormControlLabel, FormGroup} from 'material-ui/Form';
-import Menu, {MenuList, MenuItem} from 'material-ui/Menu';
-import Paper from 'material-ui/Paper';
-import {ListItemIcon, ListItemText} from 'material-ui/List';
-import Grow from 'material-ui/transitions/Grow';
-import {Manager, Target, Popper} from 'react-popper';
-import ClickAwayListener from 'material-ui/utils/ClickAwayListener';
-import LogInIcon from 'material-ui-icons/PowerSettingsNew';
-import SignUpIcon from 'material-ui-icons/AddCircleOutline';
-import AboutUsIcon from 'material-ui-icons/InfoOutline';
-import Divider from 'material-ui/Divider';
 import Media from 'react-media';
+import {Manager, Target, Popper} from 'react-popper';
+import {AppBar, Typography, Paper,
+  Divider, Drawer, Toolbar, List, MenuList, IconButton}
+   from 'material-ui';
+import {withStyles} from 'material-ui/styles';
+import Grow from 'material-ui/transitions/Grow';
+import ClickAwayListener from 'material-ui/utils/ClickAwayListener';
+import MenuIcon from 'material-ui-icons/Menu';
+import AccountCircle from 'material-ui-icons/AccountCircle';
+import {mailFolderListItems, otherMailFolderListItems} from './drawerList';
 
-const styles = theme => ({
+import {bindActionCreators} from 'redux';
+
+import {connect} from 'react-redux';
+
+import * as headerActions from '../../js/redux/actions/headerActions';
+
+const styles = (theme) => ({
   menuItem: {
     '&:focus': {
       'backgroundColor': theme.palette.primary[500],
-      '&  $icon': {
+      '& $text, & $icon': {
         color: theme.palette.common.white,
       },
     },
@@ -37,14 +32,15 @@ const styles = theme => ({
     'paddingLeft': 12,
     'paddingRight': 12,
   },
-  // text: {
-  //   popperClose: {
-  //     pointerEvents: 'none',
-  //   },
-  //   fontWeight: ['300'],
-  //   fontSize: 14,
-  //   letterSpacing: .9,
-  // },
+  text: {
+    popperClose: {
+      pointerEvents: 'none',
+      display: 'none',
+    },
+    fontWeight: ['300'],
+    fontSize: 14,
+    letterSpacing: .9,
+  },
   icon: {
     marginRight: 0,
     width: 20,
@@ -64,6 +60,9 @@ const styles = theme => ({
     marginLeft: -12,
     marginRight: 5,
   },
+  list: {
+    width: 200,
+  },
 });
 
 
@@ -73,27 +72,41 @@ const styles = theme => ({
 class Header extends React.Component {
   /**
    * this function is called by React to render the component
-   * @return {component}
+   * @param {object} props
    */
-  state = {
-    auth: true,
-    anchorElement: null,
-    open: false,
-  };
-
-  /* constructor(props) {
-  const { classes } = props;
-//P.S.
-}*/
+  constructor(props) {
+    super(props);
+  const {classes} = props;
+    this.state = {
+      auth: true,
+      anchorElement: null,
+      open: false,
+      DrawerState: false,
+      elevationValue: 4,
+    };
+    // this.clicker = this.clicker.bind(this)
+// P.S.
+}
 
   handleClick = () => {
-    this.state.open === false ? this.setState({open: true}) : this.setState({open: false});
+    if (this.state.open) {
+      this.setState({open: false});
+    } else {
+      this.setState({open: true});
+    }
   };
 
   handleClose = () => {
     this.setState({open: false});
   };
 
+  openDrawer = () => {
+    this.setState({DrawerState: true});
+  };
+
+  closeDrawer = () => {
+    this.setState({DrawerState: false});
+  }
 
   // handleMenu = event => {
   //   this.setState({ anchorElement: event.currentTarget });
@@ -102,21 +115,29 @@ class Header extends React.Component {
   // handleClose = () => {
   //   this.setState({ anchorElement: null });
   // };
-
+handleToggle=()=>this.props.openDrawer()
   render() {
     const {classes} = this.props;
     const {auth, anchorElement} = this.state;
     const openSecMenu = Boolean(anchorElement);
     const {open} = this.state;
+    const sideList = (
+      <div className={classes.list}>
+        <List>{mailFolderListItems}</List>
+        <Divider />
+        <List>{otherMailFolderListItems}</List>
+      </div>
+    );
 
     return (
       <div className={classes.root}>
-        <AppBar position="static">
+        <AppBar position='fixed' elevation={1}>
           <Toolbar>
           <Media query="(max-width: 599px)">
-          {matches =>
+          {(matches) =>
             matches ? (
-              <IconButton className={classes.menuButton} aria-label="Menu">
+              <IconButton className={classes.menuButton} aria-label="Menu"
+              onClick={this.openDrawer}>
               <MenuIcon style={{fontSize: 26, color: '#fff'}} />
               </IconButton>
               )
@@ -124,19 +145,21 @@ class Header extends React.Component {
               (
                 <IconButton className={classes.menuButton}
                 style={{marginRight: 20}}
-                  aria-label="Menu">
+                  aria-label="Menu"
+                  onClick={this.openDrawer}>
                 <MenuIcon style={{fontSize: 32, color: '#fff'}}/>
                 </IconButton>
               )
                 }
                 </Media>
+
             <Media query="(max-width: 599px)">
-              {matches =>
+              {(matches) =>
                 matches ? (
                   <Typography type="display1"
                     style={{
                       fontSize: 24,
-                      fontWeight: ['300'],
+                      fontWeight: '300',
                       letterSpacing: 4,
                       color: '#fff',
                     }}
@@ -149,7 +172,7 @@ class Header extends React.Component {
               <Typography type="display1"
                 style={{
                   fontSize: 30,
-                  fontWeight: ['300'],
+                  fontWeight: '300',
                   letterSpacing: 7,
                   color: '#fff',
                   }}
@@ -160,6 +183,8 @@ class Header extends React.Component {
             }
             </Media>
             {/*
+              https://material-ui-next.com/demos/chips/
+              use chips with name of trader after login
               #####ADD TOGGLE SWITCH FOR LOGOUT/LOGIN IN MOBILE VIEW, AFTER AUTHENTICATION
               ### state
               const state= {
@@ -188,7 +213,7 @@ class Header extends React.Component {
             <Manager>
               <Target>
                 <Media query={{maxWidth: 599}}>
-                  {matches =>
+                  {(matches) =>
                     matches ? (
                       <IconButton
                         aria-owns={open ? 'menu-list' : null}
@@ -219,7 +244,7 @@ class Header extends React.Component {
                 className={classNames({[classes.popperClose]: !open})}
               >
               <Media query={{maxWidth: 599}}>
-              {matches =>
+              {(matches) =>
                 matches ? (
                   <ClickAwayListener onClickAway={this.handleClose}>
                   <Grow in={open} id="menu-list" style={{transformOrigin: '0 0 0'}}>
@@ -228,32 +253,7 @@ class Header extends React.Component {
                               paddingBottom: 1,
                               paddingTop: 1,
                             }}>
-                            <Link to='/login'>
-                              <MenuItem className={classes.menuItem}>
-                                <ListItemIcon className={classes.icon}>
-                                  <SignUpIcon />
-                                </ListItemIcon>
-                                <ListItemText inset primary="Sign Up" />
-                              </MenuItem>
-                            </Link>
-                              <Divider light style={{height: .8}} />
-                             <Link to='/login'>
-                              <MenuItem className={classes.menuItem}>
-                                <ListItemIcon className={classes.icon}>
-                                  <LogInIcon />
-                                </ListItemIcon>
-                                <ListItemText inset primary="Log In" />
-                              </MenuItem>
-                              </Link>
-                              <Divider style={{height: 1}} />
-                              <Link to='/about'>
-                              <MenuItem className={classes.menuItem}>
-                                <ListItemIcon className={classes.icon}>
-                                  <AboutUsIcon />
-                                </ListItemIcon>
-                                <ListItemText inset primary="About Us" />
-                              </MenuItem>
-                              </Link>
+                              {sideList}
                             </MenuList>
                           </Paper>
                           </Grow>
@@ -268,32 +268,7 @@ class Header extends React.Component {
                                 paddingBottom: 1,
                                 paddingTop: 1,
                               }}>
-                                <Link to='/login'>
-                                <MenuItem className={classes.menuItem}>
-                                  <ListItemIcon className={classes.iconLg}>
-                                    <SignUpIcon />
-                                  </ListItemIcon>
-                                  <ListItemText inset primary="Sign Up" />
-                                </MenuItem>
-                                </Link>
-                                <Divider light style={{height: 1.15}} />
-                                <Link to='/login'>
-                                <MenuItem className={classes.menuItem}>
-                                  <ListItemIcon className={classes.iconLg}>
-                                    <LogInIcon />
-                                  </ListItemIcon>
-                                  <ListItemText inset primary="Log In" />
-                                </MenuItem>
-                              </Link>
-                                <Divider style={{height: 1.25}} />
-                                <Link to='/about'>
-                                <MenuItem className={classes.menuItem}>
-                                  <ListItemIcon className={classes.iconLg}>
-                                    <AboutUsIcon />
-                                  </ListItemIcon>
-                                  <ListItemText inset primary="About Us" />
-                                </MenuItem>
-                                </Link>
+                                {sideList}
                               </MenuList>
                             </Paper>
                   </Grow>
@@ -305,7 +280,18 @@ class Header extends React.Component {
             </Manager>
             {/*    )}*/}
           </Toolbar>
+            <Drawer open={this.state.DrawerState} onClose={this.closeDrawer}>
+              <div
+                tabIndex={0}
+                role="button"
+                onClick={this.closeDrawer}
+                onKeyDown={this.closeDrawer}
+              >
+                {sideList}
+              </div>
+            </Drawer>
         </AppBar>
+
       </div>
     );
   }
@@ -315,4 +301,10 @@ class Header extends React.Component {
 Header.propTypes = {
   classes: PropTypes.object.isRequired,
 };
-export default withStyles(styles)(Header);
+
+const mapStateToProps = state => state;
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(headerActions, dispatch);
+const AppHeader = connect(mapStateToProps, mapDispatchToProps)(Header);
+
+export default withStyles(styles)(AppHeader);

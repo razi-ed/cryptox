@@ -5,21 +5,21 @@ import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
 import classNames from 'classnames';
 import Typography from 'material-ui/Typography';
-import {Link} from 'react-router-dom';
-import Card, {CardActions, CardContent} from 'material-ui/Card';
-import Button from 'material-ui/Button';
-import SignUpIcon from 'material-ui-icons/AddCircleOutline';
+import Card, {CardContent} from 'material-ui/Card';
 import EncryptedIcon from 'material-ui-icons/LockOutline';
 import ExchangeIcon from 'material-ui-icons/ShowChart';
 import DesignIcon from 'material-ui-icons/ViewQuilt';
 
 
 const styles = (theme) => ({
+  root: {
+    height: theme.spacing.unit * 30,
+    backgroundColor: theme.palette.text.secondary,
+    paddingTop: theme.spacing.unit * 7,
+    paddingBottom: theme.spacing.unit * 7,
+  },
   icon: {
     fontSize: 36,
-  },
-  paperColorNSize: {
-
   },
   card: {},
   cardActionButton: {
@@ -30,7 +30,6 @@ const styles = (theme) => ({
   CardTextsContainer: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'spaceAround',
   },
 });
 
@@ -46,7 +45,7 @@ class Benefits extends Component {
     const {classes} = this.props;
 
     return (
-    <Paper className={classes.paperColorNSize} elevation={10}>
+    <Paper className={classes.root} elevation={10}>
       <Grid
       container
       spacing={0}
@@ -59,11 +58,11 @@ class Benefits extends Component {
           <CardContent>
           <div className={classes.CardTextsContainer}>
           <EncryptedIcon className={classes.icon}/>
-          <Typography type='headline'>
+          <Typography type='headline' align="center">
         Data Security
         </Typography>
           </div>
-            <Typography type='subheading' component="p">
+            <Typography type='subheading' align="center">
             Cryptox encrypts user and transaction data with strong tools.
             Your data remains private.
             </Typography>
@@ -77,11 +76,11 @@ class Benefits extends Component {
                 <CardContent>
                 <div className={classes.CardTextsContainer}>
                 <ExchangeIcon className={classes.icon} />
-              <Typography type='headline'>
-              BEAUTIFUL LIVE CHARTS
+              <Typography type='headline' align="center">
+              LIVE CHARTS
               </Typography>
                 </div>
-                  <Typography type='subheading' component="p">
+                <Typography type='subheading' align="center">
                   Real time charts as per market condition changes, which facilitate easy tracking of assets.
                   </Typography>
               </CardContent>
@@ -94,11 +93,11 @@ class Benefits extends Component {
               <CardContent>
               <div className={classes.CardTextsContainer}>
               <DesignIcon className={classes.icon} />
-              <Typography type='headline'>
+              <Typography type='headline' align="center">
               INTUITIVE INTERFACE
             </Typography>
               </div>
-                <Typography type='subheading' component="p">
+                <Typography type='subheading' align="center">
                   Cryptox provide hassle-free yet
                   intuitive interface, along with an elegant experience.
                 </Typography>

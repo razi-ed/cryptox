@@ -1,6 +1,6 @@
 import React from 'react';
-import { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
-import { Link } from 'react-router-dom';
+import {ListItem, ListItemIcon, ListItemText} from 'material-ui/List';
+import {Link} from 'react-router-dom';
 import SignUpIcon from 'material-ui-icons/AddCircleOutline';
 import AboutUsIcon from 'material-ui-icons/InfoOutline';
 import LogInIcon from 'material-ui-icons/PowerSettingsNew';

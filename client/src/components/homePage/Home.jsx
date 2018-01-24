@@ -9,17 +9,6 @@ import {Link} from 'react-router-dom';
 import Card, {CardActions, CardContent, CardMedia} from 'material-ui/Card';
 import HeroImage from '../../../utils/landing_page.png';
 import Benefits from './benefits';
-const theme = createMuiTheme({
-  palette: {
-    primary: lightBlue,
-    secondary: red,
-    accent: red,
-  },
-  status: {
-    danger: 'orange',
-  },
-});
-
 
 const styles = (theme) => ({
   root: {
@@ -134,12 +123,12 @@ class Home extends React.Component {
           <img className={classes.heroImage} src={HeroImage}/>
           </Grid>
           <Grid item>
-          <Typography type="display3">
+          <Typography type="display3" align="center">
             Control Your Future Wealth
           </Typography>
           </Grid>
               <Grid item>
-              <Typography type="subheading">
+              <Typography type="subheading" align="center">
               secure, manage and exchange cryptocurrencies
               </Typography>
               </Grid>
@@ -174,10 +163,10 @@ class Home extends React.Component {
                     title="Contemplative Reptile"
                   />
                   <CardContent>
-                    <Typography type="headline" component="h2">
+                    <Typography type="headline" align="center">
                     MULTI-FIAT CURRENCIES
                     </Typography>
-                    <Typography component="p" type='subheading'>
+                    <Typography type='subheading' align="center">
                     multiple feat currencies available.
                     </Typography>
                   </CardContent>
@@ -199,10 +188,10 @@ class Home extends React.Component {
                     title="Seamless Exchange"
                   />
                   <CardContent>
-                    <Typography type="headline" component="h2">
+                    <Typography type="headline" align="center">
                     EXCHANGE
                     </Typography>
-                    <Typography component="p" type='subheading'>
+                    <Typography align="center" type='subheading'>
                     A seamless exchange experience.
                     </Typography>
                   </CardContent>
@@ -225,11 +214,11 @@ class Home extends React.Component {
                   />
                   <CardContent>
                     <Typography type="headline"
-                    component="h2">
+                    align="center">
                     MULTI-ASSET WALLET
                     </Typography>
-                    <Typography component="p" type='subheading'>
-                    Bitcoin, Ethereum, Litecoin and more.
+                    <Typography type='subheading' align="center">
+                    Bitcoin, Ethereum and more.
                     </Typography>
                   </CardContent>
                   <CardActions style={{justifyContent: 'space-around'}}>
@@ -242,17 +231,6 @@ class Home extends React.Component {
             </Grid>
           </Paper>
           <Benefits />
-          <Paper className={classes.featuresPaper} >
-            <Grid
-              container
-              spacing={0}
-              alignItems='center'
-              direction= {this.state.direction}
-              justify='space-around'
-            >
-            </Grid>
-          </Paper>
-
         </div>
       </div>
       );

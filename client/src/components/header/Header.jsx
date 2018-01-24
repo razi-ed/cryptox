@@ -1,26 +1,21 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Media from 'react-media';
 import {Manager, Target, Popper} from 'react-popper';
-import {AppBar, Button, Switch, Typography, Paper,
-Menu, Divider,Drawer, Toolbar, List, MenuList, MenuItem,
-ListItemIcon, ListItemText, IconButton} from 'material-ui';
+import {AppBar, Typography, Paper,
+  Divider, Drawer, Toolbar, List, MenuList, IconButton}
+   from 'material-ui';
 import {withStyles} from 'material-ui/styles';
 import Grow from 'material-ui/transitions/Grow';
 import ClickAwayListener from 'material-ui/utils/ClickAwayListener';
-import SignUpIcon from 'material-ui-icons/AddCircleOutline';
-import AboutUsIcon from 'material-ui-icons/InfoOutline';
 import MenuIcon from 'material-ui-icons/Menu';
 import AccountCircle from 'material-ui-icons/AccountCircle';
-import LogInIcon from 'material-ui-icons/PowerSettingsNew';
-import AppBarDrawer from './drawer'
-import { mailFolderListItems, otherMailFolderListItems } from './drawerList'
+import {mailFolderListItems, otherMailFolderListItems} from './drawerList';
 
-import { bindActionCreators } from 'redux';
+import {bindActionCreators} from 'redux';
 
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 
 import * as headerActions from '../../js/redux/actions/headerActions';
 
@@ -136,7 +131,7 @@ handleToggle=()=>this.props.openDrawer()
 
     return (
       <div className={classes.root}>
-        <AppBar position='fixed' elevation={24} square={true}>
+        <AppBar position='fixed' elevation={1}>
           <Toolbar>
           <Media query="(max-width: 599px)">
           {(matches) =>
@@ -308,7 +303,8 @@ Header.propTypes = {
 };
 
 const mapStateToProps = state => state;
-const mapDispatchToProps = dispatch => bindActionCreators(headerActions, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(headerActions, dispatch);
 const AppHeader = connect(mapStateToProps, mapDispatchToProps)(Header);
 
 export default withStyles(styles)(AppHeader);

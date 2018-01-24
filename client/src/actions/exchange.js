@@ -1,9 +1,15 @@
-import {updatePrice} from './buySellActionsCreator';
+import {updatePrice, setbaseCurrency} from './buySellActionsCreator';
 import {buySellActions} from './index';
 import {getCrypto, getFiat} from '../ajax-calls/getExchange';
 
 export const getExchangeRates =
 (baseCurrency='INR') => (dispatch, getState) => {
+<<<<<<< HEAD
+||||||| merged common ancestors
+  dispatch(updatePrice('baseCurrency', baseCurrency));
+=======
+  dispatch(setbaseCurrency( baseCurrency));
+>>>>>>> 49d738dd503b30b0e23b4bd37f53ffb1aa711af2
   let state = getState().exchange;
   dispatch(updatePrice(`${state.baseCurrency}`, {price: 1}));
       getCrypto(state)

@@ -9,7 +9,8 @@ import Header from './header/Header';
 import Home from './homePage/Home';
 import Footer from '../components/Footer';
 import ForgotPassword from '../components/auth/ForgotPassword';
-import Exchange from '../components/exchange/Exchange';
+import Exchange from './exchange/Exchange';
+import {Admin} from './admin/Admin';
 import Store, {History} from '../store';
 import {lightBlue, red} from 'material-ui/colors';
 import Reboot from 'material-ui/Reboot';
@@ -55,6 +56,7 @@ class App extends React.Component {
       <Route exact path={'/reset-password'} component={ForgotPassword}/>
       <Route exact path={'/exchange'} component={Exchange}/>
       <Route exact path={'/exchange/:type/:coin'} component={Exchange}/>
+      <Route exact path={'/admin'} component={Admin}/>
       <Footer/>
       </div>
         </MuiThemeProvider>

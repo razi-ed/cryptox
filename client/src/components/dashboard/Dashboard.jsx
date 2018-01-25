@@ -1,6 +1,6 @@
 import React from 'react';
 import Grid from 'material-ui/Grid';
-import Currency from './Currency';
+import {Currency} from './Currency';
 import UserProfile from './UserProfile';
 import {withRouter} from 'react-router-dom';
 import WalletBalances from './WalletBalances';

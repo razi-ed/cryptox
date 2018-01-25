@@ -48,10 +48,12 @@ class BuySellCard extends React.Component {
   baseUnits = () => (this.state.units * this.state.quantity).toFixed(3)
   action = async (action) => {
     try {
+      console.log('clicked', action);
+
       let response =await bsAction(action,
          this.state, this.mulFactor, this.props);
         console.log(response);
-        if (response.result== 'Transaction is Successful') {
+        if (response.result== 'Transaction Successful') {
           this.setMessage(`successfully ${action=='buy'?'purchased':'sold'} ${
                this.baseUnits()} ${this.state.trade}`,
           );
@@ -152,8 +154,8 @@ mulFactor = Currency => {
             raised
             color="primary"
             style={{width: 80}}
-            onClick={()=>this.action('sell')}>
-            SELL
+            onClick={()=>this.action('sell  ')}>
+            sell
           </Button>
         </CardActions>
         <Snackbar

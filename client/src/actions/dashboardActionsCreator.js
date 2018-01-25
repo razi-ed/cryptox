@@ -1,4 +1,4 @@
-export const isUserAuthenticated = (token, history) => {
+export const getUserDetails = (token, history) => {
   return (dispatch) => {
     fetch('/profile', {
       method: 'GET',
@@ -11,7 +11,7 @@ export const isUserAuthenticated = (token, history) => {
     })
     .then((res) => {
       console.log(res);
-      dispatch({type: 'SET_USER_DETAILS', email: res.email, name: res.name});
+      dispatch({type: 'GET_USER_DETAILS', email: res.email, name: res.name});
     }).catch((error) => {
       console.log(error);
       history.push('/login');

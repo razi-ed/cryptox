@@ -1,4 +1,4 @@
-/* export const isUserAuthenticated = (token, history) => {
+/* export const getUserDetails = (token, history) => {
   return (dispatch) => {
     fetch('/profile', {
       method: 'GET',

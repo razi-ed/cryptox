@@ -20,8 +20,6 @@ class UserProfile extends React.Component {
    * @return {userDetailsHTML}
    */
   render() {
-    console.log(this.props.state);
-
     return (
       <div className='user-profile'>
         <Grid spacing={0} container justify='center'>

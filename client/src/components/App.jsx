@@ -55,7 +55,10 @@ class App extends React.Component {
       <Route exact path={'/'} component={Home}/>
       <Route exact path={'/login'} component={LogIn}/>
       <Route exact path={'/reset-password'} component={ForgotPassword}/>
-      <Route exact path={'/dashboard'} component={Dashboard}/>
+      <Route exact path={'/dashboard'} render={()=> {
+        return (<Dashboard exchange={this.props}
+         dispatch={this.props.updatePrice}/>);
+      }}/>
       <Route exact path={'/edit-profile'} component={EditDetails}/>
       <Route exact path={'/exchange'} component={Exchange}/>
       <Route exact path={'/exchange/:type/:coin'} component={Exchange}/>

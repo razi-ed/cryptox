@@ -19,7 +19,7 @@ export default function user(state = {}, action) {
     {
       return {...state, name: action.name};
     }
-    case 'SET_USER_DETAILS':
+    case 'GET_USER_DETAILS':
     {
       return {...state, email: action.email, name: action.name};
     }

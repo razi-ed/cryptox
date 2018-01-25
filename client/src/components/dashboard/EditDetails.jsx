@@ -7,7 +7,7 @@ import * as ReactRedux from 'react-redux';
 import {withRouter, Link} from 'react-router-dom';
 import ConnectedNameForm from './Forms/ChangeNameForm';
 import ChangePasswordForm from './Forms/ChangePasswordForm';
-import {isUserAuthenticated} from '../../actions/dashboardActionsCreator';
+import {getUserDetails} from '../../actions/dashboardActionsCreator';
 
 
 /**
@@ -30,7 +30,7 @@ class EditDetails extends React.Component {
    */
   componentDidMount() {
     if (localStorage.getItem('token')) {
-      this.props.dispatch(isUserAuthenticated(localStorage.getItem('token'),
+      this.props.dispatch(getUserDetails(localStorage.getItem('token'),
        this.props.history));
     } else {
       this.props.history.push('/login');
@@ -41,8 +41,6 @@ class EditDetails extends React.Component {
    * @return {EditeDetialsHTML}
    */
   render() {
-    console.log(this.props.state);
-
     return (
       <Paper className='user-profile'>
         <Typography type='title' noWrap style={{display: 'flex'}}>

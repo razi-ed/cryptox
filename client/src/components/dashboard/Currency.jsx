@@ -15,11 +15,11 @@ export default class Currency extends React.Component {
   render() {
     return (
       <Grid item spacing={0} xs={12} sm={6} md={2} lg={2}>
-      <Paper className='currency'>
-      <div>{this.props.type}</div>
-      <div>{this.props.price}</div>
+        <Paper className='currency'>
+        <div>{this.props.type}</div>
+        <div>{this.props.price}</div>
 
-      </Paper>
+        </Paper>
       </Grid>
   );
   }

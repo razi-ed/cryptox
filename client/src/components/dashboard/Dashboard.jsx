@@ -30,7 +30,7 @@ class Dashboard extends React.Component {
     return (
       <div className='dashboard-container'>
       {/* <LogOutIcon style={{float: 'left'}}/> */}
-      <Grid className='user-profile-container' container>
+      <Grid className='user-profile-container' container spacing={0}>
       <UserProfile />
       <WalletBalances />
       </Grid>
@@ -41,7 +41,8 @@ class Dashboard extends React.Component {
       <Currency currency = 'litecoin'/>
       <Currency currency = 'dash'/> */}
       {this.props.exchange.crypto.map((crypto) => {
-        return <Currency type={crypto} price={this.props.exchange[crypto].price}/>;
+        return <Currency key={crypto}
+         type={crypto} price={this.props.exchange[crypto].price}/>;
       })}
     </Grid>
       </div>

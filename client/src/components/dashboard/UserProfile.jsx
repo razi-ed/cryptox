@@ -1,11 +1,7 @@
 import React from 'react';
 import Grid from 'material-ui/Grid';
-import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
-import {Link} from 'react-router-dom';
 import * as ReactRedux from 'react-redux';
-import Button from 'material-ui/Button';
-import ModeEditIcon from 'material-ui-icons/ModeEdit';
 
 /**
  * UserDetails component

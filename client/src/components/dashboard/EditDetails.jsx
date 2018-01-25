@@ -1,6 +1,5 @@
 import React from 'react';
 import Button from 'material-ui/Button';
-import Grid from 'material-ui/Grid';
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 import * as ReactRedux from 'react-redux';

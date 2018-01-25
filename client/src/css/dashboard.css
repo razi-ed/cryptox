@@ -7,8 +7,15 @@
   justify-content: center;
   align-items: center;
   overflow-x: hidden;
-  margin-top: 10vh;
+  /* margin-top: 65px; */
   margin-bottom: 5vh;
+}
+
+.buy-sell-button {
+  display: flex;
+  justify-content: center;
+  margin: 3%;
+  
 }
 
 .currency {
@@ -20,7 +27,7 @@
 .user-profile {
   padding: 1%;
   margin: 3%;
-  margin-top: 15vh;
+  margin-top: 65px;
 }
 
 .change-name-form {

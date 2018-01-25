@@ -2,6 +2,7 @@ import React from 'react';
 import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
+import Button from 'material-ui/Button/Button';
 
 // /**
 //  * Return the component with details of
@@ -30,18 +31,29 @@ import Typography from 'material-ui/Typography';
 //   }
 // }
 
+const handleClick = (props) => {
+  props.history.push(`/exchange/fiat/${props.baseCurrency}`);
+};
+
 export const Currency = (props) => {
   return (
     <Grid item spacing={0} xs={12} sm={6} md={2} lg={2}>
-        <Paper className='currency' style={{display: 'flex'}}>
-
-        <Typography type='subheading'>
+        <Paper className='currency' style={{justifyContent: 'center'}}>
+        {/* <div style={{display: 'flex'}}>
+        </div> */}
+        <Typography type='subheading' align='center'>
           {props.type}
         </Typography>
-        <Typography type='body1' align='right'>
-          {props.price}
+        <Typography type='subheading' align = 'center' >
+          {props.price} {props.baseCurrency}
         </Typography>
-
+        <div className='buy-sell-button'>
+          <Button raised color='primary' style={{width: '80%'}} onClick={() => {
+           handleClick(props);
+          }}>
+            buy / sell
+          </Button>
+        </div>
         </Paper>
       </Grid>
   );

@@ -42,7 +42,10 @@ class Dashboard extends React.Component {
       <Currency currency = 'dash'/> */}
       {this.props.exchange.crypto.map((crypto) => {
         return <Currency key={crypto}
-         type={crypto} price={this.props.exchange[crypto].price}/>;
+         type={crypto}
+         price={this.props.exchange[crypto].price}
+         baseCurrency={this.props.exchange.baseCurrency}
+         history= {this.props.history}/>;
       })}
     </Grid>
       </div>

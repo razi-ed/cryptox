@@ -1,12 +1,4 @@
-export const getUserDetails = (email, name) => {
-  return {
-    type: 'SET_USER_DETAILS',
-    email,
-    name,
-  };
-};
-
-export const isUserAuthenticated = (token, history) => {
+/* export const isUserAuthenticated = (token, history) => {
   return (dispatch) => {
     fetch('/profile', {
       method: 'GET',
@@ -27,3 +19,4 @@ export const isUserAuthenticated = (token, history) => {
   };
 }
 ;
+ */

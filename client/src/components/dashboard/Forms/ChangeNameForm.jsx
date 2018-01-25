@@ -2,9 +2,7 @@ import React from 'react';
 import {FormControl} from 'material-ui/Form';
 import Input, {InputLabel, InputAdornment} from 'material-ui/Input';
 import Button from 'material-ui/Button';
-import {changeName} from '../../../js/redux/actions/userActionsCreator';
 import {withRouter} from 'react-router-dom';
-import * as ReactRedux from 'react-redux';
 import Grid from 'material-ui/Grid';
 
 /**
@@ -18,6 +16,8 @@ class ChangeNameForm extends React.Component {
     super();
     this.state = {
       name: null,
+      validationHelperTextVisible: 'none',
+      actionmessage: `couldn't update name`,
     };
     this.changeNameRequest = this.changeNameRequest.bind(this);
   }
@@ -26,8 +26,6 @@ class ChangeNameForm extends React.Component {
    * @method
    */
   changeNameRequest() {
-    console.log(this.state);
-
     fetch('/profile', {
       method: 'PUT',
       headers: {
@@ -40,8 +38,12 @@ class ChangeNameForm extends React.Component {
     })
     .then((res) => res.json())
     .then((res) => {
-      console.log(res);
-      this.props.history.push('/dashboard');
+      if (res.success) {
+        this.setState({
+          validationHelperTextVisible: 'block',
+          actionmessage: 'Name updated Succesfully',
+        });
+      }
     })
     .catch((err) => {
       this.props.history.push('/login');
@@ -56,6 +58,14 @@ class ChangeNameForm extends React.Component {
     return (
       <div id = 'change-name-form'>
         <Grid item xs={12} sm={8} md= {8}>
+
+        <h4 style={{
+            color: 'red',
+            display: this.state.validationHelperTextVisible,
+            paddingTop: 12,
+          }}>
+          {this.state.actionmessage}
+        </h4>
         <form onSubmit = {(e) => e.preventDefault() }>
           <FormControl
               className = 'form'
@@ -86,14 +96,5 @@ class ChangeNameForm extends React.Component {
     );
   }
 }
-/*
-const mapStateToProps = (state) => {
-  return {
-    state: state,
-  };
-};
-
-
-const ConnectedNameForm = ReactRedux.connect(mapStateToProps)(ChangeNameForm); */
 
 export default withRouter(ChangeNameForm);

@@ -4,11 +4,10 @@ import Grid from 'material-ui/Grid';
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 import * as ReactRedux from 'react-redux';
-import {withRouter} from 'react-router-dom';
+import {withRouter, Link} from 'react-router-dom';
 import ConnectedNameForm from './Forms/ChangeNameForm';
 import ChangePasswordForm from './Forms/ChangePasswordForm';
-import {isUserAuthenticated} from
-                             '../../js/redux/actions/dashboardActionsCreator';
+import {isUserAuthenticated} from '../../actions/dashboardActionsCreator';
 
 
 /**

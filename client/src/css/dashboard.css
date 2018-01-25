@@ -1,21 +1,14 @@
 .currency-panel {
   background-color: #e0e0e0;
-  /* display: flex; */
   justify-content: space-around;
-  /* flex-wrap: wrap;   */
-}
+ }
 
-.user-profile-container {  
-}
-
-.edit-icon {
-  margin-left: 2%;
-  padding-left: 4%;
-}
-.currency-container {
+.dashboard-container {
   justify-content: center;
   align-items: center;
   overflow-x: hidden;
+  margin-top: 10vh;
+  margin-bottom: 5vh;
 }
 
 .currency {
@@ -27,11 +20,13 @@
 .user-profile {
   padding: 1%;
   margin: 3%;
+  margin-top: 15vh;
 }
 
 .change-name-form {
   width: 50%;  
 }
+
 .form {
   width: 80%;
 }

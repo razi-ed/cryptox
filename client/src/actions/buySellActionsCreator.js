@@ -1,9 +1,3 @@
-/**
- * authenticate is an actionCreator ###TEMPLATE###
- * @return {object} action
- * @param {string} currency
- * @param {object} price
- */
 
 /**
  *to update the price of the specified currency
@@ -17,6 +11,20 @@ export function updatePrice(currency, price, action) {
     type: 'update_currency',
     payload: {
       currency, price,
+    },
+  };
+}
+/**
+ *
+ * @param {*} baseCurrency
+ * @param {*} action
+ * @return {object} state
+ */
+export function setbaseCurrency( baseCurrency, action) {
+  return {
+    type: 'Set_baseCurrency',
+    payload: {
+      baseCurrency,
     },
   };
 }

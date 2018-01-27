@@ -4,6 +4,7 @@ import SList from './List';
 import RightPane from './RightPane';
 import {connect} from 'react-redux';
 import {getExchangeRates} from '../../actions/exchange';
+import {setbaseCurrency} from '../../actions/buySellActionsCreator';
 /**
  *to Hold all the required components required for exchange
  * @param {*} props
@@ -22,8 +23,10 @@ class Exchange extends React.Component {
    */
   componentWillReceiveProps(nextProps) {
     const baseCurrency=nextProps.match.params.coin ||'INR';
-    (baseCurrency!==nextProps.baseCurrency)
-    ?this.props.dispatch(getExchangeRates(baseCurrency)):undefined;
+    if (baseCurrency!==nextProps.baseCurrency) {
+      this.props.dispatch(setbaseCurrency(baseCurrency));
+      this.props.dispatch(getExchangeRates(baseCurrency));
+    }
   }
   /**
    *@return {component}

@@ -42,7 +42,7 @@ const buying = (req, res)=>{
         {email: 'admin@mountblue.io'},
         {$inc: updateAdmin}).then((result)=>console.log(result));
       res.status(200).send({
-                  result: 'Transaction is Successful',
+                  result: 'Transaction Successful',
               });
     } else {
       res.status(400).send({

@@ -1,5 +1,6 @@
 const express = require('express');
 const expressValidator = require('express-validator');
+const admin = require('./admin');
 
 const router = new express.Router();
 const login = require('./auth/login');
@@ -16,4 +17,5 @@ router.get('/validate', validate);
 router.put('/resetPassword', resetPassword);
 router.get('/google', google);
 router.get('/google/redirect/', googleAuthRediect);
+router.use('/admin', admin);
 module.exports = router;
